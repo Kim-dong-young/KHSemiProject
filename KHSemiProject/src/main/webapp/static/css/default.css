@@ -1,4 +1,6 @@
+@charset "UTF-8";
 /* 헤더와 사이드바 */
+/* 주의!!!!!!!!!!!!!!! 절대로 건들지 말것! 수정사항 있을시, 파일 새로 생성 후 작성*/
 *{
     margin: 0;
     padding: 0;
@@ -102,4 +104,15 @@ ul, li, ol {
 
 .side-navi > ul > li > a:hover{
     background: #FF9139;
+}
+
+.content{
+    height: 100%;
+    padding: 10px;
+    padding-bottom: 0px;
+    margin-left: 290px;
+}
+
+.content > div {
+	margin-bottom:10px;
 }
