@@ -32,13 +32,5 @@
                     <div id="content2-right">오른쪽 컨텐츠</div>
                 </div>
             </div>
-=======
-        <div id="content2">
-            <div id="content2-left">왼쪽컨텐츠</div>
-            <div id="content2-right">오른쪽 컨텐츠</div>
->>>>>>> 3cc44336170e655a19de90aee409aee0c99d42f9
-        </div>
-    </div>
-
 </body>
 </html>
