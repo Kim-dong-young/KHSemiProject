@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="templates/mainPage.jsp" %>
+	<a href="templates/mainPage.jsp">메인 페이지로</a>
 </body>
 </html>
