@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html leng='en'>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +16,7 @@
 
     <link rel="stylesheet" href="../static/css/default.css">
     <link rel="stylesheet" href="../static/css/content.css">
+
 </head>
 <body>
     <div class="wrap">
@@ -22,9 +27,9 @@
         <div class="container">
             <div class="side-navi">
                 <ul>
-                    <li><a href="templates/mainPage.jsp">홈</a></li>
+                    <li><a href="mainPage.jsp">홈</a></li>
                     <li><a href="">개인화면</a></li>
-                    <li><a href="templates/searchMainPage.jsp">탐색</a></li>
+                    <li><a href="searchMainPage.jsp">탐색</a></li>
                     <li><a href="">유저설정</a></li>
                     <li><a href="">커뮤니티</a></li>
                     <li><a href="">문제만들기</a></li>
@@ -34,6 +39,7 @@
             <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
                 <div id="content1">
                     <div>상단 컨텐츠</div>
+                    <p>탐색화면!!!!</p>
                 </div>
                 <div id="content2">
                     <div id="content2-left">왼쪽컨텐츠</div>
