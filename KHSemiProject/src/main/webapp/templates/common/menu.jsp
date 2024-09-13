@@ -24,7 +24,7 @@
                 <ul>
                     <li><a href="mainPage.jsp">홈</a></li>
                     <li><a href="">개인화면</a></li>
-                    <li><a href="">탐색</a></li>
+                    <li><a href="searchMainPage.jsp">탐색</a></li>
                     <li><a href="">유저설정</a></li>
                     <li><a href="">커뮤니티</a></li>
                     <li><a href="">문제만들기</a></li>
