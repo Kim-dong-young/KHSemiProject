@@ -5,14 +5,4 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>SearchController</display-name>
-    <servlet-name>SearchController</servlet-name>
-    <jsp-file>com.kh.search.controller.SearchController</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SearchController</servlet-name>
-    <url-pattern>/SearchController</url-pattern>
-  </servlet-mapping>
 </web-app>
