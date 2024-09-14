@@ -20,12 +20,6 @@ local.properties
 # tomcat
 Servers/
 
-# JDT-specific
-.classpath
-
-# Eclipse Core
-.project
-
 # External tool builders
 .externalToolBuilders/
 
