@@ -15,6 +15,5 @@
             <div id="content2-right">오른쪽 컨텐츠</div>
         </div>
     </div>
-
 </body>
 </html>
