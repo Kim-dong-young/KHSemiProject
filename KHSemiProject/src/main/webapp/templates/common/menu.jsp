@@ -30,9 +30,6 @@
                 <li><a href="">도움말</a></li>
             </ul>
         </div>
-        <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
-
-        </div>
     </div>
 </body>
 </html>
