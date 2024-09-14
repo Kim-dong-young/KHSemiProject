@@ -1,0 +1,48 @@
+button{
+    border-style:none;
+    outline:none;
+}
+
+.wrapper{
+    display:flex;
+    justify-content: space-around;
+}
+
+.board{
+    border:1px solid #989898;
+    width: 65%;
+    height:700px;
+}
+
+.board-tab ul{
+    display:flex;
+    justify-content: flex-start;
+}
+
+.board-tab li{
+    width:80px;
+    height:35px;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    background-color: #F3F3F3;
+}
+
+.board-tab li button{
+    width:100%;
+    height:100%;
+}
+
+.board-content{
+    border:1px solid #989898;
+    width:100%;
+}
+
+.board-content .board-info{
+    border:1px solid #989898;
+    width:100%;
+}
+
+.board-side{
+    width:30%;
+}
