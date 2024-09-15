@@ -32,12 +32,12 @@
 					<div class="board-info">
 						<table>
 							<tr>
-								<th>탭</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>댓글</th>
-								<th>작성일</th>
-								<th>조회수</th>
+								<td class="tab">탭</td>
+								<td class="title">제목</td>
+								<td class="author">작성자</td>
+								<td class="comment">댓글</td>
+								<td class="date">작성일</td>
+								<td class="viewcount">조회수</td>
 							</tr>
 						</table>
 					</div>
@@ -45,53 +45,106 @@
 					<div class="board-list">
 						<table>
 							<tr>
-								<th>탭</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>댓글</th>
-								<th>작성일</th>
-								<th>조회수</th>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
 							</tr>
 
 							<tr>
-								<th>탭</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>댓글</th>
-								<th>작성일</th>
-								<th>조회수</th>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
 							</tr>
 
 							<tr>
-								<th>탭</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>댓글</th>
-								<th>작성일</th>
-								<th>조회수</th>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
 							</tr>
 
 							<tr>
-								<th>탭</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>댓글</th>
-								<th>작성일</th>
-								<th>조회수</th>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
 							</tr>
 
 							<tr>
-								<th>탭</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>댓글</th>
-								<th>작성일</th>
-								<th>조회수</th>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
 							</tr>
+
+							
+							<tr>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
+							</tr>
+
+							
+							<tr>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
+							</tr>
+
+							
+							<tr>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
+							</tr>
+
+							
+							<tr>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
+							</tr>
+
+							
+							<tr>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">1</td>
+								<td class="date">12:45</td>
+								<td class="viewcount">135</td>
+							</tr>
+
+	
 						</table>
 					</div>
 				</div>
 			</div>
+
 			<div class="board-side">
 
 			</div>

@@ -5,6 +5,7 @@
 <head>
 
     <%@ include file="common/menu.jsp" %>
+    <link rel="stylesheet" href="../static/css/mainPageContent.css">
 
     <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
         <div id="content1">

@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../static/css/default.css">
-    <link rel="stylesheet" href="../static/css/mainPageContent.css">
 </head>
 <body>
     <div class="header">
