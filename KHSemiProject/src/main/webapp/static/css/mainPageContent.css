@@ -1,0 +1,103 @@
+@charset "UTF-8";
+#content1{
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    height: 327px;
+}
+
+#content1>div {
+    margin-top: 5px;
+    /* border: 1px solid black; */
+}
+
+#content1>div:first-child{
+    margin: 0;
+    font-size: 30px;
+}
+
+.recommend-button > ul{
+    display: flex;
+}
+
+.recommend-button > ul >li {
+    margin-right: 10px;
+}
+
+.recommend-button > ul > li > button{
+    width: 100px;
+    height: 30px;
+    border-radius: 50px;
+    background: #FF9139;
+    border: none;
+    font-size: 17px;
+    box-shadow: 3px 3px 3px #999999;
+}
+
+.quiz-list{
+    border: 1px solid black;
+    padding: 5px;
+    height: 223px;
+}
+
+.quiz-list>ul{
+    display: flex;
+    flex-wrap: nowrap;
+    /* border: 1px solid black; */
+    height: 100%;
+}
+
+.quiz-box{
+    width: 250px;
+    /* border: 1px solid black; */
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quiz-box>div{
+    width: 100%;
+}
+
+.thumbnail{
+    border: 1px solid black;
+    height: 75%;
+}
+
+.title{
+    border: 1px solid black;
+    height: 20%;
+}
+
+#content2{
+    /* border: 1px solid #d9d9d9; */
+    padding: 0 20px;
+    height: 1000px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#content2>div{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#content2>div:first-child{
+    margin: 0;
+}
+
+#content2-left{
+    height: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    width: 65%;
+}
+
+#content2-right{
+    height: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    width: 30%;
+}
+
