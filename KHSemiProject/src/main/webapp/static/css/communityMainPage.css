@@ -8,12 +8,14 @@ button{
     justify-content: space-around;
 }
 
+/* 좌측(게시판) */
 .board{
     border:1px solid #989898;
     width: 65%;
     height:700px;
 }
 
+/* 게시판 탭 선택 */
 .board-tab ul{
     display:flex;
     justify-content: flex-start;
@@ -33,16 +35,59 @@ button{
     height:100%;
 }
 
+/* 유저 게시글이 표시되는 div */
 .board-content{
     border:1px solid #989898;
     width:100%;
+    height:665px;
 }
 
 .board-content .board-info{
     border:1px solid #989898;
     width:100%;
+    height:40px;
 }
 
+.board-content .board-list{
+    width:100%;
+    height:calc(100% - 40px);
+}
+
+.board-content table{
+    width:100%;
+    height:100%;
+}
+
+.board-content tr{
+    height:40px;
+}
+
+.tab{
+    text-align: center;
+    width:5%;
+}
+
+.title{
+    width:50%;
+}
+
+.author{
+    width:15%;
+}
+
+.comment{
+    width:10%;
+}
+
+.date{
+    width:10%;
+}
+
+.viewcount{
+    width:10%;
+}
+
+/* 우측(인기글 및 광고) */
 .board-side{
     width:30%;
 }
