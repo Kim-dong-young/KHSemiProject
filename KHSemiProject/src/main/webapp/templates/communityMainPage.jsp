@@ -35,7 +35,7 @@
 								<td class="tab">탭</td>
 								<td class="title">제목</td>
 								<td class="author">작성자</td>
-								<td class="comment" style="color:black;">댓글</td>
+								<td class="comment-num" style="color:black;">댓글</td>
 								<td class="date">작성일</td>
 								<td class="viewcount">조회수</td>
 							</tr>
@@ -46,9 +46,9 @@
 						<table>
 							<tr>
 								<td class="tab">잡담</td>
-								<td class="title">테스트용 제목</td>
-								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="title" onclick="location.href='communityViewPage.jsp'">테스트용 제목 테스트용 제목 테스트용 제목 테스트용 제목</td>
+								<td class="author">유저명유저명유저명유저명</td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">13</td>
 							</tr>
@@ -57,7 +57,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[14]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[14]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">135</td>
 							</tr>
@@ -66,7 +66,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[3]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[3]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">1</td>
 							</tr>
@@ -75,7 +75,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[27]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[27]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">1352</td>
 							</tr>
@@ -84,7 +84,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[112]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[112]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">135</td>
 							</tr>
@@ -93,7 +93,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[13]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[13]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">135</td>
 							</tr>
@@ -102,7 +102,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[8]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[8]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">135</td>
 							</tr>
@@ -111,7 +111,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">12:45</td>
 								<td class="viewcount">135</td>
 							</tr>
@@ -120,7 +120,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">2024.8.27</td>
 								<td class="viewcount">135</td>
 							</tr>
@@ -129,7 +129,7 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 								<td class="date">2023.9.1</td>
 								<td class="viewcount">135</td>
 							</tr>
@@ -198,35 +198,35 @@
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 							</tr>
 
 							<tr>
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 							</tr>
 
 							<tr>
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 							</tr>
 
 							<tr>
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 							</tr>
 														
 							<tr>
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
 								<td class="author">Test1</td>
-								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+								<td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
 							</tr>
 						</table>
 					</div>

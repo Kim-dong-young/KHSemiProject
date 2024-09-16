@@ -18,7 +18,7 @@ p{
 /* 좌측(게시판) */
 .board{
     width: 65%;
-    height:700px;
+
 }
 
 /* 게시판 탭 선택 */
@@ -90,12 +90,12 @@ p{
     width:15%;
 }
 
-.comment{
+.comment-num{
     width:12%;
     color: #FF0000;
 }
 
-.comment img{
+.comment-num img{
     width:15px;
     height:15px;
 }
@@ -200,7 +200,7 @@ p{
     margin-bottom: 25px;
 }
 
-.hot-bulletin img{
+.hot-bulletin > img{
     width:30px;
     height:30px;
 }
@@ -215,6 +215,12 @@ p{
 .hot-bulletin-list table{
     width:100%;
     height:100%;
+    table-layout: fixed; /* 테이블 밖으로 글자 삐져나옴 방지 */
+}
+
+.hot-bulletin-list img{
+    width:20px;
+    height:20px;
 }
 
 .cm-banner{
