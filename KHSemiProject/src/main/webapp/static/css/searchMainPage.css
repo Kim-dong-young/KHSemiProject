@@ -1,0 +1,39 @@
+#category-frame {
+    height: 160px;
+}
+
+.wrapper{
+    margin-left: 10px;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#category-frame-table {
+    width: 100%;
+    height: auto;
+    border-left: 10px;
+    border-right: 10px;
+    padding: 10px;
+    
+}
+#category-frame-table tr {
+    width: 100%;
+    height: 100%;
+}
+#category-frame-table tr td{
+    padding: 10px;
+    text-align: center;
+}
+#category-frame-table tr td p{
+    font-size: 25px;
+}
+
+#quiz-search-div {
+    display: flex;
+    justify-content: center;
+    background: #d9d9d9;
+    border-radius: 50px;
+    width: 600px;
+    height: 45px;
+}
