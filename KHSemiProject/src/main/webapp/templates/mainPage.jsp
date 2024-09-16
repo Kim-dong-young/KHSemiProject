@@ -6,7 +6,8 @@
 
     <%@ include file="common/menu.jsp" %>
     <link rel="stylesheet" href="../static/css/mainPageContent.css">
-
+</head>
+<body>
     <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
         <div id="content1">
             <div>이런 퀴즈는 어떤가요?~</div>

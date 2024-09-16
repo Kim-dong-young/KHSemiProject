@@ -35,15 +35,15 @@
 }
 
 .quiz-list{
-    border: 1px solid black;
-    padding: 5px;
+    margin: 0 0;
+    /* border: 1px solid black; */
     height: 223px;
 }
 
 .quiz-list>ul{
     display: flex;
     flex-wrap: nowrap;
-    /* border: 1px solid black; */
+    border: 1px solid black;
     height: 100%;
 }
 
