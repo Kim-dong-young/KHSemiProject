@@ -133,6 +133,7 @@
 								<td class="date">2023.9.1</td>
 								<td class="viewcount">135</td>
 							</tr>
+							
 						</table>
 					</div>
 
@@ -214,6 +215,13 @@
 								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
 							</tr>
 
+							<tr>
+								<td class="tab">잡담</td>
+								<td class="title">테스트용 제목</td>
+								<td class="author">Test1</td>
+								<td class="comment">[1]<img src="../static/img/comment-icon.png"></td>
+							</tr>
+														
 							<tr>
 								<td class="tab">잡담</td>
 								<td class="title">테스트용 제목</td>
