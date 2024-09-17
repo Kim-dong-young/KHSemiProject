@@ -3,7 +3,7 @@ button{
     outline:none;
 }
 
-p{
+.content > p{
     font-size:36px;
     margin-left: 10px;
     margin-bottom: 20px;
@@ -18,179 +18,14 @@ p{
 /* 좌측(게시판) */
 .board{
     width: 65%;
-
-}
-
-/* 게시판 탭 선택 */
-.board-tab ul{
-    display:flex;
-    justify-content: flex-start;
-}
-
-.board-tab li{
-    width:80px;
-    height:35px;
-    text-align: center;
-    display:flex;
-    align-items: center;
-    background-color: #F3F3F3;
-}
-
-.board-tab li button{
-    width:100%;
-    height:100%;
-}
-
-/* 유저 게시글이 표시되는 div */
-.board-content{
-    border:1px solid #989898;
-    border-radius: 5px;
-    width:100%;
-    height:665px;
-}
-
-.board-content .board-info{
-    border-bottom:1px solid #989898;
-    width:100%;
-    height:40px;
-}
-
-.board-content .board-list{
-    width:100%;
-    height:calc(100% - 40px);
-}
-
-.board-content table{
-    width:100%;
-    height:100%;
-    table-layout: fixed; /* 테이블 밖으로 글자 삐져나옴 방지 */
-}
-
-.board-content td{
-    padding-left:10px;
-    padding-right:10px;
-}
-
-.title, .tab, .author, .comment, .date, .viewcount{
-    white-space: nowrap; /* 텍스트 줄 분리 방지 */
-    overflow: hidden; /* 넘치는 텍스트를 숨김 */
-    text-overflow: ellipsis; /* 넘치는 텍스트에 말줄임(...) 표시 */
-}
-
-.tab{
-    text-align: center;
-    width:10%;
-}
-
-.title{
-    width:40%;
-}
-
-.author{
-    width:15%;
-}
-
-.comment-num{
-    width:12%;
-    color: #FF0000;
-}
-
-.comment-num img{
-    width:15px;
-    height:15px;
-}
-
-.date{
-    width:11%;
-}
-
-.viewcount{
-    width:12%;
-}
-
-/* 글기, 정렬기준 및 페이지 표시 영역 */
-.board-option{
-    display:flex;
-    justify-content: space-between;
-    margin-top:10px;
-    margin-bottom:20px;
-}
-
-.option1{
-    width:15%;
-    height:30px;
-}
-
-.option2{
-    display:flex;
-    justify-content: center;
-    width:70%;
-    height:30px;
-}
-
-.option1 > select{
-    border:1px solid #989898;
-    border-radius: 5px;
-    width: 90%;
-    margin-right:10px;
-    height:100%;
-}
-
-.option1 > button{
-    width:100%;
-    height:100%;
-    background-color: #FF772B;
-    border:1px solid #989898;
-    border-radius: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.option1 > button img {
-    width:28px;
-    height:28px;
-}
-
-.option1 > a {
-    text-decoration: none;
-    background-color: #484848;
-    color:white;
-    border:1px solid #989898;
-    border-radius: 5px;
-    display:block;
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content: center;
-}
-
-.option1 > a img {
-    width:28px;
-    height:28px;
-}
-
-.option2 > button {
-    width:30px;
-    height:30px;
-    border:1px solid #989898;
-}
-
-.option2 > input{
-    margin-right:10px;
-    width: 100%;
-    border-radius: 5px;
-}
-
-/* 검색창 */
-.search-form{
-    display:flex;
-    justify-content: flex-start;
+    min-width:500px;
+    margin-right:5%;
 }
 
 /* 우측(인기글 및 광고) */
 .board-side{
     width:30%;
+    min-width:300px;
 }
 
 .hot-bulletin{
