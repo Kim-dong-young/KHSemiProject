@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../static/css/mainPageContent.css">
+<link rel="stylesheet" href="../static/css/communityBoardPage.css">
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -118,14 +119,15 @@
                         <div class="success-btn"><button>달성하기</button></div>
                     </div>
                 </div>
-                <div id="popular-community">
+                <div class="popular-community">
                     <div>인기글</div>
                     <table>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
-                        <tr></tr>
+                        <tr>
+                            <td class="tab">잡담</td>
+                            <td class="title">테스트용 제목</td>
+                            <td class="author">Test1</td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                        </tr>
                     </table>
                 </div>
             </div>
