@@ -71,57 +71,107 @@
         <div id="content2">
             <div id="content2-left">
                 <div class="user-status">
-                    <div class="user-profile-info">
-                        <div id="user-profile-img"><img src="../static/img/test.png" alt=""></div>
-                        <div class="user-level-info">
-                            <div id="user-level-value">12345</div>
-                            <div class="user-exp-info">
-                                <span id="current-value-info">1</span>
-                                <span>/</span>
-                                <span id="total-value-info">2</span>
+                    <div id="user-info">
+                        <div id=user-info-img><img src="../static/img/test.png" alt=""></div>
+                        <div class="user-info-exp">
+                            <div class="user-info-level">
+                                <div>
+                                    <span>LV.</span>
+                                    <span id="level">456</span>
+                                </div>
+                                <div>
+                                    <span>1</span>
+                                    <span>/</span>
+                                    <span>2</span>
+                                </div>
                             </div>
-                            <div id="exp-gage-bar"></div>
+                            <div id="user-exp-bar">
+                                <div id="current-user-exp-bar"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="rate-gage">
-                        <div id="achievement-rate">12</div>
-                        <div id="played-quiz">12</div>
-                        <div id="correct-answer-rate">12</div>
+                    <div class="achievement-donut-rate" data-persent="70">
+                        <div>
+                            <div>1</div>
+                            <div>업적 달성률</div>
+                        </div>
+                        <div>
+                            <div>1</div>
+                            <div>플레이한 퀴즈</div>
+                        </div>
+                        <div>
+                            <div>1</div>
+                            <div>정답률</div>
+                        </div>
                     </div>
                 </div>
                 <div class="quest-list">
                     <div>일간</div>
-                    <div class="daily-quest-list" id="first-quest">
-                        <div>1.퀴즈 한개 풀기</div>
+                    <hr>
+                    <div class="quest-list-row">
                         <div>
-                            <span>0</span>
-                            <span>/</span>
-                            <span>1</span>
+                            <div class="quest-content">1. 퀴즈 1개 완료하기</div>
+                            <div class="quest-achieving-condition">
+                                <span>0</span>
+                                <span>/</span>
+                                <span class="completion-condition">1</span>
+                            </div>
+                            <div class="submit-btn">
+                                <button>달성하기</button>
+                            </div>
                         </div>
-                        <div class="success-btn"><button>달성하기</button></div>
-                    </div>
-                    <div class="daily-quest-list" id="second-quest">
-                        <div>1.퀴즈 한개 풀기</div>
                         <div>
-                            <span>0</span>
-                            <span>/</span>
-                            <span>1</span>
+                            <div class="quest-content">1. 퀴즈 1개 완료하기</div>
+                            <div class="quest-achieving-condition">
+                                <span>0</span>
+                                <span>/</span>
+                                <span class="completion-condition">1</span>
+                            </div>
+                            <div class="submit-btn">
+                                <button>달성하기</button>
+                            </div>
                         </div>
-                        <div class="success-btn"><button>달성하기</button></div>
-                    </div>
-                    <div class="daily-quest-list" id="third-quest">
-                        <div>1.퀴즈 한개 풀기</div>
                         <div>
-                            <span>0</span>
-                            <span>/</span>
-                            <span>1</span>
+                            <div class="quest-content">1. 퀴즈 1개 완료하기</div>
+                            <div class="quest-achieving-condition">
+                                <span>0</span>
+                                <span>/</span>
+                                <span class="completion-condition">1</span>
+                            </div>
+                            <div class="submit-btn">
+                                <button>달성하기</button>
+                            </div>
                         </div>
-                        <div class="success-btn"><button>달성하기</button></div>
-                    </div>
+                    </div>                    
                 </div>
                 <div class="popular-community">
                     <div>인기글</div>
+                    <hr>
                     <table>
+                        <tr>
+                            <td class="tab">잡담</td>
+                            <td class="title">테스트용 제목</td>
+                            <td class="author">Test1</td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                        </tr>
+                        <tr>
+                            <td class="tab">잡담</td>
+                            <td class="title">테스트용 제목</td>
+                            <td class="author">Test1</td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                        </tr>
+                        <tr>
+                            <td class="tab">잡담</td>
+                            <td class="title">테스트용 제목</td>
+                            <td class="author">Test1</td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                        </tr>
+                        <tr>
+                            <td class="tab">잡담</td>
+                            <td class="title">테스트용 제목</td>
+                            <td class="author">Test1</td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                        </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>

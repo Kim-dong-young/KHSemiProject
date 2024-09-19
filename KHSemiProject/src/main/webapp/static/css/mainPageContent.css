@@ -1,4 +1,12 @@
 @charset "UTF-8";
+button{
+    border: none;
+    width: 100px;
+    border-radius: 50px;
+    background: #FF9139;
+    box-shadow: 3px 3px 3px #999999;
+}
+
 #content1{
     border: 1px solid #d9d9d9;
     border-radius: 10px;
@@ -32,13 +40,8 @@
 }
 
 .recommend-button > ul > li > button{
-    width: 100px;
     height: 30px;
-    border-radius: 50px;
-    background: #FF9139;
-    border: none;
     font-size: 17px;
-    box-shadow: 3px 3px 3px #999999;
 }
 
 /* 좀더 찾아봐야됨 */
@@ -88,15 +91,6 @@
     justify-content: space-around;
 }
 
-#content2>div{
-    /* border: 1px solid #d9d9d9; */
-    padding: 10px;
-}
-
-#content2>div:first-child{
-    margin: 0;
-}
-
 #content2-left{
     height: 100%;
     border-radius: 10px;
@@ -111,90 +105,93 @@
 
 .user-status{
     width: 100%;
-    height: 100px;
+    height: 150px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     border: 1px solid #d9d9d9;
 }
 
-.user-status>div{
-    padding: 5px;
+.user-status div{
+    border: 1px solid #d9d9d9;
 }
 
-.user-profile-info{
-    width: 50%;
+#user-info{
     display: flex;
-    /* border: 1px solid black; */
-}
-
-.user-profile-info>div{
-    padding-left: 50px;
-    display: flex;
-}
-
-#user-profile-img{
-    justify-content: center;
     align-items: center;
 }
 
-#user-profile-img>img{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
+#user-info>div{
+    margin: 0 10px;
 }
 
-#exp-gage-bar{
+#user-info-img{
+    width: 70px;
+    height: 70px;
+}
+
+#user-info-img img{
     width: 100%;
-    height: 10px;
-    border: 1px solid black;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.user-info-level{
+    padding: 0 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#user-exp-bar{
+    width: 250px;
+    height: 15px;
+    border: 1px solid #d9d9d9;
     border-radius: 50px;
 }
 
-.rate-gage{
+#current-user-exp-bar{
     width: 50%;
+    height: 100%;
+    padding: 0;
+    background: #FF9139;
+    border-radius: 50px;
+}
+
+.achievement-donut-rate{
     display: flex;
-    /* border: 1px solid black; */
+}
+
+.achievement-donut-rate>div{
+    width: 100px;
+    height: 100%;
 }
 
 .quest-list{
     border: 1px solid #d9d9d9;
-    padding: 0 10px;
+    padding: 10px;
 }
 
 .quest-list>div:first-child{
     font-size: 30px;
 }
 
-.quest-list>div:nth-child(n+2){
-    width: 100%;
-    height: 50px;
-    margin: 10px 0;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
+.quest-list-row>div{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 25px;
+    margin-top: 10px;
 }
 
-.daily-quest-list>div{
-    margin: 0 30px;
+.quest-content{
+    margin-right: 100px;
 }
 
-.daily-quest-list>div:nth-child(n+2){
-    margin: 0 10px;
+.quest-achieving-condition{
+    margin-right: 25px;
 }
 
-.success-btn>button{
-    width: 100px;
+.submit-btn button{
     height: 25px;
-    border-radius: 50px;
-    background: #FF9139;
-    border: none;
-    font-size: 17px;
-    box-shadow: 3px 3px 3px #999999;
-    margin-bottom: 10px;
 }
 
 .popular-community{
@@ -214,7 +211,7 @@
 
 .popular-community table{
     width: 100%;
-    border: 1px solid #d9d9d9;
+    /* border: 1px solid #d9d9d9; */
 }
 
 .popular-community td{
