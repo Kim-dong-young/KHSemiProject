@@ -2,10 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../static/css/searchMainPage.css">
+
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -64,9 +67,52 @@
                     <button>평점순</button>
                 </div>
                 <div id="tag-popup-button">
-                    <button>테그필터</button>
+                   <button onclick="tagPopup()">태그 필터</button>
+                </div>
+                
+            </div>
+            <div id="tag-popup" style="display: none;">
+                <div id="tag-top">
+                    <div id="tag-search">
+                        <input type="text">
+                    </div>
+                    <div id="tag-search-exit-button" onclick="closeTagPopup()">
+                        <input type="image" src="../static/img/searchMainPage/back.png">
+                    </div>
+                </div>
+                <br>
+                <div id="tag-popup-tags">
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
                 </div>
             </div>
+            <script>
+                function tagPopup(){
+                    document.getElementById("tag-popup").style.display = "flex";
+                }
+                function closeTagPopup(){
+                    document.getElementById("tag-popup").style.display = "none";
+                }
+            </script>
             <br>
             <div class="contents">
 
