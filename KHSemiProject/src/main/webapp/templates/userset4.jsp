@@ -18,5 +18,17 @@
             <li><a href="../templates/userset4.jsp">기타 설정</a></li>
         </ul>
     </nav>
+    <section id="other" class="content-section">
+        <h2>기타 설정</h2>
+        <form>
+            <label for="theme">테마 선택:</label>
+            <select id="theme" name="theme">
+                <option value="light" selected>라이트 모드</option>
+                <option value="dark">다크 모드</option>
+            </select>
+            <button type="submit">저장</button>
+        </form>
+    </section>
+    <script src="../static/js/userset.js"></script>
 </body>
 </html>

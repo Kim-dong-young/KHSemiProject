@@ -18,5 +18,20 @@
             <li><a href="../templates/userset4.jsp">기타 설정</a></li>
         </ul>
     </nav>
+    <section id="notifications" class="content-section">
+        <h2>알림 설정</h2>
+        <form>
+            <label>
+                <input type="checkbox" name="email-notifications" checked>
+                이메일 알림
+            </label>
+            <label>
+                <input type="checkbox" name="push-notifications">
+                푸시 알림
+            </label>
+            <button type="submit">저장</button>
+        </form>
+    </section>
+    <script src="../static/js/userset.js"></script>
 </body>
 </html>
