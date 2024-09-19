@@ -12,6 +12,9 @@ button{
     border-radius: 10px;
     height: 327px;
 }
+.side-navi{
+    margin-left: 0px !important;
+}
 
 #content1>div {
     margin-top: 5px;

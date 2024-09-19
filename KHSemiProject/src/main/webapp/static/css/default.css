@@ -51,6 +51,8 @@ ul, li, ol {
 .container{
     height: auto;
     padding-top: 100px;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
 }
 
 .side-navi{
@@ -67,6 +69,7 @@ ul, li, ol {
 .side-navi > ul{
     /* border: 1px solid black; */
     padding-top: 50px;
+    padding-left: 0px !important;
 }
 
 .side-navi > ul > li{
