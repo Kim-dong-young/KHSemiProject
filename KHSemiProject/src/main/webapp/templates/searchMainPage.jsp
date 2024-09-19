@@ -2,10 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../static/css/searchMainPage.css">
+
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -64,8 +73,10 @@
                     <button>평점순</button>
                 </div>
                 <div id="tag-popup-button">
-                    <button>테그필터</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="popover" data-bs-content="Some content inside the popover">
+                        Toggle popover</button>
                 </div>
+                
             </div>
             <br>
             <div class="contents">
