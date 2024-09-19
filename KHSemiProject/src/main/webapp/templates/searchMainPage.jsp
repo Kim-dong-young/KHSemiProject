@@ -67,10 +67,52 @@
                     <button>평점순</button>
                 </div>
                 <div id="tag-popup-button">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">Toggle popover</button>
+                   <button onclick="tagPopup()">태그 필터</button>
                 </div>
                 
             </div>
+            <div id="tag-popup" style="display: none;">
+                <div id="tag-top">
+                    <div id="tag-search">
+                        <input type="text">
+                    </div>
+                    <div id="tag-search-exit-button" onclick="closeTagPopup()">
+                        <input type="image" src="../static/img/searchMainPage/back.png">
+                    </div>
+                </div>
+                <br>
+                <div id="tag-popup-tags">
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                    <button>
+                        asdf
+                    </button>
+                </div>
+            </div>
+            <script>
+                function tagPopup(){
+                    document.getElementById("tag-popup").style.display = "flex";
+                }
+                function closeTagPopup(){
+                    document.getElementById("tag-popup").style.display = "none";
+                }
+            </script>
             <br>
             <div class="contents">
 
