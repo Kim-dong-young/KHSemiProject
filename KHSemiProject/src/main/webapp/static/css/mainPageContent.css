@@ -108,14 +108,14 @@ button{
 
 .user-status{
     width: 100%;
-    height: 150px;
+    height: 125px;
     display: flex;
     justify-content: space-around;
     border: 1px solid #d9d9d9;
 }
 
 .user-status div{
-    border: 1px solid #d9d9d9;
+    /* border: 1px solid #d9d9d9; */
 }
 
 #user-info{
@@ -164,8 +164,39 @@ button{
 }
 
 .achievement-donut-rate>div{
-    width: 100px;
-    height: 100%;
+    width: 99px;
+    margin: 0 5px;
+}
+
+.donut-chart{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: relative;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut-chart::before {
+    content: '';
+    width: 70%;
+    height: 70%;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.donut-text {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.content-rate{
+    text-align: center;
 }
 
 .quest-list{

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../static/css/mainPageContent.css">
 <link rel="stylesheet" href="../static/css/communityBoardPage.css">
+
+<script src="../static/js/mainPage.js"></script>
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -90,18 +92,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="achievement-donut-rate" data-persent="70">
+                    <div class="achievement-donut-rate">
                         <div>
-                            <div>1</div>
-                            <div>업적 달성률</div>
+                            <div class="donut-chart" data-persent="70">
+                                <span class="donut-text"></span>
+                            </div>
+                            <div class="content-rate">업적 달성률</div>
                         </div>
                         <div>
-                            <div>1</div>
-                            <div>플레이한 퀴즈</div>
+                            <div class="donut-chart" data-persent="50">
+                                <span class="donut-text"></span>
+                            </div>
+                            <div class="content-rate">플레이한 퀴즈</div>
                         </div>
                         <div>
-                            <div>1</div>
-                            <div>정답률</div>
+                            <div class="donut-chart" data-persent="80">
+                                <span class="donut-text"></span>
+                            </div>
+                            <div class="content-rate">정답률</div>
                         </div>
                     </div>
                 </div>
