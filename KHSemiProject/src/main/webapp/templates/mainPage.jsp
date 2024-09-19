@@ -115,7 +115,6 @@
                 </div>
                 <div class="quest-list">
                     <div>일간</div>
-                    <hr>
                     <div class="quest-list-row">
                         <div>
                             <div class="quest-content">1. 퀴즈 1개 완료하기</div>
@@ -154,7 +153,6 @@
                 </div>
                 <div class="popular-community">
                     <div>인기글</div>
-                    <hr>
                     <table>
                         <tr>
                             <td class="tab">잡담</td>
@@ -190,8 +188,10 @@
                 </div>
             </div>
             <div id="content2-right">
-                <div></div>
-                <div></div>
+                <div class="attendance-recode">
+                    
+                </div>
+                <div class="ranking"></div>
             </div>
         </div>
     </div>

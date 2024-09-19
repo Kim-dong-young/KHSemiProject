@@ -106,16 +106,16 @@ button{
     margin-bottom: 10px;
 }
 
+#content2-left>div:last-child{
+    margin-bottom: 0;
+}
+
 .user-status{
     width: 100%;
     height: 125px;
     display: flex;
     justify-content: space-around;
     border: 1px solid #d9d9d9;
-}
-
-.user-status div{
-    /* border: 1px solid #d9d9d9; */
 }
 
 #user-info{
@@ -208,6 +208,11 @@ button{
     font-size: 30px;
 }
 
+.quest-list-row{
+    border: 1px solid #FF9139;
+    border-radius: 10px
+}
+
 .quest-list-row>div{
     display: flex;
     justify-content: center;
@@ -245,7 +250,8 @@ button{
 
 .popular-community table{
     width: 100%;
-    /* border: 1px solid #d9d9d9; */
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
 }
 
 .popular-community td{
@@ -253,9 +259,18 @@ button{
 }
 
 #content2-right{
-    height: 100%;
     border: 1px solid #d9d9d9;
     border-radius: 10px;
     width: 30%;
+    height: 621px;
+    padding: 10px;
 }
 
+#content2-right>div{
+    border: 1px solid #d9d9d9;
+}
+
+.attendance-recode{
+    width: 100%;
+    padding: 10px;
+}
