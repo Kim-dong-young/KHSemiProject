@@ -1,3 +1,40 @@
+.title, .tab, .author, .comment, .date, .viewcount{
+    white-space: nowrap; /* 텍스트 줄 분리 방지 */
+    overflow: hidden; /* 넘치는 텍스트를 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트에 말줄임(...) 표시 */
+}
+
+.tab{
+    text-align: center;
+    width:10%;
+}
+
+.title{
+    width:40%;
+}
+
+.author{
+    width:15%;
+}
+
+.comment-num{
+    width:12%;
+    color: #FF0000;
+}
+
+.comment-num img{
+    width:15px;
+    height:15px;
+}
+
+.date{
+    width:11%;
+}
+
+.viewcount{
+    width:12%;
+}
+
 .hot-bulletin{
     border:1px solid #989898;
     border-radius: 5px;
