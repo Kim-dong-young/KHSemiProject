@@ -14,20 +14,11 @@ local.properties
 .loadpath
 .recommenders
 
-# Eclipse Core       
-.project 
-
 # JDT-specific (Eclipse Java Development Tools)      
 .classpath
 
 # tomcat
 Servers/
-
-# JDT-specific
-.classpath
-
-# Eclipse Core
-.project
 
 # External tool builders
 .externalToolBuilders/
