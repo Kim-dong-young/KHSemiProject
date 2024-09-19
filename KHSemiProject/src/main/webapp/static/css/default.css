@@ -18,6 +18,7 @@ ul, li, ol {
 }
 
 .header{
+    z-index: 100;
     position: fixed;
     width: 100%;
     height: 100px;
@@ -51,9 +52,12 @@ ul, li, ol {
 .container{
     height: auto;
     padding-top: 100px;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
 }
 
 .side-navi{
+    z-index: 100;
     /* border: 1px solid black; */
     top: 100px;
     position: fixed;
@@ -67,6 +71,7 @@ ul, li, ol {
 .side-navi > ul{
     /* border: 1px solid black; */
     padding-top: 50px;
+    padding-left: 0px !important;
 }
 
 .side-navi > ul > li{
