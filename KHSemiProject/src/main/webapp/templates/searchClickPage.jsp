@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div>
-                    <button>9.56</button>
-                    <button></button>
+                    <button onclick="location.href='searchMainPage.jsp'">뒤로가기</button>
+                    <button>플레이</button>
                 </div>
             </div>
             <div>
