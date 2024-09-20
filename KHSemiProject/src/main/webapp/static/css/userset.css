@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-.content {
-    padding: 0;
-    margin: 0;
-}
-
-
 a {
     text-decoration: none;
     color: rgb(0, 0, 0);
@@ -45,7 +39,7 @@ main {
     justify-content: center;
     align-items: center;
     margin-bottom: 0;
-    height: calc(100% - 56px);
+    height: calc(100% - 100px);
 }
 
 form {
@@ -68,7 +62,7 @@ fieldset {
     border: 1px solid #ddd; 
     border-radius: 8px; 
     padding: 20px;
-    height: 100%;
+    height: calc(100% - 100px);
 }
 
 .profile-details {
@@ -187,6 +181,10 @@ button {
 button:hover {
     background-color: #FF9C00; /* 호버 효과 */
 }
+
+
+
+
 
 
 
