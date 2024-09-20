@@ -2,15 +2,18 @@
 button{
     border: none;
     width: 100px;
-    height: 25px;
     border-radius: 50px;
     background: #FF9139;
+    box-shadow: 3px 3px 3px #999999;
 }
 
 #content1{
     border: 1px solid #d9d9d9;
     border-radius: 10px;
     height: 327px;
+}
+.side-navi{
+    margin-left: 0px !important;
 }
 
 #content1>div {
@@ -135,10 +138,6 @@ button{
     border-radius: 50%;
 }
 
-.user-info-exp>div{
-    margin: 10px 0;
-}
-
 .user-info-level{
     padding: 0 5px;
     display: flex;
@@ -230,10 +229,8 @@ button{
     margin-right: 25px;
 }
 
-.submit-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.submit-btn button{
+    height: 25px;
 }
 
 .popular-community{
@@ -265,7 +262,7 @@ button{
     border: 1px solid #d9d9d9;
     border-radius: 10px;
     width: 30%;
-    height: 611px;
+    height: 621px;
     padding: 10px;
 }
 
@@ -274,58 +271,6 @@ button{
 }
 
 .attendance-recode{
-    font-size: 25px;
     width: 100%;
     padding: 10px;
-}
-
-.attendance-recode>div{
-    /* border: 1px solid #d9d9d9; */
-    margin: 5px 0;
-}
-
-#attendance,
-#serial-attendance-day,
-#serial-attendance-week{
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* 내부 요소를 수직 중앙 정렬 */
-    margin: 10px 0; /* 각 섹션 사이에 간격 추가 */
-}
-
-#attendance-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.solve-a-quiz-day{
-    margin-top: 100px;
-}
-
-.solve-a-quiz-day-bar{
-    padding: 0 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.solve-a-quiz-bar{
-    width: 7px;
-    height: 100px;
-    position: relative;
-}
-
-.solve-a-quiz-bar>div{
-    width: 100%;
-    height: 30%;
-    background: #FF9139;
-    position: absolute;
-    bottom: 0;
-}
-
-.solve-a-quiz-day-of-week{
-    font-size: 15px;
-    padding:  0 10px;
-    display: flex;
-    justify-content: space-between;
 }
