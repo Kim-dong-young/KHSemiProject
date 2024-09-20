@@ -117,7 +117,7 @@
             <div class="contents">
 
                 <section class="video-flex">
-                    <div class="video-priview">
+                    <div class="video-priview" onclick="location.href='searchClickPage.jsp'">
                         <div class="thumbnail-row">
                             <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
@@ -129,6 +129,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="video-priview">
                         <div class="thumbnail-row">
                             <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
