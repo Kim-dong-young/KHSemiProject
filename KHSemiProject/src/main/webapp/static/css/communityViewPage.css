@@ -1,0 +1,276 @@
+button{
+    border-style:none;
+    outline:none;
+}
+
+span{
+    white-space: nowrap; /* 텍스트 줄 분리 방지 */
+    overflow: hidden; /* 넘치는 텍스트를 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트에 말줄임(...) 표시 */
+}
+
+.content > p{
+    font-size:36px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.after-vline:after{
+    content: "|";
+    padding: 5px;
+}
+
+/*
+.title, .tab, .author, .comment, .date, .viewcount{
+ communityBoardPage 에 적
+*/
+
+/* 좌측(게시글 내용) */
+.board{
+    width:65%;
+    min-width: 500px;
+    margin-right:5%;
+}
+
+.bulletin-content{
+    border:1px solid #989898;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width:100%;
+}
+
+/* 게시글 제목 영역 */
+.bulletin-title{
+    border-bottom:1px solid #989898;
+    background-color: #D9D9D9;
+    height:30px;
+    display:flex;
+    align-items: center;
+    position:relative;
+}
+
+.bulletin-title .board-tab{
+    background-color: #484848;
+    border-radius: 5px;
+    color:white;
+    font-size:16px;
+    text-align: center;
+    margin-left:5px;
+    margin-right:5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    width:50px;
+    height:20px;
+}
+
+.bulletin-title button{
+    width:60px;
+    position:absolute;
+    right:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bulletin-title img{
+    width:20px;
+    height:20px;
+}
+
+/* 게시글 정보(유저명, 조회수 등) 영역 */
+.bulletin-info{
+    border-bottom:1px solid #989898;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.author-info{
+    width:20%;
+    display:flex;
+    margin-left:5px;
+    align-items: center;
+}
+
+.author-info > img{
+    width:25px;
+    height:25px;
+}
+
+.data-info{
+    width:80%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right:5px;
+}
+
+/* 게시글 내용 영역 */
+.bulletin-input{
+    width:100%;
+    padding:12px;
+}
+
+.bulletin-input p{
+    font-weight:450;
+}
+
+.image-input{
+    max-width:800px;
+    height: auto;
+}
+
+
+.image-input img{
+    max-width:100%;
+}
+
+/* 게시글 좋아요, 신고 버튼 영역 */
+.bulletin-option{
+    display:flex;
+    justify-content: center;
+    padding:25px;
+}
+
+.bulletin-option button{
+    border-radius: 5px;
+    width:100px;
+    height:30px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bulletin-option img{
+    width:25px;
+    height:25px;
+    margin-right: 10px;
+}
+
+.like-button{
+    border:1px solid #355BAC;
+    background-color: #699FE5;
+    margin-right:50px;
+}
+
+.report-button{
+    border:1px solid #762C2C;
+    background-color: #F13131;
+}
+
+/* 댓글 영역 */
+.bulletin-comment{
+    width:100%;
+    border: 1px solid #989898;
+    border-top:none;
+    border-bottom:none;
+    padding: 12px;
+}
+
+.comment{
+    display:flex;
+    justify-content: flex-start;
+    width:100%;
+    padding-bottom: 12px;
+}
+
+.comment .after-vline:after{
+    padding: 3px;
+}
+
+.comment-left{
+    width:60px;
+}
+
+.comment-left img{
+    width:50px;
+    height:50px;
+}
+
+.comment-right{
+    width:calc(100%-60px);
+}
+
+.comment-content span{
+    font-weight: 450;
+}
+
+.comment-option button{
+    font-size:12px;
+    background-color: transparent;
+}
+
+/* 댓글 페이지 영역 */
+.comment-page{
+    border:1px solid #989898;
+    border-top:none;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:15px;
+}
+
+.comment-page button{
+    width:30px;
+    height:30px;
+    border:1px solid #989898;
+}
+
+/* 댓글 작성 영역 */
+.comment-write{
+    border:1px solid #989898;
+    border-top:none;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding:12px;
+    margin-bottom:20px;
+}
+
+.comment-write textarea{
+    width:calc(100% - 10px);
+    height:160px;
+    resize:none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    padding:5px;
+    margin-bottom:10px;
+}
+
+.comment-wrtie textarea::placeholder{
+    font-weight:400;
+}
+
+.comment-write button{
+    width:100px;
+    border:1px solid #8A8A8A;
+    border-radius: 5px;
+    background-color: #ffffff;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment-write img{
+    width:25px;
+    height:25px;
+    margin-right:10px;
+}
+
+/* 우측(인기글 및 광고) */
+.board-side{
+    width:30%;
+    min-width:300px;
+}

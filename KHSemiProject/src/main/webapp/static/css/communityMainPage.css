@@ -1,0 +1,29 @@
+button{
+    border-style:none;
+    outline:none;
+}
+
+.content > p{
+    font-size:36px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.wrapper{
+    margin-left: 10px;
+    display:flex;
+    justify-content: space-between;
+}
+
+/* 좌측(게시판) */
+.board{
+    width: 65%;
+    min-width:500px;
+    margin-right:5%;
+}
+
+/* 우측(인기글 및 광고) */
+.board-side{
+    width:30%;
+    min-width:300px;
+}
