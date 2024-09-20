@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="static/css/default.css">
-    <link rel="stylesheet" href="static/css/content.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../static/css/userset.css">
 </head>
 <body>
-    
+	<%@ include file="common/menu.jsp" %>
+    <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
+    <nav class="navbar">
+        <ul class="navbar_menu">
+            <li><a href="../templates/userset1.jsp">프로필 설정</a></li>
+            <li><a href="../templates/userset2.jsp">개인정보 설정</a></li>
+            <li><a href="../templates/userset3.jsp">알림 설정</a></li>
+            <li><a href="../templates/userset4.jsp">기타 설정</a></li>
+        </ul>
+    </nav>
 </body>
 </html>

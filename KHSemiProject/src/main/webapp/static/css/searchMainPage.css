@@ -5,7 +5,6 @@
 .category-div {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    z-index: -10;
 }
 
 .category-div div {
@@ -41,7 +40,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -10;
 }
 
 #search-div-area {
@@ -79,9 +77,59 @@
     justify-content: space-between;
 }
 
+#tag-popup{
+    position: fixed;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    background-color: white;
+    height: 400px;
+    width: 350px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    right: 10px;
+    top: 100px;
+    z-index: 50;
+
+    flex-direction: column;
+
+    text-align: center;
+}
+
+#tag-top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tag-popup-tags{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
 
+#tag-popup input[type=text]{
+    width: 250px;
+    margin-top: 20px;
+    font-size: 25px;
+    background: #d9d9d9;
+    border-radius: 50px;
+    text-align: center;
+}
 
+#tag-popup input[type=image]{
+    margin-top: 20px;
+    width: 40px;
+}
+
+#tag-popup-tags button {
+    background: #cacaca;
+    border-radius: 10px;
+    width: 85px;
+    height: 27px;
+}
 
 
 
