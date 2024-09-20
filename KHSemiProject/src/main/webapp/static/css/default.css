@@ -1,10 +1,16 @@
+@charset "UTF-8";
 /* 헤더와 사이드바 */
+/* 주의!!!!!!!!!!!!!!! 절대로 건들지 말것! 수정사항 있을시, 파일 새로 생성 후 작성*/
 *{
     margin: 0;
-    padding: 0;
+    padding: 0; 
 
     font-family: "Noto Sans KR", sans-serif;
     font-weight: bold;
+}
+
+body{
+    height: 100vh;
 }
 
 div{
@@ -16,6 +22,7 @@ ul, li, ol {
 }
 
 .header{
+    z-index: 100;
     position: fixed;
     width: 100%;
     height: 100px;
@@ -49,9 +56,12 @@ ul, li, ol {
 .container{
     height: auto;
     padding-top: 100px;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
 }
 
 .side-navi{
+    z-index: 100;
     /* border: 1px solid black; */
     top: 100px;
     position: fixed;
@@ -65,6 +75,7 @@ ul, li, ol {
 .side-navi > ul{
     /* border: 1px solid black; */
     padding-top: 50px;
+    padding-left: 0px !important;
 }
 
 .side-navi > ul > li{
@@ -102,4 +113,15 @@ ul, li, ol {
 
 .side-navi > ul > li > a:hover{
     background: #FF9139;
+}
+
+.content{
+    height: calc(100% - 100px);
+    padding: 10px;
+    padding-bottom: 0px;
+    margin-left: 290px;
+}
+
+.content > div {
+	margin-bottom:10px;
 }
