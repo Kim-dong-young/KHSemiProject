@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>댓글 창</title>
+    <link rel="stylesheet" href="Reply.css">
+</head>
+<body>
+    <div class="comment-section"> 
+        <div class="header">
+            <span>댓글 3</span>
+            <button class="close-btn">X</button>
+        </div>
+        <ul class="comments">
+            <li>
+                <span class="user">user01</span>
+                <span class="comment">ㅇㅇ 이 퀴즈 진짜 쉬움ㅋㅋ</span>
+            </li>
+            <li>
+                <span class="user">지존고수</span>
+                <span class="comment">하나라도 틀리면 반성하자ㅋㅋ</span>
+                <button class="report-btn">신고</button>
+            </li>
+            <li>
+                <span class="user">dydwns</span>
+                <span class="comment">재밌게 잘 풀었습니다. 앞으로도 이런 좋은 문제 더 많이 만들어 주세요.</span>
+            </li>
+        </ul>
+        <fieldset class="input-area">
+            <legend>user01</legend>
+            <input type="text" id="commentInput" placeholder="댓글 추가..." />
+        </fieldset>
+    </div>
+    <script src="Reply.js"></script>
+</body>
+</html>
