@@ -70,6 +70,30 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <div class="container">
+            <div class="side-navi">
+                <ul>
+                    <li><a href="no.no">홈</a></li>
+                    <li><a href="">개인화면</a></li>
+                    <li><a href="">탐색</a></li>
+                    <li><a href="UserSet.jsp">유저설정</a></li>
+                    <li><a href="">커뮤니티</a></li>
+                    <li><a href="">문제만들기</a></li>
+                    <li><a href="">도움말</a></li>
+                </ul>
+            </div>
+            <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
+                <div id="content1">
+                    <div>상단 컨텐츠</div>
+                </div>
+                <div id="content2">
+                    <div id="content2-left">왼쪽컨텐츠</div>
+                    <div id="content2-right">오른쪽 컨텐츠</div>
+                </div>
+            </div>
+=======
         <div id="content2">
             <div id="content2-left">
                 <div class="user-status">
@@ -195,5 +219,6 @@
             </div>
         </div>
     </div>
+>>>>>>> 3528e64938008de06503aa3a561ef139edcf0536
 </body>
 </html>
