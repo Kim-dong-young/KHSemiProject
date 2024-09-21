@@ -13,11 +13,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../static/css/default.css">
+    <link rel="stylesheet" href="static/css/default.css">
 </head>
 <body>
     <div class="header">
-        <div id="logo-img"><a href=""><img src="../static/img/logo.png" alt=""></a></div>
+        <div id="logo-img"><a href=""><img src="static/img/logo.png" alt=""></a></div>
         <div id="welcome-user">User01님 환영합니다.</div>
     </div>
     <div class="container">

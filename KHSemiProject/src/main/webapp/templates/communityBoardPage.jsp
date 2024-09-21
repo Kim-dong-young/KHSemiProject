@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
-<link rel="stylesheet" href="../static/css/communityBoardPage.css">
+<link rel="stylesheet" href="static/css/communityBoardPage.css">
 
 </head>
 <body>
@@ -42,7 +42,7 @@
                     <td class="tab">잡담</td>
                     <td class="title" onclick="location.href='communityViewPage.jsp'">테스트용 제목 테스트용 제목 테스트용 제목 테스트용 제목</td>
                     <td class="author">유저명유저명유저명유저명</td>
-                    <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                    <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
                     <td class="date">12:45</td>
                     <td class="viewcount">13</td>
                 </tr>
@@ -75,7 +75,7 @@
             </div>
 
             <div class="option1">
-                <a href="communityWritePage.jsp"><img src="../static/img/pen-icon-white.png">글쓰기</a>
+                <a href="communityWritePage.jsp"><img src="static/img/pen-icon-white.png">글쓰기</a>
             </div>
         </div>
 
@@ -94,7 +94,7 @@
             </div>
             
             <div class="option1">
-                <button><img src="../static/img/search-icon.png">검색</button>
+                <button><img src="static/img/search-icon.png">검색</button>
             </div>
         </form>
     </div>
