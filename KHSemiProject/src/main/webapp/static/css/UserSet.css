@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F3F3F3;
+    padding: 8px 12px;
+    margin: auto;
+}
+
+.navbar_menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar_menu :hover {
+    background: rgb(255, 155, 23);
+    border-radius: 4px;
+}
+
+.navbar_menu li {
+    padding: 8px 12px;
+    text-align: center;
+    width: 100%;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    height: calc(100% - 100px);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 80px auto; /* 위쪽 여백, 가운데 정렬 */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    min-height: 300px;
+    margin-left: 38%;
+}
+
+fieldset {
+    margin: 0 auto;
+    width: calc(100% - 40px);
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    padding: 20px;
+    height: calc(100% - 100px);
+}
+
+.profile-details {
+    width: 100%; /* 전체 너비 사용 */
+    margin-bottom: 20px; /* 각 섹션 아래에 여백 추가 */
+}
+
+.profile-details label {
+    display: block; /* 블록 요소로 변경 */
+    margin-bottom: 0; /* 아래 여백 제거 */
+    font-weight: bold; /* 글씨 두껍게 */
+    text-align: left; /* 왼쪽 정렬 */
+    font-size: 16px; /* 폰트 크기 설정 */
+}
+
+.profile-details input,
+.profile-details textarea {
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* 폰트 크기 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 조정 */
+    width: calc(100% - 20px); /* 폼의 너비에 맞게 조정 */
+    margin: 5px 0; /* 위아래 여백 추가 */
+    height: 40px; /* 입력 필드 높이 설정 */
+}
+
+.profile-details textarea {
+    height: 100px; /* 텍스트 영역의 고정 높이 */
+}
+
+.personal-details {
+    width: 100%; /* 전체 너비 사용 */
+    margin-bottom: 20px; /* 각 섹션 아래에 여백 추가 */
+}
+
+.personal-details label {
+    display: block; /* 블록 요소로 변경 */
+    margin-bottom: 0; /* 아래 여백 제거 */
+    font-weight: bold; /* 글씨 두껍게 */
+    text-align: left; /* 왼쪽 정렬 */
+    font-size: 16px; /* 폰트 크기 설정 */
+}
+
+.personal-details input{
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* 폰트 크기 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 조정 */
+    width: calc(100% - 20px); /* 폼의 너비에 맞게 조정 */
+    margin: 5px 0; /* 위아래 여백 추가 */
+    height: 40px; /* 입력 필드 높이 설정 */
+}
+
+.notifications-details {
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    width: 100%; /* 전체 너비 사용 */
+    margin-bottom: 20px; /* 아래 여백 추가 */
+}
+
+.notifications-details label {
+    display: flex; /* flexbox 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    margin-bottom: 10px; /* 각 체크박스 간격 조정 */
+    font-size: 18px; /* 폰트 크기 증가 */
+    color: #333; /* 글씨 색상 */
+    width: 100%; /* 레이블 너비 설정 */
+}
+
+.notifications-details input[type="checkbox"] {
+    margin-right: 10px; /* 체크박스와 텍스트 간격 조정 */
+}
+
+.other-details {
+    width: 100%; /* 전체 너비 사용 */
+    margin-bottom: 20px; /* 각 섹션 아래에 여백 추가 */
+}
+
+.other-details label {
+    display: block; /* 블록 요소로 변경 */
+    margin-bottom: 0; /* 아래 여백 제거 */
+    font-weight: bold; /* 글씨 두껍게 */
+    text-align: left; /* 왼쪽 정렬 */
+    font-size: 16px; /* 폰트 크기 설정 */
+    width: 100%;
+}
+
+.other-details input{
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* 폰트 크기 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 크기 조정 */
+    width: calc(100% - 20px); /* 폼의 너비에 맞게 조정 */
+    margin: 5px 0; /* 위아래 여백 추가 */
+    height: 40px; /* 입력 필드 높이 설정 */
+}
+
+
+
+button {
+    padding: 10px 20px; /* 버튼 패딩 */
+    border: none;
+    border-radius: 4px;
+    background-color: #FFB246; /* 버튼 배경색 */
+    color: #fff; /* 버튼 텍스트 색상 */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* 버튼과 폼의 간격 추가 */
+    width: 100%; /* 버튼 너비를 100%로 설정 */
+}
+
+button:hover {
+    background-color: #FF9C00; /* 호버 효과 */
+}
+
+
+
+
+
+
+
+
+
