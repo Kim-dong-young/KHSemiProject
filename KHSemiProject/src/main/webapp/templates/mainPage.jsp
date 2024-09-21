@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../static/css/mainPageContent.css">
-<link rel="stylesheet" href="../static/css/communityBoardPage.css">
+<link rel="stylesheet" href="static/css/mainPageContent.css">
+<link rel="stylesheet" href="static/css/communityBoardPage.css">
 
-<script src="../static/js/mainPage.js"></script>
+<script src="static/js/mainPage.js"></script>
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -74,7 +74,7 @@
             <div id="content2-left">
                 <div class="user-status">
                     <div id="user-info">
-                        <div id=user-info-img><img src="../static/img/test.png" alt=""></div>
+                        <div id=user-info-img><img src="static/img/test.png" alt=""></div>
                         <div class="user-info-exp">
                             <div class="user-info-level">
                                 <div>
@@ -158,31 +158,31 @@
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
                         </tr>
                     </table>
                 </div>

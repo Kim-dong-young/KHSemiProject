@@ -23,7 +23,7 @@
     <div class="container">
         <div class="side-navi">
             <ul>
-                <li><a href="mainPage.jsp">홈</a></li>
+                <li><a href="<%=contextPath%>/main.me">홈</a></li>
                 <li><a href="personalScreen.jsp">개인화면</a></li>
                 <li><a href="searchMainPage.jsp">탐색</a></li>
                 <li><a href="userset.jsp">유저설정</a></li>
