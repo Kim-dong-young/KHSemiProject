@@ -20,7 +20,7 @@ DROP TABLE RP CASCADE CONSTRAINTS;
 
 
 
-CREATE TABLE MEMBER( --유저 목록
+CREATE TABLE MEMBER( 
     MEMBER_number number not null,
     MEMBER_id varchar2(50) not null,
     MEMBER_pwd varchar2(50) not null,
@@ -34,13 +34,13 @@ CREATE TABLE MEMBER( --유저 목록
     PRIMARY KEY(MEMBER_number)
 );
     
-CREATE TABLE CATEGORY ( --카테고리
+CREATE TABLE CATEGORY ( 
     CATEGORY_number NUMBER NOT NULL,
     CATEGORY_name VARCHAR2(50) NOT NULL,
     PRIMARY KEY (CATEGORY_number)
 );
 
-CREATE TABLE QUIZ( --퀴즈문제집
+CREATE TABLE QUIZ( 
     QUIZ_number number not null,
     QUIZ_title varchar2(50) not null,
     QUIZ_date date default SYSDATE not null,
@@ -52,7 +52,7 @@ CREATE TABLE QUIZ( --퀴즈문제집
     FOREIGN KEY(CATEGORY_number) references CATEGORY(CATEGORY_number)
 );
 
-CREATE TABLE PROBLEM( --문제
+CREATE TABLE PROBLEM( 
     PROBLEM_number number not null,
     PROBLEM_content varchar2(50),
     PROBLEM_media_kind number,
@@ -63,7 +63,7 @@ CREATE TABLE PROBLEM( --문제
     FOREIGN KEY (QUIZ_number) REFERENCES QUIZ(QUIZ_number)
 );
 
-CREATE TABLE ANSWER ( --해답
+CREATE TABLE ANSWER (
     ANSWER_number number not null,
     ANSWER_kind number not null,
     ANSWER_content varchar2(1000) not null,
@@ -72,14 +72,14 @@ CREATE TABLE ANSWER ( --해답
     FOREIGN KEY (PROBLEM_number) references PROBLEM(PROBLEM_number)
 );
 
-CREATE TABLE QUIZ_TAG ( --퀴즈 태그
+CREATE TABLE QUIZ_TAG ( 
     TAG_name varchar2(50) not null,
     QUIZ_number number not null,
-    PRIMARY KEY (TAG_name, QUIZ_number), -- 복합키로 수정
+    PRIMARY KEY (TAG_name, QUIZ_number), 
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE BOOKMARK ( --북마크
+CREATE TABLE BOOKMARK ( 
     MEMBER_number number not null,
     QUIZ_number number not null,
     CONSTRAINT PK_BOOKMARK PRIMARY KEY (MEMBER_number, QUIZ_number),
@@ -87,7 +87,7 @@ CREATE TABLE BOOKMARK ( --북마크
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE QUIZ_LOG( --푼 문제집
+CREATE TABLE QUIZ_LOG( 
     QUIZ_LOG_number number not null,
     MEMBER_number number not null,
     QUIZ_number number not null,
@@ -98,7 +98,7 @@ CREATE TABLE QUIZ_LOG( --푼 문제집
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE QUIZ_RATE( --퀴즈별점
+CREATE TABLE QUIZ_RATE( 
     QUIZ_rate_rating number not null,
     MEMBER_number number not null,
     QUIZ_number number not null,
@@ -106,14 +106,14 @@ CREATE TABLE QUIZ_RATE( --퀴즈별점
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE ACHIEVE( --업적
+CREATE TABLE ACHIEVE( 
     ACHIEVE_number number not null,
     ACHIEVE_title varchar2(50) not null,
     ACHIEVE_content varchar2(100) not null,
     PRIMARY KEY (ACHIEVE_number)
 );
 
-CREATE TABLE MEMBER_ACHIEVE( --유저별 업적
+CREATE TABLE MEMBER_ACHIEVE( 
     MEMBER_number number not null,
     ACHIEVE_number number not null,
     MEMBER_ACHIEVE_date date default SYSDATE not null,
@@ -121,13 +121,13 @@ CREATE TABLE MEMBER_ACHIEVE( --유저별 업적
     FOREIGN KEY (ACHIEVE_number) references ACHIEVE(ACHIEVE_number)
 );
 
-CREATE TABLE QUEST( --퀘스트
+CREATE TABLE QUEST(
     QUEST_number number not null,
     QUEST_content varchar2(100) not null,
     PRIMARY KEY (QUEST_number)
 );
 
-CREATE TABLE MEMBER_QUEST( --유저별퀘스트
+CREATE TABLE MEMBER_QUEST(
     MEMBER_QUEST_number number not null,
     MEMBER_QUEST_success number default 0 not null,
     MEMBER_QUEST_date date default SYSDATE not null,
@@ -138,7 +138,7 @@ CREATE TABLE MEMBER_QUEST( --유저별퀘스트
     FOREIGN KEY (QUEST_number) references QUEST(QUEST_number)        
 );
 
-CREATE TABLE COMMUNITY( --커뮤니티
+CREATE TABLE COMMUNITY( 
     COMMUNITY_number number not null,
     COMMUNITY_title varchar2(50) not null,
     COMMUNITY_content varchar2(1000) not null,
@@ -150,7 +150,7 @@ CREATE TABLE COMMUNITY( --커뮤니티
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number)
 );
 
-CREATE TABLE COMMUNITY_COMMENT( --커뮤니티 댓글
+CREATE TABLE COMMUNITY_COMMENT(
     COMMUNITY_COMMENT_number number not null,
     COMMUNITY_parent_number number,
     COMMUNITY_number number not null,
@@ -163,7 +163,7 @@ CREATE TABLE COMMUNITY_COMMENT( --커뮤니티 댓글
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number)
 );
 
-CREATE TABLE COMMUNITY_LIKE( --커뮤니티 좋아요
+CREATE TABLE COMMUNITY_LIKE(
     MEMBER_number number not null,
     COMMUNITY_number number not null,
     CONSTRAINT PK_COMMUNITY_LIKE PRIMARY KEY(MEMBER_number, COMMUNITY_number),
@@ -171,7 +171,7 @@ CREATE TABLE COMMUNITY_LIKE( --커뮤니티 좋아요
     FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number)
 );
 
-CREATE TABLE DAILY_CHECK( --출석테이블
+CREATE TABLE DAILY_CHECK( 
     DAILY_CHECK_number number not null,
     DAILY_CHECK_date date default SYSDATE not null,
     MEMBER_number number not null,
@@ -179,7 +179,7 @@ CREATE TABLE DAILY_CHECK( --출석테이블
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number)
 );
 
-CREATE TABLE QUIZ_COMMENT( --퀴즈댓글
+CREATE TABLE QUIZ_COMMENT( 
     QUIZ_COMMENT_number number not null, 
     QUIZ_COMMENT_content varchar2(500) not null,
     QUIZ_number number not null,
@@ -189,20 +189,20 @@ CREATE TABLE QUIZ_COMMENT( --퀴즈댓글
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE RP( --신고
+CREATE TABLE RP( 
     RP_number number not null,
     RP_encounter_number number not null,
     RP_reason varchar2(50),
     RP_date date DEFAULT SYSDATE not null,
     MEMBER_number number not null,
-    REPORTED_MEMBER_number number, -- MEMBER_number2를 명확한 이름으로 변경
+    REPORTED_MEMBER_number number, 
     QUIZ_number number,
     QUIZ_COMMENT_number number,
     COMMUNITY_number number,
     COMMUNITY_COMMENT_number number,
     PRIMARY KEY (RP_number),
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number),
-    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number), -- 변경된 외래 키
+    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number),
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number),
     FOREIGN KEY (QUIZ_COMMENT_number) references QUIZ_COMMENT(QUIZ_COMMENT_number),
     FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number),
