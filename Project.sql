@@ -1,24 +1,26 @@
---DROP TABLE `MEMBER`;
---DROP TABLE `CATEGORY`;
---DROP TABLE `QUIZ`;
---DROP TABLE `PROBLEM`;
---DROP TABLE `ANSWER`;
---DROP TABLE `QUIZ_TAG`;
---DROP TABLE `BOOKMARK`;
---DROP TABLE `QUIZ_LOG`;
---DROP TABLE `QUIZ_RATE`;
---DROP TABLE `ACHIEVE`;
---DROP TABLE `MEMBER_ACHIEVE`;
---DROP TABLE `QUEST`;
---DROP TABLE `MEMBER_QUEST`;
---DROP TABLE `COMMUNITY`;
---DROP TABLE `COMMUNITY_COMMENT`;
---DROP TABLE `COMMUNITY_LIKE`;
---DROP TABLE `DAILY_CHEC`;
---DROP TABLE `QUIZ_COMMENT`;
---DROP TABLE `RP`;
+DROP TABLE MEMBER CASCADE CONSTRAINTS;
+DROP TABLE CATEGORY CASCADE CONSTRAINTS;
+DROP TABLE QUIZ CASCADE CONSTRAINTS;
+DROP TABLE PROBLEM CASCADE CONSTRAINTS;
+DROP TABLE ANSWER CASCADE CONSTRAINTS;
+DROP TABLE QUIZ_TAG CASCADE CONSTRAINTS;
+DROP TABLE BOOKMARK CASCADE CONSTRAINTS;
+DROP TABLE QUIZ_LOG CASCADE CONSTRAINTS;
+DROP TABLE QUIZ_RATE CASCADE CONSTRAINTS;
+DROP TABLE ACHIEVE CASCADE CONSTRAINTS;
+DROP TABLE MEMBER_ACHIEVE CASCADE CONSTRAINTS;
+DROP TABLE QUEST CASCADE CONSTRAINTS;
+DROP TABLE MEMBER_QUEST CASCADE CONSTRAINTS;
+DROP TABLE COMMUNITY CASCADE CONSTRAINTS;
+DROP TABLE COMMUNITY_COMMENT CASCADE CONSTRAINTS;
+DROP TABLE COMMUNITY_LIKE CASCADE CONSTRAINTS;
+DROP TABLE DAILY_CHECK CASCADE CONSTRAINTS;
+DROP TABLE QUIZ_COMMENT CASCADE CONSTRAINTS;
+DROP TABLE RP CASCADE CONSTRAINTS;
 
-CREATE TABLE MEMBER( --Ïú†Ï†Ä Î™©Î°ù
+
+
+CREATE TABLE MEMBER( --¿Ø¿˙ ∏Ò∑œ
     MEMBER_number number not null,
     MEMBER_id varchar2(50) not null,
     MEMBER_pwd varchar2(50) not null,
@@ -26,19 +28,19 @@ CREATE TABLE MEMBER( --Ïú†Ï†Ä Î™©Î°ù
     MEMBER_exp number DEFAULT 0 not null,
     MEMBER_image varchar2(50),
     MEMBER_join_date Date default SYSDATE not null,
-    MEMBER_check_continueCount NUMBER NOT NULL,
+    MEMBER_check_continueCount NUMBER DEFAULT 1 NOT NULL,
     MEMBER_status VARCHAR2(1) DEFAULT 'Y' NOT NULL,
     MEMBER_introduce VARCHAR2(100),
     PRIMARY KEY(MEMBER_number)
 );
     
-CREATE TABLE CATEGORY ( --Ïπ¥ÌÖåÍ≥†Î¶¨
+CREATE TABLE CATEGORY ( --ƒ´≈◊∞Ì∏Æ
     CATEGORY_number NUMBER NOT NULL,
     CATEGORY_name VARCHAR2(50) NOT NULL,
     PRIMARY KEY (CATEGORY_number)
 );
 
-CREATE TABLE QUIZ( --ÌÄ¥Ï¶àÎ¨∏Ï†úÏßë
+CREATE TABLE QUIZ( --ƒ˚¡ÓπÆ¡¶¡˝
     QUIZ_number number not null,
     QUIZ_title varchar2(50) not null,
     QUIZ_date date default SYSDATE not null,
@@ -50,7 +52,7 @@ CREATE TABLE QUIZ( --ÌÄ¥Ï¶àÎ¨∏Ï†úÏßë
     FOREIGN KEY(CATEGORY_number) references CATEGORY(CATEGORY_number)
 );
 
-CREATE TABLE PROBLEM( --Î¨∏Ï†ú
+CREATE TABLE PROBLEM( --πÆ¡¶
     PROBLEM_number number not null,
     PROBLEM_content varchar2(50),
     PROBLEM_media_kind number,
@@ -61,7 +63,7 @@ CREATE TABLE PROBLEM( --Î¨∏Ï†ú
     FOREIGN KEY (QUIZ_number) REFERENCES QUIZ(QUIZ_number)
 );
 
-CREATE TABLE ANSWER ( --Ìï¥Îãµ
+CREATE TABLE ANSWER ( --«ÿ¥‰
     ANSWER_number number not null,
     ANSWER_kind number not null,
     ANSWER_content varchar2(1000) not null,
@@ -70,14 +72,14 @@ CREATE TABLE ANSWER ( --Ìï¥Îãµ
     FOREIGN KEY (PROBLEM_number) references PROBLEM(PROBLEM_number)
 );
 
-CREATE TABLE QUIZ_TAG ( --ÌÄ¥Ï¶à ÌÉúÍ∑∏
+CREATE TABLE QUIZ_TAG ( --ƒ˚¡Ó ≈¬±◊
     TAG_name varchar2(50) not null,
     QUIZ_number number not null,
-    PRIMARY KEY (TAG_name, QUIZ_number), -- Î≥µÌï©ÌÇ§Î°ú ÏàòÏ†ï
+    PRIMARY KEY (TAG_name, QUIZ_number), -- ∫π«’≈∞∑Œ ºˆ¡§
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE BOOKMARK ( --Î∂ÅÎßàÌÅ¨
+CREATE TABLE BOOKMARK ( --∫œ∏∂≈©
     MEMBER_number number not null,
     QUIZ_number number not null,
     CONSTRAINT PK_BOOKMARK PRIMARY KEY (MEMBER_number, QUIZ_number),
@@ -85,7 +87,7 @@ CREATE TABLE BOOKMARK ( --Î∂ÅÎßàÌÅ¨
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE QUIZ_LOG( --Ìëº Î¨∏Ï†úÏßë
+CREATE TABLE QUIZ_LOG( --«¨ πÆ¡¶¡˝
     QUIZ_LOG_number number not null,
     MEMBER_number number not null,
     QUIZ_number number not null,
@@ -96,7 +98,7 @@ CREATE TABLE QUIZ_LOG( --Ìëº Î¨∏Ï†úÏßë
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE QUIZ_RATE( --ÌÄ¥Ï¶àÎ≥ÑÏ†ê
+CREATE TABLE QUIZ_RATE( --ƒ˚¡Ó∫∞¡°
     QUIZ_rate_rating number not null,
     MEMBER_number number not null,
     QUIZ_number number not null,
@@ -104,14 +106,14 @@ CREATE TABLE QUIZ_RATE( --ÌÄ¥Ï¶àÎ≥ÑÏ†ê
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE ACHIEVE( --ÏóÖÏ†Å
+CREATE TABLE ACHIEVE( --æ˜¿˚
     ACHIEVE_number number not null,
     ACHIEVE_title varchar2(50) not null,
     ACHIEVE_content varchar2(100) not null,
     PRIMARY KEY (ACHIEVE_number)
 );
 
-CREATE TABLE MEMBER_ACHIEVE( --Ïú†Ï†ÄÎ≥Ñ ÏóÖÏ†Å
+CREATE TABLE MEMBER_ACHIEVE( --¿Ø¿˙∫∞ æ˜¿˚
     MEMBER_number number not null,
     ACHIEVE_number number not null,
     MEMBER_ACHIEVE_date date default SYSDATE not null,
@@ -119,13 +121,13 @@ CREATE TABLE MEMBER_ACHIEVE( --Ïú†Ï†ÄÎ≥Ñ ÏóÖÏ†Å
     FOREIGN KEY (ACHIEVE_number) references ACHIEVE(ACHIEVE_number)
 );
 
-CREATE TABLE QUEST( --ÌÄòÏä§Ìä∏
+CREATE TABLE QUEST( --ƒ˘Ω∫∆Æ
     QUEST_number number not null,
     QUEST_content varchar2(100) not null,
     PRIMARY KEY (QUEST_number)
 );
 
-CREATE TABLE MEMBER_QUEST( --Ïú†Ï†ÄÎ≥ÑÌÄòÏä§Ìä∏
+CREATE TABLE MEMBER_QUEST( --¿Ø¿˙∫∞ƒ˘Ω∫∆Æ
     MEMBER_QUEST_number number not null,
     MEMBER_QUEST_success number default 0 not null,
     MEMBER_QUEST_date date default SYSDATE not null,
@@ -136,7 +138,7 @@ CREATE TABLE MEMBER_QUEST( --Ïú†Ï†ÄÎ≥ÑÌÄòÏä§Ìä∏
     FOREIGN KEY (QUEST_number) references QUEST(QUEST_number)        
 );
 
-CREATE TABLE COMMUNITY( --Ïª§ÎÆ§ÎãàÌã∞
+CREATE TABLE COMMUNITY( --ƒøπ¬¥œ∆º
     COMMUNITY_number number not null,
     COMMUNITY_title varchar2(50) not null,
     COMMUNITY_content varchar2(1000) not null,
@@ -148,7 +150,7 @@ CREATE TABLE COMMUNITY( --Ïª§ÎÆ§ÎãàÌã∞
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number)
 );
 
-CREATE TABLE COMMUNITY_COMMENT( --Ïª§ÎÆ§ÎãàÌã∞ ÎåìÍ∏Ä
+CREATE TABLE COMMUNITY_COMMENT( --ƒøπ¬¥œ∆º ¥Ò±€
     COMMUNITY_COMMENT_number number not null,
     COMMUNITY_parent_number number,
     COMMUNITY_number number not null,
@@ -161,7 +163,7 @@ CREATE TABLE COMMUNITY_COMMENT( --Ïª§ÎÆ§ÎãàÌã∞ ÎåìÍ∏Ä
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number)
 );
 
-CREATE TABLE COMMUNITY_LIKE( --Ïª§ÎÆ§ÎãàÌã∞ Ï¢ãÏïÑÏöî
+CREATE TABLE COMMUNITY_LIKE( --ƒøπ¬¥œ∆º ¡¡æ∆ø‰
     MEMBER_number number not null,
     COMMUNITY_number number not null,
     CONSTRAINT PK_COMMUNITY_LIKE PRIMARY KEY(MEMBER_number, COMMUNITY_number),
@@ -169,7 +171,7 @@ CREATE TABLE COMMUNITY_LIKE( --Ïª§ÎÆ§ÎãàÌã∞ Ï¢ãÏïÑÏöî
     FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number)
 );
 
-CREATE TABLE DAILY_CHECK( --Ï∂úÏÑùÌÖåÏù¥Î∏î
+CREATE TABLE DAILY_CHECK( --√‚ºÆ≈◊¿Ã∫Ì
     DAILY_CHECK_number number not null,
     DAILY_CHECK_date date default SYSDATE not null,
     MEMBER_number number not null,
@@ -177,7 +179,7 @@ CREATE TABLE DAILY_CHECK( --Ï∂úÏÑùÌÖåÏù¥Î∏î
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number)
 );
 
-CREATE TABLE QUIZ_COMMENT( --ÌÄ¥Ï¶àÎåìÍ∏Ä
+CREATE TABLE QUIZ_COMMENT( --ƒ˚¡Ó¥Ò±€
     QUIZ_COMMENT_number number not null, 
     QUIZ_COMMENT_content varchar2(500) not null,
     QUIZ_number number not null,
@@ -187,25 +189,29 @@ CREATE TABLE QUIZ_COMMENT( --ÌÄ¥Ï¶àÎåìÍ∏Ä
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE RP( --Ïã†Í≥†
+CREATE TABLE RP( --Ω≈∞Ì
     RP_number number not null,
     RP_encounter_number number not null,
     RP_reason varchar2(50),
     RP_date date DEFAULT SYSDATE not null,
     MEMBER_number number not null,
-    REPORTED_MEMBER_number number, -- MEMBER_number2Î•º Î™ÖÌôïÌïú Ïù¥Î¶ÑÏúºÎ°ú Î≥ÄÍ≤Ω
+    REPORTED_MEMBER_number number, -- MEMBER_number2∏¶ ∏Ì»Æ«— ¿Ã∏ß¿∏∑Œ ∫Ø∞Ê
     QUIZ_number number,
     QUIZ_COMMENT_number number,
     COMMUNITY_number number,
     COMMUNITY_COMMENT_number number,
     PRIMARY KEY (RP_number),
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number),
-    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number), -- Î≥ÄÍ≤ΩÎêú Ïô∏Îûò ÌÇ§
+    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number), -- ∫Ø∞Êµ» ø‹∑° ≈∞
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number),
     FOREIGN KEY (QUIZ_COMMENT_number) references QUIZ_COMMENT(QUIZ_COMMENT_number),
     FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number),
     FOREIGN KEY (COMMUNITY_COMMENT_number) references COMMUNITY_COMMENT(COMMUNITY_COMMENT_number)
 );
+
+
+
+
 
 
 
