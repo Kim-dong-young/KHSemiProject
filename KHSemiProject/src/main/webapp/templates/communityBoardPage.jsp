@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ 
+    page import="com.kh.common.PageInfo, java.util.ArrayList, com.kh.community.model.vo.Board" 
+%>
+<%
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	ArrayList<Board> boardList = (ArrayList<Board>)request.getAttribute("boardList");
+
+    int currentPage = pageInfo.getCurrentPage();
+    int startPage = pageInfo.getStartPage();
+    int endPage = pageInfo.getEndPage();
+    int maxPage = pageInfo.getMaxPage();
+    int boardLimit = pageInfo.getBoardLimit();
+    int pageBarLimit = pageInfo.getPageBarLimit();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,14 +53,32 @@
 
         <div class="board-list">
             <table>
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title" onclick="location.href='communityViewPage.jsp'">테스트용 제목 테스트용 제목 테스트용 제목 테스트용 제목</td>
-                    <td class="author">유저명유저명유저명유저명</td>
-                    <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">13</td>
-                </tr>
+                <% if(boardList.isEmpty()) { %>
+                    <tr>
+                        <td colspan="6">게시글이 없습니다.</td>
+                    </tr>
+                <% } else { %>
+                    <% for(Board b : boardList) { %>
+                        <tr>
+                            <td class="tab"><%=b.getCommunityTab()%></td>
+                            <td class="title" onclick="location.href='communityViewPage.jsp'"><%=b.getCommunityTitle()%></td>
+                            <td class="author"><%=b.getMemberId()%></td>
+                            <td class="comment-num">0<img src="static/img/comment-icon.png"></td>
+                            <td class="date"><%=b.getCommunityDate()%></td>
+                            <td class="viewcount"><%=b.getCommunityViewcount()%></td>
+                        </tr>
+                    <% } %>
+                    <% for(int i=boardList.size(); i < boardLimit; i++) { %>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    <% } %>
+                <% } %>
             </table>
         </div>
 
@@ -59,19 +92,34 @@
             </div>
 
             <div class="option2">
-                <button>&lt;&lt;</button>
-                <button>&lt;</button>
-                <button style="background-color: #FF9139;">1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>&gt;</button>
-                <button>&gt;&gt;</button>
+                <!-- 맨 처음으로 가는 버튼 -->
+                <button onclick="location.href='<%=contextPath%>/list.bo?cpage=1'">&lt;&lt;</button>
+                
+                <!-- 페이징바 단위 만큼 앞으로 이동하는 버튼 -->
+                <% if(startPage != 1) { %>
+                    <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=startPage - 1%>'">&lt;</button>
+                <% } else { %>
+                    <button disabled>&lt;</button>
+                <% } %>
+
+                <!-- 페이지 이동 버튼 -->
+                <%for(int i=startPage; i <= endPage; i ++) { %>
+                    <% if(i == currentPage) { %>
+                        <button disabled><%=i %></button>
+                    <% } else { %>
+                        <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=i%>'"><%=i %></button>
+                    <% } %>
+                <% } %>
+
+                <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
+                <% if(startPage + pageBarLimit < maxPage) { %>
+                    <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
+                <% } else { %>
+                    <button disabled>&gt;</button>
+                <% } %>
+
+                <!-- 맨 뒤로 가는 버튼 -->
+                <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=maxPage%>'">&gt;&gt;</button>
             </div>
 
             <div class="option1">

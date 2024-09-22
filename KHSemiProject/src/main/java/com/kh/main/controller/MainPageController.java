@@ -1,4 +1,4 @@
-package com.kh.controller.main;
+package com.kh.main.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
