@@ -42,8 +42,16 @@ ul, li, ol {
 .btn.custom-btn{
     font-family: "Noto Sans KR", sans-serif;
     font-weight: bold;
-    font-size: 25px;
     width: 125px;
+}
+
+.btn.custom-btn.login-btn{
+    font-size: 25px;
+    
+}
+
+.btn.custom-btn.logout-btn{
+    font-size: 15px;
 }
 
 #logo-img {
