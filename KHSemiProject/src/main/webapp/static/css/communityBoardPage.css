@@ -167,7 +167,5 @@ button{
 /* 검색창 */
 .search-form{
     display:flex;
-    flex-direction: center;
-    align-items: center;
     justify-content: flex-start;
 }
