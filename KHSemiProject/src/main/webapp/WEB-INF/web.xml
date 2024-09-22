@@ -26,4 +26,15 @@
     <servlet-name>login.me</servlet-name>
     <url-pattern>/login.me</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>category.sl</display-name>
+    <servlet-name>category.sl</servlet-name>
+    <servlet-class>com.kh.member.controller.searchCategoryController.java</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>category.sl</servlet-name>
+    <url-pattern>/category.sl</url-pattern>
+  </servlet-mapping>
 </web-app>
