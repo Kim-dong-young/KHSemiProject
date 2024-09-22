@@ -8,6 +8,20 @@
 	</entry>
 	
 	<entry key="selectList">
-		
+		SELECT *
+		FROM
+		(
+		    SELECT COMMUNITY_NUMBER,
+		           COMMUNITY_TITLE,
+		           TAB_NAME,
+		           COMMUNITY_VIEWCOUNT,
+		           COMMUNITY_DATE,
+		           MEMBER_NICKNAME,
+		           ROW_NUMBER() OVER(ORDER BY COMMUNITY_DATE DESC) AS RNUM
+		    FROM COMMUNITY
+		    JOIN MEMBER USING(MEMBER_NUMBER)
+		    JOIN COMMUNITY_TAB ON(COMMUNITY_TAB = TAB_NUMBER)
+		)
+		WHERE RNUM BETWEEN ? AND ?;
 	</entry>
 </properties>

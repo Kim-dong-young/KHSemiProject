@@ -1,4 +1,4 @@
-package com.kh.service.community;
+package com.kh.community.service;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -6,8 +6,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
-import com.kh.model.dao.community.BoardDao;
-import com.kh.model.vo.Board;
+import com.kh.community.model.dao.BoardDao;
+import com.kh.community.model.vo.Board;
 
 public class BoardService {
 
