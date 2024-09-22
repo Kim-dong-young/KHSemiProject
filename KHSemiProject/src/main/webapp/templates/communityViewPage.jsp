@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
-<link rel="stylesheet" href="static/css/communityViewPage.css">
+<link rel="stylesheet" href="../static/css/communityViewPage.css">
 
 </head>
 <body>
@@ -21,12 +21,12 @@
 					<div class="bulletin-title">
                         <span class="board-tab">잡담</span>
                         <span>탕수육 부먹 vs 찍먹 뭐가 더 낳나요?</span>
-                        <button><img src="static/img/trash-icon.png">삭제</button>
+                        <button><img src="../static/img/trash-icon.png">삭제</button>
 					</div>
 
                     <div class="bulletin-info">
                         <div class="author-info">
-                            <img src="static/img/test.png">
+                            <img src="../static/img/test.png">
                             <span>민트초코가좋아</span>
                         </div>
 
@@ -40,25 +40,25 @@
 
                     <div class="bulletin-input">
                         <div class="image-input">
-                            <img src="static/img/test.png">
+                            <img src="../static/img/test.png">
                         </div>
                         <div class="image-input">
-                            <img src="static/img/test2.jpg">
+                            <img src="../static/img/test2.jpg">
                         </div>
                         <p>부먹 VS 찍먹</p>
                         <p>댓글 ㄱㄱ</p>
                     </div>
 
                     <div class="bulletin-option">
-                        <button class="like-button"><img src="static/img/thumbup-icon.png">좋아요</button>
-                        <button class="report-button"><img src="static/img/flag-icon.png">신고</button>
+                        <button class="like-button"><img src="../static/img/thumbup-icon.png">좋아요</button>
+                        <button class="report-button"><img src="../static/img/flag-icon.png">신고</button>
                     </div>
                 </div>
 
                 <div class="bulletin-comment">
                     <div class="comment">
                         <div class="comment-left">
-                            <img src="static/img/test.png">
+                            <img src="../static/img/test.png">
                         </div>
 
                         <div class="comment-right">
@@ -79,7 +79,7 @@
 
                     <div class="comment">
                         <div class="comment-left">
-                            <img src="static/img/test.png">
+                            <img src="../static/img/test.png">
                         </div>
 
                         <div class="comment-right">
@@ -100,7 +100,7 @@
 
                     <div class="comment">
                         <div class="comment-left">
-                            <img src="static/img/test.png">
+                            <img src="../static/img/test.png">
                         </div>
 
                         <div class="comment-right">
@@ -138,7 +138,7 @@
 
                 <div class="comment-write">
                     <textarea placeholder="댓글은 자신의 얼굴을 비추는 거울입니다."></textarea>
-                    <button><img src="static/img/comment-icon.png">작성</button>
+                    <button><img src="../static/img/comment-icon.png">작성</button>
                 </div>
                 
                 <%@ include file="communityBoardPage.jsp" %>

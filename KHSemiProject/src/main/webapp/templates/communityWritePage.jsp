@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
-<link rel="stylesheet" href="static/css/communityWritePage.css">
+<link rel="stylesheet" href="../static/css/communityWritePage.css">
 
 </head>
 <body>
@@ -30,20 +30,20 @@
 
                     <div class="content-input">
                         <div class="input-option">
-                            <img src="static/img/bold-icon.png">
-                            <img src="static/img/italic-icon.png">
-                            <img src="static/img/underlined-icon.png">
-                            <img src="static/img/strikethrough-icon.png">
-                            <img src="static/img/fontsize-icon.png" style="margin-right:15px;">
-                            <img src="static/img/color-icon.png">
-                            <img src="static/img/fill-icon.png">
+                            <img src="../static/img/bold-icon.png">
+                            <img src="../static/img/italic-icon.png">
+                            <img src="../static/img/underlined-icon.png">
+                            <img src="../static/img/strikethrough-icon.png">
+                            <img src="../static/img/fontsize-icon.png" style="margin-right:15px;">
+                            <img src="../static/img/color-icon.png">
+                            <img src="../static/img/fill-icon.png">
                         </div>
                         <textarea></textarea>
                     </div>
                 </div>
 
                 <div class="board-write-option">
-                    <a href="communityMainPage.jsp"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                    <a href="communityMainPage.jsp"><img src="../static/img/pen-icon-white.png">글쓰기</a>
                 </div>
 
             </div>

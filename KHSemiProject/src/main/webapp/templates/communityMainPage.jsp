@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
-<link rel="stylesheet" href="static/css/communityMainPage.css">
+<link rel="stylesheet" href="../static/css/communityMainPage.css">
 
 </head>
 <body>

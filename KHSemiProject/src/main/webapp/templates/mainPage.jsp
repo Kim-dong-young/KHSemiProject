@@ -7,17 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/mainPageContent.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/communityBoardPage.css">
 
 <script src="${pageContext.request.contextPath}/static/js/mainPage.js"></script>
-=======
-<link rel="stylesheet" href="static/css/mainPageContent.css">
-<link rel="stylesheet" href="static/css/communityBoardPage.css">
-
-<script src="static/js/mainPage.js"></script>
->>>>>>> 02660b56ec7264d40dcad54e3b50c601eb8236ae
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -82,7 +75,6 @@
         <div id="content2">
             <div id="content2-left">
                 <div class="user-status">
-<<<<<<< HEAD
                 	<c:choose>
                 	<c:when test="${empty loginUser}">
                 		<div>로그인 후 이용 가능한 서비스입니다.</div>
@@ -129,47 +121,6 @@
 		                    </div>
                     	</c:otherwise>
                     </c:choose>
-=======
-                    <div id="user-info">
-                        <div id=user-info-img><img src="static/img/test.png" alt=""></div>
-                        <div class="user-info-exp">
-                            <div class="user-info-level">
-                                <div>
-                                    <span>LV.</span>
-                                    <span id="level">456</span>
-                                </div>
-                                <div>
-                                    <span>1</span>
-                                    <span>/</span>
-                                    <span>2</span>
-                                </div>
-                            </div>
-                            <div id="user-exp-bar">
-                                <div id="current-user-exp-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="achievement-donut-rate">
-                        <div>
-                            <div class="donut-chart" data-persent="70">
-                                <span class="donut-text"></span>
-                            </div>
-                            <div class="content-rate">업적 달성률</div>
-                        </div>
-                        <div>
-                            <div class="donut-chart" data-persent="50">
-                                <span class="donut-text"></span>
-                            </div>
-                            <div class="content-rate">플레이한 퀴즈</div>
-                        </div>
-                        <div>
-                            <div class="donut-chart" data-persent="80">
-                                <span class="donut-text"></span>
-                            </div>
-                            <div class="content-rate">정답률</div>
-                        </div>
-                    </div>
->>>>>>> 02660b56ec7264d40dcad54e3b50c601eb8236ae
                 </div>
                 <div class="quest-list">
                     <div>일간</div>
@@ -216,31 +167,31 @@
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
                         </tr>
                         <tr>
                             <td class="tab">잡담</td>
                             <td class="title">테스트용 제목</td>
                             <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
+                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
                         </tr>
                     </table>
                 </div>

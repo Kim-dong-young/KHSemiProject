@@ -1,0 +1,10 @@
+diff a/KHSemiProject/src/main/java/db/driver/driver.properties b/KHSemiProject/src/main/java/db/driver/driver.properties	(rejected hunks)
+@@ -1,4 +1,4 @@
+ driver=oracle.jdbc.driver.OracleDriver
+ url=jdbc:oracle:thin:@localhost:1521:xe
+-username=JSP
+-password=JSP
+\ No newline at end of file
++username=semichoi
++password=semichoi
+\ No newline at end of file
