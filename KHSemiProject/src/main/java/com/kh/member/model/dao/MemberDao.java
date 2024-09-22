@@ -51,6 +51,8 @@ public class MemberDao {
 						rset.getString("member_status"),
 						rset.getString("member_introduce")
 						);
+			} else {
+				System.out.println("일치하는 정보가 없습니다.");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

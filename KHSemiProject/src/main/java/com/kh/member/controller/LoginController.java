@@ -47,6 +47,8 @@ public class LoginController extends HttpServlet {
 			
 			request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 		}
+		
+		System.out.println(loginMember);
 	}
 
 	/**

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	Member loginMember = (Member)session.getAttribute("loginMember");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +38,7 @@
         			<button type="button" class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#login-signin-modal">로그인</button>
         		</c:when>
         		<c:otherwise>
-        			${loginMember.memberNickName}님 환영합니다.
+        			<%=loginMember.getMemberNickName() %>님 환영합니다.
         		</c:otherwise>
         	</c:choose>
         </div>
