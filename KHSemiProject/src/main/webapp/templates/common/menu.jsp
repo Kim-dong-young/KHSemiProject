@@ -39,7 +39,7 @@
         <div id="welcome-user">
         	<c:choose>
         		<c:when test="${empty loginMember}">
-        			<button type="button" class="btn custom-btn login-btn" data-bs-toggle="modal" data-bs-target="#login-signin-modal">로그인</button>
+        			<button type="button" class="btn custom-btn login-btn" data-bs-toggle="modal" data-bs-target="#login-modal">로그인</button>
         		</c:when>
         		<c:otherwise>
 					${loginMember.memberNickName }님 환영합니다.
