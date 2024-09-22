@@ -11,6 +11,7 @@ DROP TABLE ACHIEVE CASCADE CONSTRAINTS;
 DROP TABLE MEMBER_ACHIEVE CASCADE CONSTRAINTS;
 DROP TABLE QUEST CASCADE CONSTRAINTS;
 DROP TABLE MEMBER_QUEST CASCADE CONSTRAINTS;
+DROP TABLE COMMUNITY_TAB CASCADE CONSTRAINTS;
 DROP TABLE COMMUNITY CASCADE CONSTRAINTS;
 DROP TABLE COMMUNITY_COMMENT CASCADE CONSTRAINTS;
 DROP TABLE COMMUNITY_LIKE CASCADE CONSTRAINTS;
@@ -138,17 +139,25 @@ CREATE TABLE MEMBER_QUEST(
     FOREIGN KEY (QUEST_number) references QUEST(QUEST_number)        
 );
 
+CREATE TABLE COMMUNITY_TAB(
+    TAB_number number not null,
+    TAB_name varchar2(20) not null,
+    PRIMARY KEY (TAB_number)
+);
+
 CREATE TABLE COMMUNITY( 
     COMMUNITY_number number not null,
     COMMUNITY_title varchar2(50) not null,
     COMMUNITY_content varchar2(1000) not null,
-    COMMUNITY_tab number not null,
     COMMUNITY_viewcount number not null,
     COMMUNITY_date date default SYSDATE not null,
     MEMBER_number number not null,
+    TAB_number number not null,
     PRIMARY KEY (COMMUNITY_number),
-    FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number)
+    FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number),
+    FOREIGN KEY (TAB_number) references COMMUNITY_TAB(TAB_number)
 );
+
 
 CREATE TABLE COMMUNITY_COMMENT(
     COMMUNITY_COMMENT_number number not null,
