@@ -17,6 +17,11 @@ div{
     box-sizing: border-box;
 }
 
+body a {
+    text-decoration: none;
+    color: black;
+}
+
 ul, li, ol {
     list-style: none;
 }
@@ -47,11 +52,6 @@ ul, li, ol {
 
 .btn.custom-btn.login-btn{
     font-size: 25px;
-    
-}
-
-.btn.custom-btn.logout-btn{
-    font-size: 15px;
 }
 
 #logo-img {
@@ -99,8 +99,6 @@ ul, li, ol {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-decoration: none;
-    color: black;
 }
 
 .side-navi > ul > li:last-child{
