@@ -61,9 +61,9 @@
                     <% for(Board b : boardList) { %>
                         <tr>
                             <td class="tab"><%=b.getCommunityTab()%></td>
-                            <td class="title" onclick="location.href='communityViewPage.jsp'"><%=b.getCommunityTitle()%></td>
+                            <td class="title" onclick="location.href='<%=contextPath%>/board'"><%=b.getCommunityTitle()%></td>
                             <td class="author"><%=b.getMemberId()%></td>
-                            <td class="comment-num">0<img src="static/img/comment-icon.png"></td>
+                            <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
                             <td class="date"><%=b.getCommunityDate()%></td>
                             <td class="viewcount"><%=b.getCommunityViewcount()%></td>
                         </tr>

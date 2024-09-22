@@ -75,10 +75,11 @@ public class BoardDao {
 				Board board = new Board(
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("COMMUNITY_TITLE"),
-							rset.getString("COMMUNITY_TAB"),
+							rset.getString("TAB_NAME"),
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
-							rset.getString("MEMBER_NICKNAME")
+							rset.getString("MEMBER_NICKNAME"),
+							rset.getInt("COMMENT_COUNT")
 						);
 				
 				boardList.add(board);
