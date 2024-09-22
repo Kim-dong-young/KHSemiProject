@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	Member loginMember = (Member)session.getAttribute("login");
+	Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,11 +45,11 @@
     </div>
     <div class="side-navi">
         <ul>
-            <li><a href="mainPage.jsp">홈</a></li>
+			<li><a href="<%=contextPath%>/main.me">홈</a></li>
             <li><a href="personalScreen.jsp">개인화면</a></li>
             <li><a href="searchMainPage.jsp">탐색</a></li>
             <li><a href="userset.jsp">유저설정</a></li>
-            <li><a href="communityMainPage.jsp">커뮤니티</a></li>
+            <li><a href="<%=contextPath%>/list.bo">커뮤니티</a></li>
             <li><a href="">문제만들기</a></li>
             <li><a href="">도움말</a></li>
         </ul>

@@ -14,13 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet implementation class boardListController
  */
 @WebServlet(name = "list.bo", urlPatterns = { "/list.bo" })
-public class boardListController extends HttpServlet {
+public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public boardListController() {
+    public BoardListController() {
         super();
         // TODO Auto-generated constructor stub
     }
