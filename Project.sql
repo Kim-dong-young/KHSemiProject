@@ -18,7 +18,9 @@ DROP TABLE DAILY_CHECK CASCADE CONSTRAINTS;
 DROP TABLE QUIZ_COMMENT CASCADE CONSTRAINTS;
 DROP TABLE RP CASCADE CONSTRAINTS;
 
-CREATE TABLE MEMBER( 
+
+
+CREATE TABLE MEMBER(
     MEMBER_number number not null,
     MEMBER_id varchar2(50) not null,
     MEMBER_pwd varchar2(50) not null,
@@ -32,13 +34,13 @@ CREATE TABLE MEMBER(
     PRIMARY KEY(MEMBER_number)
 );
     
-CREATE TABLE CATEGORY ( 
+CREATE TABLE CATEGORY (
     CATEGORY_number NUMBER NOT NULL,
     CATEGORY_name VARCHAR2(50) NOT NULL,
     PRIMARY KEY (CATEGORY_number)
 );
 
-CREATE TABLE QUIZ( 
+CREATE TABLE QUIZ(
     QUIZ_number number not null,
     QUIZ_title varchar2(50) not null,
     QUIZ_date date default SYSDATE not null,
@@ -70,14 +72,14 @@ CREATE TABLE ANSWER (
     FOREIGN KEY (PROBLEM_number) references PROBLEM(PROBLEM_number)
 );
 
-CREATE TABLE QUIZ_TAG ( 
+CREATE TABLE QUIZ_TAG (
     TAG_name varchar2(50) not null,
     QUIZ_number number not null,
-    PRIMARY KEY (TAG_name, QUIZ_number), 
+    PRIMARY KEY (TAG_name, QUIZ_number),
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE BOOKMARK ( 
+CREATE TABLE BOOKMARK (
     MEMBER_number number not null,
     QUIZ_number number not null,
     CONSTRAINT PK_BOOKMARK PRIMARY KEY (MEMBER_number, QUIZ_number),
@@ -104,7 +106,7 @@ CREATE TABLE QUIZ_RATE(
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number)
 );
 
-CREATE TABLE ACHIEVE( 
+CREATE TABLE ACHIEVE(
     ACHIEVE_number number not null,
     ACHIEVE_title varchar2(50) not null,
     ACHIEVE_content varchar2(100) not null,
@@ -200,7 +202,7 @@ CREATE TABLE RP(
     COMMUNITY_COMMENT_number number,
     PRIMARY KEY (RP_number),
     FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number),
-    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number),
+    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number), 
     FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number),
     FOREIGN KEY (QUIZ_COMMENT_number) references QUIZ_COMMENT(QUIZ_COMMENT_number),
     FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number),
