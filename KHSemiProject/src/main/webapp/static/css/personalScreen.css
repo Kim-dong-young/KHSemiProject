@@ -1,0 +1,48 @@
+.content {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    height: 100vh; /* 화면 전체 높이에 맞춤 */
+}
+
+.search {
+    width: 700px;
+    height: 50px;
+    background: #EDEDED;
+    border-radius: 5px;
+    margin-top: 24px;
+    display: flex; /* flexbox로 가로 정렬 */
+
+}
+
+.search > form {
+    display: flex; /* 내부 요소 정렬 */
+    width: 100%;
+}
+
+.search > form > input {
+    border: none;
+    flex-grow: 1;
+    height: 100%; /* 부모 높이에 맞춤 */
+    background: rgba(0, 0, 0, 0);
+    color: #333;
+    padding-left: 10px;
+    border-radius: 5px 0 0 5px; /* 모서리 스타일링 */
+}
+
+.search > form > button {
+    background: transparent; /* 버튼 배경색 없애기 */
+    border: none; /* 버튼 테두리 없애기 */
+    cursor: pointer;
+    height: 100%; /* 버튼 높이 맞추기 */
+    display: flex; /* flexbox 사용 */
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: flex-end; /* 수평 가운데 정렬 */
+    border-radius: 0 5px 5px 0; /* 모서리 스타일링 */
+    margin-left: 10px;
+}
+
+.search > form > button > img {
+    width: 30px; /* 이미지 크기 조정 */
+    height: 30px; /* 높이 추가 */
+
+}
