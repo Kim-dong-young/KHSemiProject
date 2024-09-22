@@ -27,13 +27,6 @@
 </head>
 <body>
 	<%@ include file="loginModal.jsp" %>
-
-	<% if(alertMsg != null) {%>
-		<script>
-			alert("<%=alertMsg%>");
-		</script>
-		<% session.removeAttribute("alertMsg"); %>
-	<% } %>
     <div id="header">
         <div id="logo-img"><a href=""><img src="static/img/logo.png" alt="퀴즈팡 로고"></a></div>
         <div id="welcome-user">

@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/mainPageContent.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/communityBoardPage.css">
+<link rel="stylesheet" href="static/css/mainPageContent.css">
+<link rel="stylesheet" href="static/css/communityBoardPage.css">
 
-<script src="${pageContext.request.contextPath}/static/js/mainPage.js"></script>
+<script src="static/js/mainPage.js"></script>
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -28,42 +28,6 @@
             <div>
                 <div class="quiz-list">
                     <ul>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
                         <li class="quiz-box">
                             <div class="thumbnail">썸네일</div>
                             <div class="title">제목</div>
