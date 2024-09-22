@@ -20,6 +20,9 @@ local.properties
 # tomcat
 Servers/
 
+# DB properties
+*.properties
+
 # External tool builders
 .externalToolBuilders/
 
