@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,15 +33,15 @@
             <div class="content">
                 <div class="image"><img src="static/img/section1.png"></div>
                 <div class="login">
-                    <button onclick="location.href='templates/mainPage.jsp'"><img src="static/img/playbutton.png">시작하기</button>
-                    <button onclick="location.href='templates/mainPage.jsp'"><img src="static/img/google-icon.png">소셜 아이디로 로그인하기</button>
-                    <button onclick="location.href='templates/mainPage.jsp'"><img src="static/img/guest-icon.png">게스트 계정으로 플레이하기</button>
+                    <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/playbutton.png">시작하기</button>
+                    <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/google-icon.png">소셜 아이디로 로그인하기</button>
+                    <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/guest-icon.png">게스트 계정으로 플레이하기</button>
                 </div>
             </div>
         </div>
 
         <div class="section2">
-
+            
         </div>
 
         <div class="section3">

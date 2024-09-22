@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
-<link rel="stylesheet" href="../static/css/communityBoardPage.css">
+<link rel="stylesheet" href="static/css/communityBoardPage.css">
 
 </head>
 <body>
@@ -42,92 +42,10 @@
                     <td class="tab">잡담</td>
                     <td class="title" onclick="location.href='communityViewPage.jsp'">테스트용 제목 테스트용 제목 테스트용 제목 테스트용 제목</td>
                     <td class="author">유저명유저명유저명유저명</td>
-                    <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
+                    <td class="comment-num">[1]<img src="static/img/comment-icon.png"></td>
                     <td class="date">12:45</td>
                     <td class="viewcount">13</td>
                 </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[14]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">135</td>
-                </tr>
-                
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[3]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">1</td>
-                </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[27]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">1352</td>
-                </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[112]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">135</td>
-                </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[13]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">135</td>
-                </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[8]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">135</td>
-                </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">12:45</td>
-                    <td class="viewcount">135</td>
-                </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">2024.8.27</td>
-                    <td class="viewcount">135</td>
-                </tr>
-
-                <tr>
-                    <td class="tab">잡담</td>
-                    <td class="title">테스트용 제목</td>
-                    <td class="author">Test1</td>
-                    <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                    <td class="date">2023.9.1</td>
-                    <td class="viewcount">135</td>
-                </tr>
-                
             </table>
         </div>
 
@@ -157,7 +75,7 @@
             </div>
 
             <div class="option1">
-                <a href="communityWritePage.jsp"><img src="../static/img/pen-icon-white.png">글쓰기</a>
+                <a href="communityWritePage.jsp"><img src="static/img/pen-icon-white.png">글쓰기</a>
             </div>
         </div>
 
@@ -176,7 +94,7 @@
             </div>
             
             <div class="option1">
-                <button><img src="../static/img/search-icon.png">검색</button>
+                <button><img src="static/img/search-icon.png">검색</button>
             </div>
         </form>
     </div>

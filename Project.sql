@@ -229,5 +229,3 @@ CREATE TABLE RP(
 
 
 
-
-
