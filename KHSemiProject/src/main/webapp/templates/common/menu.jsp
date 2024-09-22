@@ -35,10 +35,11 @@
         <div id="welcome-user">
         	<c:choose>
         		<c:when test="${empty loginMember}">
-        			<button type="button" class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#login-signin-modal">로그인</button>
+        			<button type="button" class="btn custom-btn login-btn" data-bs-toggle="modal" data-bs-target="#login-signin-modal">로그인</button>
         		</c:when>
         		<c:otherwise>
-        			<%=loginMember.getMemberNickName() %>님 환영합니다.
+					<%=loginMember.getMemberNickName() %>님 환영합니다.
+        			<a href="<%=contextPath%>/logout.me">로그아웃</a>
         		</c:otherwise>
         	</c:choose>
         </div>
