@@ -6,4 +6,8 @@
 		  FROM COMMUNITY
 		 WHERE COMMUNITY_TAB = 1
 	</entry>
+	
+	<entry key="selectList">
+		
+	</entry>
 </properties>
