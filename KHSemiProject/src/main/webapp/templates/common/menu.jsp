@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	Member loginMember = (Member)session.getAttribute("loginMember");
+	Member loginMember = (Member)session.getAttribute("login");
 %>
 <!DOCTYPE html>
 <html lang="en">
