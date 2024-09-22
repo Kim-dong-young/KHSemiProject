@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	Member loginMember = (Member)session.getAttribute("loginMember");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,15 +27,23 @@
 </head>
 <body>
 	<%@ include file="loginModal.jsp" %>
+	<c:if test="${not empty errorMsg }">
+		<script>
+			alert("${errorMsg}");
+		</script>
+		
+		<c:remove var="errorMsg" scope="session"/>
+	</c:if>
     <div id="header">
         <div id="logo-img"><a href=""><img src="static/img/logo.png" alt="퀴즈팡 로고"></a></div>
         <div id="welcome-user">
         	<c:choose>
         		<c:when test="${empty loginMember}">
-        			<button type="button" class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#login-signin-modal">로그인</button>
+        			<button type="button" class="btn custom-btn login-btn" data-bs-toggle="modal" data-bs-target="#login-modal">로그인</button>
         		</c:when>
         		<c:otherwise>
-        			<%=loginMember.getMemberNickName() %>님 환영합니다.
+					${loginMember.memberNickName }님 환영합니다.
+        			<a href="<%=contextPath%>/logout.me">로그아웃</a>
         		</c:otherwise>
         	</c:choose>
         </div>

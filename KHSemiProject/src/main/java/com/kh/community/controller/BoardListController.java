@@ -1,8 +1,11 @@
-package com.kh.controller.community;
+package com.kh.community.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import com.kh.service.community.BoardService;
+import com.kh.common.PageInfo;
+import com.kh.community.model.vo.Board;
+import com.kh.community.service.BoardService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
+    /*
      * @see HttpServlet#HttpServlet()
      */
     public BoardListController() {
@@ -47,9 +50,15 @@ public class BoardListController extends HttpServlet {
 		// int 나누기 int => int, double로 형변환 후 계산 -> if 나머지 있다면 max Page = 몫 + 1;
 		maxPage = (int) Math.ceil( (double)listCount / boardLimit);
 		
-		startPage = ((currentPage / pageBarLimit) * pageBarLimit) + 1;
-		endPage = startPage + pageBarLimit - 1;
+		startPage = (( (currentPage - 1) / pageBarLimit ) * pageBarLimit) + 1;
+		endPage = (startPage + pageBarLimit - 1) > maxPage ? maxPage : (startPage + pageBarLimit - 1);
 		
+		PageInfo pageInfo = new PageInfo(listCount, currentPage, pageBarLimit, boardLimit, maxPage, startPage, endPage);
+		ArrayList<Board> boardList = new BoardService().selectList(pageInfo);
+		
+		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("boardList", boardList);
+
 		request.getRequestDispatcher("templates/communityMainPage.jsp").forward(request, response);
 		
 	}

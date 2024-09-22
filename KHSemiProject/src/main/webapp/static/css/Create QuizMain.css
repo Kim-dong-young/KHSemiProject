@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    width: 100%;
+    width: 90%;
     height: 100vh; 
     margin: auto;
     padding: 0px;
@@ -77,9 +77,10 @@ textarea {
 
 .screen{
     background: #d9d9d9;
-    width: 50%;
-    height: 400px;
-    margin-left: 25%;
+    
+    width: 60%;
+    height: 350px;
+    margin: auto;
 }
 
 .thumbnail{

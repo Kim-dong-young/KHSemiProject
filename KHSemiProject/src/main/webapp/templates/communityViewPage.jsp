@@ -141,7 +141,10 @@
                     <button><img src="static/img/comment-icon.png">작성</button>
                 </div>
                 
-                <%@ include file="communityBoardPage.jsp" %>
+                <!-- jsp 페이지 링크 처리 잘하자 -->
+                <jsp:include page="/list.bo?cpage=<%=request.getParameter('cpage')%>">
+                    <jsp:param name="cpage" value='<%= request.getParameter("cpage") %>' />
+                </jsp:include>
                 
                 <div class="board-side">
                     <%@ include file="communitySidePage.jsp" %>

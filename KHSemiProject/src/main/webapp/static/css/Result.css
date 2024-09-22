@@ -76,7 +76,17 @@ body {
 }
 
 
-.buttons {
+.buttons>button{
+    margin-bottom: 20px;
+    background-color: #dcfa72;
+}
+
+.buttons>button:hover{
+    background-color: #1eff00;
+}
+
+.bottom-buttons>button{
+    background-color: #ffc578;
     margin-bottom: 20px;
 }
 
@@ -92,15 +102,17 @@ body {
 }
 
 .button:hover {
-    background-color: #ffa726;
+    background-color: #ff9100;
 }
 
 .bottom-buttons {
     margin-top: 20px;
+    
+
 }
 
 .report-btn {
-    background-color: #ff6666;
+    background-color: #ff6666 !important;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -110,5 +122,5 @@ body {
 }
 
 .report-btn:hover {
-    background-color: #ff4d4d;
+    background-color: #ff1414 !important;
 }
