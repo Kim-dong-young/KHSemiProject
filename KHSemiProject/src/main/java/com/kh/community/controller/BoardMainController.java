@@ -1,5 +1,9 @@
 package com.kh.community.controller;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -7,21 +11,16 @@ import com.kh.common.PageInfo;
 import com.kh.community.model.vo.Board;
 import com.kh.community.service.BoardService;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 /**
- * Servlet implementation class boardListController
+ * Servlet implementation class BoardMainController
  */
-public class BoardListController extends HttpServlet {
+public class BoardMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     /*
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListController() {
+    public BoardMainController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -57,7 +56,8 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("boardList", boardList);
 
-		request.getRequestDispatcher("templates/communityBoardPage.jsp").forward(request, response);
+		request.getRequestDispatcher("templates/communityMainPage.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -67,5 +67,4 @@ public class BoardListController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

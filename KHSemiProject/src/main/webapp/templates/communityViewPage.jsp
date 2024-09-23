@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.community.model.vo.Board" %>
+<% 
+    Board b = (Board)request.getAttribute("board"); 
+    int commentCount = (Integer)request.getAttribute("commentCount");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,21 +25,21 @@
                 <div class="bulletin-content">
 					<div class="bulletin-title">
                         <span class="board-tab">잡담</span>
-                        <span>탕수육 부먹 vs 찍먹 뭐가 더 낳나요?</span>
+                        <span><%=b.getCommunityTitle()%></span>
                         <button><img src="static/img/trash-icon.png">삭제</button>
 					</div>
 
                     <div class="bulletin-info">
                         <div class="author-info">
                             <img src="static/img/test.png">
-                            <span>민트초코가좋아</span>
+                            <span><%=b.getMemberId()%></span>
                         </div>
 
                         <div class="data-info">
-                            <span class="after-vline">작성일: 2024-09-06 12:15</span>
-                            <span class="after-vline">조회수: 346</span>
-                            <span class="after-vline">좋아요: 2</span>
-                            <span>댓글: 3</span>
+                            <span class="after-vline">작성일: <%=b.getCommunityDate()%></span>
+                            <span class="after-vline">조회수: <%=b.getCommunityViewcount()%></span>
+                            <span class="after-vline">좋아요: <%=b.getLikeCount()%></span>
+                            <span>댓글: <%=commentCount%></span>
                         </div>
                     </div>
 
@@ -45,8 +50,7 @@
                         <div class="image-input">
                             <img src="static/img/test2.jpg">
                         </div>
-                        <p>부먹 VS 찍먹</p>
-                        <p>댓글 ㄱㄱ</p>
+                        <p><%=b.getCommunityContent()%></p>
                     </div>
 
                     <div class="bulletin-option">
@@ -141,9 +145,8 @@
                     <button><img src="static/img/comment-icon.png">작성</button>
                 </div>
                 
-                <!-- jsp 페이지 링크 처리 잘하자 -->
-                <jsp:include page="/list.bo?cpage=<%=request.getParameter('cpage')%>">
-                    <jsp:param name="cpage" value='<%= request.getParameter("cpage") %>' />
+                <jsp:include page="/list.bo/cpage">
+                    <jsp:param name="cpage" value="${cpage}"/>
                 </jsp:include>
                 
                 <div class="board-side">
