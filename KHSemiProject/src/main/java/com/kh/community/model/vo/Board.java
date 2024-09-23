@@ -9,6 +9,7 @@ public class Board {
 	private String communityDate;
 	private String memberId;
 	private int commentCount;
+	private int likeCount;
 	
 	public Board() {
 		super();
@@ -25,9 +26,22 @@ public class Board {
 		this.memberId = memberId;
 		this.commentCount = commentCount;
 	}
+	
+	public Board(int communityNo,String communityTitle, String communityContent, int communityViewcount,
+			String communityDate, String memberId, String communityTab, int likeCount) {
+		super();
+		this.communityNo = communityNo;
+		this.communityTitle = communityTitle;
+		this.communityContent = communityContent;
+		this.communityViewcount = communityViewcount;
+		this.communityDate = communityDate;
+		this.memberId = memberId;
+		this.communityTab = communityTab;
+		this.likeCount = likeCount;
+	}
 
 	public Board(int communityNo, String communityTitle, String communityContent, String communityTab,
-			int communityViewcount, String communityDate, String memberId, int commentCount) {
+			int communityViewcount, String communityDate, String memberId, int likeCount, int commentCount) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
@@ -36,6 +50,7 @@ public class Board {
 		this.communityViewcount = communityViewcount;
 		this.communityDate = communityDate;
 		this.memberId = memberId;
+		this.likeCount = likeCount;
 		this.commentCount = commentCount;
 	}
 
@@ -103,13 +118,20 @@ public class Board {
 		this.commentCount = commentCount;
 	}
 
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [communityNo=" + communityNo + ", communityTitle=" + communityTitle + ", communityContent="
 				+ communityContent + ", communityTab=" + communityTab + ", communityViewcount=" + communityViewcount
 				+ ", communityDate=" + communityDate + ", memberId=" + memberId + ", commentCount=" + commentCount
-				+ "]";
+				+ ", likeCount=" + likeCount + "]";
 	}
-	
-	
+
 }

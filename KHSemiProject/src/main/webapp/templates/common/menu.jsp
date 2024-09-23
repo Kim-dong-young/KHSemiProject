@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String alertMsg = (String)session.getAttribute("errorMsg"); 
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@
 		<script>
 			alert("<%=alertMsg%>");
 		</script>
-		<% session.removeAttribute("errorMsg"); %>
+		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <div id="header">
         <div id="logo-img"><a href=""><img src="static/img/logo.png" alt="퀴즈팡 로고"></a></div>
@@ -44,7 +44,6 @@
         			<button type="button" class="btn custom-btn login-btn" data-bs-toggle="modal" data-bs-target="#login-modal">로그인</button>
         		</c:when>
         		<c:otherwise>
-					${loginMember.memberNickName }님 환영합니다.
         			<a href="<%=contextPath%>/logout.me">로그아웃</a>
         		</c:otherwise>
         	</c:choose>
@@ -54,9 +53,11 @@
         <ul>
             <li><a href="<%=contextPath%>/main.me">홈</a></li>
             <li><a href="personalScreen.jsp">개인화면</a></li>
+
             <li><a href="<%=contextPath%>/main.sl?cpage=1">탐색</a></li>
-            <li><a href="userset1.jsp">유저설정</a></li>
-            <li><a href="<%=contextPath%>/list.bo?cpage=1">커뮤니티</a></li>
+            <li><a href="<%=contextPath%>/user.me">유저설정</a></li>
+            <li><a href="<%=contextPath%>/community?cpage=1">커뮤니티</a></li>
+
             <li><a href="">문제만들기</a></li>
             <li><a href="">도움말</a></li>
         </ul>
