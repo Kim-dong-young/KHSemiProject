@@ -142,7 +142,7 @@
                 </div>
                 
                 <!-- jsp 페이지 링크 처리 잘하자 -->
-                <jsp:include page="/list.bo?cpage=<%=request.getParameter('cpage')%>">
+                <jsp:include page="/list.bo?cpage=<%=request.getParameter("cpage")%>">
                     <jsp:param name="cpage" value='<%= request.getParameter("cpage") %>' />
                 </jsp:include>
                 

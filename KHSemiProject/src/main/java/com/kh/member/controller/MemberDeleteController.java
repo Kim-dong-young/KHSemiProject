@@ -2,6 +2,8 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 
+import com.kh.member.sevice.MemberService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,15 +11,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogoutController
+ * Servlet implementation class MemberDeleteController
  */
-public class LogoutController extends HttpServlet {
+public class MemberDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutController() {
+    public MemberDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +28,23 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//로그아웃 처리 -> session만료시키기 == 세션을 무효화시키기
-		HttpSession session = request.getSession();
-		session.invalidate();
+		request.setCharacterEncoding("UTF-8");
 		
-		response.sendRedirect(request.getContextPath()); // /jsp
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
+		
+		int result = new MemberService().deleteMember(userId, userPwd);
+		
+		HttpSession session = request.getSession();
+		if (result > 0) { // 성공시 -> session login정보 삭제 후 -> 메인페이지
+			session.removeAttribute("loginUser");
+			session.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다.");
+			
+			response.sendRedirect(request.getContextPath());
+		} else { // kh/myPage.me로 이동 // session alertMsg로 회원탈퇴 실패
+			session.setAttribute("alertMsg", "회원탈퇴에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/myPage.me");
+		}
 	}
 
 	/**

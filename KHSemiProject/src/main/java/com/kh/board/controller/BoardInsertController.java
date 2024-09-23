@@ -1,23 +1,22 @@
-package com.kh.member.controller;
-
-import java.io.IOException;
+package com.kh.board.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
- * Servlet implementation class LogoutController
+ * Servlet implementation class BoardInsertController
  */
-public class LogoutController extends HttpServlet {
+public class BoardInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutController() {
+    public BoardInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +25,10 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//로그아웃 처리 -> session만료시키기 == 세션을 무효화시키기
-		HttpSession session = request.getSession();
-		session.invalidate();
+		request.setCharacterEncoding("UTF-8");
 		
-		response.sendRedirect(request.getContextPath()); // /jsp
+		String boardTitle = request.getParameter("title");
+		System.out.println(boardTitle);
 	}
 
 	/**

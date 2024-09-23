@@ -3,98 +3,138 @@ package com.kh.member.model.vo;
 import java.sql.Date;
 
 public class Member {
-	private int memberNo;
-	private String memberId;
-	private String memberPwd;
-	private String memberNickName;
-	private int exp;
-	private String memberImg;
-	private Date joinDate;
-	private int checkContinueCnt;
+	private int userNo;
+	private String userId;
+	private String userPwd;
+	private String userName;
+	private String phone;
+	private String email;
+	private String address;
+	private String interest;
+	private Date enrollDate;
+	private Date modifyDate;
 	private String status;
-	private String introduce;
 	
 	public Member() {
 		super();
 	}
 
-	public Member(int memberNo, String memberId, String memberPwd, String memberNickName, int exp, String memberImg,
-			Date joinDate, int checkContinueCnt, String status, String introduce) {
+	public Member(int userNo, String userId, String userPwd, String userName, String phone, String email,
+			String address, String interest, Date enrollDate, Date modifyDate, String status) {
 		super();
-		this.memberNo = memberNo;
-		this.memberId = memberId;
-		this.memberPwd = memberPwd;
-		this.memberNickName = memberNickName;
-		this.exp = exp;
-		this.memberImg = memberImg;
-		this.joinDate = joinDate;
-		this.checkContinueCnt = checkContinueCnt;
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+		this.interest = interest;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
 		this.status = status;
-		this.introduce = introduce;
 	}
 
-	public int getMemberNo() {
-		return memberNo;
+	public Member(String userId, String userPwd, String userName, String phone, String email, String address,
+			String interest) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+		this.interest = interest;
 	}
 
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
+	public Member(String userId, String userName, String phone, String email, String address, String interest) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+		this.interest = interest;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
-	public String getMemberPwd() {
-		return memberPwd;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setMemberPwd(String memberPwd) {
-		this.memberPwd = memberPwd;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getMemberNickName() {
-		return memberNickName;
+	public String getUserPwd() {
+		return userPwd;
 	}
 
-	public void setMemberNickName(String memberNickName) {
-		this.memberNickName = memberNickName;
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
 	}
 
-	public int getExp() {
-		return exp;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setExp(int exp) {
-		this.exp = exp;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getMemberImg() {
-		return memberImg;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setMemberImg(String memberImg) {
-		this.memberImg = memberImg;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public Date getJoinDate() {
-		return joinDate;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setJoinDate(Date joinDate) {
-		this.joinDate = joinDate;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public int getCheckContinueCnt() {
-		return checkContinueCnt;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setCheckContinueCnt(int checkContinueCnt) {
-		this.checkContinueCnt = checkContinueCnt;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getInterest() {
+		return interest;
+	}
+
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
+
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 	public String getStatus() {
@@ -105,21 +145,10 @@ public class Member {
 		this.status = status;
 	}
 
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
 	@Override
 	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
-				+ ", memberNickName=" + memberNickName + ", exp=" + exp + ", memberImg=" + memberImg + ", joinDate="
-				+ joinDate + ", checkContinueCnt=" + checkContinueCnt + ", status=" + status + ", introduce="
-				+ introduce + "]";
+		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
+				+ ", phone=" + phone + ", email=" + email + ", address=" + address + ", interest=" + interest
+				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status=" + status + "]";
 	}
-	
-	
 }

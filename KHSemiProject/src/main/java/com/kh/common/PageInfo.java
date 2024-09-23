@@ -1,32 +1,31 @@
 package com.kh.common;
 
 public class PageInfo {
-	/* 게시글 */
-	private int listCount; // DB에 있는 총 게시글 수
-	private int currentPage; // 현재 사용자가 요청한 페이지
-	private int pageBarLimit; // 페이지 하단 페이징 바 개수
-	private int boardLimit; // 한 페이지 내에 보여질 게시글 최대 수
+	int listCount; //현재 총 게시글 수 
+	int currentPage; //현재 페이지(사용자가 요청한 페이지) 
+	int pageLimit; //페이지 하단에 보여질 페이징바의 수 
+	int boardLimit; //한 페이지내에 보여질 게시글 최대갯수 
+	//위 4개의 값을 기준으로 아래 3개의 값을 구할 수 있음
 	
-	/* 페이징 바 */
-	private int maxPage; // 게시글 수를 페이지 단위로 나눴을 때, 가장 마지막 페이지
-	private int startPage; // 제일 첫 페이지(시작 = 1), 페이징 바의 시작 수
-	private int endPage; // 페이징 바의 마지막 끝 수
+	int maxPage; //가장 마지막 페이지(총 페이지의 수)
+	int startPage; //페이징바의 시작 수
+	int endPage; //페이징방의 마지막 끝수
 	
 	public PageInfo() {
 		super();
 	}
-	
-	public PageInfo(int listCount, int currentPage, int pageBarLimit, int boardLimit, int maxPage, int startPage,
+	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
 			int endPage) {
 		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
-		this.pageBarLimit = pageBarLimit;
+		this.pageLimit = pageLimit;
 		this.boardLimit = boardLimit;
 		this.maxPage = maxPage;
 		this.startPage = startPage;
 		this.endPage = endPage;
 	}
+	
 	public int getListCount() {
 		return listCount;
 	}
@@ -39,11 +38,11 @@ public class PageInfo {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
-	public int getPageBarLimit() {
-		return pageBarLimit;
+	public int getPageLimit() {
+		return pageLimit;
 	}
-	public void setPageBarLimit(int pageBarLimit) {
-		this.pageBarLimit = pageBarLimit;
+	public void setPageLimit(int pageLimit) {
+		this.pageLimit = pageLimit;
 	}
 	public int getBoardLimit() {
 		return boardLimit;
@@ -72,9 +71,8 @@ public class PageInfo {
 	
 	@Override
 	public String toString() {
-		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageBarLimit=" + pageBarLimit
+		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageLimit=" + pageLimit
 				+ ", boardLimit=" + boardLimit + ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + "]";
 	}
-	
 }

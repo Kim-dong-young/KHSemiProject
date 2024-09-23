@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
-  <display-name>KHSemiProject</display-name>
+  <display-name>jspProject</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>*.js</url-pattern>
-    <url-pattern>*.css</url-pattern>
-    <url-pattern>*.jpg</url-pattern>
-    <url-pattern>*.gif</url-pattern>
-    <url-pattern>*.png</url-pattern>
-    <url-pattern>*.ico</url-pattern>
-    <url-pattern>*.swf</url-pattern>
-    <url-pattern>*.mp3</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>login.me</display-name>
@@ -35,5 +28,105 @@
   <servlet-mapping>
     <servlet-name>logout.me</servlet-name>
     <url-pattern>/logout.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>enrollForm.me</display-name>
+    <servlet-name>enrollForm.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberEnrollFormController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>enrollForm.me</servlet-name>
+    <url-pattern>/enrollForm.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>insert.me</display-name>
+    <servlet-name>insert.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insert.me</servlet-name>
+    <url-pattern>/insert.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>myPage.me</display-name>
+    <servlet-name>myPage.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MyPageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>myPage.me</servlet-name>
+    <url-pattern>/myPage.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>updatePwd.me</display-name>
+    <servlet-name>updatePwd.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberPwdUpdateController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updatePwd.me</servlet-name>
+    <url-pattern>/updatePwd.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>delete.me</display-name>
+    <servlet-name>delete.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete.me</servlet-name>
+    <url-pattern>/delete.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>update.me</display-name>
+    <servlet-name>update.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberUpdateController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>update.me</servlet-name>
+    <url-pattern>/update.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>list.bo</display-name>
+    <servlet-name>list.bo</servlet-name>
+    <servlet-class>com.kh.board.controller.BoardListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>list.bo</servlet-name>
+    <url-pattern>/list.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>detail.bo</display-name>
+    <servlet-name>detail.bo</servlet-name>
+    <servlet-class>com.kh.board.controller.BoardDetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>detail.bo</servlet-name>
+    <url-pattern>/detail.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BoardEnrollController</display-name>
+    <servlet-name>BoardEnrollController</servlet-name>
+    <servlet-class>com.kh.board.controller.BoardEnrollController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BoardEnrollController</servlet-name>
+    <url-pattern>/enrollForm.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>insert.bo</display-name>
+    <servlet-name>insert.bo</servlet-name>
+    <servlet-class>com.kh.board.controller.BoardInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insert.bo</servlet-name>
+    <url-pattern>/insert.bo</url-pattern>
   </servlet-mapping>
 </web-app>
