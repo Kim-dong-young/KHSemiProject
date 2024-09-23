@@ -3,58 +3,28 @@
 <properties>
 	<entry key="selectListCount">
 		SELECT COUNT(*) AS COUNT
-		  FROM BOARD
-		 WHERE BOARD_TYPE = 1
-		   AND STATUS = 'Y'
+		  FROM COMMUNITY
 	</entry>
+	
 	<entry key="selectList">
 		SELECT *
-		FROM(SELECT ROWNUM RNUM, A.*
-		     FROM (SELECT BOARD_NO,
-		                   CATEGORY_NAME,
-		                   BOARD_TITLE,
-		                   USER_ID,
-		                   COUNT,
-		                   TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') AS "CREATE_DATE"
-		              FROM BOARD B
-		              JOIN CATEGORY USING(CATEGORY_NO)
-		              JOIN MEMBER M ON(BOARD_WRITER = USER_NO)
-		             WHERE B.STATUS = 'Y'
-		               AND BOARD_TYPE = 1
-		             ORDER BY BOARD_NO DESC) A)
+		FROM
+		(
+		    SELECT COMMUNITY_NUMBER,
+		       COMMUNITY_TITLE,
+		       TAB_NAME,
+		       COMMUNITY_VIEWCOUNT,
+		       COMMUNITY_DATE,
+		       MEMBER_NICKNAME,
+		       COUNT(COMMUNITY_COMMENT_NUMBER) AS COMMENT_COUNT,  -- 댓글 수 카운트
+		       ROW_NUMBER() OVER(ORDER BY COMMUNITY_DATE DESC) AS RNUM
+		    FROM COMMUNITY
+		    JOIN COMMUNITY_TAB ON(COMMUNITY_TAB = TAB_NUMBER)
+		    JOIN MEMBER USING(MEMBER_NUMBER)
+		    LEFT JOIN COMMUNITY_COMMENT USING(COMMUNITY_NUMBER)
+		    GROUP BY COMMUNITY_TAB.TAB_NAME, COMMUNITY_NUMBER, COMMUNITY_TITLE, TAB_NAME, 
+		             COMMUNITY_VIEWCOUNT, COMMUNITY_DATE, MEMBER_NICKNAME
+		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	<entry key = "increaseCount">
-		UPDATE BOARD
-		   SET COUNT = COUNT + 1
-		 WHERE BOARD_NO = ?
-		   AND STATUS = 'Y'
-	</entry>
-	<entry key = "selectBoard">
-		SELECT BOARD_NO,
-			   CATEGORY_NAME,
-               BOARD_TITLE,
-               BOARD_CONTENT,
-               USER_ID,
-               TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') AS "CREATE_DATE"
-          FROM BOARD
-          JOIN CATEGORY USING(CATEGORY_NO)
-          JOIN MEMBER ON(BOARD_WRITER = USER_NO)
-         WHERE BOARD_NO = ?
-	</entry>
-	<entry key = "selectAttachment">
-		SELECT FIFL_NO,
-			   ORIGIN_NAME,
-			   CHANGE_NAME,
-			   FILE_PATH
-          FROM ATTACHMENT
-         WHERE REF_BNO = ?
-	</entry>
-	<entry key="selectCategoryList">
-		SELECT CATEGORY_NO,
-			   CATEGORY_NAME
-		  FROM CATEGORY
-	</entry>
 </properties>
-
-
