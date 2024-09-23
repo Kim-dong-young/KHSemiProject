@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String alertMsg = (String)session.getAttribute("errorMsg"); 
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@
 		<script>
 			alert("<%=alertMsg%>");
 		</script>
-		<% session.removeAttribute("errorMsg"); %>
+		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <div id="header">
         <div id="logo-img"><a href=""><img src="static/img/logo.png" alt="퀴즈팡 로고"></a></div>
