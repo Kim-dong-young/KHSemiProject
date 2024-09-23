@@ -6,7 +6,8 @@
 		  FROM QUIZ
 	</entry>
 	<entry key="selectQuiz">
-		
+		SELECT *
+		FROM()
 	</entry>
 </properties>
 
