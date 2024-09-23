@@ -31,8 +31,6 @@ public class SearchMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//views/board/boardListView.jsp 포워딩
-		//board데이터를 전달
 		
 		//----------------------------페이징 처리------------------------------
 		int quizCount; //현재 총 게시글 수 
@@ -61,7 +59,7 @@ public class SearchMainController extends HttpServlet {
 		 * 총 게시글 수 / 한페이지에 보여줄 게시글 수 -> 올림
 		 */
 		
-		maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		maxPage = (int)Math.ceil((double)quizCount/boardLimit);
 		
 		/**
 		 * startPage : 페이징바 시작수
@@ -89,8 +87,8 @@ public class SearchMainController extends HttpServlet {
 		//startPage가 11면 endPage 20이다(maxPage 13이라면?)
 		endPage = endPage > maxPage ? maxPage : endPage;
 		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		ArrayList<Quiz> list = new BoardService().selectList(pi);
+		PageInfo pi = new PageInfo(quizCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		ArrayList<Quiz> list = new SearchService().selectQuiz(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
