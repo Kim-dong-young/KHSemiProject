@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String contextPath = request.getContextPath();
+%>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Result Page</title>
-    <link rel="stylesheet" href="Result.css">
+    <link rel="stylesheet" href="../static/css/Result.css">
 </head>
 <body>
     <div class="container">
@@ -42,11 +45,14 @@
 
         <div class="bottom-buttons">
             <button class="report-btn">신고하기</button>
-            <button class="button">홈으로</button>
+            <button class="button">
+                <a href="<%=contextPath%>/main.me"></a>
+                홈으로
+            </button>
             <button class="button">다시하기</button>
         </div>
     </div>
 
-    <script src="Result.js"></script>
+    <script src="../static/js/Result.js"></script>
 </body>
 </html>

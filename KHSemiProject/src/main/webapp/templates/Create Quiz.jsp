@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퀴즈 생성</title>
-    <link rel="stylesheet" href="Create Quiz.css">
-    <script defer src="Create Quiz.js"></script> 
+    <link rel="stylesheet" href="../static/css/Create Quiz.css">
+    <script defer src="../static/js/Create Quiz.js"></script> 
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="QuizLogo.png" class="logo">
+            <img src="static/img/QuizLogo.png" class="logo">
             <div class="page-info">
                 <span id="current-page">1</span>/<span id="total-pages">1</span> 
             </div>
@@ -68,7 +71,7 @@
                 </div>
 
                 <div class="buttons">
-                    <button class="home-btn">홈</button>
+                    <button class="home-btn"><a href="<%=contextPath%>/main.me"></a>홈</button>
                     <button class="create-btn">질문 생성하기</button>
                 </div>
             </div>
