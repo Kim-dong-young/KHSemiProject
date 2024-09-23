@@ -51,4 +51,15 @@
     <servlet-name>logout.me</servlet-name>
     <url-pattern>/logout.me</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>main.me</display-name>
+    <servlet-name>main.me</servlet-name>
+    <servlet-class>com.kh.main.controller.MainPageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>main.me</servlet-name>
+    <url-pattern>/main.me</url-pattern>
+  </servlet-mapping>
 </web-app>
