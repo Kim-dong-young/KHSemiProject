@@ -93,5 +93,56 @@ public class BoardDao {
 		
 		return boardList;
 	}
+
+	public Board selectBoard(Connection conn, int boardNo) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Board board = null;
+		
+		String sql = prop.getProperty("selectBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board(
+							rset.getInt("COMMUNITY_NUMBER"),
+							rset.getString("COMMUNITY_TITLE"),
+							rset.getString("COMMUNITY_CONTENT"),
+							rset.getInt("COMMUNITY_VIEWCOUNT"),
+							rset.getString("COMMUNITY_DATE"),
+							rset.getString("MEMBER_NICKNAME"),
+							rset.getString("TAB_NAME"),
+							rset.getInt("LIKE_COUNT"),
+							rset.getInt("COMMENT_COUNT")
+							
+							/*
+							 * int communityNo,
+							 * String communityTitle, 
+							 * String communityContent, 
+							 * int communityViewcount,
+							 * String communityDate, 
+							 * String memberId, 
+							 * String communityTab, 
+							 * int likeCount, 
+							 * int commentCount
+							 */
+						);
+				System.out.println(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(conn);
+		}
+		
+		return board;
+	}
 	
 }

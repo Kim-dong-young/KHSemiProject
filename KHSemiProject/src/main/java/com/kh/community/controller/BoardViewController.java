@@ -1,16 +1,18 @@
 package com.kh.community.controller;
 
+import java.io.IOException;
+
+import com.kh.community.model.vo.Board;
+import com.kh.community.service.BoardService;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Servlet implementation class BoardViewController
  */
-@WebServlet(name = "board", urlPatterns = { "/board" })
 public class BoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +28,14 @@ public class BoardViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage = request.getParameter("cpage") == null ? 1 : Integer.parseInt(request.getParameter("cpage"));
-		request.setAttribute("cpage",currentPage);
+		int boardNo = Integer.parseInt(request.getParameter("no"));
+		System.out.println("view 서블릿 실행됨");
+		
+		Board board = new BoardService().selectBoard(boardNo);
+		System.out.println(board);
+		
+		request.setAttribute("board", board);
+
 		request.getRequestDispatcher("templates/communityViewPage.jsp").forward(request, response);
 	}
 

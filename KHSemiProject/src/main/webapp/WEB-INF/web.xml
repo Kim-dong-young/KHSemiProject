@@ -26,8 +26,6 @@
     <servlet-name>login.me</servlet-name>
     <url-pattern>/login.me</url-pattern>
   </servlet-mapping>
-
-  
   <servlet>
     <description></description>
     <display-name>category.sl</display-name>
@@ -38,9 +36,6 @@
     <servlet-name>category.sl</servlet-name>
     <url-pattern>/category.sl</url-pattern>
   </servlet-mapping>
-
-
-
   <servlet>
     <description></description>
     <display-name>logout.me</display-name>
@@ -51,7 +46,6 @@
     <servlet-name>logout.me</servlet-name>
     <url-pattern>/logout.me</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>main.me</display-name>
@@ -61,5 +55,35 @@
   <servlet-mapping>
     <servlet-name>main.me</servlet-name>
     <url-pattern>/main.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>list.bo</display-name>
+    <servlet-name>list.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>list.bo</servlet-name>
+    <url-pattern>/list.bo</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>community</display-name>
+    <servlet-name>community</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardMainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>community</servlet-name>
+    <url-pattern>/community</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>board</display-name>
+    <servlet-name>board</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardViewController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>board</servlet-name>
+    <url-pattern>/board</url-pattern>
   </servlet-mapping>
 </web-app>

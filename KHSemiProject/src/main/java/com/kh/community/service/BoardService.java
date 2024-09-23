@@ -26,5 +26,13 @@ public class BoardService {
 		close(conn);
 		return boardList;
 	}
+
+	public Board selectBoard(int boardNo) {
+		Connection conn = getConnection();
+		Board board = new BoardDao().selectBoard(conn, boardNo);
+		
+		close(conn);
+		return board;
+	}
 	
 }
