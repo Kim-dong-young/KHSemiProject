@@ -65,6 +65,7 @@ public class MemberDao {
 		return m;
 	}
 	
+
 	public int insertMember(Connection conn, Member m) {
 		int result = 0;
 		
@@ -79,12 +80,74 @@ public class MemberDao {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+			
+			
+	public int updatePwdMember(Connection conn, String memberId, String memberPwd, String updatePwd) {
+		//update => 처리된 행수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, memberId);
+			pstmt.setString(3, memberPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
 		
 		return result;
+	}
+
+	public Member selectMember(Connection conn, String memberId){
+		//select -> Member조회 -> ResultSet객체
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery(); // 조회결과가 있다면 한행 반환 | 없다면 반환X
+			if(rset.next()) {
+				m = new Member(
+						rset.getInt("member_number"),
+						rset.getString("member_id"),
+						rset.getString("member_pwd"),
+						rset.getString("member_nickname"),
+						rset.getInt("member_exp"),
+						rset.getString("member_image"),
+						rset.getDate("member_join_date"),
+						rset.getInt("member_check_continuecount"),
+						rset.getString("member_status"),
+						rset.getString("member_introduce")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
 	}
 }

@@ -61,7 +61,7 @@
                     <% for(Board b : boardList) { %>
                         <tr>
                             <td class="tab"><%=b.getCommunityTab()%></td>
-                            <td class="title" onclick="location.href='<%=contextPath%>/board'"><%=b.getCommunityTitle()%></td>
+                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>'"><%=b.getCommunityTitle()%></td>
                             <td class="author"><%=b.getMemberId()%></td>
                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
                             <td class="date"><%=b.getCommunityDate()%></td>
@@ -93,11 +93,11 @@
 
             <div class="option2">
                 <!-- 맨 처음으로 가는 버튼 -->
-                <button onclick="location.href='<%=contextPath%>/list.bo?cpage=1'">&lt;&lt;</button>
+                <button onclick="location.href='<%=contextPath%>/community?cpage=1'">&lt;&lt;</button>
                 
                 <!-- 페이징바 단위 만큼 앞으로 이동하는 버튼 -->
                 <% if(startPage != 1) { %>
-                    <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=startPage - 1%>'">&lt;</button>
+                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>'">&lt;</button>
                 <% } else { %>
                     <button disabled>&lt;</button>
                 <% } %>
@@ -107,19 +107,19 @@
                     <% if(i == currentPage) { %>
                         <button disabled><%=i %></button>
                     <% } else { %>
-                        <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=i%>'"><%=i %></button>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>'"><%=i %></button>
                     <% } %>
                 <% } %>
 
                 <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
                 <% if(startPage + pageBarLimit < maxPage) { %>
-                    <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
+                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
                 <% } else { %>
                     <button disabled>&gt;</button>
                 <% } %>
 
                 <!-- 맨 뒤로 가는 버튼 -->
-                <button onclick="location.href='<%=contextPath%>/list.bo?cpage=<%=maxPage%>'">&gt;&gt;</button>
+                <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>'">&gt;&gt;</button>
             </div>
 
             <div class="option1">
