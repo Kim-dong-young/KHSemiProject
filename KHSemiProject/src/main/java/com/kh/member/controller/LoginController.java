@@ -32,8 +32,10 @@ public class LoginController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String memberId = request.getParameter("memberId");
-		String memberPwd = request.getParameter("memberPwd");
+		String memberPwd = request.getParameter("memberPwd");		
+		String path = request.getParameter("origin");
 		
+		System.out.println(path);
 		Member loginMember = new MemberService().loginMember(memberId, memberPwd);
 		
 		HttpSession session = request.getSession();
@@ -41,15 +43,17 @@ public class LoginController extends HttpServlet {
 		if(loginMember == null) {
 			session.setAttribute("errorMsg", "로그인에 실패하였습니다.");
 			
-			response.sendRedirect(request.getContextPath() + "/main.me");
+			if(path.equals("/KHSemiProject/templates/mainPage.jsp") ) {
+				response.sendRedirect(request.getContextPath() + "/main.me");
+			} else {
+				response.sendRedirect(request.getContextPath());
+			}
 		} else {
 			session.setAttribute("loginMember", loginMember);
 			
 			//request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/main.me");
 		}
-		
-		System.out.println(loginMember);
 	}
 
 	/**
