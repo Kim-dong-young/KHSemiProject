@@ -34,5 +34,13 @@ public class BoardService {
 		close(conn);
 		return board;
 	}
+
+	public int countBoardComment(int boardNo) {
+		Connection conn = getConnection();
+		int result = new BoardDao().countBoardComment(conn, boardNo);
+		
+		close(conn);
+		return result;
+	}
 	
 }

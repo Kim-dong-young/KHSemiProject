@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.community.model.vo.Board" %>
-<% Board b = (Board)request.getAttribute("board"); %>
+<% 
+    Board b = (Board)request.getAttribute("board"); 
+    int commentCount = (Integer)request.getAttribute("commentCount");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +39,7 @@
                             <span class="after-vline">작성일: <%=b.getCommunityDate()%></span>
                             <span class="after-vline">조회수: <%=b.getCommunityViewcount()%></span>
                             <span class="after-vline">좋아요: <%=b.getLikeCount()%></span>
-                            <span>댓글: <%=b.getCommentCount()%></span>
+                            <span>댓글: <%=commentCount%></span>
                         </div>
                     </div>
 

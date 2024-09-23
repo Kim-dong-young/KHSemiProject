@@ -29,12 +29,12 @@ public class BoardViewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("no"));
-		System.out.println("view 서블릿 실행됨");
 		
 		Board board = new BoardService().selectBoard(boardNo);
-		System.out.println(board);
+		int commentCount = new BoardService().countBoardComment(boardNo);
 		
 		request.setAttribute("board", board);
+		request.setAttribute("commentCount", commentCount);
 
 		request.getRequestDispatcher("templates/communityViewPage.jsp").forward(request, response);
 	}

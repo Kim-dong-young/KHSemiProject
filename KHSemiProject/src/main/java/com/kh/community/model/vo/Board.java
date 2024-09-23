@@ -28,7 +28,7 @@ public class Board {
 	}
 	
 	public Board(int communityNo,String communityTitle, String communityContent, int communityViewcount,
-			String communityDate, String memberId, String communityTab, int likeCount, int commentCount) {
+			String communityDate, String memberId, String communityTab, int likeCount) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;

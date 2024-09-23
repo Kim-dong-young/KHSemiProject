@@ -105,7 +105,6 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, boardNo);
-			pstmt.setInt(2, boardNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -118,20 +117,7 @@ public class BoardDao {
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),
 							rset.getString("TAB_NAME"),
-							rset.getInt("LIKE_COUNT"),
-							rset.getInt("COMMENT_COUNT")
-							
-							/*
-							 * int communityNo,
-							 * String communityTitle, 
-							 * String communityContent, 
-							 * int communityViewcount,
-							 * String communityDate, 
-							 * String memberId, 
-							 * String communityTab, 
-							 * int likeCount, 
-							 * int commentCount
-							 */
+							rset.getInt("LIKE_COUNT")
 						);
 				System.out.println(board);
 			}
@@ -143,6 +129,33 @@ public class BoardDao {
 		}
 		
 		return board;
+	}
+
+	public int countBoardComment(Connection conn, int boardNo) {
+		int result = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("countBoardComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COMMENT_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }
