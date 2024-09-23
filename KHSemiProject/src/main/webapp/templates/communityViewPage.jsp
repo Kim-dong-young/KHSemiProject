@@ -4,6 +4,7 @@
 <% 
     Board b = (Board)request.getAttribute("board"); 
     int commentCount = (Integer)request.getAttribute("commentCount");
+    int cpage = Integer.parseInt(request.getParameter("cpage"));
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,7 @@
 	
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
 		<p>자유 게시판</p>
+        <p><%=cpage%></p>
 
         <div class="wrapper">
 			<div class="board">
@@ -145,9 +147,7 @@
                     <button><img src="static/img/comment-icon.png">작성</button>
                 </div>
                 
-                <jsp:include page="/list.bo/cpage">
-                    <jsp:param name="cpage" value="${cpage}"/>
-                </jsp:include>
+                <jsp:include page='/list.bo?cpage="<%=cpage%>"'/>
                 
                 <div class="board-side">
                     <%@ include file="communitySidePage.jsp" %>
