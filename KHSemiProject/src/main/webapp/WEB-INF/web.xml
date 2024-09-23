@@ -55,4 +55,14 @@
     <servlet-name>main.sl</servlet-name>
     <url-pattern>/main.sl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Update.me</display-name>
+    <servlet-name>Update.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberPwdUpdateController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Update.me</servlet-name>
+    <url-pattern>/Update.me</url-pattern>
+  </servlet-mapping>
 </web-app>
