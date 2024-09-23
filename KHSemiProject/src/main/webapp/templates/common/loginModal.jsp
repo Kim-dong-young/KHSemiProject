@@ -25,9 +25,10 @@
             color: black;
         }
     </style>
+    <script src="static/js/menu.js"></script>
 </head>
 <body>
-	<!-- 로그인 modal -->
+	<!-- contextPath 로그인 modal -->
 	<div class="modal" id="login-modal">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">		     
@@ -39,9 +40,10 @@
 				
 				<!-- Modal body -->
 				<div class="modal-body" align="center">
-					<form action="<%=contextPath %>/login.me" method="POST">
+					<form id="loginForm" action="<%=contextPath %>/login.me" method="POST">
+						<input type="hidden" name="origin" value="<%=request.getRequestURI()%>">
 						<div class="mb-3 mt-3">
-							<label for="email" class="form-label">아이디:</label>
+							<label for="id" class="form-label">아이디:</label>
 							<input type="text" class="form-control" id="id" placeholder="Enter ID" name="memberId">
 						</div>
 						<div class="mb-3">
@@ -55,7 +57,7 @@
 			</div>
 		</div>	
 	</div>
-	
+		
 	<!-- 회원가입 -->
 	<div class="modal" id="signin-modal">
 		<div class="modal-dialog modal-dialog-centered">
