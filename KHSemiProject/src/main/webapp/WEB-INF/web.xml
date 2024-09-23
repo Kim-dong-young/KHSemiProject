@@ -5,17 +5,6 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>*.js</url-pattern>
-    <url-pattern>*.css</url-pattern>
-    <url-pattern>*.jpg</url-pattern>
-    <url-pattern>*.gif</url-pattern>
-    <url-pattern>*.png</url-pattern>
-    <url-pattern>*.ico</url-pattern>
-    <url-pattern>*.swf</url-pattern>
-    <url-pattern>*.mp3</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>login.me</display-name>
@@ -30,7 +19,7 @@
     <description></description>
     <display-name>category.sl</display-name>
     <servlet-name>category.sl</servlet-name>
-    <servlet-class>com.kh.member.controller.searchCategoryController.java</servlet-class>
+    <servlet-class>com.kh.search.controller.searchCategoryController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>category.sl</servlet-name>
@@ -85,5 +74,14 @@
   <servlet-mapping>
     <servlet-name>board</servlet-name>
     <url-pattern>/board</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>main.sl</display-name>
+    <servlet-name>main.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.SearchMainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>main.sl</servlet-name>
+    <url-pattern>/main.sl</url-pattern>
   </servlet-mapping>
 </web-app>

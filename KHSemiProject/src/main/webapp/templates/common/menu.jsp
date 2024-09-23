@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String alertMsg = (String)session.getAttribute("errorMsg"); 
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,13 +30,12 @@
 </head>
 <body>
 	<%@ include file="loginModal.jsp" %>
-	<c:if test="${not empty errorMsg }">
+	<% if(alertMsg != null) {%>
 		<script>
-			alert("${errorMsg}");
+			alert("<%=alertMsg%>");
 		</script>
-		
-		<c:remove var="errorMsg" scope="session"/>
-	</c:if>
+		<% session.removeAttribute("errorMsg"); %>
+	<% } %>
     <div id="header">
         <div id="logo-img"><a href=""><img src="static/img/logo.png" alt="퀴즈팡 로고"></a></div>
         <div id="welcome-user">
@@ -52,9 +54,11 @@
         <ul>
             <li><a href="<%=contextPath%>/main.me">홈</a></li>
             <li><a href="personalScreen.jsp">개인화면</a></li>
-            <li><a href="searchMainPage.jsp">탐색</a></li>
-            <li><a href="userset.jsp">유저설정</a></li>
+
+            <li><a href="<%=contextPath%>/main.sl?cpage=1">탐색</a></li>
+            <li><a href="userset1.jsp">유저설정</a></li>
             <li><a href="<%=contextPath%>/community?cpage=1">커뮤니티</a></li>
+
             <li><a href="">문제만들기</a></li>
             <li><a href="">도움말</a></li>
         </ul>

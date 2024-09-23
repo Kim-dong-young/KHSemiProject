@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퀴즈팡</title>
-    <link rel="stylesheet" href="Quiz Screen(Media O).css">
+    <link rel="stylesheet" href="../static/css/Quiz Screen(Media O).css">
 </head>
 <body>
 
     <div id="quiz-container">
         <div id="header">
             <div id="title">
-                <img src="QuizLogo.png" alt="">
+                <img src="../static/img/QuizLogo.png" alt="">
             </div>
             <div id="right-header">
                 <div class="xp-box">
@@ -25,7 +28,7 @@
         </div>
 
         <div id="timer-container">
-            <img src="Timer.png" alt="타이머 아이콘" class="icon">
+            <img src="../static/img/Timer.png" alt="타이머 아이콘" class="icon">
             <div id="progress-bar">
                 <div>30</div>
             </div>
@@ -47,7 +50,8 @@
         </div>
 
         <button id="home-btn">
-            <img src="homebtn.png" alt="홈 버튼">
+            <img src="../static/img/homebtn.png" alt="홈 버튼">
+            <a href="<%=contextPath%>/main.me"></a>
         </button>
     </div>
 
