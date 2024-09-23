@@ -17,4 +17,22 @@
 		   AND MEMBER_PWD = ? 
 		   AND MEMBER_STATUS = 'Y'
 	</entry>
+	<entry key="insertMember">
+		INSERT INTO MEMBER
+		(
+			MEMBER_NUMBER,
+			MEMBER_ID,
+			MEMBER_PWD,
+			MEMBER_NICKNAME,
+			MEMBER_CHECK_CONTINUECOUNT
+		)
+		VALUES
+		(
+			SEQ_MNO.NEXTVAL,
+			?,
+			?,
+			?,
+			0
+		)
+	</entry>
 </properties>

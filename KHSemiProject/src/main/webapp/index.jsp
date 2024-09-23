@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String alertMsg = (String)session.getAttribute("errorMsg"); 
+	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,7 +21,7 @@
 		<script>
 			alert("<%=alertMsg%>");
 		</script>
-		<% session.removeAttribute("errorMsg"); %>
+		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <!-- <a href="templates/mainPage.jsp">메인 페이지로</a> -->
 	<div class="wrapper">
