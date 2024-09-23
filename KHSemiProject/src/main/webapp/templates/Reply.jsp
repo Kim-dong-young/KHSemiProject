@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>댓글 창</title>
-    <link rel="stylesheet" href="Reply.css">
+    <link rel="stylesheet" href="../static/css/Reply.css">
 </head>
 <body>
     <div class="comment-section"> 
@@ -34,6 +34,6 @@
             <input type="text" id="commentInput" placeholder="댓글 추가..." />
         </fieldset>
     </div>
-    <script src="Reply.js"></script>
+    <script src="../static/js/Reply.js"></script>
 </body>
 </html>
