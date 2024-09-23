@@ -52,7 +52,7 @@
         <ul>
             <li><a href="<%=contextPath%>/main.me">홈</a></li>
             <li><a href="personalScreen.jsp">개인화면</a></li>
-            <li><a href="searchMainPage.jsp">탐색</a></li>
+            <li><a href="<%=contextPath%>/main.sl">탐색</a></li>
             <li><a href="userset1.jsp">유저설정</a></li>
             <li><a href="<%=contextPath%>/list.bo?cpage=1">커뮤니티</a></li>
             <li><a href="">문제만들기</a></li>
