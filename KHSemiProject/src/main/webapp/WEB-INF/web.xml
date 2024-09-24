@@ -105,6 +105,15 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>write.bo</display-name>
+    <servlet-name>write.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardEnrollController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>write.bo</servlet-name>
+    <url-pattern>/write.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <display-name>attend.me</display-name>
     <servlet-name>attend.me</servlet-name>
     <servlet-class>com.kh.member.controller.AttendanceController</servlet-class>
