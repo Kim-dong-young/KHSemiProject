@@ -72,6 +72,7 @@
     align-items: center;
     height:400px;
     background-color: #F3F3F3;
+    z-index: -1;
 }
 
 .cm-banner button{

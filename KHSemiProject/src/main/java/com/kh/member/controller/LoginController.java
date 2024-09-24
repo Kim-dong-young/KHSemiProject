@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(loginMember == null) {
-			session.setAttribute("errorMsg", "로그인에 실패하였습니다.");
+			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
 			
 			if(path.equals("/KHSemiProject/templates/mainPage.jsp") ) {
 				response.sendRedirect(request.getContextPath() + "/main.me");

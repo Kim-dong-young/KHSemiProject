@@ -86,6 +86,14 @@ public class QuizDao {
 				b.setBoardWriter(rset.getString("user_id"));
 				b.setCount(rset.getInt("count"));
 				b.setCreateDate(rset.getString("create_date"));
+				
+				QUIZ_NUMBER
+				QUIZ_TITLE
+				QUIZ_DATE
+				QUIZ_MODIFY_DATE
+				MEMBER_NUMBER
+				CATEGORY_NUMBER
+				
 				list.add(q);
 			}
 		} catch (SQLException e) {
