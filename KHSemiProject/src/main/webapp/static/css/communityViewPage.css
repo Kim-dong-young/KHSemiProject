@@ -13,6 +13,7 @@ span{
     font-size:36px;
     margin-left: 10px;
     margin-bottom: 20px;
+    width:100%;
 }
 
 .wrapper {
@@ -54,6 +55,7 @@ span{
     display:flex;
     align-items: center;
     position:relative;
+    z-index: -1;
 }
 
 .bulletin-title .board-tab{
@@ -189,6 +191,7 @@ span{
 
 .comment-left{
     width:60px;
+    height:100%;
 }
 
 .comment-left img{
