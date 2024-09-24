@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -54,55 +55,98 @@ public class QuizDao {
 		return quizCount;
 	}
 
-	public ArrayList<Quiz> selectQuiz(Connection conn, PageInfo pi) {
+	public ArrayList<Quiz> selectQuiz(Connection conn, PageInfo pi, int category, int search_type, String search_text, int orderby) {
 		ArrayList<Quiz> list = new ArrayList<>();
 		
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectQuiz");
+		try {
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+		int endRow = startRow + pi.getBoardLimit() - 1;
+		
+		boolean sqlAnd = false;
+		
+		String sql = "SELECT QUIZ_NUMBER, QUIZ_TITLE ";
+				
+		if(orderby == 1) {
+			sql += "FROM (SELECT QUIZ_NUMBER, COUNT(*) "
+					+ "FROM QUIZ_LOG "
+					+ "GROUP BY QUIZ_NUMBER "
+					+ "ORDER BY COUNT(*) DESC)"
+					+ "JOIN QUIZ USING (QUIZ_NUMBER) ";
+		} else if(orderby == 2){
+			sql += "FROM QUIZ ";
+		} else if(orderby == 3) {
+			sql += "FROM (SELECT QUIZ_NUMBER, AVG(QUIZ_RATE_RATING) "
+					+ "FROM QUIZ_RATE "
+					+ "GROUP BY QUIZ_NUMBER "
+					+ "ORDER BY AVG(QUIZ_RATE_RAING) DESC) "
+					+ "JOIN QUIZ USING (QUIZ_NUMBER) ";
+		}
+		
+		
+		sql += "JOIN CATEGORY USING (CATEGORY_NUMBER) "
+		       + "JOIN MEMBER USING (MEMBER_NUMBER) ";
+		
+		boolean sqlWhere = false;
+		
+		if(category != 0) {
+			if(!sqlWhere) {
+				sql += "WHERE ";
+				sqlWhere = true;
+			}
+			sql += "CATEGORY_NUMBER = '" + category + "'";
+			sqlAnd = true;
+		}
+		if(search_text != null) {
+			if(sqlAnd) {
+				sql += " AND ";
+			}
+			if(!sqlWhere) {
+				sql += "WHERE ";
+				sqlWhere = true;
+			}
+			switch(search_type) {
+			case 1:
+				sql += "QUIZ_TITLE LIKE '%" + search_text + "%'";
+				break;
+			case 2:
+				sql += "MEMBER_NICKNAME LIKE '%" + search_text + "%'";
+				break;
+			}
+			sqlAnd = true;
+		}
+		sql += " ORDER BY ";
+		switch(orderby) {
+		case 1, 3:
+			sql += "ROWNUM DESC";
+			break;
+		case 2:
+			sql += "QUIZ_MODIFY_DATE DESC";
+		}
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			/*
-			 * currentPage : 1 -> 1~10
-			 * currentPage : 2 -> 11~20
-			 * currentPage : 3 -> 21~30
-			 */
-			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
-			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			
-			rset = pstmt.executeQuery();
-			
+			rset = stmt.executeQuery(sql);
 			while(rset.next()) {
 				Quiz q = new Quiz();
-				b.setBoardNo(rset.getInt("board_no"));
-				b.setCategory(rset.getString("category_name"));
-				b.setBoardTitle(rset.getString("board_title"));
-				b.setBoardWriter(rset.getString("user_id"));
-				b.setCount(rset.getInt("count"));
-				b.setCreateDate(rset.getString("create_date"));
 				
-				QUIZ_NUMBER
-				QUIZ_TITLE
-				QUIZ_DATE
-				QUIZ_MODIFY_DATE
-				MEMBER_NUMBER
-				CATEGORY_NUMBER
-				
+				q.setQuiz_number(rset.getInt("quiz_number"));
+				q.setQuiz_title(rset.getString("quiz_title"));
 				list.add(q);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(stmt);
 		}
-		
 		return list;
 	}
 

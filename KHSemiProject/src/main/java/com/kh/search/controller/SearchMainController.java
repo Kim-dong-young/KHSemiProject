@@ -13,6 +13,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/*
+ * (int category(0 전체 1 유머 ~ 8 기타), int search_type (0 관련없음 1 제목 2 제작자), 
+	String search_text(null가능), int orderby ( 1 조회수 2 최신 3 평점 )
+ */
+
 /**
  * Servlet implementation class SearchMainController
  */
@@ -31,7 +36,7 @@ public class SearchMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		//----------------------------페이징 처리------------------------------
 		int quizCount; //현재 총 게시글 수 
 		int currentPage; //현재 페이지(사용자가 요청한 페이지) 
@@ -87,13 +92,22 @@ public class SearchMainController extends HttpServlet {
 		//startPage가 11면 endPage 20이다(maxPage 13이라면?)
 		endPage = endPage > maxPage ? maxPage : endPage;
 		
-		//PageInfo pi = new PageInfo(quizCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		//ArrayList<Quiz> list = new SearchService().selectQuiz(pi);
 		
-//		request.setAttribute("pi", pi);
-//		request.setAttribute("list", list);
-//		System.out.println(pi);
-//		System.out.println(list);
+		int category = Integer.parseInt(request.getParameter("category"));
+		int search_type = Integer.parseInt(request.getParameter("search_type"));
+		String search_text = request.getParameter("search_text");
+		int orderby = Integer.parseInt(request.getParameter("orderby"));
+		
+		
+		
+		
+		PageInfo pi = new PageInfo(quizCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		ArrayList<Quiz> list = new SearchService().selectQuiz(pi, category, search_type, search_text, orderby);
+		
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
+		System.out.println(pi);
+		System.out.println(list);
 
 		request.getRequestDispatcher("templates/searchMainPage.jsp").forward(request, response);
 	}
