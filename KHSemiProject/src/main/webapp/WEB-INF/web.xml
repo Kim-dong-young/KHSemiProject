@@ -47,6 +47,35 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>list.bo</display-name>
+    <servlet-name>list.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>list.bo</servlet-name>
+    <url-pattern>/list.bo</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>community</display-name>
+    <servlet-name>community</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardMainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>community</servlet-name>
+    <url-pattern>/community</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>board</display-name>
+    <servlet-name>board</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardViewController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>board</servlet-name>
+    <url-pattern>/board</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <display-name>main.sl</display-name>
     <servlet-name>main.sl</servlet-name>
     <servlet-class>com.kh.search.controller.SearchMainController</servlet-class>
@@ -54,5 +83,34 @@
   <servlet-mapping>
     <servlet-name>main.sl</servlet-name>
     <url-pattern>/main.sl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>signin.me</display-name>
+    <servlet-name>signin.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>signin.me</servlet-name>
+    <url-pattern>/signin.me</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <display-name>Update.me</display-name>
+    <servlet-name>Update.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberPwdUpdateController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Update.me</servlet-name>
+    <url-pattern>/Update.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>userset.me</display-name>
+    <servlet-name>userset.me</servlet-name>
+    <servlet-class>com.kh.member.controller.usersetController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userset.me</servlet-name>
+    <url-pattern>/userset.me</url-pattern>
   </servlet-mapping>
 </web-app>

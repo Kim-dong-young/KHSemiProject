@@ -33,6 +33,13 @@ public class Member {
 		this.introduce = introduce;
 	}
 
+	public Member(String memberId, String memberPwd, String memberNickName) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberNickName = memberNickName;
+	}
+
 	public int getMemberNo() {
 		return memberNo;
 	}

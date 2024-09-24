@@ -12,15 +12,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class loginController
+ * Servlet implementation class MemberInsertController
  */
-public class LoginController extends HttpServlet {
+public class MemberInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MemberInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +32,28 @@ public class LoginController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String memberId = request.getParameter("memberId");
-		String memberPwd = request.getParameter("memberPwd");		
+		String memberPwd = request.getParameter("memberPwd");
+		String nickname = request.getParameter("nickname");
 		String path = request.getParameter("origin");
 		
-		System.out.println(path);
-		Member loginMember = new MemberService().loginMember(memberId, memberPwd);
+		Member m = new Member(memberId, memberPwd, nickname);
+		
+		System.out.println(memberId + " "+ memberPwd + " " + nickname);
+		
+		int result = new MemberService().insertMember(m);
 		
 		HttpSession session = request.getSession();
 		
-		if(loginMember == null) {
-			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
-			
-			if(path.equals("/KHSemiProject/templates/mainPage.jsp") ) {
-				response.sendRedirect(request.getContextPath() + "/main.me");
-			} else {
-				response.sendRedirect(request.getContextPath());
-			}
+		if(result > 0) {	
+			session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다.");
 		} else {
-			session.setAttribute("loginMember", loginMember);
-			
-			//request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
+			session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
+		}
+		
+		if(path.equals("/KHSemiProject/templates/mainPage.jsp") ) {
 			response.sendRedirect(request.getContextPath() + "/main.me");
+		} else {
+			response.sendRedirect(request.getContextPath());
 		}
 	}
 

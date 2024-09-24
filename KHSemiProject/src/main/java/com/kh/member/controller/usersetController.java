@@ -1,25 +1,22 @@
-package com.kh.community.controller;
-
-import java.io.IOException;
-
-import com.kh.community.model.vo.Board;
-import com.kh.community.service.BoardService;
+package com.kh.member.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
- * Servlet implementation class BoardViewController
+ * Servlet implementation class userset
  */
-public class BoardViewController extends HttpServlet {
+public class usersetController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardViewController() {
+    public usersetController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +25,8 @@ public class BoardViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int boardNo = Integer.parseInt(request.getParameter("no"));
-		
-		Board board = new BoardService().selectBoard(boardNo);
-		int commentCount = new BoardService().countBoardComment(boardNo);
-		
-		request.setAttribute("board", board);
-		request.setAttribute("commentCount", commentCount);
-
-		request.getRequestDispatcher("templates/communityViewPage.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("templates/userset1.jsp").forward(request, response);
 	}
 
 	/**
