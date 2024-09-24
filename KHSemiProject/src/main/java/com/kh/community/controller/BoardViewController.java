@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
 import com.kh.community.model.vo.Board;
+import com.kh.community.model.vo.Comment;
 import com.kh.community.service.BoardService;
 
 import jakarta.servlet.ServletException;
@@ -33,10 +34,10 @@ public class BoardViewController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("no"));
 		
 		Board board = new BoardService().selectBoard(boardNo);
-		int commentCount = new BoardService().countBoardComment(boardNo);
+		ArrayList<Comment> commentList = new BoardService().selectCommentList(boardNo);
 		
 		request.setAttribute("board", board);
-		request.setAttribute("commentCount", commentCount);
+		request.setAttribute("commentList", commentList);
 		
 		/* 게시글 */
 		int listCount; // DB에 있는 총 게시글 수

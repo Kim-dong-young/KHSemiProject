@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.kh.common.PageInfo;
 import com.kh.community.model.dao.BoardDao;
 import com.kh.community.model.vo.Board;
+import com.kh.community.model.vo.Comment;
 
 public class BoardService {
 
@@ -41,6 +42,14 @@ public class BoardService {
 		
 		close(conn);
 		return result;
+	}
+
+	public ArrayList<Comment> selectCommentList(int boardNo) {
+		Connection conn = getConnection();
+		ArrayList<Comment> commentList = new BoardDao().selectCommentList(conn, boardNo);
+		
+		close(conn);
+		return commentList;
 	}
 	
 }

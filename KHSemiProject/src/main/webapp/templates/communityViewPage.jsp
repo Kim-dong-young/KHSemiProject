@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.community.model.vo.Board, com.kh.common.PageInfo, java.util.ArrayList, com.kh.community.model.vo.Board" %>
+<%@ 
+    page import="com.kh.community.model.vo.Board, 
+                com.kh.common.PageInfo, 
+                java.util.ArrayList, 
+                com.kh.community.model.vo.Board,
+                com.kh.community.model.vo.Comment" %>
 <% 
     Board currentBoard = (Board)request.getAttribute("board"); 
-    int commentCount = (Integer)request.getAttribute("commentCount");
+    ArrayList<Comment> commentList = (ArrayList<Comment>)request.getAttribute("commentList");
+    int commentCount = commentList.size();
     int cpage = Integer.parseInt(request.getParameter("cpage"));
 
     PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -72,68 +78,28 @@
                 </div>
 
                 <div class="bulletin-comment">
-                    <div class="comment">
-                        <div class="comment-left">
-                            <img src="static/img/test.png">
-                        </div>
-
-                        <div class="comment-right">
-                            <div class="user-info">
-                                <span>스타레일고수가될거야</span>
-                                <span>Lv.35</span>
+                    <% for(Comment cm : commentList) { %>
+                        <div class="comment">
+                            <div class="comment-left">
+                                <img src="static/img/test.png">
                             </div>
-                            <div class="comment-content">
-                                <span>탕수육은 찍먹이 근본이지</span>
-                            </div>
-                            <div class="comment-option">
-                                <button class="after-vline">답글</button>
-                                <button class="after-vline">신고</button>
-                                <button>삭제</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="comment">
-                        <div class="comment-left">
-                            <img src="static/img/test.png">
-                        </div>
-
-                        <div class="comment-right">
-                            <div class="user-info">
-                                <span>스타레일고수가될거야</span>
-                                <span>Lv.35</span>
-                            </div>
-                            <div class="comment-content">
-                                <span>탕수육은 찍먹이 근본이지</span>
-                            </div>
-                            <div class="comment-option">
-                                <button class="after-vline">답글</button>
-                                <button class="after-vline">신고</button>
-                                <button>삭제</button>
+    
+                            <div class="comment-right">
+                                <div class="user-info">
+                                    <span><%=cm.getMemberNo()%></span>
+                                    <span>Lv.35</span>
+                                </div>
+                                <div class="comment-content">
+                                    <span><%=cm.getCommentContent()%></span>
+                                </div>
+                                <div class="comment-option">
+                                    <button class="after-vline">답글</button>
+                                    <button class="after-vline">신고</button>
+                                    <button>삭제</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="comment">
-                        <div class="comment-left">
-                            <img src="static/img/test.png">
-                        </div>
-
-                        <div class="comment-right">
-                            <div class="user-info">
-                                <span>스타레일고수가될거야</span>
-                                <span>Lv.35</span>
-                            </div>
-                            <div class="comment-content">
-                                <span>탕수육은 찍먹이 근본이지</span>
-                            </div>
-                            <div class="comment-option">
-                                <button class="after-vline">답글</button>
-                                <button class="after-vline">신고</button>
-                                <button>삭제</button>
-                            </div>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
 
                 <div class="comment-page">
