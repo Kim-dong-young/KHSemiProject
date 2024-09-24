@@ -18,9 +18,9 @@ public class SearchService {
 		return quizCount;
 	}
 
-	public ArrayList<Quiz> selectQuiz(PageInfo pi) {
+	public ArrayList<Quiz> selectQuiz(PageInfo pi, int category, int search_type, String search_text, int orderby) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Quiz> quiz = new QuizDao().selectQuiz(conn, pi);
+		ArrayList<Quiz> quiz = new QuizDao().selectQuiz(conn, pi, category, search_type, search_text, orderby);
 		JDBCTemplate.close(conn);
 		
 		return quiz;
