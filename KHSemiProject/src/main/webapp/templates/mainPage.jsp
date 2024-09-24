@@ -40,12 +40,12 @@
             <div id="content2-left">
                 <div class="user-status">
                 	<c:choose>
-                	<c:when test="${empty loginUser}">
-                		<div>로그인 후 이용 가능한 서비스입니다.</div>
-                	</c:when>
+                	    <c:when test="${empty loginMember}">
+                		    <div>로그인 후 이용 가능한 서비스입니다.</div>
+                	    </c:when>
                 		<c:otherwise>
 		                    <div id="user-info">
-		                        <div id=user-info-img><img src="../static/img/test.png" alt=""></div>
+		                        <div id=user-info-img><img src="static/img/test.png" alt=""></div>
 		                        <div class="user-info-exp">
 		                            <div class="user-info-level">
 		                                <div>
