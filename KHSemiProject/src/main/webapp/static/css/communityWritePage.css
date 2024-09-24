@@ -135,7 +135,7 @@ span{
     align-items: center;
 }
 
-.board-write-option > a {
+.board-write-option > button {
     width:100px;
     height:100%;
     background-color: #484848;
@@ -146,7 +146,7 @@ span{
     align-items: center;
 }
 
-.board-write-option > a img{
+.board-write-option > button img{
     width:25px;
     height:25px;
 }
