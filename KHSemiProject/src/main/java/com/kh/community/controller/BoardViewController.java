@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
 import com.kh.community.model.vo.Board;
+import com.kh.community.model.vo.Comment;
 import com.kh.community.service.BoardService;
 
 import jakarta.servlet.ServletException;
@@ -33,10 +34,8 @@ public class BoardViewController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("no"));
 		
 		Board board = new BoardService().selectBoard(boardNo);
-		int commentCount = new BoardService().countBoardComment(boardNo);
 		
 		request.setAttribute("board", board);
-		request.setAttribute("commentCount", commentCount);
 		
 		/* 게시글 */
 		int listCount; // DB에 있는 총 게시글 수
@@ -64,6 +63,36 @@ public class BoardViewController extends HttpServlet {
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("boardList", boardList);
+		
+		/* 댓글 */
+		int cCount; // 해당 게시글의 총 댓글 수
+		int cCurrentPage; // 현재 사용자가 요청한 페이지
+		int cPageBarLimit = 5; // 페이지 하단 페이징 바 개수
+		int cLimit = 10; // 한 페이지 내에 보여질 댓글 최대 수
+		
+		int cMaxPage; // 댓글 수를 페이지 단위로 나눴을 때, 가장 마지막 페이지
+		int cStartPage; // 제일 첫 페이지(시작 = 1), 페이징 바의 시작 수
+		int cEndPage; // 페이징 바의 마지막 끝 수
+		
+		cCount = new BoardService().countBoardComment(boardNo);
+		
+		cCurrentPage = Integer.parseInt(request.getParameter("comment"));
+		
+		cMaxPage = (int) Math.ceil( (double)cCount / cLimit);
+		
+		cStartPage = (( (cCurrentPage - 1) / cPageBarLimit ) * cPageBarLimit) + 1;
+		
+		cEndPage = (cStartPage + cPageBarLimit - 1) > cMaxPage ? 
+				cMaxPage : (cStartPage + cPageBarLimit - 1);
+		
+		PageInfo cPageInfo = new PageInfo(cCount, cCurrentPage, cPageBarLimit, 
+				cLimit, cMaxPage, cStartPage, cEndPage);
+		
+		ArrayList<Comment> commentList = new BoardService().selectCommentList(cPageInfo, boardNo);
+		
+		request.setAttribute("commentCount", cCount);
+		request.setAttribute("cPageInfo", cPageInfo);
+		request.setAttribute("commentList", commentList);
 
 		request.getRequestDispatcher("templates/communityViewPage.jsp").forward(request, response);
 	}

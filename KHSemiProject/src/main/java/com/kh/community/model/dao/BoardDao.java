@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.kh.common.PageInfo;
 import com.kh.community.model.vo.Board;
+import com.kh.community.model.vo.Comment;
 
 public class BoardDao {
 	
@@ -119,7 +120,6 @@ public class BoardDao {
 							rset.getString("TAB_NAME"),
 							rset.getInt("LIKE_COUNT")
 						);
-				System.out.println(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -156,6 +156,46 @@ public class BoardDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Comment> selectCommentList(Connection conn, PageInfo cPageInfo, int boardNo) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Comment> commentList = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectCommentList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (cPageInfo.getCurrentPage() - 1) * cPageInfo.getBoardLimit() + 1;
+			int endRow = startRow + cPageInfo.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Comment comment = new Comment(
+							rset.getInt("COMMUNITY_COMMENT_NUMBER"),
+							rset.getInt("COMMUNITY_PARENT_NUMBER"),
+							rset.getInt("COMMUNITY_NUMBER"),
+							rset.getString("MEMBER_NICKNAME"),
+							rset.getString("COMMUNITY_COMMENT_CONTENT")
+						);
+				
+				commentList.add(comment);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return commentList;
 	}
 	
 }
