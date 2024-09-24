@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../static/css/userset.css">
+<link rel="stylesheet" href="static/css/userset.css">
 </head>
 <body>
 	<%@ include file="common/menu.jsp" %>
@@ -36,7 +36,7 @@
             </section>
         </fieldset>
         </main>
-    <script src="../static/js/userset.js"></script>
+    <script src="static/js/userset.js"></script>
     </div>
 </body>
 </html>
