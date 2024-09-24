@@ -44,9 +44,9 @@ public class BoardService {
 		return result;
 	}
 
-	public ArrayList<Comment> selectCommentList(int boardNo) {
+	public ArrayList<Comment> selectCommentList(PageInfo cPageInfo, int boardNo) {
 		Connection conn = getConnection();
-		ArrayList<Comment> commentList = new BoardDao().selectCommentList(conn, boardNo);
+		ArrayList<Comment> commentList = new BoardDao().selectCommentList(conn, cPageInfo, boardNo);
 		
 		close(conn);
 		return commentList;

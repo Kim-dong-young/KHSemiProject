@@ -61,7 +61,7 @@
                     <% for(Board b : boardList) { %>
                         <tr>
                             <td class="tab"><%=b.getCommunityTab()%></td>
-                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>'"><%=b.getCommunityTitle()%></td>
+                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                             <td class="author"><%=b.getMemberId()%></td>
                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
                             <td class="date"><%=b.getCommunityDate()%></td>
@@ -112,7 +112,7 @@
                 <% } %>
 
                 <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
-                <% if(startPage + pageBarLimit < maxPage) { %>
+                <% if( (startPage + pageBarLimit < maxPage) ) { %>
                     <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
                 <% } else { %>
                     <button disabled>&gt;</button>

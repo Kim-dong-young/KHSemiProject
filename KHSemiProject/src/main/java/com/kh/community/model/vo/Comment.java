@@ -12,6 +12,15 @@ public class Comment {
 		super();
 	}
 	
+	public Comment(int commentNo, int commentParentNo, int communityNo, String memberNo, String commentContent) {
+		super();
+		this.commentNo = commentNo;
+		this.commentParentNo = commentParentNo;
+		this.communityNo = communityNo;
+		this.memberNo = memberNo;
+		this.commentContent = commentContent;
+	}
+
 	public Comment(int commentNo, int commentParentNo, int communityNo, String memberNo, String commentContent,
 			String commentDate) {
 		super();

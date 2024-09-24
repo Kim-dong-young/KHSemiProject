@@ -8,12 +8,16 @@
                 com.kh.community.model.vo.Comment" %>
 <% 
     Board currentBoard = (Board)request.getAttribute("board"); 
+
+    PageInfo cPageInfo = (PageInfo)request.getAttribute("cPageInfo");
     ArrayList<Comment> commentList = (ArrayList<Comment>)request.getAttribute("commentList");
-    int commentCount = commentList.size();
-    int cpage = Integer.parseInt(request.getParameter("cpage"));
+    int commentCount = (Integer)request.getAttribute("commentCount");
 
     PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	ArrayList<Board> boardList = (ArrayList<Board>)request.getAttribute("boardList");
+    
+    int cpage = Integer.parseInt(request.getParameter("cpage"));
+    int comment = Integer.parseInt(request.getParameter("comment"));
 
     int currentPage = pageInfo.getCurrentPage();
     int startPage = pageInfo.getStartPage();
@@ -21,6 +25,13 @@
     int maxPage = pageInfo.getMaxPage();
     int boardLimit = pageInfo.getBoardLimit();
     int pageBarLimit = pageInfo.getPageBarLimit();
+
+    int cCurrentPage = cPageInfo.getCurrentPage();
+    int cStartPage = cPageInfo.getStartPage();
+    int cEndPage = cPageInfo.getEndPage();
+    int cMaxPage = cPageInfo.getMaxPage();
+    int cLimit = cPageInfo.getBoardLimit();
+    int cPageBarLimit = cPageInfo.getPageBarLimit();
 %>
 <!DOCTYPE html>
 <html>
@@ -103,19 +114,34 @@
                 </div>
 
                 <div class="comment-page">
-                    <button>&lt;&lt;</button>
-                    <button>&lt;</button>
-                    <button style="background-color: #FF9139;">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                    <button>6</button>
-                    <button>7</button>
-                    <button>8</button>
-                    <button>9</button>
-                    <button>&gt;</button>
-                    <button>&gt;&gt;</button>
+                    <!-- 맨 처음으로 가는 버튼 -->
+                    <button onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=currentBoard.getCommunityNo()%>&comment=1'">&lt;&lt;</button>
+                                                    
+                    <!-- 페이징바 단위 만큼 앞으로 이동하는 버튼 -->
+                    <% if(cStartPage != 1) { %>
+                        <button onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cStartPage - 1%>'">&lt;</button>
+                    <% } else { %>                      
+                        <button disabled>&lt;</button>
+                    <% } %>
+
+                    <!-- 페이지 이동 버튼 -->
+                    <%for(int i=cStartPage; i <= cEndPage; i ++) { %>
+                        <% if(i == cCurrentPage) { %>
+                            <button disabled><%=i %></button>
+                        <% } else { %>
+                            <button onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=i%>'"><%=i %></button>
+                        <% } %>
+                    <% } %>
+
+                    <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
+                    <% if( (cStartPage + cPageBarLimit < cMaxPage) ) { %>
+                        <button onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cStartPage + cLimit%>'">&gt;</button>
+                    <% } else { %>
+                        <button disabled>&gt;</button>
+                    <% } %>
+
+                    <!-- 맨 뒤로 가는 버튼 -->
+                    <button onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>'">&gt;&gt;</button>
                 </div>
 
                 <div class="comment-write">
@@ -159,7 +185,7 @@
                                     <% for(Board b : boardList) { %>
                                         <tr>
                                             <td class="tab"><%=b.getCommunityTab()%></td>
-                                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>'"><%=b.getCommunityTitle()%></td>
+                                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                                             <td class="author"><%=b.getMemberId()%></td>
                                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
                                             <td class="date"><%=b.getCommunityDate()%></td>
@@ -210,7 +236,7 @@
                                 <% } %>
                 
                                 <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
-                                <% if(startPage + pageBarLimit < maxPage) { %>
+                                <% if( (startPage + pageBarLimit < maxPage) ) { %>
                                     <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>&no=<%=currentBoard.getCommunityNo()%>'">&gt;</button>
                                 <% } else { %>
                                     <button disabled>&gt;</button>

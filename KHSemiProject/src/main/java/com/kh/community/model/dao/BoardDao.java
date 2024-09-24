@@ -158,7 +158,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Comment> selectCommentList(Connection conn, int boardNo) {
+	public ArrayList<Comment> selectCommentList(Connection conn, PageInfo cPageInfo, int boardNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		ArrayList<Comment> commentList = new ArrayList<>();
@@ -168,7 +168,12 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (cPageInfo.getCurrentPage() - 1) * cPageInfo.getBoardLimit() + 1;
+			int endRow = startRow + cPageInfo.getBoardLimit() - 1;
+			
 			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -178,8 +183,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_PARENT_NUMBER"),
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("MEMBER_NICKNAME"),
-							rset.getString("COMMUNITY_COMMENT_CONTENT"),
-							rset.getString("COMMUNITY_COMMENT_DATE")
+							rset.getString("COMMUNITY_COMMENT_CONTENT")
 						);
 				
 				commentList.add(comment);
