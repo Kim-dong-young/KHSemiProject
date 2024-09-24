@@ -74,4 +74,9 @@
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="increaseViewCount">
+		UPDATE COMMUNITY
+		   SET COMMUNITY_VIEWCOUNT = COMMUNITY_VIEWCOUNT + 1
+		 WHERE COMMUNITY_NUMBER = ?
+	</entry>
 </properties>
