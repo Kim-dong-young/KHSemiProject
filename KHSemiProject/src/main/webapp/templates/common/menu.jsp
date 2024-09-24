@@ -54,7 +54,7 @@
             <li><a href="<%=contextPath%>/main.me">홈</a></li>
             <li><a href="personalScreen.jsp">개인화면</a></li>
 
-            <li><a href="<%=contextPath%>/main.sl?cpage=1">탐색</a></li>
+            <li><a href="<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2">탐색</a></li>
             <li><a href="<%=contextPath%>/userset.me">유저설정</a></li>
             <li><a href="<%=contextPath%>/community?cpage=1">커뮤니티</a></li>
 

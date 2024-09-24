@@ -34,6 +34,7 @@ ul, li, ol {
     background: #FF9139;
     display: flex;
     justify-content: space-between;
+    z-index: 100;
 }
 
 #welcome-user{
