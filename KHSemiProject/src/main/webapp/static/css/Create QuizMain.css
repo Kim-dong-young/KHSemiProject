@@ -10,8 +10,8 @@ body {
 }
 
 .container {
-    width: 90%;
-    height: 100vh; 
+    width: 1920px;;
+    height: 1080px; 
     margin: auto;
     padding: 0px;
     background-color: white;
@@ -79,7 +79,7 @@ textarea {
     background: #d9d9d9;
     
     width: 60%;
-    height: 350px;
+    height: 380px;
     margin: auto;
 }
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.common.PageInfo, java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <html lang="ko">
@@ -7,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../static/css/searchMainPage.css">
+<link rel="stylesheet" href="static/css/searchMainPage.css">
 
 </head>
 <body>
@@ -16,35 +17,35 @@
         <div class="wrapper">
             <div class="category-div">
                 <div>
-                    <img src="../static/img/searchMainPage/Happy.png" alt="">
+                    <img src="static/img/searchMainPage/Happy.png" alt="">
                     <p>유머</p>
                 </div>
                 <div>
-                    <img src="../static/img/searchMainPage/Paint Palette.png" alt="">
+                    <img src="static/img/searchMainPage/Paint Palette.png" alt="">
                     <p>예술/문학</p>
                 </div>
                 <div>
-                    <img src="../static/img/searchMainPage/Geography.png" alt="">
+                    <img src="static/img/searchMainPage/Geography.png" alt="">
                     <p>세계</p>
                 </div>
                 <div>
-                    <img src="../static/img/searchMainPage/Colosseum.png" alt="">
+                    <img src="static/img/searchMainPage/Colosseum.png" alt="">
                     <p>역사</p>
                 </div>
                 <div>
-                    <img src="../static/img/searchMainPage/Language.png" alt="">
+                    <img src="static/img/searchMainPage/Language.png" alt="">
                     <p>언어</p>
                 </div>
                 <div>
-                    <img src="../static/img/searchMainPage/Test Tube.png" alt="">
+                    <img src="static/img/searchMainPage/Test Tube.png" alt="">
                     <p>과학/자연</p>
                 </div>
                 <div>
-                    <img src="../static/img/searchMainPage/Game Soccer.png" alt="">
+                    <img src="static/img/searchMainPage/Game Soccer.png" alt="">
                     <p>스포츠</p>
                 </div>
                 <div>
-                    <img src="../static/img/searchMainPage/Question Mark.png" alt="">
+                    <img src="static/img/searchMainPage/Question Mark.png" alt="">
                     <p>기타</p>
                 </div>
             </div>
@@ -56,7 +57,7 @@
                         <option value="maker">제작자</option>
                     </select>
                     <input type="text" id="search-text">
-                    <input type="image" src="../static/img/icon.png" id="search-submit">
+                    <input type="image" src="static/img/icon.png" id="search-submit">
                 </div>
             </div>
             <br>
@@ -77,7 +78,7 @@
                         <input type="text">
                     </div>
                     <div id="tag-search-exit-button" onclick="closeTagPopup()">
-                        <input type="image" src="../static/img/searchMainPage/back.png">
+                        <input type="image" src="static/img/searchMainPage/back.png">
                     </div>
                 </div>
                 <br>
@@ -119,7 +120,7 @@
                 <section class="video-flex">
                     <div class="video-priview" onclick="location.href='searchClickPage.jsp'">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">
@@ -132,7 +133,7 @@
                     
                     <div class="video-priview">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">
@@ -144,7 +145,7 @@
                     </div>
                     <div class="video-priview">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">
@@ -156,7 +157,7 @@
                     </div>
                     <div class="video-priview">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">
@@ -168,7 +169,7 @@
                     </div>
                     <div class="video-priview">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">
@@ -180,7 +181,7 @@
                     </div>
                     <div class="video-priview">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">
@@ -192,7 +193,7 @@
                     </div>
                     <div class="video-priview">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">
@@ -204,7 +205,7 @@
                     </div>
                     <div class="video-priview">
                         <div class="thumbnail-row">
-                            <img class="thumbnail" src="../static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                            <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                         </div>
                         <div class="video-info-grid">
                             <div class="video-info">

@@ -1,11 +1,13 @@
 * {
     margin: 0;
-    padding: 1;
+    padding: 0;
     box-sizing: border-box;
 }
 
 html, body {
-    height: 100%;
+    width: 1920px;;
+    height: 1080px;
+    margin: auto;
 }
 
 body {
@@ -17,7 +19,6 @@ body {
     display: flex;
     flex-direction: column;
     width: 90%;
-    height: 100vh; 
     margin: auto;
     padding: 0;
     background-color: white;
