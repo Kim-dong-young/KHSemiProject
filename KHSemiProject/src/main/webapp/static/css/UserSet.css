@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+.content {
+    width: calc(100% - 290px);
+    height: 100%;
+}
+
 a {
     text-decoration: none;
     color: rgb(0, 0, 0);
@@ -13,6 +18,8 @@ a {
     background: #F3F3F3;
     padding: 8px 12px;
     margin: auto;
+
+
 }
 
 .navbar_menu {
@@ -20,6 +27,8 @@ a {
     list-style: none;
     align-items: center;
     width: 100%;
+
+
 }
 
 .navbar_menu :hover {
@@ -40,6 +49,7 @@ main {
     align-items: center;
     margin-bottom: 0;
     height: calc(100% - 100px);
+
 }
 
 form {
@@ -54,6 +64,8 @@ form {
     background-color: #f9f9f9;
     min-height: 300px;
     margin-left: 38%;
+
+
 }
 
 fieldset {
