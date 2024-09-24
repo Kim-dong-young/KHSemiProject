@@ -48,4 +48,27 @@ public class MemberService {
 		
 		return updateMember;
 	}
+	
+	public int attendanceCheck(int memberNo) {
+		Connection conn = getConnection();	
+		MemberDao mDao = new MemberDao();
+		
+		int result1 = mDao.attendanceCheck(conn, memberNo);
+		int result2;
+		
+		if(result1 > 0) {
+			return 0;
+		} else {
+			result2 = mDao.attendanceInsert(conn, memberNo);
+			
+			if(result2 > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		}
+		
+		close(conn);
+		return result2;
+	}
 }

@@ -44,6 +44,10 @@ ul, li, ol {
     align-items: center;
 }
 
+#welcome-user a{
+    font-size: 25px;
+}
+
 .btn.custom-btn{
     font-family: "Noto Sans KR", sans-serif;
     font-weight: bold;

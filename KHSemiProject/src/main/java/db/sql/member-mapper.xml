@@ -23,16 +23,24 @@
 			MEMBER_NUMBER,
 			MEMBER_ID,
 			MEMBER_PWD,
-			MEMBER_NICKNAME,
-			MEMBER_CHECK_CONTINUECOUNT
+			MEMBER_NICKNAME
 		)
 		VALUES
 		(
 			SEQ_MNO.NEXTVAL,
 			?,
 			?,
-			?,
-			0
+			?
 		)
+	</entry>
+	<entry key="attendanceCheck">
+		SELECT COUNT(*) AS COUNT
+  		  FROM DAILY_CHECK
+ 		 WHERE MEMBER_NUMBER = ?
+ 		   AND TO_CHAR(DAILY_CHECK_DATE) = TO_CHAR(SYSDATE)
+	</entry>
+	<entry key="attendanceInsert">
+		INSERT INTO DAILY_CHECK
+		VALUES(SEQ_DCNO.nextval, SYSDATE, ?)
 	</entry>
 </properties>
