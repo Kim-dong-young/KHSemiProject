@@ -87,13 +87,13 @@ public class SearchMainController extends HttpServlet {
 		//startPage가 11면 endPage 20이다(maxPage 13이라면?)
 		endPage = endPage > maxPage ? maxPage : endPage;
 		
-		PageInfo pi = new PageInfo(quizCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		ArrayList<Quiz> list = new SearchService().selectQuiz(pi);
+		//PageInfo pi = new PageInfo(quizCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		//ArrayList<Quiz> list = new SearchService().selectQuiz(pi);
 		
-		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
-		System.out.println(pi);
-		System.out.println(list);
+//		request.setAttribute("pi", pi);
+//		request.setAttribute("list", list);
+//		System.out.println(pi);
+//		System.out.println(list);
 
 		request.getRequestDispatcher("templates/searchMainPage.jsp").forward(request, response);
 	}

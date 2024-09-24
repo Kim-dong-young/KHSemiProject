@@ -107,7 +107,7 @@
     <description></description>
     <display-name>userset.me</display-name>
     <servlet-name>userset.me</servlet-name>
-    <servlet-class>com.kh.member.controller.userset</servlet-class>
+    <servlet-class>com.kh.member.controller.usersetController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userset.me</servlet-name>
