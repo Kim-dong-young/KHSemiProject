@@ -122,4 +122,14 @@
     <servlet-name>attend.me</servlet-name>
     <url-pattern>/attend.me</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>create.quiz</display-name>
+    <servlet-name>create.quiz</servlet-name>
+    <servlet-class>com.kh.quiz.controller.CreateQuizMainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>create.quiz</servlet-name>
+    <url-pattern>/create.quiz</url-pattern>
+  </servlet-mapping>
 </web-app>

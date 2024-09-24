@@ -9,12 +9,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz 생성</title>
-    <link rel="stylesheet" href="../static/css/Create QuizMain.css">
+    <link rel="stylesheet" href="./static/css/CreateQuizMain.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="../static/img/QuizLogo.png" alt="Quiz Logo" class="logo">
+            <img src="./static/img/QuizLogo.png" alt="Quiz Logo" class="logo">
         </div>
         <div class="quiz-form">
             <label for="quiz-title">퀴즈 제목:</label>
@@ -53,8 +53,8 @@
             </div>
             <div class="buttons">
                 <button class="home-btn">
-                    <a href="<%=contextPath%>/main.me""></a>
-                    <img src="../static/img/homebtn.png" width="130px" height="45px">
+                    <a href="<%=contextPath%>/main.me"></a>
+                    <img src="./static/img/homebtn.png" width="130px" height="45px">
                 </button>
                 <button class="create-btn" onclick="saveQuiz()">질문 생성하기</button> 
             </div>
@@ -62,7 +62,7 @@
     </div>
 
 
-    <script src="../static/js/Create QuizMain.js"></script>
+    <script src="./static/js/Create QuizMain.js"></script>
 </body>
 </html>
 
