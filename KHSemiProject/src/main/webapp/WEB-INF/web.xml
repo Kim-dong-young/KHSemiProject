@@ -45,7 +45,7 @@
     <servlet-name>list.bo</servlet-name>
     <url-pattern>/list.bo</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>community</display-name>
     <servlet-name>community</servlet-name>
@@ -83,7 +83,7 @@
   <servlet-mapping>
     <servlet-name>signin.me</servlet-name>
     <url-pattern>/signin.me</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
   <servlet>
     <display-name>Update.me</display-name>
     <servlet-name>Update.me</servlet-name>
@@ -102,5 +102,44 @@
   <servlet-mapping>
     <servlet-name>userset.me</servlet-name>
     <url-pattern>/userset.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>write.bo</display-name>
+    <servlet-name>write.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardEnrollController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>write.bo</servlet-name>
+    <url-pattern>/write.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <display-name>attend.me</display-name>
+    <servlet-name>attend.me</servlet-name>
+    <servlet-class>com.kh.member.controller.AttendanceController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>attend.me</servlet-name>
+    <url-pattern>/attend.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>create.quiz</display-name>
+    <servlet-name>create.quiz</servlet-name>
+    <servlet-class>com.kh.quiz.controller.CreateQuizMainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>create.quiz</servlet-name>
+    <url-pattern>/create.quiz</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>insert.bo</display-name>
+    <servlet-name>insert.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insert.bo</servlet-name>
+    <url-pattern>/insert.bo</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -2,7 +2,9 @@
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String alertMsg = (String)session.getAttribute("alertMsg"); 
+	String alertMsg = (String)session.getAttribute("alertMsg");
+
+	Member loginMember = (Member)session.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,8 +59,7 @@
             <li><a href="<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2">탐색</a></li>
             <li><a href="<%=contextPath%>/userset.me">유저설정</a></li>
             <li><a href="<%=contextPath%>/community?cpage=1">커뮤니티</a></li>
-
-            <li><a href="">문제만들기</a></li>
+            <li><a href="<%=contextPath%>/create.quiz">문제만들기</a></li>
             <li><a href="">도움말</a></li>
         </ul>
     </div>

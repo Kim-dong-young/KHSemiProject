@@ -163,18 +163,25 @@
             <div id="content2-right">
                 <div class="attendance-recode">
                     <div id="attendance">
-                        <div>출석</div>
-                        <div id="attendance-btn"><button>출석하기</button></div>
+                    	<%if(loginMember == null) {%>
+                       		<div id="attendance-btn"><button disable>출석</button></div>
+                        <%} else {%>
+                    	<form action="<%=contextPath%>/attend.me" method="post">
+                    		<input type="hidden" name="MemberNo" value="<%=loginMember.getMemberNo()%>">
+                    		<div>출석부</div>
+	                        <div id="attendance-btn"><button type="submit" style="background: green">출석하기</button></div>	                        
+                    	</form>
+                    	<%}%>                
                     </div>
                     <hr>
-                    <div id="serial-attendance-day">
-                        <div>일간 출석 일수</div>
-                        <div>30일</div>
+                    <div id="serial-attendance">
+                        <div>연속 출석 일수</div>
+                        <div></div>
                     </div>
                     <hr>
-                    <div id="serial-attendance-week">
-                        <div>주간 출석 일수</div>
-                        <div>4주</div>
+                    <div id="total-attendance">
+                        <div>총 출석 일수</div>
+                        <div></div>
                     </div>
                     <hr>
                     <div id="solve-a-quiz">

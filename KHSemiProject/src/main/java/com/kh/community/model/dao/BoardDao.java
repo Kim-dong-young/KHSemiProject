@@ -125,7 +125,7 @@ public class BoardDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(conn);
+			close(pstmt);
 		}
 		
 		return board;
@@ -196,6 +196,27 @@ public class BoardDao {
 		}
 		
 		return commentList;
+	}
+
+	public int increaseViewCount(Connection conn, int communityNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseViewCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, communityNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

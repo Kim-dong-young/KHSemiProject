@@ -16,36 +16,44 @@
         <p>글 쓰기</p>
         <div class="wrapper">
             <div class="board">
-                <div class="board-write">
-                    <div class="tab-select">
-                        <span>탭 선택</span>
-                        <button>질문</button>
-                        <button>풀이</button>
-                        <button>잡담</button>
-                    </div>
 
-                    <div class="title-input">
-                        <input type="text" placeholder="글 제목을 입력해주세요.">
-                    </div>
-
-                    <div class="content-input">
-                        <div class="input-option">
-                            <img src="static/img/bold-icon.png">
-                            <img src="static/img/italic-icon.png">
-                            <img src="static/img/underlined-icon.png">
-                            <img src="static/img/strikethrough-icon.png">
-                            <img src="static/img/fontsize-icon.png" style="margin-right:15px;">
-                            <img src="static/img/color-icon.png">
-                            <img src="static/img/fill-icon.png">
+                <form action="<%=contextPath%>/insert.bo">
+                    <div class="board-write">
+                        <div class="tab-select">
+                            <span>탭 선택</span>
+                            <button>질문</button>
+                            <button>풀이</button>
+                            <button>잡담</button>
                         </div>
-                        <textarea></textarea>
+
+                        <div class="title-input">
+                            <input type="text" name="title" placeholder="글 제목을 입력해주세요.">
+                        </div>
+
+                        <div class="content-input">
+                            <div class="input-option">
+                                <img src="static/img/bold-icon.png">
+                                <img src="static/img/italic-icon.png">
+                                <img src="static/img/underlined-icon.png">
+                                <img src="static/img/strikethrough-icon.png">
+                                <img src="static/img/fontsize-icon.png" style="margin-right:15px;">
+                                <img src="static/img/color-icon.png">
+                                <img src="static/img/fill-icon.png">
+                            </div>
+                            <textarea name="content"></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="board-write-option">
-                    <a href="communityMainPage.jsp"><img src="static/img/pen-icon-white.png">글쓰기</a>
-                </div>
+                    <div class="board-write-option">
+                        <button type="submit"><img src="static/img/pen-icon-white.png">글쓰기</button>
+                    </div>
 
+                    <select name="tab">
+                        <option>질문</option>
+                        <option>풀이</option>
+                        <option>잡담</option>
+                    </select>
+                </form>
             </div>
 
             <div class="board-side">

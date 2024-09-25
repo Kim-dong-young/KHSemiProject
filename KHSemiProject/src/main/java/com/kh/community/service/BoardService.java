@@ -30,7 +30,18 @@ public class BoardService {
 
 	public Board selectBoard(int boardNo) {
 		Connection conn = getConnection();
-		Board board = new BoardDao().selectBoard(conn, boardNo);
+		BoardDao bDao = new BoardDao();
+		Board board = bDao.selectBoard(conn, boardNo);
+		
+		if(board != null) {
+			int result = bDao.increaseViewCount(conn, board.getCommunityNo());
+			
+			if(result > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		}
 		
 		close(conn);
 		return board;
