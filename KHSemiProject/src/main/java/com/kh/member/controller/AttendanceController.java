@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import com.kh.member.model.vo.Attendance;
 import com.kh.member.model.vo.Member;
 import com.kh.member.service.MemberService;
 
@@ -32,13 +33,14 @@ public class AttendanceController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memberNo = Integer.parseInt(request.getParameter("MemberNo"));
 		
-		int result = new MemberService().attendanceCheck(memberNo); 
+		int atCheck  = new MemberService().attendanceCheck(memberNo);
+		
 		
 		HttpSession session = request.getSession();
-		if(result == 0) {
-			session.setAttribute("alertMsg", "오늘 출석을 하셨습니다.");
+		if(atCheck == 0) {
+			session.setAttribute("alertMsg", "이미 출석을 하셨습니다.");
 		} else {
-			session.setAttribute("alertMsg", "출석 완료");
+			session.setAttribute("alertMsg", "출석 완료");		
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/main.me");
