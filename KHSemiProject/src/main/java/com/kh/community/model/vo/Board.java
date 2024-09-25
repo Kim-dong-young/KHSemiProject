@@ -8,6 +8,7 @@ public class Board {
 	private int communityViewcount;
 	private String communityDate;
 	private String memberId;
+	private int memberNo;
 	private int commentCount;
 	private int likeCount;
 	
@@ -36,7 +37,7 @@ public class Board {
 	}
 	
 	public Board(int communityNo,String communityTitle, String communityContent, int communityViewcount,
-			String communityDate, String memberId, String communityTab, int likeCount) {
+			String communityDate, String memberId, int memberNo, String communityTab, int likeCount) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
@@ -44,12 +45,14 @@ public class Board {
 		this.communityViewcount = communityViewcount;
 		this.communityDate = communityDate;
 		this.memberId = memberId;
+		this.memberNo = memberNo;
 		this.communityTab = communityTab;
 		this.likeCount = likeCount;
 	}
 
 	public Board(int communityNo, String communityTitle, String communityContent, String communityTab,
-			int communityViewcount, String communityDate, String memberId, int likeCount, int commentCount) {
+			int communityViewcount, String communityDate, String memberId, int memberNo, int commentCount,
+			int likeCount) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
@@ -58,8 +61,9 @@ public class Board {
 		this.communityViewcount = communityViewcount;
 		this.communityDate = communityDate;
 		this.memberId = memberId;
-		this.likeCount = likeCount;
+		this.memberNo = memberNo;
 		this.commentCount = commentCount;
+		this.likeCount = likeCount;
 	}
 
 	public int getCommunityNo() {
@@ -117,6 +121,14 @@ public class Board {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+	
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	public int getCommentCount() {
 		return commentCount;
@@ -138,8 +150,8 @@ public class Board {
 	public String toString() {
 		return "Board [communityNo=" + communityNo + ", communityTitle=" + communityTitle + ", communityContent="
 				+ communityContent + ", communityTab=" + communityTab + ", communityViewcount=" + communityViewcount
-				+ ", communityDate=" + communityDate + ", memberId=" + memberId + ", commentCount=" + commentCount
-				+ ", likeCount=" + likeCount + "]";
+				+ ", communityDate=" + communityDate + ", memberId=" + memberId + ", memberNo=" + memberNo
+				+ ", commentCount=" + commentCount + ", likeCount=" + likeCount + "]";
 	}
 
 }

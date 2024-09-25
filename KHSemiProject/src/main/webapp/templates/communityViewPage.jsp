@@ -58,14 +58,15 @@ crossorigin="anonymous"></script>
 	
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
 		<p>자유 게시판</p>
-
         <div class="wrapper">
 			<div class="board">
                 <div class="bulletin-content">
 					<div class="bulletin-title">
                         <span class="board-tab"><%=currentBoard.getCommunityTab()%></span>
                         <span><%=currentBoard.getCommunityTitle()%></span>
-                        <button><img src="static/img/trash-icon.png">삭제</button>
+                        <% if( loginMember != null && loginMember.getMemberNo() == currentBoard.getMemberNo() ) { %>
+                            <button onclick="location.href='<%=contextPath%>/delete.bo?userno=<%=loginMember.getMemberNo()%>'"><img src="static/img/trash-icon.png">삭제</button>
+                        <% } %>
 					</div>
 
                     <div class="bulletin-info">
