@@ -1,25 +1,24 @@
 package com.kh.community.controller;
 
-import java.io.IOException;
-
-import com.kh.community.model.vo.Comment;
-import com.kh.community.service.BoardService;
-
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import com.kh.community.service.BoardService;
 
 /**
- * Servlet implementation class CommentInsertController
+ * Servlet implementation class BoardDeleteController
  */
-public class CommentInsertController extends HttpServlet {
+public class BoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentInsertController() {
+    public BoardDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,22 +27,9 @@ public class CommentInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userNo = request.getParameter("commentWriter");
-		String content = request.getParameter("commentContent");
-		String communityNo = request.getParameter("no");
+		int memberNo = Integer.parseInt(request.getParameter("userno"));
 		
-		String cpage = request.getParameter("cpage");
-		String cmtPage = request.getParameter("comment");
-		System.out.println(cmtPage);
-		
-		Comment comment = new Comment();
-		comment.setMemberNo(userNo);
-		comment.setCommentContent(content);
-		comment.setCommunityNo(Integer.parseInt(communityNo));
-		
-		int result = new BoardService().insertComment(comment);
-		
-		response.sendRedirect("board?cpage="+ cpage +"&no="+ communityNo +"&comment=" + cmtPage);
+		int result = new BoardService().deleteBoard(memberNo);
 	}
 
 	/**

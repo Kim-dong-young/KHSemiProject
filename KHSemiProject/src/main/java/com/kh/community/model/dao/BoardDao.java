@@ -118,6 +118,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),
+							rset.getInt("MEMBER_NUMBER"),
 							rset.getString("TAB_NAME"),
 							rset.getInt("LIKE_COUNT")
 						);
@@ -284,6 +285,27 @@ public class BoardDao {
 			pstmt.setInt(1, comment.getCommunityNo());
 			pstmt.setInt(2, Integer.parseInt(comment.getMemberNo()));
 			pstmt.setString(3, comment.getCommentContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteBoard(Connection conn, int memberNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			/* TODO sql 작성 */
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

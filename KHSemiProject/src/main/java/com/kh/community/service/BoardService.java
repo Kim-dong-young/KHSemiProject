@@ -99,5 +99,21 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
+
+	public int deleteBoard(int memberNo) {
+		Connection conn = getConnection();
+		int result = new BoardDao().deleteBoard(conn, memberNo);
+		
+		/* TODO 게시글을 삭제하려면, 댓글부터 삭제해야한다. 댓글삭제처리 할 것 */
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
 	
 }
