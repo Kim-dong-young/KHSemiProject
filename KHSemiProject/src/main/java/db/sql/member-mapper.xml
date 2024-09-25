@@ -43,4 +43,9 @@
 		INSERT INTO DAILY_CHECK
 		VALUES(SEQ_DCNO.nextval, SYSDATE, ?)
 	</entry>
+	<entry key="totalAttendance">
+		SELECT COUNT(*) AS COUNT
+  		  FROM DAILY_CHECK
+ 		 WHERE MEMBER_NUMBER = ?
+	</entry>
 </properties>

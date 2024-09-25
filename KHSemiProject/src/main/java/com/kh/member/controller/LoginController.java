@@ -37,9 +37,11 @@ public class LoginController extends HttpServlet {
 		
 		System.out.println(path);
 		Member loginMember = new MemberService().loginMember(memberId, memberPwd);
+		int totalAt = new MemberService().totalAttendance(loginMember.getMemberNo());
 		
-		HttpSession session = request.getSession();
+		Member updateMem = new MemberService().resetAttend(loginMember);
 		
+		HttpSession session = request.getSession();		
 		if(loginMember == null) {
 			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
 			
@@ -50,6 +52,7 @@ public class LoginController extends HttpServlet {
 			}
 		} else {
 			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("totalAt", totalAt);
 			
 			//request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/main.me");
