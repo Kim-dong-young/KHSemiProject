@@ -23,6 +23,16 @@
 
 <link rel="stylesheet" href="static/css/communityBoardPage.css">
 
+<!-- jQuery -->
+<script 
+src="https://code.jquery.com/jquery-3.7.1.min.js"
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+crossorigin="anonymous"></script>
+<script
+src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"
+integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
+crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -123,7 +133,11 @@
             </div>
 
             <div class="option1">
-                <a href="<%=contextPath%>/write.bo"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                <% if ( loginMember != null ) { %>
+                    <a href="<%=contextPath%>/write.bo"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                <% } else { %>
+                    <a onclick="alert('로그인한 유저만 글을 작성할 수 있습니다.')"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                <% } %>
             </div>
         </div>
 

@@ -144,6 +144,14 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>comment.bo</display-name>
+    <servlet-name>comment.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.CommentInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>comment.bo</servlet-name>
+    <url-pattern>/comment.bo</url-pattern>
+  </servlet-mapping>
     <display-name>userset2.me</display-name>
     <servlet-name>userset2.me</servlet-name>
     <servlet-class>com.kh.member.controller.userset2Controller</servlet-class>

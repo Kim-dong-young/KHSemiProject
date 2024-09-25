@@ -15,6 +15,14 @@ public class Board {
 		super();
 	}
 
+	public Board(String memberId, String communityTab, String communityTitle, String communityContent) {
+		super();
+		this.memberId = memberId;
+		this.communityTab = communityTab;
+		this.communityTitle = communityTitle;
+		this.communityContent = communityContent;
+	}
+
 	public Board(int communityNo, String communityTitle, String communityTab, int communityViewcount,
 			String communityDate, String memberId, int commentCount) {
 		super();

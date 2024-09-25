@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.kh.common.PageInfo;
 import com.kh.community.model.dao.BoardDao;
 import com.kh.community.model.vo.Board;
+import com.kh.community.model.vo.Category;
 import com.kh.community.model.vo.Comment;
 
 public class BoardService {
@@ -61,6 +62,42 @@ public class BoardService {
 		
 		close(conn);
 		return commentList;
+	}
+
+	public ArrayList<Category> selectCategory() {
+		Connection conn = getConnection();
+		ArrayList<Category> categoryList = new BoardDao().selectCategory(conn);
+		
+		close(conn);
+		return categoryList;
+	}
+
+	public int insertBoard(Board b) {
+		Connection conn = getConnection();
+		int result = new BoardDao().insertBoard(conn,b);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public int insertComment(Comment comment) {
+		Connection conn = getConnection();
+		int result = new BoardDao().insertComment(conn, comment);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
 	}
 	
 }
