@@ -48,8 +48,14 @@ public class SearchMainController extends HttpServlet {
 		int startPage; //페이징바의 시작 수
 		int endPage; //페이징방의 마지막 끝수
 		
+		int category = Integer.parseInt(request.getParameter("category"));
+		int search_type = Integer.parseInt(request.getParameter("search_type"));
+		String search_text = request.getParameter("search_text");
+		int orderby = Integer.parseInt(request.getParameter("orderby"));
+		
+		
 		//총 게시글 수
-		quizCount = new SearchService().selectQuizCount();
+		quizCount = new SearchService().selectQuizCount(category, search_type, search_text, orderby);
 		
 		//현재 페이지(사용자가 요청한 페이지) 
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
@@ -93,13 +99,9 @@ public class SearchMainController extends HttpServlet {
 		endPage = endPage > maxPage ? maxPage : endPage;
 		
 		
-		int category = Integer.parseInt(request.getParameter("category"));
-		int search_type = Integer.parseInt(request.getParameter("search_type"));
-		String search_text = request.getParameter("search_text");
-		int orderby = Integer.parseInt(request.getParameter("orderby"));
 		
 		
-		
+		System.out.println(search_text);
 		
 		PageInfo pi = new PageInfo(quizCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		ArrayList<Quiz> list = new SearchService().selectQuiz(pi, category, search_type, search_text, orderby);
