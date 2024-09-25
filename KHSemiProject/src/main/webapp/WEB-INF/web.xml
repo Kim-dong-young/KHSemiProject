@@ -152,6 +152,7 @@
     <servlet-name>comment.bo</servlet-name>
     <url-pattern>/comment.bo</url-pattern>
   </servlet-mapping>
+   <servlet>
     <display-name>userset2.me</display-name>
     <servlet-name>userset2.me</servlet-name>
     <servlet-class>com.kh.member.controller.userset2Controller</servlet-class>

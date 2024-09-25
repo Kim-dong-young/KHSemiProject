@@ -2,19 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%
 String contextPath = request.getContextPath();
+System.out.println("Context Path: " + contextPath);
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz 생성</title>
-<link rel="stylesheet" href="./static/css/CreateQuizMain.css">
+<link rel="stylesheet" href="<%=contextPath%>/static/css/CreateQuizMain.css">
 </head>
 <body>
 	<div class="container">
 		<div class="header">
-			<img src="./static/img/QuizLogo.png" alt="Quiz Logo" class="logo">
+			<img src="<%=contextPath%>/static/img/QuizLogo.png" alt="Quiz Logo" class="logo">
 		</div>
 		<div class="quiz-form">
 			<label for="quiz-title">퀴즈 제목:</label> <input type="text"
@@ -51,20 +53,19 @@ String contextPath = request.getContextPath();
 			</div>
 			<div class="buttons">
 				<button class="home-btn">
-					<a href="<%=contextPath%>/main.me"> <img
-						src="./static/img/homebtn.png" width="130px" height="45px">
+					<a href="<%=contextPath%>/main.me">
+					<img src="./static/img/homebtn.png" width="130px" height="45px">
 					</a>
 
 				</button>
 				<button class="create-btn" onclick="saveQuiz()">
-					<a href="<%=request.getContextPath()%>/quiz.cr"> 질문 생성하기 </a>
+					<a href="<%=request.getContextPath()%>/quiz.cr">질문 생성하기</a>
 				</button>
 			</div>
 		</div>
 	</div>
 
 
-	<script src="./static/js/Create QuizMain.js"></script>
+	<script src="<%=contextPath%>/static/js/CreateQuizMain.js"></script>
 </body>
 </html>
-
