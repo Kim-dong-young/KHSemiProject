@@ -5,24 +5,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 
-import com.kh.member.model.vo.Attendance;
-import com.kh.member.model.vo.Member;
-import com.kh.member.service.MemberService;
-
 /**
- * Servlet implementation class AttendanceController
+ * Servlet implementation class userset4Controller
  */
-public class AttendanceController extends HttpServlet {
+public class userset4Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AttendanceController() {
+    public userset4Controller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +25,8 @@ public class AttendanceController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberNo = Integer.parseInt(request.getParameter("MemberNo"));		
-		int atCheck  = new MemberService().attendanceCheck(memberNo);
-		int upDateTotalAt = new MemberService().totalAttendance(memberNo);
-				
-		Member updateMem = new MemberService().selectMember(memberNo);
-		
-		HttpSession session = request.getSession();
-		if(atCheck == 0) {
-			session.setAttribute("alertMsg", "이미 출석을 하셨습니다.");
-		} else {
-			session.setAttribute("alertMsg", "출석 완료");	
-			session.setAttribute("loginMember", updateMem);
-			session.setAttribute("totalAt", upDateTotalAt);
-		}
-		
-		response.sendRedirect(request.getContextPath() + "/main.me");
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("templates/userset4.jsp").forward(request, response);
 	}
 
 	/**

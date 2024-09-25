@@ -27,58 +27,99 @@
     <%@ include file="common/menu.jsp" %>
     <div class="content">
         <div class="wrapper">
-            <div class="category-div">
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=1&search_type=${param.search_type}&orderby=${param.orderby}'">
+            <div class="category-div" >
+                <div onclick="categorySearch(1)" <c:if test="${param.category == 1}"> style="background-color: bisque;" </c:if>>
                     <img src="static/img/searchMainPage/Happy.png" alt="">
                     <p>유머</p>
                 </div>
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=2&search_type=${param.search_type}&orderby=${param.orderby}'">
+                <div onclick="categorySearch(2)" <c:if test="${param.category == 2}"> style="background-color: bisque;"</c:if>>
                     <img src="static/img/searchMainPage/Paint Palette.png" alt="">
                     <p>예술/문학</p>
                 </div>
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=3&search_type=${param.search_type}&orderby=${param.orderby}'">
+                <div onclick="categorySearch(3)" <c:if test="${param.category == 3}"> style="background-color: bisque;"</c:if>>
                     <img src="static/img/searchMainPage/Geography.png" alt="">
                     <p>세계</p>
                 </div>
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=4&search_type=${param.search_type}&orderby=${param.orderby}'">
+                <div onclick="categorySearch(4)" <c:if test="${param.category == 4}"> style="background-color: bisque;"</c:if>>
                     <img src="static/img/searchMainPage/Colosseum.png" alt="">
                     <p>역사</p>
                 </div>
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=5&search_type=${param.search_type}&orderby=${param.orderby}'">
+                <div onclick="categorySearch(5)" <c:if test="${param.category == 5}"> style="background-color: bisque;"</c:if>>
                     <img src="static/img/searchMainPage/Language.png" alt="">
                     <p>언어</p>
                 </div>
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=6&search_type=${param.search_type}&orderby=${param.orderby}'">
+                <div onclick="categorySearch(6)" <c:if test="${param.category == 6}"> style="background-color: bisque;"</c:if>>
                     <img src="static/img/searchMainPage/Test Tube.png" alt="">
                     <p>과학/자연</p>
                 </div>
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=7&search_type=${param.search_type}&orderby=${param.orderby}'">
+                <div onclick="categorySearch(7)" <c:if test="${param.category == 7}"> style="background-color: bisque;"</c:if>>
                     <img src="static/img/searchMainPage/Game Soccer.png" alt="">
                     <p>스포츠</p>
                 </div>
-                <div onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=8&search_type=${param.search_type}&orderby=${param.orderby}'">
+                <div onclick="categorySearch(8)" <c:if test="${param.category == 8}"> style="background-color: bisque;"</c:if>>
                     <img src="static/img/searchMainPage/Question Mark.png" alt="">
                     <p>기타</p>
                 </div>
+                <script>
+                    function categorySearch(num){
+                        if(num == ${param.category}){
+                            location.href='<%=contextPath%>/main.sl?cpage=1&category=0&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                        } else {
+                            location.href='<%=contextPath%>/main.sl?cpage=1&category=' + num + '&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                        }
+                        
+                    }
+                </script>
             </div>
             <br>
             <div class="search-div">
                 <div id="search-div-area">
                     <select name="search-menu" id="search-select">
-                        <option value="title">제목</option>
-                        <option value="maker">제작자</option>
+                        <option value="1" <c:if test="${param.search_type == 1}">selected</c:if>>제목</option>
+                        <option value="2" <c:if test="${param.search_type == 2}">selected</c:if>>제작자</option>
                     </select>
-                    <input type="text" id="search-text">
-                    <input type="image" src="static/img/icon.png" id="search-submit">
+                    <input type="text" id="search-text" value="${param.search_text}" onkeypress="if(window.event.keyCode==13){searchComfirm()}">
+
+                    <input type="image" src="static/img/icon.png" id="search-submit" onclick="searchComfirm()">
                 </div>
             </div>
+
+            <script>
+                function searchComfirm(){
+                    location.href='<%=contextPath%>/main.sl?cpage=1&category=${param.category}&search_type=' 
+                    + encodeURIComponent(document.getElementById('search-select').value) + '&orderby=${param.orderby}&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                }
+            </script>
+
             <br>
             <div class="buttons">
                 <div id="array-buttons">
-                    <button>조회수</button>
-                    <button>최신순</button>
-                    <button>평점순</button>
+                    <% if(Integer.parseInt(request.getParameter("orderby")) == 1) { %>
+                        <button disabled>조회수</button>
+                    <% } else {%>
+                        <button onclick="arraySearch(1)">조회수</button>
+                    <% } %>
+                    <% if(Integer.parseInt(request.getParameter("orderby")) == 2) { %>
+                        <button disabled>최신순</button>
+                    <% } else {%>
+                        <button onclick="arraySearch(2)">최신순</button>
+                    <% } %>
+                    <% if(Integer.parseInt(request.getParameter("orderby")) == 3) { %>
+                        <button disabled>평점순</button>
+                    <% } else {%>
+                        <button onclick="arraySearch(3)">평점순</button>
+                    <% } %>
                 </div>
+
+                <script>
+                    function arraySearch(num){
+                        location.href='<%=contextPath%>/main.sl?cpage=1&category=${param.category}&orderby=' + num + '&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                    }
+                </script>
+
                 <div id="tag-popup-button">
                    <button onclick="tagPopup()">태그 필터</button>
                 </div>
@@ -152,20 +193,27 @@
             </div>
 
             <div class="option2">
-                <button>&lt;&lt;</button>
-                <button>&lt;</button>
-                <button style="background-color: #FF9139;">1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>&gt;</button>
-                <button>&gt;&gt;</button>
+                <%if(currentPage > 1) { %>
+                    <button onclick="pageChange(<%=currentPage - 1%>)">&lt;</button>
+                <% } %>
+                <% for(int p = startPage; p <= endPage; p++) { %>
+                    <% if(p == currentPage) { %>
+                        <button disabled><%=p%></button>
+                    <% } else {%>
+                        <button onclick="pageChange(<%=p%>)"><%=p%></button>
+                    <% } %>
+                <% } %>
+                <%if(currentPage < maxPage) { %>
+                    <button onclick="pageChange(<%=currentPage + 1%>)">&gt;</button>
+                <% } %>
             </div>
+
+            <script>
+                function pageChange(num){
+                    location.href='<%=contextPath%>/main.sl?cpage=' + num + '&category=${param.category}&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                }
+            </script>
 
 
 

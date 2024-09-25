@@ -12,10 +12,10 @@
     <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
     <nav class="navbar">
         <ul class="navbar_menu">
-            <li><a href="templates/userset1.jsp">프로필 설정</a></li>
-            <li><a href="templates/userset2.jsp">개인정보 설정</a></li>
-            <li><a href="templates/userset3.jsp">내 정보 설정</a></li>
-            <li><a href="templates/userset4.jsp">회원 탈퇴 설정</a></li>
+            <li><a href="${pageContext.request.contextPath}/templates/userset1.jsp">프로필 설정</a></li>
+            <li><a href="${pageContext.request.contextPath}/templates/userset2.jsp">개인정보 설정</a></li>
+            <li><a href="${pageContext.request.contextPath}/templates/userset3.jsp">내 정보 설정</a></li>
+            <li><a href="${pageContext.request.contextPath}/templates/userset4.jsp">회원 탈퇴 설정</a></li>
         </ul>
     </nav>
     <main>
