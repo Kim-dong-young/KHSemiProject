@@ -53,31 +53,40 @@ public class MemberService {
 		return updateMember;
 	}
 	
+	public Member selectMember(int memberNo) {
+		Connection conn = getConnection();	
+		Member updateMember = new MemberDao().selectMember(conn, memberNo);
+		
+		close(conn);
+		
+		return updateMember;
+	}
+	
 	public int attendanceCheck(int memberNo) {
 		Connection conn = getConnection();	
 		MemberDao mDao = new MemberDao();
 		
 		int result = mDao.attendanceCheck(conn, memberNo);
-		
-		if(result > 0) {
-			return 0;
-		} else {
-			result = mDao.attendanceInsert(conn, memberNo);
+
+		if(result == 0) {
+			int result1 = mDao.attendanceInsert(conn, memberNo);
+			int result2 = mDao.updateContinueCount(conn, memberNo);
 			
-			if(result > 0) {
+			if(result1 > 0 && result2 > 0) {
 				commit(conn);
 			} else {
 				rollback(conn);
 			}
-		}
+			
+			close(conn);
+			return result1 * result2;
+		} 
 		
-		close(conn);
-		return result;
+		return 0;
 	}
 	
 	public int totalAttendance(int memberNo) {
 		Connection conn = getConnection();	
-		
 		int result = new MemberDao().totalAttendance(conn, memberNo);
 		
 		close(conn);
