@@ -33,7 +33,7 @@
 			?
 		)
 	</entry>
-	<entry key="selectMember">
+	<entry key="selectMemberId">
 		SELECT MEMBER_NUMBER,
 			   MEMBER_ID,
 			   MEMBER_PWD,
@@ -48,6 +48,23 @@
 		 WHERE MEMBER_ID = ?
 		   AND MEMBER_STATUS = 'Y'
 	</entry>
+	
+	<entry key="selectMemberNo">
+		SELECT MEMBER_NUMBER,
+			   MEMBER_ID,
+			   MEMBER_PWD,
+			   MEMBER_NICKNAME,
+			   MEMBER_EXP,
+			   MEMBER_IMAGE,
+			   MEMBER_JOIN_DATE,
+			   MEMBER_CHECK_CONTINUECOUNT,
+			   MEMBER_STATUS,
+			   MEMBER_INTRODUCE
+		  FROM MEMBER
+		 WHERE MEMBER_NUMBER = ?
+		   AND MEMBER_STATUS = 'Y'
+	</entry>
+	
 	<entry key="attendanceCheck">
 		SELECT COUNT(*) AS COUNT
   		  FROM DAILY_CHECK
@@ -72,6 +89,11 @@
 	<entry key="resetAttend">
 		UPDATE MEMBER 
 		   SET MEMBER_CHECK_CONTINUECOUNT = 0
+		 WHERE MEMBER_NUMBER = ?
+	</entry>
+	<entry key="updateContinueCount">
+		UPDATE MEMBER 
+		   SET MEMBER_CHECK_CONTINUECOUNT = MEMBER_CHECK_CONTINUECOUNT + 1
 		 WHERE MEMBER_NUMBER = ?
 	</entry>
 </properties>
