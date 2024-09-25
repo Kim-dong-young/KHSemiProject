@@ -247,7 +247,7 @@
                             </div>
                 
                             <div class="option1">
-                                <a href="communityWritePage.jsp"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                                <a href="<%=contextPath%>/write.bo"><img src="static/img/pen-icon-white.png">글쓰기</a>
                             </div>
                         </div>
                 

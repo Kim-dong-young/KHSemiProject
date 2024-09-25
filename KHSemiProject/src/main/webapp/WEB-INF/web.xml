@@ -122,4 +122,14 @@
     <servlet-name>attend.me</servlet-name>
     <url-pattern>/attend.me</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>insert.bo</display-name>
+    <servlet-name>insert.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insert.bo</servlet-name>
+    <url-pattern>/insert.bo</url-pattern>
+  </servlet-mapping>
 </web-app>
