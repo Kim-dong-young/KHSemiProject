@@ -65,7 +65,8 @@
 #search-text {
     background-color: #d9d9d9;
     border: none;
-    text-align: right;
+    text-align: left;
+    margin-left: 10px;
     width: 70%;
 }
 
@@ -219,4 +220,11 @@
     display:flex;
     justify-content: center;
     height:30px;
+}
+
+
+.option2 > button {
+    width:30px;
+    height:30px;
+    border:1px solid #989898;
 }
