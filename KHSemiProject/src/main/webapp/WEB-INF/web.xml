@@ -97,7 +97,7 @@
     <description></description>
     <display-name>userset.me</display-name>
     <servlet-name>userset.me</servlet-name>
-    <servlet-class>com.kh.member.controller.usersetController</servlet-class>
+    <servlet-class>com.kh.member.controller.userset1Controller</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>userset.me</servlet-name>
@@ -141,5 +141,35 @@
   <servlet-mapping>
     <servlet-name>insert.bo</servlet-name>
     <url-pattern>/insert.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>userset2.me</display-name>
+    <servlet-name>userset2.me</servlet-name>
+    <servlet-class>com.kh.member.controller.userset2Controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userset2.me</servlet-name>
+    <url-pattern>/userset2.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>userset3.me</display-name>
+    <servlet-name>userset3.me</servlet-name>
+    <servlet-class>com.kh.member.controller.userset3Controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userset3.me</servlet-name>
+    <url-pattern>/userset3.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>userset4.me</display-name>
+    <servlet-name>userset4.me</servlet-name>
+    <servlet-class>com.kh.member.controller.userset4Controller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>userset4.me</servlet-name>
+    <url-pattern>/userset4.me</url-pattern>
   </servlet-mapping>
 </web-app>
