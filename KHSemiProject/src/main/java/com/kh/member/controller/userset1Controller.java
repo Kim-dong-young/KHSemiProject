@@ -10,13 +10,13 @@ import java.io.IOException;
 /**
  * Servlet implementation class userset
  */
-public class usersetController extends HttpServlet {
+public class userset1Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public usersetController() {
+    public userset1Controller() {
         super();
         // TODO Auto-generated constructor stub
     }
