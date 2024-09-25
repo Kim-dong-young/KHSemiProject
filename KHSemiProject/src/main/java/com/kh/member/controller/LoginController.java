@@ -37,9 +37,6 @@ public class LoginController extends HttpServlet {
 		
 		System.out.println(path);
 		Member loginMember = new MemberService().loginMember(memberId, memberPwd);
-		int totalAt = new MemberService().totalAttendance(loginMember.getMemberNo());
-		
-		Member updateMem = new MemberService().resetAttend(loginMember);
 		
 		HttpSession session = request.getSession();		
 		if(loginMember == null) {
@@ -51,6 +48,12 @@ public class LoginController extends HttpServlet {
 				response.sendRedirect(request.getContextPath());
 			}
 		} else {
+			int totalAt = new MemberService().totalAttendance(loginMember.getMemberNo());
+			
+			if(loginMember.getCheckContinueCnt() != 0) {
+				Member updateMem = new MemberService().resetAttend(loginMember);
+			}
+			
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("totalAt", totalAt);
 			

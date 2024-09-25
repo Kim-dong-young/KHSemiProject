@@ -88,6 +88,24 @@ public class MemberService {
 	public Member resetAttend(Member loginMember) {
 		Connection conn = getConnection();
 		
-		int result = new MemberDao().deforeAttendCheck(conn, loginMember);
+		Member updateMem = null;
+		MemberDao mDao = new MemberDao();
+		
+		int result1 = mDao.deforeAttendCheck(conn, loginMember); 		     // 전날 출석 체크
+		int result2 = mDao.attendanceCheck(conn, loginMember.getMemberNo()); // 오늘 출석 체크
+		if(result1 + result2 == 0) {
+			int result3 = mDao.resetAttend(conn, loginMember);
+			
+			if(result3 > 0) {
+				commit(conn);
+				
+				updateMem = new MemberDao().selectMember(conn, loginMember.getMemberId());
+				return updateMem;
+			} else {
+				rollback(conn);
+			}
+		}
+		
+		return loginMember;
 	}
 }
