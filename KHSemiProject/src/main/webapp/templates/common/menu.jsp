@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" href="static/css/default.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/default.css">
 </head>
 <body>
 	<%@ include file="loginModal.jsp" %>
@@ -39,7 +39,7 @@
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <div id="header">
-        <div id="logo-img"><a href=""><img src="static/img/logo.png" alt="퀴즈팡 로고"></a></div>
+        <div id="logo-img"><a href=""><img src="<%=request.getContextPath()%>/static/img/logo.png" alt="퀴즈팡 로고"></a></div>
         <div id="welcome-user">
         	<c:choose>
         		<c:when test="${empty loginMember}">
@@ -59,8 +59,7 @@
             <li><a href="<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2">탐색</a></li>
             <li><a href="<%=contextPath%>/userset.me">유저설정</a></li>
             <li><a href="<%=contextPath%>/community?cpage=1">커뮤니티</a></li>
-
-            <li><a href="">문제만들기</a></li>
+            <li><a href="<%=contextPath%>/create.quiz">문제만들기</a></li>
             <li><a href="">도움말</a></li>
         </ul>
     </div>

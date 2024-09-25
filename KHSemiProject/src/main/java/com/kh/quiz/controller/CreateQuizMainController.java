@@ -1,26 +1,25 @@
-package com.kh.community.controller;
+package com.kh.quiz.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import com.kh.community.model.vo.Category;
-import com.kh.community.service.BoardService;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardEnrollController
+ * Servlet implementation class CreateQuizMainController
  */
-public class BoardEnrollController extends HttpServlet {
+
+@WebServlet(name = "create.quiz", urlPatterns= {"/create.quiz"})
+public class CreateQuizMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardEnrollController() {
+    public CreateQuizMainController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +28,8 @@ public class BoardEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectCategory();
-		
-		request.setAttribute("category", categoryList);
-		
-		request.getRequestDispatcher("templates/communityWritePage.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("templates/CreateQuizMain.jsp").forward(request, response);
 	}
 
 	/**

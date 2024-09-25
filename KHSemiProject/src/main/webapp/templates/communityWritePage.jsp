@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.community.model.vo.Category" %>
+<%
+    ArrayList<Category> category = (ArrayList<Category>)request.getAttribute("category"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
-<link rel="stylesheet" href="static/css/communityWritePage.css">
+<script src="<%=request.getContextPath()%>/static/js/communityWritePage.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/communityWritePage.css">
 
 </head>
 <body>
@@ -16,36 +21,52 @@
         <p>글 쓰기</p>
         <div class="wrapper">
             <div class="board">
-                <div class="board-write">
-                    <div class="tab-select">
-                        <span>탭 선택</span>
-                        <button>질문</button>
-                        <button>풀이</button>
-                        <button>잡담</button>
+
+                <form method="post" action="<%=contextPath%>/insert.bo" onsubmit="return checkEmptyTab();">
+                    <input type="hidden" name="userNo" value="<%=loginMember.getMemberNo()%>">
+                    <input type="hidden" name="tab">
+
+                    <!-- 이미지 첨부 개발중 -->
+                    <div style="display:none;">
+                        <input type="file" name="file1" id="file1" onchange="loadImg(this)" accept="image/*">
+                        <input type="file" name="file2" id="file2" onchange="loadImg(this)" accept="image/*">
+                        <input type="file" name="file3" id="file3" onchange="loadImg(this)" accept="image/*">
+                        <input type="file" name="file4" id="file4" onchange="loadImg(this)" accept="image/*">
+                        <input type="file" name="file5" id="file5" onchange="loadImg(this)" accept="image/*">
                     </div>
 
-                    <div class="title-input">
-                        <input type="text" placeholder="글 제목을 입력해주세요.">
-                    </div>
-
-                    <div class="content-input">
-                        <div class="input-option">
-                            <img src="static/img/bold-icon.png">
-                            <img src="static/img/italic-icon.png">
-                            <img src="static/img/underlined-icon.png">
-                            <img src="static/img/strikethrough-icon.png">
-                            <img src="static/img/fontsize-icon.png" style="margin-right:15px;">
-                            <img src="static/img/color-icon.png">
-                            <img src="static/img/fill-icon.png">
+                    <div class="board-write">
+                        <div class="tab-select">
+                            <span>탭 선택</span>
+                            <% for(Category c : category) { %>
+                                <button type="button" onclick="selectTab(this)" value="<%=c.getTabNumber()%>"><%=c.getTabName()%></button>
+                            <% } %>
                         </div>
-                        <textarea></textarea>
+
+                        <div class="title-input">
+                            <input type="text" name="title" placeholder="글 제목을 입력해주세요.">
+                        </div>
+
+                        <div class="content-input">
+                            <div class="input-option">
+                                <img src="static/img/bold-icon.png">
+                                <img src="static/img/italic-icon.png">
+                                <img src="static/img/underlined-icon.png">
+                                <img src="static/img/strikethrough-icon.png">
+                                <img src="static/img/fontsize-icon.png" style="margin-right:15px;">
+                                <img src="static/img/color-icon.png">
+                                <img src="static/img/fill-icon.png">
+                                <img src="static/img/image-icon.png" onclick="chooseImg()">
+                            </div>
+                            <textarea name="content"></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="board-write-option">
-                    <a href="communityMainPage.jsp"><img src="static/img/pen-icon-white.png">글쓰기</a>
-                </div>
+                    <div class="board-write-option">
+                        <button type="submit"><img src="static/img/pen-icon-white.png">글쓰기</button>
+                    </div>
 
+                </form>
             </div>
 
             <div class="board-side">

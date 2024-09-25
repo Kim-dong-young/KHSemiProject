@@ -124,6 +124,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>create.quiz</display-name>
+    <servlet-name>create.quiz</servlet-name>
+    <servlet-class>com.kh.quiz.controller.CreateQuizMainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>create.quiz</servlet-name>
+    <url-pattern>/create.quiz</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>insert.bo</display-name>
     <servlet-name>insert.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardInsertController</servlet-class>
@@ -131,5 +141,15 @@
   <servlet-mapping>
     <servlet-name>insert.bo</servlet-name>
     <url-pattern>/insert.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>comment.bo</display-name>
+    <servlet-name>comment.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.CommentInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>comment.bo</servlet-name>
+    <url-pattern>/comment.bo</url-pattern>
   </servlet-mapping>
 </web-app>

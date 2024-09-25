@@ -79,4 +79,50 @@
 		   SET COMMUNITY_VIEWCOUNT = COMMUNITY_VIEWCOUNT + 1
 		 WHERE COMMUNITY_NUMBER = ?
 	</entry>
+	<entry key="selectCategory">
+		SELECT TAB_NUMBER,
+	    	   TAB_NAME
+	      FROM COMMUNITY_TAB
+	     WHERE TAB_NUMBER != 1  -- 1은 공지탭
+	</entry>
+	<entry key="insertBoard">
+		INSERT INTO COMMUNITY
+		(
+		    COMMUNITY_NUMBER,
+		    COMMUNITY_TITLE,
+		    COMMUNITY_CONTENT,
+		    COMMUNITY_VIEWCOUNT,
+		    COMMUNITY_DATE,
+		    MEMBER_NUMBER,
+		    TAB_NUMBER
+		)
+		VALUES
+		(
+		    SEQ_COMMUNITY.NEXTVAL,
+		    ?,
+		    ?,
+		    0,
+		    SYSDATE,
+		    ?,
+		    ?
+		)
+	</entry>
+	<entry key="insertComment">
+		INSERT INTO COMMUNITY_COMMENT
+		(
+		    COMMUNITY_COMMENT_NUMBER,
+		    COMMUNITY_NUMBER,
+		    MEMBER_NUMBER,
+		    COMMUNITY_COMMENT_CONTENT,
+		    COMMUNITY_COMMENT_DATE
+		)
+		VALUES
+		(
+		    SEQ_COMMUNITY_COMMENT.NEXTVAL,
+		    ?,
+		    ?,
+		    ?,
+		    SYSDATE
+		)
+	</entry>
 </properties>
