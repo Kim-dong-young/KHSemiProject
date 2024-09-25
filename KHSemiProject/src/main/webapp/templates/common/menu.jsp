@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" href="static/css/default.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/default.css">
 </head>
 <body>
 	<%@ include file="loginModal.jsp" %>
@@ -37,7 +37,7 @@
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <div id="header">
-        <div id="logo-img"><a href=""><img src="static/img/logo.png" alt="퀴즈팡 로고"></a></div>
+        <div id="logo-img"><a href=""><img src="<%=request.getContextPath()%>/static/img/logo.png" alt="퀴즈팡 로고"></a></div>
         <div id="welcome-user">
         	<c:choose>
         		<c:when test="${empty loginMember}">
