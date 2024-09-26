@@ -13,6 +13,7 @@ import java.util.Properties;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.PageInfo;
 import com.kh.search.model.vo.Quiz;
+import com.kh.search.model.vo.Tag;
 
 public class QuizDao {
 	private Properties prop = new Properties();
@@ -92,7 +93,7 @@ public class QuizDao {
 		return quizCount;
 	}
 
-	public ArrayList<Quiz> selectQuiz(Connection conn, PageInfo pi, int category, int search_type, String search_text, int orderby) {
+	public ArrayList<Quiz> selectQuiz(Connection conn, PageInfo pi, int category, int search_type, String search_text, int orderby, ArrayList<String> tagList) {
 		ArrayList<Quiz> list = new ArrayList<>();
 		
 		Statement stmt = null;
@@ -132,6 +133,10 @@ public class QuizDao {
 		sql += "JOIN CATEGORY USING (CATEGORY_NUMBER) "
 		       + "JOIN MEMBER USING (MEMBER_NUMBER) ";
 		
+		if(tagList != null) {
+			sql += "JOIN QUIZ_TAG USING (QUIZ_NUMBER)";
+		}
+		
 		boolean sqlWhere = false;
 		
 		if(category != 0) {
@@ -160,6 +165,22 @@ public class QuizDao {
 			}
 			sqlAnd = true;
 		}
+		
+		if(tagList != null) {
+			for(int i = 0; i < tagList.size();i++) {
+				System.out.println(tagList.get(i));
+				if(sqlAnd) {
+					sql += " AND ";
+				}
+				if(!sqlWhere) {
+					sql += "WHERE ";
+					sqlWhere = true;
+				}
+				sql += "TAG_NAME = '" + tagList.get(i) + "'";
+				sqlAnd = true;
+			}
+		}
+		
 		sql += " ORDER BY ";
 		switch(orderby) {
 		case 1, 3:
@@ -191,6 +212,36 @@ public class QuizDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(stmt);
 		}
+		return list;
+	}
+
+	public ArrayList<Tag> selectTagList(Connection conn, String searchText) {
+		ArrayList<Tag> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTagList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + searchText + "%");
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Tag(
+						rset.getString("tag_name"),
+						rset.getInt("count")
+						));
+							
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
 		return list;
 	}
 

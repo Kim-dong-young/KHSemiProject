@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.common.PageInfo, java.util.ArrayList, com.kh.search.model.vo.Quiz" %>
+<%@ page import="com.kh.common.PageInfo, java.util.ArrayList, com.kh.search.model.vo.Quiz, com.kh.search.model.vo.Tag" %>
 <%
     PageInfo pi = (PageInfo)request.getAttribute("pi");
     ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
+    
+    ArrayList<String> tagList = (ArrayList<String>)request.getAttribute("tagList");
 
     int currentPage = pi.getCurrentPage();
     int startPage = pi.getStartPage();
@@ -62,12 +64,17 @@
                 </div>
                 <script>
                     function categorySearch(num){
+                        const tagList = document.getElementsByClassName("tag-clicked");
+                        let String = "";
+                        for (let tag of tagList){
+                            String += tag.value + "!";
+                        }
                         if(num == ${param.category}){
                             location.href='<%=contextPath%>/main.sl?cpage=1&category=0&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
-                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)+ '&tag_list=' + encodeURIComponent(String)
                         } else {
                             location.href='<%=contextPath%>/main.sl?cpage=1&category=' + num + '&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
-                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)+ '&tag_list=' + encodeURIComponent(String)
                         }
                         
                     }
@@ -88,8 +95,13 @@
 
             <script>
                 function searchComfirm(){
+                    const tagList = document.getElementsByClassName("tag-clicked");
+                    let String = "";
+                    for (let tag of tagList){
+                        String += tag.value + "!";
+                    }
                     location.href='<%=contextPath%>/main.sl?cpage=1&category=${param.category}&search_type=' 
-                    + encodeURIComponent(document.getElementById('search-select').value) + '&orderby=${param.orderby}&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                    + encodeURIComponent(document.getElementById('search-select').value) + '&orderby=${param.orderby}&search_text=' + encodeURIComponent(document.getElementById('search-text').value) + '&tag_list=' + encodeURIComponent(String)
                 }
             </script>
 
@@ -115,8 +127,13 @@
 
                 <script>
                     function arraySearch(num){
+                        const tagList = document.getElementsByClassName("tag-clicked");
+                        let String = "";
+                        for (let tag of tagList){
+                            String += tag.value + "!";
+                        }
                         location.href='<%=contextPath%>/main.sl?cpage=1&category=${param.category}&orderby=' + num + '&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
-                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value) + '&tag_list=' + encodeURIComponent(String)
                     }
                 </script>
 
@@ -128,13 +145,16 @@
             <div id="tag-popup" style="display: none;">
                 <div id="tag-top">
                     <div id="tag-search">
-                        <input type="text">
+                        <input type="text" onchange="tagSearchAjax()">
                     </div>
                     <div id="tag-search-exit-button" onclick="closeTagPopup()">
-                        <input type="image" src="static/img/searchMainPage/back.png">
+                        <input type="image" src="static/img/searchMainPage/back.png" onclick="pageChange(<%=currentPage%>)">
                     </div>
                 </div>
                 <br>
+                <div id="tag-selected-div">
+
+                </div>
                 <div id="tag-popup-tags">
                     <button>
                         asdf
@@ -162,9 +182,59 @@
             <script>
                 function tagPopup(){
                     document.getElementById("tag-popup").style.display = "flex";
+                    tagSearchAjax()
                 }
                 function closeTagPopup(){
                     document.getElementById("tag-popup").style.display = "none";
+                }
+                function tagSearchAjax(){
+                    $.ajax({
+                        url: "tgSearch.sl",
+                        contentType: "application/json",
+                        data: {
+                            searchText: document.querySelector("#tag-search input").value
+                        },
+                        success: function(res){
+                            const tags = document.getElementById("tag-popup-tags")
+                            tags.innerHTML = "";
+                            let tagList = document.getElementsByClassName("tag-clicked");
+                            let check = 0;
+                            for(let tag of res){
+                                check = 0;
+                                for (let tagli of tagList){
+                                    if(tag.quizTag == tagli.value){
+                                        check = 1;
+                                    }
+                                }
+                                if(check == 0){
+                                    tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + tag.count + "</button>";
+                                }
+                            }
+
+                        },
+                        error: function(){
+                            console.log("태그 조회용 ajax통신 실패")
+                        }
+                    })
+                }
+                function lol(wow){
+                    if(wow.classList.contains('tag-clicked')){
+                        wow.classList.remove('tag-clicked');
+                        updateTagSelect();
+                    } else{
+                        wow.classList.add('tag-clicked');
+                        updateTagSelect();
+                    }
+                }
+                function updateTagSelect(){
+                    const divvv = document.getElementById("tag-selected-div");
+                    let tagList = document.getElementsByClassName("tag-clicked");
+                    let String = "";
+                    for (let tag of tagList){
+                        String += "<button onclick='lol(this)' value='" + tag.value + "' class='tag-clicked'>" + tag.innerText + "</button>";
+                    }
+                    divvv.innerHTML = String;
+                    tagSearchAjax();
                 }
             </script>
             <br>
@@ -192,6 +262,8 @@
                 </section>
             </div>
 
+            
+
             <div class="option2">
                 <%if(currentPage > 1) { %>
                     <button onclick="pageChange(<%=currentPage - 1%>)">&lt;</button>
@@ -210,8 +282,13 @@
 
             <script>
                 function pageChange(num){
+                    const tagList = document.getElementsByClassName("tag-clicked");
+                    let String = "";
+                    for (let tag of tagList){
+                        String += tag.value + "!";
+                    }
                     location.href='<%=contextPath%>/main.sl?cpage=' + num + '&category=${param.category}&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
-                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value) + '&tag_list=' + encodeURIComponent(String)
                 }
             </script>
 
@@ -235,6 +312,7 @@
 
 
     </div>
+    
     
         
 

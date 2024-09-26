@@ -201,6 +201,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>AjaxQuizTagListController</display-name>
+    <servlet-name>AjaxQuizTagListController</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxQuizTagListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxQuizTagListController</servlet-name>
+    <url-pattern>/tgSearch.sl</url-pattern>
+  </servlet-mapping>
+<servlet>
+    <description></description>
     <display-name>delete.co</display-name>
     <servlet-name>delete.co</servlet-name>
     <servlet-class>com.kh.community.controller.CommentDeleteController</servlet-class>
