@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,12 +175,12 @@
                     <hr>
                     <div id="serial-attendance">
                         <div>연속 출석 일수</div>
-                        <div></div>
+                        <div><%=loginMember.getCheckContinueCnt() %>회</div>
                     </div>
                     <hr>
                     <div id="total-attendance">
                         <div>총 출석 일수</div>
-                        <div></div>
+                        <div>${totalAt }회</div>
                     </div>
                     <hr>
                     <div id="solve-a-quiz">

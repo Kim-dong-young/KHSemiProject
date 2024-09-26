@@ -42,20 +42,31 @@
 <link rel="stylesheet" href="static/css/communityViewPage.css">
 <link rel="stylesheet" href="static/css/communityBoardPage.css">
 
+<!-- jQuery -->
+<script 
+src="https://code.jquery.com/jquery-3.7.1.min.js"
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+crossorigin="anonymous"></script>
+<script
+src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"
+integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
+crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<%@ include file="common/menu.jsp" %>
 	
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
 		<p>자유 게시판</p>
-
         <div class="wrapper">
 			<div class="board">
                 <div class="bulletin-content">
 					<div class="bulletin-title">
                         <span class="board-tab"><%=currentBoard.getCommunityTab()%></span>
                         <span><%=currentBoard.getCommunityTitle()%></span>
-                        <button><img src="static/img/trash-icon.png">삭제</button>
+                        <% if( loginMember != null && loginMember.getMemberNo() == currentBoard.getMemberNo() ) { %>
+                            <button onclick="location.href='<%=contextPath%>/delete.bo?userno=<%=loginMember.getMemberNo()%>'"><img src="static/img/trash-icon.png">삭제</button>
+                        <% } %>
 					</div>
 
                     <div class="bulletin-info">
@@ -144,11 +155,16 @@
                     <button onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>'">&gt;&gt;</button>
                 </div>
 
-                <div class="comment-write">
-                    <textarea placeholder="댓글은 자신의 얼굴을 비추는 거울입니다."></textarea>
-                    <button><img src="static/img/comment-icon.png">작성</button>
-                </div>
-                
+                <% if(loginMember != null) { %>
+                    <form method="post" action="<%=contextPath%>/comment.bo?cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>">
+                    <input type="hidden" name="commentWriter" value="<%=loginMember.getMemberNo()%>">
+                    <div class="comment-write">
+                        <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다."></textarea>
+                        <button type="submit"><img src="static/img/comment-icon.png">작성</button>
+                    </div>
+                    </form>
+                <% } %>
+
                 <div>
                     <div class="board-tab">
                         <ul>
@@ -247,7 +263,11 @@
                             </div>
                 
                             <div class="option1">
-                                <a href="communityWritePage.jsp"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                                <% if ( loginMember != null ) { %>
+                                    <a href="<%=contextPath%>/write.bo"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                                <% } else { %>
+                                    <a onclick="alert('로그인한 유저만 글을 작성할 수 있습니다.')"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                                <% } %>
                             </div>
                         </div>
                 
