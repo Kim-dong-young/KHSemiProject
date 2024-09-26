@@ -24,6 +24,7 @@
         <h2>개인정보 설정</h2>
         <form>
             <div class="personal-details">
+                
             <label for="password">비밀번호:</label>
             <input type="password" id="password" name="password" placeholder="현재 비밀번호">
 

@@ -40,14 +40,14 @@ public class MemberPwdUpdateController extends HttpServlet {
 		
 		if(updateMember == null) {
 			request.setAttribute("errorMsg", "비밀번호 변경에 실패하였습니다.");
-			request.getRequestDispatcher("/KHSemiProject/templates/userset.jsp").forward(request, response);
+			request.getRequestDispatcher("/KHSemiProject/templates/userset2.jsp").forward(request, response);
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", session);
 			session.setAttribute("alerMsg", "성공적으로 변경을 완료하였습니다.");
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/update.me");
+		response.sendRedirect(request.getContextPath() + "/userset2.me");
 	}
 
 	/**
