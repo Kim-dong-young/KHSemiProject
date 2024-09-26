@@ -107,7 +107,7 @@
     justify-content: center;
 }
 
-#tag-popup-tags{
+#tag-popup-tags, #tag-selected-div{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,14 +129,16 @@
     width: 40px;
 }
 
-#tag-popup-tags button {
+#tag-popup-tags button , #tag-selected-div button{
     background: #cacaca;
     border-radius: 10px;
     width: 85px;
     height: 27px;
 }
 
-
+.tag-clicked {
+    background-color: red !important;
+}
 
 .video-grid{
     display: grid;
