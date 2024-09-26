@@ -1,13 +1,14 @@
 package com.kh.community.controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class BoardDeleteController
@@ -27,9 +28,28 @@ public class BoardDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberNo = Integer.parseInt(request.getParameter("userno"));
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		int cPage = Integer.parseInt(request.getParameter("cpage"));
+		int cmtPage = Integer.parseInt(request.getParameter("comment"));
 		
-		int result = new BoardService().deleteBoard(memberNo);
+		System.out.println(boardNo);
+		System.out.println(cPage);
+		System.out.println(cmtPage);
+		/*	삭제 순서
+		 * 
+		 * 	1. 게시글에 달린 댓글부터 삭제한다
+		 * 	2. 게시글에 달린 좋아요 정보도 삭제한다
+		 *  3. 게시글을 삭제한다
+		 */
+		
+		boolean isSuccess = new BoardService().deleteBoard(boardNo);
+		
+		if(isSuccess) {
+			response.sendRedirect("community?cpage=" + cPage);
+		} else {
+			request.setAttribute("errorMsg", "삭제에 실패하였습니다.");
+			response.sendRedirect("board?cpage=" + cPage + "&no="+ boardNo + "&comment=" + cmtPage);
+		}
 	}
 
 	/**

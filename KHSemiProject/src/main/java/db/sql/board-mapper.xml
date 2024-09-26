@@ -127,7 +127,19 @@
 		    SYSDATE
 		)
 	</entry>
+	<entry key="deleteComment">
+		DELETE
+		  FROM COMMUNITY_COMMENT
+		 WHERE COMMUNITY_NUMBER = ?
+	</entry>
+	<entry key="deleteCommunityLike">
+		DELETE
+		  FROM COMMUNITY_LIKE
+		 WHERE COMMUNITY_NUMBER = ?
+	</entry>
 	<entry key="deleteBoard">
-		
+		DELETE
+		  FROM COMMUNITY
+		 WHERE COMMUNITY_NUMBER = ?
 	</entry>
 </properties>

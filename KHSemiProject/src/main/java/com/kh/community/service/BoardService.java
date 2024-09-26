@@ -100,20 +100,24 @@ public class BoardService {
 		return result;
 	}
 
-	public int deleteBoard(int memberNo) {
+	public boolean deleteBoard(int boardNo) {
 		Connection conn = getConnection();
-		int result = new BoardDao().deleteBoard(conn, memberNo);
+		BoardDao bDao = new BoardDao();
+		Boolean isSuccess = false;
 		
-		/* TODO 게시글을 삭제하려면, 댓글부터 삭제해야한다. 댓글삭제처리 할 것 */
+		int result1 = bDao.deleteComment(conn, boardNo);
+		int result2 = bDao.deleteCommunityLike(conn, boardNo);
+		int result3 = bDao.deleteBoard(conn, boardNo);
 		
-		if(result > 0) {
+		if(result1 > -1 && result2 > -1 && result3 > -1) {
 			commit(conn);
+			isSuccess = true;
 		} else {
 			rollback(conn);
 		}
 		
 		close(conn);
-		return result;
+		return isSuccess;
 	}
-	
+
 }

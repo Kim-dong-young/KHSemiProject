@@ -295,9 +295,51 @@ public class BoardDao {
 		
 		return result;
 	}
+	
+	public int deleteComment(Connection conn, int boardNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
-	public int deleteBoard(Connection conn, int memberNo) {
-		int result = 0;
+	public int deleteCommunityLike(Connection conn, int boardNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteCommunityLike");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteBoard(Connection conn, int boardNo) {
+		int result = -1;
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("deleteBoard");
@@ -305,7 +347,7 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			/* TODO sql 작성 */
+			pstmt.setInt(1, boardNo);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

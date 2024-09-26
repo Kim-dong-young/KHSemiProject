@@ -39,6 +39,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
+<script src="<%=request.getContextPath()%>/static/js/communityViewPage.js"></script>
 <link rel="stylesheet" href="static/css/communityViewPage.css">
 <link rel="stylesheet" href="static/css/communityBoardPage.css">
 
@@ -53,9 +54,10 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body onload="errorAlert()">
 	<%@ include file="common/menu.jsp" %>
-	
+	<input id="errorMsg" type="hidden" value='<%=request.getAttribute("errorMsg") == null ? "" : request.getAttribute("errorMsg") %>'>
+
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
 		<p>자유 게시판</p>
         <div class="wrapper">
@@ -65,7 +67,7 @@ crossorigin="anonymous"></script>
                         <span class="board-tab"><%=currentBoard.getCommunityTab()%></span>
                         <span><%=currentBoard.getCommunityTitle()%></span>
                         <% if( loginMember != null && loginMember.getMemberNo() == currentBoard.getMemberNo() ) { %>
-                            <button onclick="location.href='<%=contextPath%>/delete.bo?userno=<%=loginMember.getMemberNo()%>'"><img src="static/img/trash-icon.png">삭제</button>
+                            <button onclick="location.href='<%=contextPath%>/delete.bo?bno=<%=currentBoard.getCommunityNo()%>&cpage=<%=cpage%>&comment=<%=cCurrentPage%>'"><img src="static/img/trash-icon.png">삭제</button>
                         <% } %>
 					</div>
 
