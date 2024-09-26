@@ -24,9 +24,6 @@
         <h2>개인정보 설정</h2>
         <form>
             <div class="personal-details">
-            <label for="email">이메일:</label>
-            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요.">
-
             <label for="password">비밀번호:</label>
             <input type="password" id="password" name="password" placeholder="현재 비밀번호">
 
@@ -36,7 +33,7 @@
             <label for="confirm-password">새 비밀번호 확인:</label>
             <input type="password" id="confirm-password" name="confirm-password" placeholder="새 비밀번호 확인">
             </div>
-            <button type="submit">변경 완료</button>
+            <button type="submit">변경하기</button>
         </form>
     </section>
     </fieldset>

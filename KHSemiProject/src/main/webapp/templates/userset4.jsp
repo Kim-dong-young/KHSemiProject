@@ -24,12 +24,10 @@
         <h2>회원 탈퇴 설정</h2>
         <form>
             <div class="other-details">
-            <label for="theme">테마 선택:</label>
-            <select id="theme" name="theme">
-                <option value="light" selected>라이트 모드</option>
-                <option value="dark">다크 모드</option>
-            </select>
-            <button type="submit">저장</button>
+                정말 탈퇴할거야? 정말로? 나 너무 슬퍼<br><br><br>
+                형님 이러면 나 울어 정말로<br><br><br>
+                마지막 기회야 잘 생각해야돼 형님<br><br><br>
+            <button type="submit">탈퇴하기</button>
         </form>
     </section>
     </fieldset>
