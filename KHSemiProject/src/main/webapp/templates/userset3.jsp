@@ -23,23 +23,22 @@
     <main>
     <fieldset>
     <section id="notifications" class="content-section">
-        <h2>내 정보 설정</h2>
-        <form>
-            <div class="notifications-details">
-            <label>
-                <input type="checkbox" name="email-notifications" checked>
-                이메일 알림
-            </label>
-            <label>
-                <input type="checkbox" name="push-notifications">
-                푸시 알림
-            </label>
-            </div>
-            <button type="submit">저장</button>
-        </form>
-    </section>
-    </fieldset>
-    </main>
+            <h2>내 정보 설정</h2>
+                <form>
+                    <div class="notifications-details">
+
+                            <label for="nickname">아이디:</label>
+                            <input type="text" id="nickname" name="nickname">
+                            <label for="phone">전화번호:</label>
+                            <input type="text" id="phone" name="phone">
+                            <label for="address">주소:</label>
+                            <input type="text" id="address" name="address">
+                        </div>
+                    <button type="submit">변경</button>
+                </form>
+            </section>
+        </fieldset>
+        </main>
     <script src="static/js/userset.js"></script>
 </body>
 </html>
