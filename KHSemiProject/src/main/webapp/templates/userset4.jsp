@@ -21,12 +21,15 @@
     <main>
     <fieldset>
     <section id="other" class="content-section">
+        <div class="other-details">
         <h2>회원 탈퇴 설정</h2>
-        <form>
-            <div class="other-details">
-                정말 탈퇴할거야? 정말로? 나 너무 슬퍼<br><br><br>
+        </div>
+
+        <div class="modal-body" align="center">
+        <form accept="${pageContext.request.contextPath}/templates/userset4.jsp" method="post">
+               <b>정말 탈퇴할거야? 정말로? 나 너무 슬퍼<br><br><br>
                 형님 이러면 나 울어 정말로<br><br><br>
-                마지막 기회야 잘 생각해야돼 형님<br><br><br>
+                마지막 기회야 잘 생각해야돼 형님</b> <br><br><br>
             <button type="submit">탈퇴하기</button>
         </form>
     </section>
