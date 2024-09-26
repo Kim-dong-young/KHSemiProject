@@ -52,9 +52,11 @@ public class LoginController extends HttpServlet {
 			
 			if(loginMember.getCheckContinueCnt() != 0) {
 				Member updateMem = new MemberService().resetAttend(loginMember);
+				session.setAttribute("loginMember", updateMem);
+			} else {
+				session.setAttribute("loginMember", loginMember);
 			}
 			
-			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("totalAt", totalAt);
 			
 			//request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
