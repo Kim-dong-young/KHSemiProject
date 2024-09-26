@@ -39,11 +39,11 @@ crossorigin="anonymous"></script>
     <div class="board-tab">
         <ul>
             <li><button style="background-color: #FF9139;">전체</button></li>
-            <li><button>인기글</button></li>
-            <li><button>공지</button></li>
-            <li><button>질문</button></li>
-            <li><button>풀이</button></li>
-            <li><button>잡담</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=0'">인기글</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=1'">공지</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=2'">질문</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=3'">풀이</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=4'">잡담</button></li>
         </ul>
     </div>
 
