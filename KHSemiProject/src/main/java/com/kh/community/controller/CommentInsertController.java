@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.kh.community.model.vo.Comment;
 import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class CommentInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userNo = request.getParameter("commentWriter");
+		String userNo = String.valueOf(((Member)request.getSession().getAttribute("loginMember")).getMemberNo());
 		String content = request.getParameter("commentContent");
 		String communityNo = request.getParameter("no");
 		

@@ -157,13 +157,23 @@ crossorigin="anonymous"></script>
 
                 <% if(loginMember != null) { %>
                     <form method="post" action="<%=contextPath%>/comment.bo?cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>">
-                    <input type="hidden" name="commentWriter" value="<%=loginMember.getMemberNo()%>">
                     <div class="comment-write">
                         <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다."></textarea>
                         <button type="submit"><img src="static/img/comment-icon.png">작성</button>
                     </div>
                     </form>
+                <% } else { %>
+                    <div class="comment-write">
+                        <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다." readonly></textarea>
+                        <button onclick="alert('로그인한 유저만 댓글을 작성할 수 있습니다.')"><img src="static/img/comment-icon.png">작성</button>
+                    </div>
                 <% } %>
+
+
+
+<!-- ================================================ 하단 게시글 목록 ==================================================== -->
+
+
 
                 <div>
                     <div class="board-tab">
