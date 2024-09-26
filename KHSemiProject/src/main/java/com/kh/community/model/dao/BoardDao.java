@@ -185,6 +185,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_PARENT_NUMBER"),
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("MEMBER_NICKNAME"),
+							rset.getInt("MEMBER_NUMBER"),
 							rset.getString("COMMUNITY_COMMENT_CONTENT")
 						);
 				
@@ -243,6 +244,9 @@ public class BoardDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return categoryList;
@@ -283,7 +287,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, comment.getCommunityNo());
-			pstmt.setInt(2, Integer.parseInt(comment.getMemberNo()));
+			pstmt.setInt(2, comment.getMemberNo());
 			pstmt.setString(3, comment.getCommentContent());
 			
 			result = pstmt.executeUpdate();
@@ -358,5 +362,91 @@ public class BoardDao {
 		
 		return result;
 	}
+
+	public int deleteMemberComment(Connection conn, int commentNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMemberComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, commentNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Board> selectBoardTabList(Connection conn, int tabNo) {
+		ArrayList<Board> boardList = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectBoardTabList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, tabNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Board b = new Board(
+						rset.getInt("COMMUNITY_NUMBER"),
+						rset.getString("COMMUNITY_TITLE"),
+						rset.getString("TAB_NAME"),
+						rset.getInt("COMMUNITY_VIEWCOUNT"),
+						rset.getString("COMMUNITY_DATE"),
+						rset.getString("MEMBER_NICKNAME"),
+						rset.getInt("COMMENT_COUNT")
+					);
+				
+				boardList.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return boardList;
+	}
+
+	public int selectBoardTabListCount(Connection conn, int tabNo) {
+		int listCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectBoardTabListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, tabNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	
 	
 }

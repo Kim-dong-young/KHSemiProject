@@ -29,7 +29,7 @@
     int cCurrentPage = cPageInfo.getCurrentPage();
     int cStartPage = cPageInfo.getStartPage();
     int cEndPage = cPageInfo.getEndPage();
-    int cMaxPage = cPageInfo.getMaxPage();
+    int cMaxPage = cPageInfo.getMaxPage() == 0 ? 1 : cPageInfo.getMaxPage();
     int cLimit = cPageInfo.getBoardLimit();
     int cPageBarLimit = cPageInfo.getPageBarLimit();
 %>
@@ -54,7 +54,7 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body onload="errorAlert()">
+<body onload="init()">
 	<%@ include file="common/menu.jsp" %>
 	<input id="errorMsg" type="hidden" value='<%=request.getAttribute("errorMsg") == null ? "" : request.getAttribute("errorMsg") %>'>
 
@@ -110,7 +110,7 @@ crossorigin="anonymous"></script>
     
                             <div class="comment-right">
                                 <div class="user-info">
-                                    <span><%=cm.getMemberNo()%></span>
+                                    <span><%=cm.getMemberName()%></span>
                                     <span>Lv.35</span>
                                 </div>
                                 <div class="comment-content">
@@ -118,8 +118,12 @@ crossorigin="anonymous"></script>
                                 </div>
                                 <div class="comment-option">
                                     <button class="after-vline">답글</button>
-                                    <button class="after-vline">신고</button>
-                                    <button>삭제</button>
+                                    <% if( loginMember != null && (cm.getMemberNo() == loginMember.getMemberNo())) { %>
+                                        <button class="after-vline">신고</button>
+                                        <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>'">삭제</button>
+                                    <% } else { %>
+                                        <button>신고</button>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>

@@ -120,4 +120,34 @@ public class BoardService {
 		return isSuccess;
 	}
 
+	public int deleteMemberComment(int commentNo) {
+		Connection conn = getConnection();
+		int result = new BoardDao().deleteMemberComment(conn, commentNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public ArrayList<Board> selectBoardTabList(int tabNo) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().selectBoardTabList(conn, tabNo);
+		
+		close(conn);
+		return boardList;
+	}
+
+	public int selectBoardTabListCount(int tabNo) {
+		Connection conn = getConnection();
+		int boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		
+		close(conn);
+		return boardCount;
+	}
+
 }
