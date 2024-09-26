@@ -12,10 +12,10 @@ VALUES (4, '풀이');
 
 
 INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (1, 'admin', 'admin', '관리자', 0, NULL, to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '관리자 계정');
+VALUES (1, 'admin', 'admin', '관리자', 0, NULL, to_date('09/21/2024', 'MM/DD/RRRR'), 4, 'Y', '관리자 계정');
 
 INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (2, 'user01', 'pass01', 'test01', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.');
+VALUES (2, 'user01', 'pass01', 'test01', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 3, 'Y', '안녕하세요. 잘부탁드립니다.');
 
 INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
 VALUES (3, 'user02', 'pass02', 'test02', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.');
@@ -1069,5 +1069,13 @@ CREATE SEQUENCE SEQ_COMMUNITY
 CREATE SEQUENCE SEQ_COMMUNITY_COMMENT
     INCREMENT BY 1
     START WITH 73;
+
+insert into DAILY_CHECK values(1, sysdate-4, 1);
+insert into DAILY_CHECK values(2, sysdate-4, 2);
+insert into DAILY_CHECK values(3, sysdate-3, 1);
+insert into DAILY_CHECK values(4, sysdate-3, 2);
+insert into DAILY_CHECK values(5, sysdate-2, 1);
+insert into DAILY_CHECK values(6, sysdate-2, 2);
+insert into DAILY_CHECK values(7, sysdate-1, 1);
 
 COMMIT;
