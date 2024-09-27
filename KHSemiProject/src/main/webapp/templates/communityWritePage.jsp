@@ -26,7 +26,7 @@
                     <input type="hidden" name="userNo" value="<%=loginMember.getMemberNo()%>">
                     <input type="hidden" name="tab">
 
-                    <!-- 이미지 첨부 개발중 -->
+                    <!-- SummerNote 공부 후 추?가 할듯 
                     <div style="display:none;">
                         <input type="file" name="file1" id="file1" onchange="loadImg(this)" accept="image/*">
                         <input type="file" name="file2" id="file2" onchange="loadImg(this)" accept="image/*">
@@ -34,6 +34,7 @@
                         <input type="file" name="file4" id="file4" onchange="loadImg(this)" accept="image/*">
                         <input type="file" name="file5" id="file5" onchange="loadImg(this)" accept="image/*">
                     </div>
+                    -->
 
                     <div class="board-write">
                         <div class="tab-select">
@@ -58,7 +59,8 @@
                                 <img src="static/img/fill-icon.png">
                                 <img src="static/img/image-icon.png" onclick="chooseImg()">
                             </div>
-                            <textarea name="content"></textarea>
+                            <!-- wrap = hard : 텍스트 입력값을 textarea에 맞게 줄바꿈(\n)을 해줌, 안하면 한줄로 쭉 나옴 -->
+                            <textarea name="content" wrap="hard"></textarea>
                         </div>
                     </div>
 
