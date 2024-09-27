@@ -31,20 +31,20 @@ public class MemberPwdUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+
+		String memberId = request.getParameter("memberId");
+		String memberPwd = request.getParameter("password");
+		String updatememberPwd = request.getParameter("new-password");
 		
-		String memberPwd = request.getParameter("memberPwd");
-		String updatememberPwd = request.getParameter("updatememberPwd");
-		String updatememberPwdChange = request.getParameter("updatememberPwdChange");
-		
-		Member updateMember = new MemberService().updatePwdMember(memberPwd, updatememberPwd, updatememberPwdChange);
-		
+		Member updateMember = new MemberService().updatePwdMember(memberId, memberPwd, updatememberPwd);
+		HttpSession session = request.getSession();
 		if(updateMember == null) {
-			request.setAttribute("errorMsg", "비밀번호 변경에 실패하였습니다.");
-			request.getRequestDispatcher("/KHSemiProject/templates/userset2.jsp").forward(request, response);
+			session.setAttribute("alertMsg", "비밀번호 변경에 실패하였습니다.");
+//			request.getRequestDispatcher("/KHSemiProject/templates/userset2.jsp").forward(request, response);
 		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", session);
-			session.setAttribute("alerMsg", "성공적으로 변경을 완료하였습니다.");
+			
+			session.setAttribute("loginMember", updateMember);
+			session.setAttribute("alertMsg", "성공적으로 변경을 완료하였습니다.");
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/userset2.me");

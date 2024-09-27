@@ -97,13 +97,13 @@ public class MemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+		
 			pstmt.setString(1, updatePwd);
 			pstmt.setString(2, memberId);
 			pstmt.setString(3, memberPwd);
 			
 			result = pstmt.executeUpdate();
-			
+			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
