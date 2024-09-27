@@ -136,7 +136,13 @@ public class BoardService {
 
 	public ArrayList<Board> selectBoardTabList(PageInfo pageInfo, int tabNo) {
 		Connection conn = getConnection();
-		ArrayList<Board> boardList = new BoardDao().selectBoardTabList(conn, pageInfo ,tabNo);
+		ArrayList<Board> boardList;
+		
+		if(tabNo == 0) {
+			boardList = new BoardDao().selectBoardSortedPop(conn, pageInfo, tabNo);
+		} else {
+			boardList = new BoardDao().selectBoardTabList(conn, pageInfo ,tabNo);
+		}
 		
 		close(conn);
 		return boardList;
@@ -144,8 +150,10 @@ public class BoardService {
 
 	public int selectBoardTabListCount(int tabNo) {
 		Connection conn = getConnection();
-		int boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		int boardCount;
 		
+		boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+
 		close(conn);
 		return boardCount;
 	}

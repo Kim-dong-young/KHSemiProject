@@ -120,6 +120,9 @@ span{
     background-color: transparent;
     border:none;
     resize:none;
+    /* 
+        contentEditable 후 
+        overflow:auto;  div를 textarea처럼 스크롤 생성해줌 */
 }
 
 .content-input > textarea:focus{
