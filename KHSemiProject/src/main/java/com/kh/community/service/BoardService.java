@@ -134,9 +134,9 @@ public class BoardService {
 		return result;
 	}
 
-	public ArrayList<Board> selectBoardTabList(int tabNo) {
+	public ArrayList<Board> selectBoardTabList(PageInfo pageInfo, int tabNo) {
 		Connection conn = getConnection();
-		ArrayList<Board> boardList = new BoardDao().selectBoardTabList(conn, tabNo);
+		ArrayList<Board> boardList = new BoardDao().selectBoardTabList(conn, pageInfo ,tabNo);
 		
 		close(conn);
 		return boardList;
@@ -149,5 +149,6 @@ public class BoardService {
 		close(conn);
 		return boardCount;
 	}
+
 
 }

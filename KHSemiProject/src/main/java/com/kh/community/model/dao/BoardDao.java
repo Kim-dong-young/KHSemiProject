@@ -384,32 +384,37 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Board> selectBoardTabList(Connection conn, int tabNo) {
-		ArrayList<Board> boardList = new ArrayList<>();
+	public ArrayList<Board> selectBoardTabList(Connection conn, PageInfo pageInfo, int tabNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
+		ArrayList<Board> boardList = new ArrayList<>();
 		
 		String sql = prop.getProperty("selectBoardTabList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit() + 1;
+			int endRow = startRow + pageInfo.getBoardLimit() - 1;
+			
 			pstmt.setInt(1, tabNo);
+			pstmt.setInt(2,startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				Board b = new Board(
-						rset.getInt("COMMUNITY_NUMBER"),
-						rset.getString("COMMUNITY_TITLE"),
-						rset.getString("TAB_NAME"),
-						rset.getInt("COMMUNITY_VIEWCOUNT"),
-						rset.getString("COMMUNITY_DATE"),
-						rset.getString("MEMBER_NICKNAME"),
-						rset.getInt("COMMENT_COUNT")
-					);
+				Board board = new Board(
+							rset.getInt("COMMUNITY_NUMBER"),
+							rset.getString("COMMUNITY_TITLE"),
+							rset.getString("TAB_NAME"),
+							rset.getInt("COMMUNITY_VIEWCOUNT"),
+							rset.getString("COMMUNITY_DATE"),
+							rset.getString("MEMBER_NICKNAME"),
+							rset.getInt("COMMENT_COUNT")
+						);
 				
-				boardList.add(b);
+				boardList.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

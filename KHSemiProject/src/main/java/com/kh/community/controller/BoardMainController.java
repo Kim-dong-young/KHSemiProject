@@ -40,9 +40,14 @@ public class BoardMainController extends HttpServlet {
 		int startPage; // 제일 첫 페이지(시작 = 1), 페이징 바의 시작 수
 		int endPage; // 페이징 바의 마지막 끝 수
 		
-		listCount = new BoardService().selectListCount();
-		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
+		String tabNo = request.getParameter("tno");
+		
+		if(tabNo == null) {
+			listCount = new BoardService().selectListCount();
+		} else {
+			listCount = new BoardService().selectBoardTabListCount(Integer.parseInt(tabNo));
+		}
 		
 		// int 나누기 int => int, double로 형변환 후 계산 -> if 나머지 있다면 max Page = 몫 + 1;
 		maxPage = (int) Math.ceil( (double)listCount / boardLimit);
@@ -51,13 +56,18 @@ public class BoardMainController extends HttpServlet {
 		endPage = (startPage + pageBarLimit - 1) > maxPage ? maxPage : (startPage + pageBarLimit - 1);
 		
 		PageInfo pageInfo = new PageInfo(listCount, currentPage, pageBarLimit, boardLimit, maxPage, startPage, endPage);
-		ArrayList<Board> boardList = new BoardService().selectList(pageInfo);
+		ArrayList<Board> boardList = new ArrayList<>();
+		
+		if(tabNo == null) {
+			boardList = new BoardService().selectList(pageInfo);
+		} else {
+			boardList = new BoardService().selectBoardTabList(pageInfo, Integer.parseInt(tabNo));
+		}
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("boardList", boardList);
 
 		request.getRequestDispatcher("templates/communityMainPage.jsp").forward(request, response);
-		
 	}
 
 	/**
