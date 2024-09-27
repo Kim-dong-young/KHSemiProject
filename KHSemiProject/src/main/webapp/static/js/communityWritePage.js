@@ -17,7 +17,11 @@ function selectTab(_this){
 }
 
 function checkEmptyTab(){
+    const text =  document.querySelector("textarea[name=content]");
+    text.replace(/\r\n/g, '<br/>'); /* 엔터입력 처리 */
+
     const tabInput = document.querySelector("input[name=tab]");
+
     if(tabInput.value === ""){
         alert("게시글의 탭이 설정되지 않았습니다.");
         return false;
@@ -26,7 +30,7 @@ function checkEmptyTab(){
         return true;
     }
 }
-
+/*
 function loadImg(_input){
     //_input.files[0] -> 선택된 파일이 담김
     // 파일을 읽어들이는 객체
@@ -38,16 +42,22 @@ function loadImg(_input){
         reader.readAsDataURL(_input.files[0])
         curFileNum++;
 
-        reader.onload = function(){
-            const content = document.getElementsByName("content")
+        reader.onload = function(e){
+            const content = document.querySelector("#content");
 
-            content.innerHTML += _input.files[0]
+            let imgTag = document.createElement("img")
+           // imgTag.src = URL.createObjectURL(_input.files[0])
+            imgTag.src = e.target.result;
+            imgTag.alt = "첨부이미지" + curFileNum;
+            imgTag.style.display='block';
+            document.querySelector("div[name=content]").appendChild(imgTag);
         }
     } else{
         curFileNum--;
     }
 
 }
+
 
 function chooseImg(){
     if(curFileNum < maxFileNum){
@@ -57,3 +67,4 @@ function chooseImg(){
         alert("파일은 최대 5개까지 업로드 가능합니다.");
     }
 }
+*/

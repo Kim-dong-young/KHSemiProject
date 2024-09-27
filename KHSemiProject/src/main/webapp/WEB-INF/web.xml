@@ -181,17 +181,14 @@
     <servlet-name>userset4.me</servlet-name>
     <url-pattern>/userset4.me</url-pattern>
   </servlet-mapping>
-  
- <servlet>
-     <servlet-name>quizCreate</servlet-name>
+  <servlet>
+    <servlet-name>quizCreate</servlet-name>
     <jsp-file>/templates/CreateQuiz.jsp</jsp-file>
-</servlet>
-
-<servlet-mapping>
+  </servlet>
+  <servlet-mapping>
     <servlet-name>quizCreate</servlet-name>
     <url-pattern>/quiz.cr</url-pattern>
-</servlet-mapping>
-
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>delete.bo</display-name>
@@ -201,5 +198,35 @@
   <servlet-mapping>
     <servlet-name>delete.bo</servlet-name>
     <url-pattern>/delete.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxQuizTagListController</display-name>
+    <servlet-name>AjaxQuizTagListController</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxQuizTagListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxQuizTagListController</servlet-name>
+    <url-pattern>/tgSearch.sl</url-pattern>
+  </servlet-mapping>
+<servlet>
+    <description></description>
+    <display-name>delete.co</display-name>
+    <servlet-name>delete.co</servlet-name>
+    <servlet-class>com.kh.community.controller.CommentDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete.co</servlet-name>
+    <url-pattern>/delete.co</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>tab.bo</display-name>
+    <servlet-name>tab.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardTabController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tab.bo</servlet-name>
+    <url-pattern>/tab.bo</url-pattern>
   </servlet-mapping>
 </web-app>

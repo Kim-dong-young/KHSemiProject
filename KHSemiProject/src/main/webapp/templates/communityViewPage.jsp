@@ -29,7 +29,7 @@
     int cCurrentPage = cPageInfo.getCurrentPage();
     int cStartPage = cPageInfo.getStartPage();
     int cEndPage = cPageInfo.getEndPage();
-    int cMaxPage = cPageInfo.getMaxPage();
+    int cMaxPage = cPageInfo.getMaxPage() == 0 ? 1 : cPageInfo.getMaxPage();
     int cLimit = cPageInfo.getBoardLimit();
     int cPageBarLimit = cPageInfo.getPageBarLimit();
 %>
@@ -39,6 +39,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
+<script src="<%=request.getContextPath()%>/static/js/communityViewPage.js"></script>
 <link rel="stylesheet" href="static/css/communityViewPage.css">
 <link rel="stylesheet" href="static/css/communityBoardPage.css">
 
@@ -53,9 +54,10 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body onload="init()">
 	<%@ include file="common/menu.jsp" %>
-	
+	<input id="errorMsg" type="hidden" value='<%=request.getAttribute("errorMsg") == null ? "" : request.getAttribute("errorMsg") %>'>
+
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
 		<p>자유 게시판</p>
         <div class="wrapper">
@@ -65,7 +67,7 @@ crossorigin="anonymous"></script>
                         <span class="board-tab"><%=currentBoard.getCommunityTab()%></span>
                         <span><%=currentBoard.getCommunityTitle()%></span>
                         <% if( loginMember != null && loginMember.getMemberNo() == currentBoard.getMemberNo() ) { %>
-                            <button onclick="location.href='<%=contextPath%>/delete.bo?userno=<%=loginMember.getMemberNo()%>'"><img src="static/img/trash-icon.png">삭제</button>
+                            <button onclick="location.href='<%=contextPath%>/delete.bo?bno=<%=currentBoard.getCommunityNo()%>&cpage=<%=cpage%>&comment=<%=cCurrentPage%>'"><img src="static/img/trash-icon.png">삭제</button>
                         <% } %>
 					</div>
 
@@ -108,7 +110,7 @@ crossorigin="anonymous"></script>
     
                             <div class="comment-right">
                                 <div class="user-info">
-                                    <span><%=cm.getMemberNo()%></span>
+                                    <span><%=cm.getMemberName()%></span>
                                     <span>Lv.35</span>
                                 </div>
                                 <div class="comment-content">
@@ -116,8 +118,12 @@ crossorigin="anonymous"></script>
                                 </div>
                                 <div class="comment-option">
                                     <button class="after-vline">답글</button>
-                                    <button class="after-vline">신고</button>
-                                    <button>삭제</button>
+                                    <% if( loginMember != null && (cm.getMemberNo() == loginMember.getMemberNo())) { %>
+                                        <button class="after-vline">신고</button>
+                                        <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>'">삭제</button>
+                                    <% } else { %>
+                                        <button>신고</button>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
@@ -157,13 +163,23 @@ crossorigin="anonymous"></script>
 
                 <% if(loginMember != null) { %>
                     <form method="post" action="<%=contextPath%>/comment.bo?cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>">
-                    <input type="hidden" name="commentWriter" value="<%=loginMember.getMemberNo()%>">
                     <div class="comment-write">
                         <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다."></textarea>
                         <button type="submit"><img src="static/img/comment-icon.png">작성</button>
                     </div>
                     </form>
+                <% } else { %>
+                    <div class="comment-write">
+                        <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다." readonly></textarea>
+                        <button onclick="alert('로그인한 유저만 댓글을 작성할 수 있습니다.')"><img src="static/img/comment-icon.png">작성</button>
+                    </div>
                 <% } %>
+
+
+
+<!-- ================================================ 하단 게시글 목록 ==================================================== -->
+
+
 
                 <div>
                     <div class="board-tab">
