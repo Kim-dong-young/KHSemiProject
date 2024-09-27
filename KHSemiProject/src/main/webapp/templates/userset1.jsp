@@ -25,7 +25,6 @@
                 <form>
                     <div class="profile-details">
 
-
                         <label for="nickname">닉네임:</label>
                         <input type="text" id="nickname" name="nickname" placeholder="현재 닉네임">
                         <label for="nickname">이메일:</label>

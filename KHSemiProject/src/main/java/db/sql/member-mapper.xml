@@ -96,4 +96,10 @@
 		   SET MEMBER_CHECK_CONTINUECOUNT = MEMBER_CHECK_CONTINUECOUNT + 1
 		 WHERE MEMBER_NUMBER = ?
 	</entry>
+	<entry key="updatePwdMember">
+		UPDATE MEMBER
+		SET MEMBER_PWD = ?
+		WHERE MEMBER_ID = ?
+		  AND MEMBER_PWD = ?
+	</entry>
 </properties>
