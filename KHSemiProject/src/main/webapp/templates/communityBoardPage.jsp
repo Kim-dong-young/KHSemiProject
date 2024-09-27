@@ -13,6 +13,8 @@
     int maxPage = pageInfo.getMaxPage();
     int boardLimit = pageInfo.getBoardLimit();
     int pageBarLimit = pageInfo.getPageBarLimit();
+
+    String tno = request.getParameter("tno");
 %>
 
 <!DOCTYPE html>
@@ -38,12 +40,12 @@ crossorigin="anonymous"></script>
 
     <div class="board-tab">
         <ul>
-            <li><button style="background-color: #FF9139;">전체</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=0'">인기글</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=1'">공지</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=2'">질문</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=3'">풀이</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/tab.bo?tno=4'">잡담</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1'" style="background-color: #FF9139;">전체</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=0'">인기글</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=1'">공지</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=2'">질문</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=3'">풀이</button></li>
+            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=4'">잡담</button></li>
         </ul>
     </div>
 
@@ -103,11 +105,19 @@ crossorigin="anonymous"></script>
 
             <div class="option2">
                 <!-- 맨 처음으로 가는 버튼 -->
-                <button onclick="location.href='<%=contextPath%>/community?cpage=1'">&lt;&lt;</button>
+                <% if ( tno == null ) { %>
+                    <button onclick="location.href='<%=contextPath%>/community?cpage=1'">&lt;&lt;</button>
+                <% } else { %>
+                    <button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=tno%>'">&lt;&lt;</button>
+                <% } %>
                 
                 <!-- 페이징바 단위 만큼 앞으로 이동하는 버튼 -->
                 <% if(startPage != 1) { %>
-                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>'">&lt;</button>
+                    <% if ( tno == null ) { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>'">&lt;</button>
+                    <% } else { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>&tno=<%=tno%>'">&lt;</button>
+                    <% } %>
                 <% } else { %>
                     <button disabled>&lt;</button>
                 <% } %>
@@ -117,19 +127,31 @@ crossorigin="anonymous"></script>
                     <% if(i == currentPage) { %>
                         <button disabled><%=i %></button>
                     <% } else { %>
-                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>'"><%=i %></button>
+                        <% if ( tno == null ) { %>
+                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>'"><%=i %></button>
+                        <% } else { %>
+                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>&tno=<%=tno%>'"><%=i %></button>
+                        <% } %>
                     <% } %>
                 <% } %>
 
                 <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
                 <% if( (startPage + pageBarLimit < maxPage) ) { %>
-                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
+                    <% if ( tno == null ) { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
+                    <% } else { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>&tno=<%=tno%>'">&gt;</button>
+                    <% } %>
                 <% } else { %>
                     <button disabled>&gt;</button>
                 <% } %>
 
                 <!-- 맨 뒤로 가는 버튼 -->
-                <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>'">&gt;&gt;</button>
+                <% if ( tno == null ) { %>
+                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>'">&gt;&gt;</button>
+                <% } else { %>
+                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>&tno=<%=tno%>'">&gt;&gt;</button>
+                <% } %>
             </div>
 
             <div class="option1">
