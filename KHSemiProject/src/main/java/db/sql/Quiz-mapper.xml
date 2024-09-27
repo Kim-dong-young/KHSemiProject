@@ -8,6 +8,19 @@
         GROUP BY TAG_NAME
         ORDER BY COUNT DESC
 	</entry>
+	<entry key="selectQuizCount">
+		SELECT COUNT(*) AS COUNT
+		FROM QUIZ
+		JOIN CATEGORY USING (CATEGORY_NUMBER)
+		JOIN MEMBER USING (MEMBER_NUMBER)
+		?
+		WHERE CATEGORY_NUMBER = ?
+		AND ?
+		?
+		
+	
+	
+	</entry>
 </properties>
 
 

@@ -55,7 +55,7 @@ public class SearchMainController extends HttpServlet {
 		
 		String tag_list = request.getParameter("tag_list");
 		//총 게시글 수
-		quizCount = new SearchService().selectQuizCount(category, search_type, search_text, orderby);
+		
 		
 		//현재 페이지(사용자가 요청한 페이지) 
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
@@ -80,6 +80,8 @@ public class SearchMainController extends HttpServlet {
 		} else {
 			tagList = null;
 		}
+		
+		quizCount = new SearchService().selectQuizCount(category, search_type, search_text, orderby, tagList);
 		
 		System.out.println("응애응애" + str);
 		/**
