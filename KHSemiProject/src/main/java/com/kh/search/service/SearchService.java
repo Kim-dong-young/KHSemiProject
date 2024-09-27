@@ -11,10 +11,10 @@ import com.kh.search.model.vo.Tag;
 
 public class SearchService {
 
-	public int selectQuizCount(int category, int search_type, String search_text, int orderby) {
+	public int selectQuizCount(int category, int search_type, String search_text, int orderby, ArrayList<String> tagList) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int quizCount = new QuizDao().selectQuizCount(conn, category, search_type, search_text, orderby);
+		int quizCount = new QuizDao().selectQuizCount(conn, category, search_type, search_text, orderby, tagList);
 		JDBCTemplate.close(conn);
 		return quizCount;
 	}
