@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ 
-    page import="com.kh.common.PageInfo, java.util.ArrayList, com.kh.community.model.vo.Board, com.kh.community.model.vo.Category" 
+    page import="com.kh.common.PageInfo, 
+                java.util.ArrayList, 
+                com.kh.community.model.vo.Board, 
+                com.kh.community.model.vo.Category" 
 %>
 <%
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -71,16 +74,31 @@ crossorigin="anonymous"></script>
                         <td colspan="6">게시글이 없습니다.</td>
                     </tr>
                 <% } else { %>
-                    <% for(Board b : boardList) { %>
-                        <tr>
-                            <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
-                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
-                            <td class="author"><%=b.getMemberId()%></td>
-                            <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
-                            <td class="date"><%=b.getCommunityDate()%></td>
-                            <td class="viewcount"><%=b.getCommunityViewcount()%></td>
-                        </tr>
+                    
+                    <% if( tno == null ) { %>
+                        <% for(Board b : boardList) { %>
+                            <tr>
+                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
+                                <td class="author"><%=b.getMemberId()%></td>
+                                <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
+                                <td class="date"><%=b.getCommunityDate()%></td>
+                                <td class="viewcount"><%=b.getCommunityViewcount()%></td>
+                            </tr>
+                        <% } %>
+                    <% } else { %>
+                        <% for(Board b : boardList) { %>
+                            <tr>
+                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
+                                <td class="author"><%=b.getMemberId()%></td>
+                                <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
+                                <td class="date"><%=b.getCommunityDate()%></td>
+                                <td class="viewcount"><%=b.getCommunityViewcount()%></td>
+                            </tr>
+                        <% } %>
                     <% } %>
+
                     <% for(int i=boardList.size(); i < boardLimit; i++) { %>
                         <tr>
                             <td>&nbsp;</td>
@@ -91,6 +109,7 @@ crossorigin="anonymous"></script>
                             <td>&nbsp;</td>
                         </tr>
                     <% } %>
+
                 <% } %>
             </table>
         </div>
