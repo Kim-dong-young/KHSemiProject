@@ -5,6 +5,7 @@ public class Board {
 	private String communityTitle;
 	private String communityContent;
 	private String communityTab;
+	private int communityTabNo;
 	private int communityViewcount;
 	private String communityDate;
 	private String memberId;
@@ -15,7 +16,8 @@ public class Board {
 	public Board() {
 		super();
 	}
-
+	
+	// 게시글 쓸 때, 쓴 게시글 정보 불러오는 생성자
 	public Board(String memberId, String communityTab, String communityTitle, String communityContent) {
 		super();
 		this.memberId = memberId;
@@ -23,21 +25,24 @@ public class Board {
 		this.communityTitle = communityTitle;
 		this.communityContent = communityContent;
 	}
-
-	public Board(int communityNo, String communityTitle, String communityTab, int communityViewcount,
-			String communityDate, String memberId, int commentCount) {
+	
+	// 게시글 목록 불러오는 생성자
+	public Board(int communityNo, String communityTitle, String communityTab, int communityTabNo,
+			int communityViewcount, String communityDate, String memberId, int commentCount) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
 		this.communityTab = communityTab;
+		this.communityTabNo = communityTabNo;
 		this.communityViewcount = communityViewcount;
 		this.communityDate = communityDate;
 		this.memberId = memberId;
 		this.commentCount = commentCount;
 	}
 	
+	// 게시글 정보 불러오는 생성자
 	public Board(int communityNo,String communityTitle, String communityContent, int communityViewcount,
-			String communityDate, String memberId, int memberNo, String communityTab, int likeCount) {
+			String communityDate, String memberId, int memberNo, String communityTab, int communityTabNo, int likeCount) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
@@ -47,17 +52,20 @@ public class Board {
 		this.memberId = memberId;
 		this.memberNo = memberNo;
 		this.communityTab = communityTab;
+		this.communityTabNo = communityTabNo;
 		this.likeCount = likeCount;
 	}
 
+	// 전체 생성자
 	public Board(int communityNo, String communityTitle, String communityContent, String communityTab,
-			int communityViewcount, String communityDate, String memberId, int memberNo, int commentCount,
-			int likeCount) {
+			int communityTabNo, int communityViewcount, String communityDate, String memberId, int memberNo,
+			int commentCount, int likeCount) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
 		this.communityContent = communityContent;
 		this.communityTab = communityTab;
+		this.communityTabNo = communityTabNo;
 		this.communityViewcount = communityViewcount;
 		this.communityDate = communityDate;
 		this.memberId = memberId;
@@ -96,6 +104,14 @@ public class Board {
 
 	public void setCommunityTab(String communityTab) {
 		this.communityTab = communityTab;
+	}
+
+	public int getCommunityTabNo() {
+		return communityTabNo;
+	}
+
+	public void setCommunityTabNo(int communityTabNo) {
+		this.communityTabNo = communityTabNo;
 	}
 
 	public int getCommunityViewcount() {
@@ -149,9 +165,10 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [communityNo=" + communityNo + ", communityTitle=" + communityTitle + ", communityContent="
-				+ communityContent + ", communityTab=" + communityTab + ", communityViewcount=" + communityViewcount
-				+ ", communityDate=" + communityDate + ", memberId=" + memberId + ", memberNo=" + memberNo
-				+ ", commentCount=" + commentCount + ", likeCount=" + likeCount + "]";
+				+ communityContent + ", communityTab=" + communityTab + ", communityTabNo=" + communityTabNo
+				+ ", communityViewcount=" + communityViewcount + ", communityDate=" + communityDate + ", memberId="
+				+ memberId + ", memberNo=" + memberNo + ", commentCount=" + commentCount + ", likeCount=" + likeCount
+				+ "]";
 	}
 
 }

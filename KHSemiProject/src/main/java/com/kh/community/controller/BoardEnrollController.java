@@ -29,7 +29,7 @@ public class BoardEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectCategory();
+		ArrayList<Category> categoryList = new BoardService().selectUserCategory();
 		
 		request.setAttribute("category", categoryList);
 		

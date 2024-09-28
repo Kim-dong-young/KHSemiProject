@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
 import com.kh.community.model.vo.Board;
+import com.kh.community.model.vo.Category;
 import com.kh.community.model.vo.Comment;
 import com.kh.community.service.BoardService;
 
@@ -31,11 +32,15 @@ public class BoardViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BoardService bService = new BoardService();
+		
 		int boardNo = Integer.parseInt(request.getParameter("no"));
 		
-		Board board = new BoardService().selectBoard(boardNo);
-		
+		Board board = bService.selectBoard(boardNo);
 		request.setAttribute("board", board);
+		
+		String tabNo = request.getParameter("tno");
+		request.setAttribute("tno", tabNo);
 		
 		/* 게시글 */
 		int listCount; // DB에 있는 총 게시글 수
@@ -48,7 +53,11 @@ public class BoardViewController extends HttpServlet {
 		int startPage; // 제일 첫 페이지(시작 = 1), 페이징 바의 시작 수
 		int endPage; // 페이징 바의 마지막 끝 수
 		
-		listCount = new BoardService().selectListCount();
+		if(tabNo == null) {
+			listCount = bService.selectListCount();
+		} else {
+			listCount = bService.selectBoardTabListCount(Integer.parseInt(tabNo));
+		}
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
@@ -59,7 +68,13 @@ public class BoardViewController extends HttpServlet {
 		endPage = (startPage + pageBarLimit - 1) > maxPage ? maxPage : (startPage + pageBarLimit - 1);
 		
 		PageInfo pageInfo = new PageInfo(listCount, currentPage, pageBarLimit, boardLimit, maxPage, startPage, endPage);
-		ArrayList<Board> boardList = new BoardService().selectList(pageInfo);
+		ArrayList<Board> boardList = new ArrayList<>();
+		
+		if(tabNo == null) {
+			boardList = bService.selectList(pageInfo);
+		} else {
+			boardList = bService.selectBoardTabList(pageInfo, Integer.parseInt(tabNo));
+		}
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("boardList", boardList);
@@ -74,7 +89,7 @@ public class BoardViewController extends HttpServlet {
 		int cStartPage; // 제일 첫 페이지(시작 = 1), 페이징 바의 시작 수
 		int cEndPage; // 페이징 바의 마지막 끝 수
 		
-		cCount = new BoardService().countBoardComment(boardNo);
+		cCount = bService.countBoardComment(boardNo);
 		
 		cCurrentPage = Integer.parseInt(request.getParameter("comment"));
 		
@@ -88,11 +103,13 @@ public class BoardViewController extends HttpServlet {
 		PageInfo cPageInfo = new PageInfo(cCount, cCurrentPage, cPageBarLimit, 
 				cLimit, cMaxPage, cStartPage, cEndPage);
 		
-		ArrayList<Comment> commentList = new BoardService().selectCommentList(cPageInfo, boardNo);
+		ArrayList<Comment> commentList = bService.selectCommentList(cPageInfo, boardNo);
+		ArrayList<Category> category = bService.selectCategory();
 		
 		request.setAttribute("commentCount", cCount);
 		request.setAttribute("cPageInfo", cPageInfo);
 		request.setAttribute("commentList", commentList);
+		request.setAttribute("category", category);
 
 		request.getRequestDispatcher("templates/communityViewPage.jsp").forward(request, response);
 	}

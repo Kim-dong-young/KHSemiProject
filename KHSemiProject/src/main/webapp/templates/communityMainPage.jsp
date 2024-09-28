@@ -13,7 +13,7 @@
 	<%@ include file="common/menu.jsp" %>
 	
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
-		<p>자유 게시판</p>
+		<p onclick="location.href='<%=contextPath%>/community?cpage=1'">자유 게시판</p>
 
 		<div class="wrapper">
 			<div class="board">

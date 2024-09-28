@@ -78,6 +78,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("COMMUNITY_TITLE"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),
@@ -120,6 +121,7 @@ public class BoardDao {
 							rset.getString("MEMBER_NICKNAME"),
 							rset.getInt("MEMBER_NUMBER"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("LIKE_COUNT")
 						);
 			}
@@ -228,6 +230,36 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("selectCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Category category = new Category();
+				
+				category.setTabNumber(rset.getInt("tab_number"));
+				category.setTabName(rset.getString("tab_name"));
+				
+				categoryList.add(category);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return categoryList;
+	}
+	
+	public ArrayList<Category> selectUserCategory(Connection conn) {
+		ArrayList<Category> categoryList = new ArrayList<Category>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectUserCategory");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -408,6 +440,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("COMMUNITY_TITLE"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),
@@ -451,13 +484,37 @@ public class BoardDao {
 		
 		return listCount;
 	}
+	
+	public int selectBoardPopListCount(Connection conn, int tabNo) {
+		int listCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectBoardPopListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
 
-	public ArrayList<Board> selectBoardSortedPop(Connection conn, PageInfo pageInfo, int tabNo) {
+	public ArrayList<Board> selectBoardPopList(Connection conn, PageInfo pageInfo, int tabNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		ArrayList<Board> boardList = new ArrayList<>();
 		
-		String sql = prop.getProperty("selectBoardSortedPop");
+		String sql = prop.getProperty("selectBoardPopList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -465,7 +522,7 @@ public class BoardDao {
 			int startRow = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit() + 1;
 			int endRow = startRow + pageInfo.getBoardLimit() - 1;
 			
-			pstmt.setInt(1,startRow);
+			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
@@ -475,6 +532,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("COMMUNITY_TITLE"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),
@@ -492,7 +550,4 @@ public class BoardDao {
 		
 		return boardList;
 	}
-	
-	
-	
 }

@@ -1,15 +1,17 @@
 package com.kh.community.controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
 import com.kh.community.model.vo.Board;
+import com.kh.community.model.vo.Category;
 import com.kh.community.service.BoardService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class BoardMainController
@@ -29,6 +31,8 @@ public class BoardMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BoardService bService = new BoardService();
+		
 		/* 게시글 */
 		int listCount; // DB에 있는 총 게시글 수
 		int currentPage; // 현재 사용자가 요청한 페이지
@@ -43,10 +47,10 @@ public class BoardMainController extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		String tabNo = request.getParameter("tno");
 		
-		if(tabNo == null || Integer.parseInt(tabNo) == 0) {
-			listCount = new BoardService().selectListCount();
+		if(tabNo == null) {
+			listCount = bService.selectListCount();
 		} else {
-			listCount = new BoardService().selectBoardTabListCount(Integer.parseInt(tabNo));
+			listCount = bService.selectBoardTabListCount(Integer.parseInt(tabNo));
 		}
 		
 		// int 나누기 int => int, double로 형변환 후 계산 -> if 나머지 있다면 max Page = 몫 + 1;
@@ -59,13 +63,16 @@ public class BoardMainController extends HttpServlet {
 		ArrayList<Board> boardList = new ArrayList<>();
 		
 		if(tabNo == null) {
-			boardList = new BoardService().selectList(pageInfo);
+			boardList = bService.selectList(pageInfo);
 		} else {
-			boardList = new BoardService().selectBoardTabList(pageInfo, Integer.parseInt(tabNo));
+			boardList = bService.selectBoardTabList(pageInfo, Integer.parseInt(tabNo));
 		}
+		
+		ArrayList<Category> category = bService.selectCategory();
 		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("boardList", boardList);
+		request.setAttribute("category", category);
 
 		request.getRequestDispatcher("templates/communityMainPage.jsp").forward(request, response);
 	}
