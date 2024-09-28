@@ -78,6 +78,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("COMMUNITY_TITLE"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),
@@ -120,6 +121,7 @@ public class BoardDao {
 							rset.getString("MEMBER_NICKNAME"),
 							rset.getInt("MEMBER_NUMBER"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("LIKE_COUNT")
 						);
 			}
@@ -228,6 +230,36 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("selectCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Category category = new Category();
+				
+				category.setTabNumber(rset.getInt("tab_number"));
+				category.setTabName(rset.getString("tab_name"));
+				
+				categoryList.add(category);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return categoryList;
+	}
+	
+	public ArrayList<Category> selectUserCategory(Connection conn) {
+		ArrayList<Category> categoryList = new ArrayList<Category>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectUserCategory");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -408,6 +440,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("COMMUNITY_TITLE"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),
@@ -499,6 +532,7 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("COMMUNITY_TITLE"),
 							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
 							rset.getInt("COMMUNITY_VIEWCOUNT"),
 							rset.getString("COMMUNITY_DATE"),
 							rset.getString("MEMBER_NICKNAME"),

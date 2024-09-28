@@ -71,6 +71,14 @@ public class BoardService {
 		close(conn);
 		return categoryList;
 	}
+	
+	public ArrayList<Category> selectUserCategory() {
+		Connection conn = getConnection();
+		ArrayList<Category> categoryList = new BoardDao().selectUserCategory(conn);
+		
+		close(conn);
+		return categoryList;
+	}
 
 	public int insertBoard(Board b) {
 		Connection conn = getConnection();
@@ -161,6 +169,5 @@ public class BoardService {
 		close(conn);
 		return boardCount;
 	}
-
 
 }
