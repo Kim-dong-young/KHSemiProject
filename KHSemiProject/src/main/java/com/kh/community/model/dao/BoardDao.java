@@ -451,13 +451,37 @@ public class BoardDao {
 		
 		return listCount;
 	}
+	
+	public int selectBoardPopListCount(Connection conn, int tabNo) {
+		int listCount = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectBoardPopListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
 
-	public ArrayList<Board> selectBoardSortedPop(Connection conn, PageInfo pageInfo, int tabNo) {
+	public ArrayList<Board> selectBoardPopList(Connection conn, PageInfo pageInfo, int tabNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		ArrayList<Board> boardList = new ArrayList<>();
 		
-		String sql = prop.getProperty("selectBoardSortedPop");
+		String sql = prop.getProperty("selectBoardPopList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -465,7 +489,7 @@ public class BoardDao {
 			int startRow = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit() + 1;
 			int endRow = startRow + pageInfo.getBoardLimit() - 1;
 			
-			pstmt.setInt(1,startRow);
+			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
@@ -492,7 +516,4 @@ public class BoardDao {
 		
 		return boardList;
 	}
-	
-	
-	
 }

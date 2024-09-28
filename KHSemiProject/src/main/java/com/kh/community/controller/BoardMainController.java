@@ -43,7 +43,7 @@ public class BoardMainController extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		String tabNo = request.getParameter("tno");
 		
-		if(tabNo == null || Integer.parseInt(tabNo) == 0) {
+		if(tabNo == null) {
 			listCount = new BoardService().selectListCount();
 		} else {
 			listCount = new BoardService().selectBoardTabListCount(Integer.parseInt(tabNo));

@@ -139,7 +139,7 @@ public class BoardService {
 		ArrayList<Board> boardList;
 		
 		if(tabNo == 0) {
-			boardList = new BoardDao().selectBoardSortedPop(conn, pageInfo, tabNo);
+			boardList = new BoardDao().selectBoardPopList(conn, pageInfo, tabNo);
 		} else {
 			boardList = new BoardDao().selectBoardTabList(conn, pageInfo ,tabNo);
 		}
@@ -152,7 +152,11 @@ public class BoardService {
 		Connection conn = getConnection();
 		int boardCount;
 		
-		boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		if(tabNo == 0) {
+			boardCount = new BoardDao().selectBoardPopListCount(conn, tabNo);
+		} else {
+			boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		}
 
 		close(conn);
 		return boardCount;
