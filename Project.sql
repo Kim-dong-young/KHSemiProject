@@ -18,6 +18,8 @@ DROP TABLE COMMUNITY_LIKE CASCADE CONSTRAINTS;
 DROP TABLE DAILY_CHECK CASCADE CONSTRAINTS;
 DROP TABLE QUIZ_COMMENT CASCADE CONSTRAINTS;
 DROP TABLE RP CASCADE CONSTRAINTS;
+DROP TABLE IMGS_file CASCADE CONSTRAINTS;
+DROP TABLE IMGS_link CASCADE CONSTRAINTS;
 
 DROP SEQUENCE SEQ_MNO;
 DROP SEQUENCE SEQ_DCNO;
@@ -220,6 +222,30 @@ CREATE TABLE RP(
     FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number),
     FOREIGN KEY (COMMUNITY_COMMENT_number) references COMMUNITY_COMMENT(COMMUNITY_COMMENT_number)
 );
+
+CREATE TABLE IMGS_file (
+    IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- 이미지 ID
+    IMGS_file_data BLOB ,              -- 이미지 파일 자체
+    IMGS_file_name VARCHAR2(255),     -- 이미지 파일 이름
+    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- 업로드 날짜
+    FOREIGN KEY (IMGS_file_id) references PROBLEM(problem_number)
+);
+CREATE TABLE IMGS_link (
+    IMGS_link_id NUMBER PRIMARY KEY NOT NULL,       -- 이미지 ID
+    IMGS_link_path VARCHAR2(1500),          -- 이미지 파일 경로 또는 URL
+    IMGS_link_name VARCHAR2(255),          -- 이미지 파일 이름
+    IMGS_link_upload_date DATE DEFAULT SYSDATE,   -- 업로드 날짜
+    FOREIGN KEY (IMGS_link_id) references PROBLEM(problem_number)
+);
+
+CREATE TABLE THUMBNAIL(
+    TN_id NUMBER PRIMARY KEY NOT NULL,
+    TN_data BLOB,
+    TN_name VARCHAR2(255),
+    TN_upload_date DATE DEFAULT SYSDATE,
+    FOREIGN KEY (TN_id) references QUIZ(QUIZ_number)  
+);
+
 
 CREATE SEQUENCE SEQ_MNO
       INCREMENT BY 1
