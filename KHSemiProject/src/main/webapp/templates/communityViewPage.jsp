@@ -84,7 +84,7 @@ crossorigin="anonymous"></script>
                         <div class="data-info">
                             <span class="after-vline">작성일: <%=currentBoard.getCommunityDate()%></span>
                             <span class="after-vline">조회수: <%=currentBoard.getCommunityViewcount()%></span>
-                            <span class="after-vline">좋아요: <%=currentBoard.getLikeCount()%></span>
+                            <span name="likeCount" class="after-vline">좋아요: <%=currentBoard.getLikeCount()%></span>
                             <span>댓글: <%=commentCount%></span>
                         </div>
                     </div>
@@ -100,7 +100,11 @@ crossorigin="anonymous"></script>
                     </div>
 
                     <div class="bulletin-option">
-                        <button class="like-button"><img src="static/img/thumbup-icon.png">좋아요</button>
+                        <% if( loginMember != null ) { %>
+                            <button class="like-button" onclick="increaseLike(<%=currentBoard.getCommunityNo()%>)"><img src="static/img/thumbup-icon.png">좋아요</button>
+                        <% } else { %>
+                            <button class="like-button" onclick='alert("로그인한 유저만 좋아요를 누를 수 있습니다.")'><img src="static/img/thumbup-icon.png">좋아요</button>
+                        <% } %>
                         <button class="report-button"><img src="static/img/flag-icon.png">신고</button>
                     </div>
                 </div>

@@ -1,11 +1,14 @@
 package com.kh.community.controller;
 
+import java.io.IOException;
+
+import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Servlet implementation class BoardLikeController
@@ -25,8 +28,14 @@ public class BoardLikeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+		
+		int likeCount = new BoardService().increaseLike(memberNo, boardNo);
+		
+		response.getWriter().print(likeCount);
 	}
 
 	/**

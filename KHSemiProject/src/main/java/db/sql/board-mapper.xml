@@ -229,4 +229,28 @@
 		)
 		WHERE RNUM BETWEEN ? AND ?  -- 페이징 처리
 	</entry>
+	<entry key="selectLikeMember">
+		SELECT MEMBER_NUMBER,
+		       COMMUNITY_NUMBER
+		  FROM COMMUNITY_LIKE
+		 WHERE MEMBER_NUMBER = ?
+		   AND COMMUNITY_NUMBER = ?
+	</entry>
+	<entry key="increaseLike">
+		INSERT INTO COMMUNITY_LIKE
+		(
+			MEMBER_NUMBER,
+			COMMUNITY_NUMBER
+		)
+		VALUES
+		(
+			?,
+			?
+		)
+	</entry>
+	<entry key="countBoardLike">
+	   SELECT COUNT(*) AS COUNT
+		 FROM COMMUNITY_LIKE
+		WHERE COMMUNITY_NUMBER = ?
+	</entry>
 </properties>
