@@ -71,6 +71,14 @@ public class BoardService {
 		close(conn);
 		return categoryList;
 	}
+	
+	public ArrayList<Category> selectUserCategory() {
+		Connection conn = getConnection();
+		ArrayList<Category> categoryList = new BoardDao().selectUserCategory(conn);
+		
+		close(conn);
+		return categoryList;
+	}
 
 	public int insertBoard(Board b) {
 		Connection conn = getConnection();
@@ -139,7 +147,7 @@ public class BoardService {
 		ArrayList<Board> boardList;
 		
 		if(tabNo == 0) {
-			boardList = new BoardDao().selectBoardSortedPop(conn, pageInfo, tabNo);
+			boardList = new BoardDao().selectBoardPopList(conn, pageInfo, tabNo);
 		} else {
 			boardList = new BoardDao().selectBoardTabList(conn, pageInfo ,tabNo);
 		}
@@ -152,11 +160,14 @@ public class BoardService {
 		Connection conn = getConnection();
 		int boardCount;
 		
-		boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		if(tabNo == 0) {
+			boardCount = new BoardDao().selectBoardPopListCount(conn, tabNo);
+		} else {
+			boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		}
 
 		close(conn);
 		return boardCount;
 	}
-
 
 }

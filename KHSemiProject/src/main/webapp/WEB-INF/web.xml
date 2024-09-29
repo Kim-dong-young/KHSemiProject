@@ -238,4 +238,14 @@
     <servlet-name>tab.bo</servlet-name>
     <url-pattern>/tab.bo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>like.bo</display-name>
+    <servlet-name>like.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardLikeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>like.bo</servlet-name>
+    <url-pattern>/like.bo</url-pattern>
+  </servlet-mapping>
 </web-app>

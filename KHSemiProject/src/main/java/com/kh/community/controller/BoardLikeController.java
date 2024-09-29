@@ -1,26 +1,22 @@
 package com.kh.community.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import com.kh.community.model.vo.Category;
-import com.kh.community.service.BoardService;
-
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
- * Servlet implementation class BoardEnrollController
+ * Servlet implementation class BoardLikeController
  */
-public class BoardEnrollController extends HttpServlet {
+public class BoardLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardEnrollController() {
+    public BoardLikeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +25,8 @@ public class BoardEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectUserCategory();
-		
-		request.setAttribute("category", categoryList);
-		
-		request.getRequestDispatcher("templates/communityWritePage.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

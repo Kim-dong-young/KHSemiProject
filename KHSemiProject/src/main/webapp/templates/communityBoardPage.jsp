@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ 
-    page import="com.kh.common.PageInfo, java.util.ArrayList, com.kh.community.model.vo.Board" 
+    page import="com.kh.common.PageInfo, 
+                java.util.ArrayList, 
+                com.kh.community.model.vo.Board, 
+                com.kh.community.model.vo.Category" 
 %>
 <%
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	ArrayList<Board> boardList = (ArrayList<Board>)request.getAttribute("boardList");
+    ArrayList<Category> category = (ArrayList<Category>)request.getAttribute("category");
 
     int currentPage = pageInfo.getCurrentPage();
     int startPage = pageInfo.getStartPage();
@@ -23,6 +27,7 @@
 <meta charset="UTF-8">
 <title>퀴즈팡 - 커뮤니티</title>
 
+<script src="<%=request.getContextPath()%>/static/js/communityBoardPage.js"></script>
 <link rel="stylesheet" href="static/css/communityBoardPage.css">
 
 <!-- jQuery -->
@@ -36,16 +41,15 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body onload="init(<%=tno%>)">
 
     <div class="board-tab">
         <ul>
-            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1'" style="background-color: #FF9139;">전체</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=0'">인기글</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=1'">공지</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=2'">질문</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=3'">풀이</button></li>
-            <li><button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=4'">잡담</button></li>
+            <li><button id="t" onclick="location.href='<%=contextPath%>/community?cpage=1'">전체</button></li>
+            <li><button id="t0" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=0'">인기글</button></li>
+            <% for( Category c : category ) { %>
+                <li><button id="t<%=c.getTabNumber()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=c.getTabNumber()%>'"><%=c.getTabName()%></button></li>
+            <% } %>
         </ul>
     </div>
 
@@ -70,16 +74,31 @@ crossorigin="anonymous"></script>
                         <td colspan="6">게시글이 없습니다.</td>
                     </tr>
                 <% } else { %>
-                    <% for(Board b : boardList) { %>
-                        <tr>
-                            <td class="tab"><%=b.getCommunityTab()%></td>
-                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
-                            <td class="author"><%=b.getMemberId()%></td>
-                            <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
-                            <td class="date"><%=b.getCommunityDate()%></td>
-                            <td class="viewcount"><%=b.getCommunityViewcount()%></td>
-                        </tr>
+                    
+                    <% if( tno == null ) { %>
+                        <% for(Board b : boardList) { %>
+                            <tr>
+                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
+                                <td class="author"><%=b.getMemberId()%></td>
+                                <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
+                                <td class="date"><%=b.getCommunityDate()%></td>
+                                <td class="viewcount"><%=b.getCommunityViewcount()%></td>
+                            </tr>
+                        <% } %>
+                    <% } else { %>
+                        <% for(Board b : boardList) { %>
+                            <tr>
+                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
+                                <td class="author"><%=b.getMemberId()%></td>
+                                <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
+                                <td class="date"><%=b.getCommunityDate()%></td>
+                                <td class="viewcount"><%=b.getCommunityViewcount()%></td>
+                            </tr>
+                        <% } %>
                     <% } %>
+
                     <% for(int i=boardList.size(); i < boardLimit; i++) { %>
                         <tr>
                             <td>&nbsp;</td>
@@ -90,6 +109,7 @@ crossorigin="anonymous"></script>
                             <td>&nbsp;</td>
                         </tr>
                     <% } %>
+
                 <% } %>
             </table>
         </div>
