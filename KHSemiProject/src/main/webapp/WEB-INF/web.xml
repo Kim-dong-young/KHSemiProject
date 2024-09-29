@@ -248,4 +248,14 @@
     <servlet-name>like.bo</servlet-name>
     <url-pattern>/like.bo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>myquiz.sl</display-name>
+    <servlet-name>myquiz.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.SelectMyQuiz</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>myquiz.sl</servlet-name>
+    <url-pattern>/myquiz.sl</url-pattern>
+  </servlet-mapping>
 </web-app>

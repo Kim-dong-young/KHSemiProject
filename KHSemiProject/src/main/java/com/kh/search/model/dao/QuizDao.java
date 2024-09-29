@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -268,5 +267,34 @@ public class QuizDao {
 		
 		return list;
 	}
-
+	
+	public ArrayList<Quiz> selectMyQuiz(Connection conn, int memberNo) {
+		ArrayList<Quiz> list = new ArrayList<>();
+		System.out.println(memberNo);
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Quiz q = new Quiz();
+				q.setQuiz_number(rset.getInt("quiz_number"));
+				q.setQuiz_title(rset.getString("quiz_title"));
+				
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}
 }

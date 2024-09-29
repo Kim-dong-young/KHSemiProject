@@ -1,9 +1,9 @@
-package com.kh.member.controller;
+package com.kh.search.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.kh.member.model.vo.Member;
+import com.google.gson.Gson;
 import com.kh.search.model.vo.Quiz;
 import com.kh.search.service.SearchService;
 
@@ -13,15 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PersonalPageController
+ * Servlet implementation class SelectMyQuiz
  */
-public class PersonalPageController extends HttpServlet {
+public class SelectMyQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersonalPageController() {
+    public SelectMyQuiz() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +31,13 @@ public class PersonalPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-			
-		request.getRequestDispatcher("templates/personalPage.jsp").forward(request, response);
+		
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		
+		ArrayList<Quiz> list = new SearchService().selectMyQuiz(memberNo);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

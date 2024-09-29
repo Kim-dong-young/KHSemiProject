@@ -19,7 +19,7 @@ public class Quiz {
 		this.quiz_modify_date = quiz_modify_date;
 		this.member_number = member_number;
 		this.category_number = category_number;
-	}
+	}	
 	@Override
 	public String toString() {
 		return "Quiz [quiz_number=" + quiz_number + ", quiz_title=" + quiz_title + ", quiz_date=" + quiz_date
