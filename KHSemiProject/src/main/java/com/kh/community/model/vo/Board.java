@@ -26,6 +26,18 @@ public class Board {
 		this.communityContent = communityContent;
 	}
 	
+	// 실시간 인기글 상위5개 게시물 불러오는 생성자
+	public Board(int communityNo, String communityTitle, String communityTab, int communityTabNo, String memberId,
+			int commentCount) {
+		super();
+		this.communityNo = communityNo;
+		this.communityTitle = communityTitle;
+		this.communityTab = communityTab;
+		this.communityTabNo = communityTabNo;
+		this.memberId = memberId;
+		this.commentCount = commentCount;
+	}
+	
 	// 게시글 목록 불러오는 생성자
 	public Board(int communityNo, String communityTitle, String communityTab, int communityTabNo,
 			int communityViewcount, String communityDate, String memberId, int commentCount) {
@@ -39,7 +51,7 @@ public class Board {
 		this.memberId = memberId;
 		this.commentCount = commentCount;
 	}
-	
+
 	// 게시글 정보 불러오는 생성자
 	public Board(int communityNo,String communityTitle, String communityContent, int communityViewcount,
 			String communityDate, String memberId, int memberNo, String communityTab, int communityTabNo, int likeCount) {
@@ -73,7 +85,7 @@ public class Board {
 		this.commentCount = commentCount;
 		this.likeCount = likeCount;
 	}
-
+	
 	public int getCommunityNo() {
 		return communityNo;
 	}

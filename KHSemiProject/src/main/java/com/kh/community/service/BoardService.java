@@ -170,4 +170,36 @@ public class BoardService {
 		return boardCount;
 	}
 
+	public int increaseLike(int memberNo, int boardNo) {
+		Connection conn = getConnection();
+		BoardDao bDao = new BoardDao();
+		// 조회 결과가 없으면(= 해당 유저가 해당 게시글 좋아요를 안눌렀다면) result1 = 0
+		int result1 = bDao.selectLikeMember(conn, memberNo, boardNo);
+		int result2 = bDao.increaseLike(conn, memberNo, boardNo);
+		int likeCount = 0;
+		
+		if(result1 == 0 && result2 > 0) {
+			commit(conn);
+			likeCount = bDao.countBoardLike(conn, boardNo);
+		} else if( result2 == -1 ){
+			rollback(conn);
+			likeCount = result2;
+		}
+		else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return likeCount;
+	}
+
+	public ArrayList<Board> selectBoardTop5() {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().selectBoardTop5(conn);
+
+		close(conn);
+		return boardList;
+	}
+
+	
 }

@@ -550,4 +550,116 @@ public class BoardDao {
 		
 		return boardList;
 	}
+	
+	public int selectLikeMember(Connection conn, int memberNo, int boardNo) {
+		int result = 1;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectLikeMember");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			rset = pstmt.executeQuery();
+			if(!rset.next()) { // 조회 결과가 없으면(= 해당 유저가 해당 게시글 좋아요를 안눌렀다면) 0
+				result = 0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int increaseLike(Connection conn, int memberNo, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseLike");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int countBoardLike(Connection conn, int boardNo) {
+		int result = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("countBoardLike");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			switch(e.getErrorCode()) {
+			case 1:
+				return -1;
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Board> selectBoardTop5(Connection conn) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Board> boardList = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectBoardTop5");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+	
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Board board = new Board(
+							rset.getInt("COMMUNITY_NUMBER"),
+							rset.getString("COMMUNITY_TITLE"),
+							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
+							rset.getString("MEMBER_NICKNAME"),
+							rset.getInt("COMMENT_COUNT")
+						);
+				
+				boardList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return boardList;
+	}
 }
