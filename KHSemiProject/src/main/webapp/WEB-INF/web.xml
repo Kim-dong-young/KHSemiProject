@@ -239,4 +239,14 @@
     <servlet-name>like.bo</servlet-name>
     <url-pattern>/like.bo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>poplist.bo</display-name>
+    <servlet-name>poplist.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardNowPopListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>poplist.bo</servlet-name>
+    <url-pattern>/poplist.bo</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -41,7 +41,7 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body onload="init(<%=tno%>)">
+<body onload="initBoard(<%=tno%>)">
 
     <div class="board-tab">
         <ul>
@@ -74,7 +74,7 @@ crossorigin="anonymous"></script>
                         <td colspan="6">게시글이 없습니다.</td>
                     </tr>
                 <% } else { %>
-                    
+
                     <% if( tno == null ) { %>
                         <% for(Board b : boardList) { %>
                             <tr>
