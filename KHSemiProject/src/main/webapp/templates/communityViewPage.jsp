@@ -58,7 +58,7 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body onload="init(<%=tno%>)">
+<body onload="initView(<%=tno%>)">
 	<%@ include file="common/menu.jsp" %>
 	<input id="errorMsg" type="hidden" value='<%=request.getAttribute("errorMsg") == null ? "" : request.getAttribute("errorMsg") %>'>
 

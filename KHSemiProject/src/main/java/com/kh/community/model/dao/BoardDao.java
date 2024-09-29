@@ -628,4 +628,38 @@ public class BoardDao {
 		
 		return result;
 	}
+
+	public ArrayList<Board> selectBoardTop5(Connection conn) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Board> boardList = new ArrayList<>();
+		
+		String sql = prop.getProperty("selectBoardTop5");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+	
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Board board = new Board(
+							rset.getInt("COMMUNITY_NUMBER"),
+							rset.getString("COMMUNITY_TITLE"),
+							rset.getString("TAB_NAME"),
+							rset.getInt("TAB_NUMBER"),
+							rset.getString("MEMBER_NICKNAME"),
+							rset.getInt("COMMENT_COUNT")
+						);
+				
+				boardList.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return boardList;
+	}
 }

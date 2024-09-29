@@ -193,4 +193,13 @@ public class BoardService {
 		return likeCount;
 	}
 
+	public ArrayList<Board> selectBoardTop5() {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().selectBoardTop5(conn);
+
+		close(conn);
+		return boardList;
+	}
+
+	
 }

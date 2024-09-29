@@ -1,4 +1,6 @@
-function init(tno){
+document.addEventListener('load', initView());
+
+function initView(tno){
     const errorMsg = document.getElementById("errorMsg").value
     history.scrollRestoration = "auto";
 
