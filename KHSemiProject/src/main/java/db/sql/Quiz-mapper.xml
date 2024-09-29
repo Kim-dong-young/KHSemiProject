@@ -19,7 +19,13 @@
 		?
 		
 	
-	
+
+	</entry>
+	<entry key="selectMyQuiz">
+		SELECT QUIZ_NUMBER,
+			   QUIZ_TITLE
+		  FROM QUIZ
+		 WHERE MEMBER_NUMBER = ?
 	</entry>
 </properties>
 

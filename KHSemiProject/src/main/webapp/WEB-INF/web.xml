@@ -201,6 +201,15 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>personal.me</display-name>
+    <servlet-name>personal.me</servlet-name>
+    <servlet-class>com.kh.member.controller.PersonalPageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>personal.me</servlet-name>
+    <url-pattern>/personal.me</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <display-name>AjaxQuizTagListController</display-name>
     <servlet-name>AjaxQuizTagListController</servlet-name>
     <servlet-class>com.kh.search.controller.AjaxQuizTagListController</servlet-class>
@@ -209,7 +218,7 @@
     <servlet-name>AjaxQuizTagListController</servlet-name>
     <url-pattern>/tgSearch.sl</url-pattern>
   </servlet-mapping>
-<servlet>
+  <servlet>
     <description></description>
     <display-name>delete.co</display-name>
     <servlet-name>delete.co</servlet-name>
@@ -240,7 +249,7 @@
     <url-pattern>/like.bo</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
+  	<description></description>
     <display-name>poplist.bo</display-name>
     <servlet-name>poplist.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardNowPopListController</servlet-class>
@@ -248,5 +257,15 @@
   <servlet-mapping>
     <servlet-name>poplist.bo</servlet-name>
     <url-pattern>/poplist.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<description></description>
+    <display-name>myquiz.sl</display-name>
+    <servlet-name>myquiz.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.SelectMyQuiz</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>myquiz.sl</servlet-name>
+    <url-pattern>/myquiz.sl</url-pattern>
   </servlet-mapping>
 </web-app>
