@@ -240,6 +240,15 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>delete.me</display-name>
+    <servlet-name>delete.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete.me</servlet-name>
+    <url-pattern>/delete.me</url-pattern>
+    </servlet-mapping>
+	<servlet>
     <display-name>like.bo</display-name>
     <servlet-name>like.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardLikeController</servlet-class>
