@@ -37,27 +37,26 @@
     font-size: 17px;
 }
 
-.swiper {
-    width: 100%;
+.my-swiper-box{
     height: 223px;
-
+    /* border: 1px solid black; */
 }
 
-.swiper-slide {
-    width: 100px;
-    height: 100%;
+.swiper-wrapper {
+    padding: 0 10px;
 }
 
-.thumbnail{
+.swiper-slide .thumbnail{
     border-radius: 10px;
     border: 1px solid black;
-    height: 75%;
+    height: 180px;
 }
 
-.title{
+.swiper-slide .title{
+    margin-top: 10px;
     border-radius: 10px;
     border: 1px solid black;
-    height: 20%;
+    height: 30px;
 }
 
 #content2{

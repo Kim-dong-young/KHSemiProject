@@ -12,5 +12,11 @@ function init(pageName, optional){
         case "communityWritePage":
             initSide()
             break;
+        case "personalPage":
+            initLoad(optional) // memberNo 전달
+            break;
+        case "mainPage":
+            initSwiper()
+            break;
     }
 }
