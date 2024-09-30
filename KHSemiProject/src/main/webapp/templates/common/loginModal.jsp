@@ -25,7 +25,6 @@
             color: black;
         }
     </style>
-    <script src="static/js/menu.js"></script>
 </head>
 <body>
 	<!-- contextPath 로그인 modal -->

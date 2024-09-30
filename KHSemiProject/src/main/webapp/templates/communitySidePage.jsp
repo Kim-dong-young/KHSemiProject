@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="static/css/communitySidePage.css">
 
 </head>
-<body onload="initSide()">
+<body>
     <div class="hot-bulletin">
         <img src="static/img/fire-icon.png">
         <span>실시간 인기글</span>
