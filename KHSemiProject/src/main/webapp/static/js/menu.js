@@ -12,5 +12,8 @@ function init(pageName, optional){
         case "communityWritePage":
             initSide()
             break;
+        case "searchMainPage":
+            initSide()
+            break;
     }
 }

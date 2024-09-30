@@ -15,6 +15,7 @@
 %>
 
 
+
 <!DOCTYPE html>
 <html>
 <html lang="ko">
@@ -22,11 +23,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
-<link rel="stylesheet" href="static/css/searchMainPage.css">
 
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
+
+    <link rel="stylesheet" href="static/css/searchMainPage.css">
+    <script>
+        let tttList = [];
+        <% if (tagList != null && !tagList.isEmpty()){ %>
+            <% for(int i = 0; i < tagList.size(); i++){ %>
+                tttList[<%=i%>] = "<%=tagList.get(i)%>"
+            console.log(tttList)
+            <% } %>
+        <% } else {%>
+            tttList = "null"
+            console.log(tttList)
+        <% } %>
+    </script>
+
     <div class="content">
         <div class="wrapper">
             <div class="category-div" >
@@ -195,21 +210,48 @@
                             searchText: document.querySelector("#tag-search input").value
                         },
                         success: function(res){
+                            
+
                             const tags = document.getElementById("tag-popup-tags")
+                            const clickedtags = document.getElementById("tag-selected-div")
                             tags.innerHTML = "";
-                            let tagList = document.getElementsByClassName("tag-clicked");
+                            let tagLiist = document.getElementsByClassName("tag-clicked");
                             let check = 0;
-                            for(let tag of res){
-                                check = 0;
-                                for (let tagli of tagList){
-                                    if(tag.quizTag == tagli.value){
-                                        check = 1;
+
+                            if(tttList == "null") { 
+                                console.log("비어있다!");
+                                for(let tag of res){
+                                    check = 0;
+                                    for (let tagli of tagLiist){
+                                        if(tag.quizTag == tagli.value){
+                                            check = 1;
+                                        }
+                                    }
+                                    if(check == 0){
+                                        tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + tag.count + "</button>";
                                     }
                                 }
-                                if(check == 0){
-                                    tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + tag.count + "</button>";
+                            } else { 
+                                console.log("안비었음!");
+                                for(let tag of res){
+                                    check = 0;
+                                    for(let tt of tttList) {
+                                        if(tt == tag.quizTag){
+                                            check = 1;
+                                        }
+                                    }
+                                    if(check == 1) {
+                                        clickedtags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "' class='tag-clicked'>" + tag.quizTag + tag.count + "</button>";
+                                    } else {
+                                        tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + tag.count + "</button>";
+                                    }
                                 }
+                                tttList = "null"
+                                console.log("어라!");
                             }
+
+                            
+                            
 
                         },
                         error: function(){

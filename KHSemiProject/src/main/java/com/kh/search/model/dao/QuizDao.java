@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -112,113 +113,245 @@ public class QuizDao {
 	}
 
 	public ArrayList<Quiz> selectQuiz(Connection conn, PageInfo pi, int category, int search_type, String search_text, int orderby, ArrayList<String> tagList) {
-	    ArrayList<Quiz> list = new ArrayList<>();
+ArrayList<Quiz> list = new ArrayList<>();
 	    
 	    PreparedStatement pstmt = null;
 	    ResultSet rset = null;
 
 	    int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 	    int endRow = startRow + pi.getBoardLimit() - 1;
-
-	    StringBuilder sql = new StringBuilder("SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT QUIZ_NUMBER, QUIZ_TITLE ");
 	    
-	    // 1. ORDER BY에 따른 쿼리 변경
-	    if(orderby == 1) {
-	        sql.append("FROM (SELECT QUIZ_NUMBER, COUNT(*) ")
-	           .append("FROM QUIZ_LOG GROUP BY QUIZ_NUMBER ORDER BY COUNT(*) DESC) ")
-	           .append("JOIN QUIZ USING (QUIZ_NUMBER) ");
-	    } else if(orderby == 2){
-	        sql.append("FROM QUIZ ");
-	    } else if(orderby == 3) {
-	        sql.append("FROM (SELECT QUIZ_NUMBER, AVG(QUIZ_RATE_RATING) ")
-	           .append("FROM QUIZ_RATE GROUP BY QUIZ_NUMBER ORDER BY AVG(QUIZ_RATE_RATING) DESC) ")
-	           .append("JOIN QUIZ USING (QUIZ_NUMBER) ");
-	    }
-
-	    // 2. 기본 JOIN 조건 추가
-	    sql.append("JOIN CATEGORY USING (CATEGORY_NUMBER) ")
-	       .append("JOIN MEMBER USING (MEMBER_NUMBER) ");
-
-	    // 3. 태그 리스트가 있으면 QUIZ_TAG와 JOIN
-	    if (tagList != null && !tagList.isEmpty()) {
-	        sql.append("JOIN QUIZ_TAG USING (QUIZ_NUMBER) ");
-	    }
-
-	    // 4. WHERE 조건 추가
-	    boolean sqlWhere = false;
 	    
-	    if (category != 0) {
-	        sql.append("WHERE CATEGORY_NUMBER = ? ");
-	        sqlWhere = true;
-	    }
+	    int index = 1;
+	    
+	    String sql = "";
+	    
+	    
+	    if(tagList != null && !tagList.isEmpty()) {
+	    	
+	    	
+	    	
+	    	sql += ("SELECT * FROM (SELECT A.* FROM (SELECT QUIZ_NUMBER, QUIZ_TITLE ");
+		    // 1. ORDER BY에 따른 쿼리 변경
+		    if(orderby == 1) {
+		        sql += ("FROM (SELECT QUIZ_NUMBER, COUNT(*) ");
+		        sql += ("FROM QUIZ_LOG GROUP BY QUIZ_NUMBER ORDER BY COUNT(*) DESC) ");
+		        sql += ("JOIN QUIZ USING (QUIZ_NUMBER) ");
+		    } else if(orderby == 2){
+		    	sql += ("FROM QUIZ ");
+		    } else if(orderby == 3) {
+		    	sql += ("FROM (SELECT QUIZ_NUMBER, AVG(QUIZ_RATE_RATING) ")
+		           +("FROM QUIZ_RATE GROUP BY QUIZ_NUMBER ORDER BY AVG(QUIZ_RATE_RATING) DESC) ")
+		           +("JOIN QUIZ USING (QUIZ_NUMBER) ");
+		    }
+		    // 3. 태그 리스트가 있으면 QUIZ_TAG와 JOIN
+		    if (tagList != null && !tagList.isEmpty()) {
+		    	sql += ("JOIN QUIZ_TAG USING (QUIZ_NUMBER) ");
+		    }
+		    // 2. 기본 JOIN 조건 추가
+		    sql += ("JOIN CATEGORY USING (CATEGORY_NUMBER) ")
+		       + ("JOIN MEMBER USING (MEMBER_NUMBER) ");
 
-	    if (search_text != null && !search_text.trim().isEmpty()) {
+		    
+
+		    // 4. WHERE 조건 추가
+		    boolean sqlWhere = false;
+		    
+		    if (category != 0) {
+		    	sql += ("WHERE CATEGORY_NUMBER = ? ");
+		        sqlWhere = true;
+		    }
+
+		    if (search_text != null && !search_text.trim().isEmpty()) {
+		        if (sqlWhere) {
+		        	sql += ("AND ");
+		        } else {
+		        	sql += ("WHERE ");
+		            sqlWhere = true;
+		        }
+		        if (search_type == 1) {
+		        	sql += ("QUIZ_TITLE LIKE ? ");
+		        } else if (search_type == 2) {
+		        	sql += ("MEMBER_NICKNAME LIKE ? ");
+		        }
+		    }
+	    	
+	    	
 	        if (sqlWhere) {
-	            sql.append("AND ");
+	        	sql += ("AND ");
 	        } else {
-	            sql.append("WHERE ");
+	        	sql += ("WHERE ");
 	            sqlWhere = true;
 	        }
-	        if (search_type == 1) {
-	            sql.append("QUIZ_TITLE LIKE ? ");
-	        } else if (search_type == 2) {
-	            sql.append("MEMBER_NICKNAME LIKE ? ");
-	        }
-	    }
+	        sql += ("TAG_NAME = ?");
+	    
+	    	
+	    	// 5. ORDER BY 구문 추가
+	        sql += ("ORDER BY ");
+		    if (orderby == 1 || orderby == 3) {
+		    	sql += ("ROWNUM DESC ");
+		    } else if (orderby == 2) {
+		    	sql += ("QUIZ_NUMBER DESC ");
+		    }
 
-	    if (tagList != null && !tagList.isEmpty()) {
-	        if (sqlWhere) {
-	            sql.append("AND ");
-	        } else {
-	            sql.append("WHERE ");
-	            sqlWhere = true;
-	        }
-	        sql.append("TAG_NAME IN (");
-	        for (int i = 0; i < tagList.size(); i++) {
-	            sql.append("?");
-	            if (i < tagList.size() - 1) {
-	                sql.append(", ");
-	            }
-	        }
-	        sql.append(") ");
-	    }
+		    // 6. 페이징 처리
+		    sql += (") A) WHERE ROWNUM BETWEEN ? AND ?");
+	    	
+	    	
+		    
+		    for(int i = 0; i < tagList.size() -1; i++) {
+		    	sql += (" INTERSECT ");
+		    	sql += ("SELECT * FROM (SELECT A.* FROM (SELECT QUIZ_NUMBER, QUIZ_TITLE ");
+			    // 1. ORDER BY에 따른 쿼리 변경
+			    if(orderby == 1) {
+			    	sql += ("FROM (SELECT QUIZ_NUMBER, COUNT(*) ")
+			           + ("FROM QUIZ_LOG GROUP BY QUIZ_NUMBER ORDER BY COUNT(*) DESC) ")
+			           + ("JOIN QUIZ USING (QUIZ_NUMBER) ");
+			    } else if(orderby == 2){
+			    	sql += ("FROM QUIZ ");
+			    } else if(orderby == 3) {
+			    	sql += ("FROM (SELECT QUIZ_NUMBER, AVG(QUIZ_RATE_RATING) ")
+			           +("FROM QUIZ_RATE GROUP BY QUIZ_NUMBER ORDER BY AVG(QUIZ_RATE_RATING) DESC) ")
+			           +("JOIN QUIZ USING (QUIZ_NUMBER) ");
+			    }
+// 3. 태그 리스트가 있으면 QUIZ_TAG와 JOIN
+			    if (tagList != null && !tagList.isEmpty()) {
+			    	sql += ("JOIN QUIZ_TAG USING (QUIZ_NUMBER) ");
+			    }
 
-	    // 5. ORDER BY 구문 추가
-	    sql.append("ORDER BY ");
-	    if (orderby == 1 || orderby == 3) {
-	        sql.append("ROWNUM DESC ");
-	    } else if (orderby == 2) {
-	        sql.append("QUIZ_NUMBER DESC ");
-	    }
+			    // 2. 기본 JOIN 조건 추가
+			    sql += ("JOIN CATEGORY USING (CATEGORY_NUMBER) ")
+			       +("JOIN MEMBER USING (MEMBER_NUMBER) ");
 
-	    // 6. 페이징 처리
-	    sql.append(") A) WHERE RNUM BETWEEN ? AND ?");
+			    
+			    // 4. WHERE 조건 추가
+			    sqlWhere = false;
+			    
+			    if (category != 0) {
+			    	sql += ("WHERE CATEGORY_NUMBER = ? ");
+			        sqlWhere = true;
+			    }
+
+			    if (search_text != null && !search_text.trim().isEmpty()) {
+			        if (sqlWhere) {
+			        	sql += ("AND ");
+			        } else {
+			        	sql += ("WHERE ");
+			            sqlWhere = true;
+			        }
+			        if (search_type == 1) {
+			        	sql += ("QUIZ_TITLE LIKE ? ");
+			        } else if (search_type == 2) {
+			        	sql += ("MEMBER_NICKNAME LIKE ? ");
+			        }
+			    }
+		    	
+			    if (sqlWhere) {
+			    	sql += ("AND ");
+		        } else {
+		        	sql += ("WHERE ");
+		            sqlWhere = true;
+		        }
+			    sql += ("TAG_NAME = ?");
+		    	
+		    	// 5. ORDER BY 구문 추가
+			    sql += ("ORDER BY ");
+			    if (orderby == 1 || orderby == 3) {
+			    	sql += ("ROWNUM DESC ");
+			    } else if (orderby == 2) {
+			    	sql += ("QUIZ_NUMBER DESC ");
+			    }
+
+			    // 6. 페이징 처리
+			    sql += (") A) WHERE ROWNUM BETWEEN ? AND ?");
+			    index++;
+	    	}
+		    
+	    	
+	    	
+	    } else {
+	    	sql += ("SELECT * FROM (SELECT A.* FROM (SELECT QUIZ_NUMBER, QUIZ_TITLE ");
+		    
+		    // 1. ORDER BY에 따른 쿼리 변경
+		    if(orderby == 1) {
+		    	sql += ("FROM (SELECT QUIZ_NUMBER, COUNT(*) ")
+		           +("FROM QUIZ_LOG GROUP BY QUIZ_NUMBER ORDER BY COUNT(*) DESC) ")
+		           +("JOIN QUIZ USING (QUIZ_NUMBER) ");
+		    } else if(orderby == 2){
+		    	sql += ("FROM QUIZ ");
+		    } else if(orderby == 3) {
+		    	sql += ("FROM (SELECT QUIZ_NUMBER, AVG(QUIZ_RATE_RATING) ")
+		           +("FROM QUIZ_RATE GROUP BY QUIZ_NUMBER ORDER BY AVG(QUIZ_RATE_RATING) DESC) ")
+		           +("JOIN QUIZ USING (QUIZ_NUMBER) ");
+		    }
+
+		    // 2. 기본 JOIN 조건 추가
+		    sql += ("JOIN CATEGORY USING (CATEGORY_NUMBER) ")
+		       +("JOIN MEMBER USING (MEMBER_NUMBER) ");
+
+		    // 4. WHERE 조건 추가
+		    boolean sqlWhere = false;
+		    
+		    if (category != 0) {
+		    	sql += ("WHERE CATEGORY_NUMBER = ? ");
+		        sqlWhere = true;
+		    }
+
+		    if (search_text != null && !search_text.trim().isEmpty()) {
+		        if (sqlWhere) {
+		        	sql += ("AND ");
+		        } else {
+		        	sql += ("WHERE ");
+		            sqlWhere = true;
+		        }
+		        if (search_type == 1) {
+		        	sql += ("QUIZ_TITLE LIKE ? ");
+		        } else if (search_type == 2) {
+		        	sql += ("MEMBER_NICKNAME LIKE ? ");
+		        }
+		    }
+		    
+		 // 5. ORDER BY 구문 추가
+		    sql += ("ORDER BY ");
+		    if (orderby == 1 || orderby == 3) {
+		    	sql += ("ROWNUM DESC ");
+		    } else if (orderby == 2) {
+		    	sql += ("QUIZ_NUMBER DESC ");
+		    }
+
+		    // 6. 페이징 처리
+		    sql += (") A) WHERE ROWNUM BETWEEN ? AND ?");
+	    }
+	    
+	    
+	    
 
 	    try {
-	        pstmt = conn.prepareStatement(sql.toString());
-
+	        pstmt = conn.prepareStatement(sql);
+	        int taglll = 0;
 	        int paramIndex = 1;
+	        for(int i = 0; i < index; i++) {
+	        	// 카테고리 바인딩
+		        if (category != 0) {
+		            pstmt.setInt(paramIndex++, category);
+		        }
 
-	        // 카테고리 바인딩
-	        if (category != 0) {
-	            pstmt.setInt(paramIndex++, category);
+		        // 검색 텍스트 바인딩
+		        if (search_text != null && !search_text.trim().isEmpty()) {
+		            pstmt.setString(paramIndex++, "%" + search_text + "%");
+		        }
+
+		        // 태그 리스트 바인딩
+		        if (tagList != null && !tagList.isEmpty()) {
+		        	pstmt.setString(paramIndex++, tagList.get(taglll++));
+		                
+
+		        }
+
+		        // 페이징 바인딩
+		        pstmt.setInt(paramIndex++, startRow);
+		        pstmt.setInt(paramIndex++, endRow);
 	        }
-
-	        // 검색 텍스트 바인딩
-	        if (search_text != null && !search_text.trim().isEmpty()) {
-	            pstmt.setString(paramIndex++, "%" + search_text + "%");
-	        }
-
-	        // 태그 리스트 바인딩
-	        if (tagList != null && !tagList.isEmpty()) {
-	            for (String tag : tagList) {
-	                pstmt.setString(paramIndex++, tag);
-	            }
-	        }
-
-	        // 페이징 바인딩
-	        pstmt.setInt(paramIndex++, startRow);
-	        pstmt.setInt(paramIndex++, endRow);
 
 	        // 쿼리 실행
 	        rset = pstmt.executeQuery();
@@ -237,7 +370,9 @@ public class QuizDao {
 	    }
 	    return list;
 	}
-
+		
+		
+		
 	public ArrayList<Tag> selectTagList(Connection conn, String searchText) {
 		ArrayList<Tag> list = new ArrayList<>();
 		
