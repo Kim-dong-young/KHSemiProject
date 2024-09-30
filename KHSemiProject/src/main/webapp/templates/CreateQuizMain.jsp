@@ -19,9 +19,9 @@ System.out.println("Context Path: " + contextPath);
 			<img src="<%=contextPath%>/static/img/QuizLogo.png" alt="Quiz Logo" class="logo">
 		</div>
 		<div class="quiz-form">
-			<label for="quiz-title">퀴즈 제목:</label> <input type="text"
-				id="quiz-title" placeholder="제목을 입력해주세요."> <label
-				for="quiz-description">퀴즈 설명:</label>
+			<label for="quiz-title">퀴즈 제목:</label> 
+			<input type="text" id="quiz-title" placeholder="제목을 입력해주세요."> 
+				<label for="quiz-description">퀴즈 설명:</label>
 			<textarea id="quiz-description" placeholder="텍스트로 작성"></textarea>
 
 			<label for="thumbnail">썸네일:</label>
