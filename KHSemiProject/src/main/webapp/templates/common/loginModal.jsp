@@ -25,7 +25,6 @@
             color: black;
         }
     </style>
-    <script src="static/js/menu.js"></script>
 </head>
 <body>
 	<!-- contextPath 로그인 modal -->
@@ -41,7 +40,7 @@
 				<!-- Modal body -->
 				<div class="modal-body" align="center">
 					<form id="loginForm" action="<%=contextPath %>/login.me" method="POST">
-						<input type="hidden" name="origin" value="<%=request.getRequestURI()%>">
+						<input type="hidden" name="path" value="">
 						<div class="mb-3 mt-3">
 							<label for="id" class="form-label">아이디:</label>
 							<input type="text" class="form-control" id="id" placeholder="Enter ID" name="memberId">

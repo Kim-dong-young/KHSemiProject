@@ -37,32 +37,15 @@
     font-size: 17px;
 }
 
-/* 좀더 찾아봐야됨 */
-.quiz-list{ 
-    /* border: 1px solid black; */
-    margin: 0 1px;
-    height: 223px;
-}
-
-.quiz-list>ul{
-    display: flex;
-    flex-wrap: nowrap;
-    /* border: 1px solid black; */
-    height: 100%;
-}
-
-.quiz-box{
-    width: 250px;
-    /* border: 1px solid black; */
-    margin-right: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.quiz-box>div{
-    /* border: 1px solid black; */
+.swiper {
     width: 100%;
+    height: 223px;
+
+}
+
+.swiper-slide {
+    width: 100px;
+    height: 100%;
 }
 
 .thumbnail{

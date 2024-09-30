@@ -10,6 +10,13 @@
 <link rel="stylesheet" href="static/css/communityBoardPage.css">
 
 <script src="static/js/mainPage.js"></script>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -25,13 +32,17 @@
                 </ul>
             </div>
             <div>
-                <div class="quiz-list">
-                    <ul>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                    </ul>
+                <div class="swiper">
+                	<div class=swiper-wrapper>
+                		<div class="swiper-slide">
+                			
+                         </div>
+                         
+                	</div>
+                	
+                	  <!-- 이전, 다음 버튼 필요시 추가 -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
                 </div>
             </div>
         </div>
