@@ -247,8 +247,8 @@
   <servlet-mapping>
     <servlet-name>delete.me</servlet-name>
     <url-pattern>/delete.me</url-pattern>
-    </servlet-mapping>
-	<servlet>
+  </servlet-mapping>
+  <servlet>
     <display-name>like.bo</display-name>
     <servlet-name>like.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardLikeController</servlet-class>
@@ -296,5 +296,15 @@
   <servlet-mapping>
     <servlet-name>create.dao</servlet-name>
     <url-pattern>/create.dao</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>search.bo</display-name>
+    <servlet-name>search.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardSearchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search.bo</servlet-name>
+    <url-pattern>/search.bo</url-pattern>
   </servlet-mapping>
 </web-app>
