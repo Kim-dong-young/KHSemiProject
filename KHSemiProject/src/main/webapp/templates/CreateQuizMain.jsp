@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+%>
 <%
 String contextPath = request.getContextPath();
+
 %>
 
 <!DOCTYPE html>
@@ -17,15 +19,15 @@ String contextPath = request.getContextPath();
 		<div class="header">
 			<img src="<%=contextPath%>/static/img/QuizLogo.png" alt="Quiz Logo" class="logo">
 		</div>
-		<form class="quiz-form">
+		<form class="quiz-form" action="<%=contextPath%>/create.quiz" method="post" enctype="multipart/form-data" >
 			<label for="quiz-title">퀴즈 제목:</label> 
 			<input type="text" id="quiz-title" name="title" placeholder="제목을 입력해주세요."> 
 				<label for="quiz-description">퀴즈 설명:</label>
-			<textarea id="quiz-description" placeholder="텍스트로 작성"></textarea>
+			<textarea id="quiz-description" name="explanation" placeholder="텍스트로 작성"></textarea>
 
 			<label for="thumbnail">썸네일:</label>
 			<div class="thumbnail-upload">
-				<input type="file" id="thumbnail"  name="thumbnail" accept="image/*"> 
+				<input type="file" id="thumbnail" name="thumbnail" accept="image/*"> 
 				<label
 					for="thumbnail">파일 업로드
 				</label>
@@ -35,7 +37,7 @@ String contextPath = request.getContextPath();
 			<div class="category-tag-row">
 				<div class="form-group">
 					<label for="category">카테고리:</label> 
-					<select id="category">
+					<select id="category" name="category">
 						<option value="">선택</option>
 						<option value="humor">유머</option>
 						<option value="art_literature">예술/문학</option>
@@ -49,8 +51,8 @@ String contextPath = request.getContextPath();
 				</div>
 
 				<div class="form-group">
-					<label for="tag">태그 설정:</label> <input type="text" id="tag"
-						placeholder="직접 입력">
+					<label for="tag">태그 설정:</label> 
+					<input type="text" id="tag" name="tag" placeholder="직접 입력">
 				</div>
 			</div>
 			<div class="buttons">
@@ -63,9 +65,8 @@ String contextPath = request.getContextPath();
 					<a href="<%=request.getContextPath()%>/quiz.cr">질문 생성하기</a>
 				</button>
 			</div>
-		</div>
-	</form>
-
+		</form>
+	</div>
 
 	<script src="<%=contextPath%>/static/js/CreateQuizMain.js"></script>
 </body>
