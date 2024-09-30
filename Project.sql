@@ -21,6 +21,8 @@ DROP TABLE RP CASCADE CONSTRAINTS;
 DROP TABLE IMGS_file CASCADE CONSTRAINTS;
 DROP TABLE IMGS_link CASCADE CONSTRAINTS;
 
+
+
 DROP SEQUENCE SEQ_MNO;
 DROP SEQUENCE SEQ_DCNO;
 DROP SEQUENCE SEQ_COMMUNITY;
@@ -51,8 +53,10 @@ CREATE TABLE QUIZ(
     QUIZ_title varchar2(50) not null,
     QUIZ_date date default SYSDATE not null,
     QUIZ_modify_date date default SYSDATE,
+    QUIZ_explanation varchar2(500),
     MEMBER_number number not null,
     CATEGORY_number number not null,
+    THUMBNAIL BLOB,
     PRIMARY KEY(QUIZ_number),
     FOREIGN KEY(MEMBER_number) references MEMBER(MEMBER_number),
     FOREIGN KEY(CATEGORY_number) references CATEGORY(CATEGORY_number)
@@ -236,14 +240,6 @@ CREATE TABLE IMGS_link (
     IMGS_link_name VARCHAR2(255),          -- 이미지 파일 이름
     IMGS_link_upload_date DATE DEFAULT SYSDATE,   -- 업로드 날짜
     FOREIGN KEY (IMGS_link_id) references PROBLEM(problem_number)
-);
-
-CREATE TABLE THUMBNAIL(
-    TN_id NUMBER PRIMARY KEY NOT NULL,
-    TN_data BLOB,
-    TN_name VARCHAR2(255),
-    TN_upload_date DATE DEFAULT SYSDATE,
-    FOREIGN KEY (TN_id) references QUIZ(QUIZ_number)  
 );
 
 

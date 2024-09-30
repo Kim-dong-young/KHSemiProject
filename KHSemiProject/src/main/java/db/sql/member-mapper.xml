@@ -102,4 +102,10 @@
 		WHERE MEMBER_ID = ?
 		  AND MEMBER_PWD = ?
 	</entry>
+	<entry key="deleteMember">
+		UPDATE MEMBER
+			SET MEMBER_STATUS = 'N'
+		WHERE MEMBER_ID = ?
+			AND MEMBER_PWD = ?
+	</entry>
 </properties>

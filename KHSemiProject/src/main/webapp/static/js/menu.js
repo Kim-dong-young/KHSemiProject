@@ -17,6 +17,9 @@ function init(pageName, optional){
             break;
         case "mainPage":
             initSwiper()
+			break;
+        case "searchMainPage":
+            tagSearchAjax()
             break;
     }
 }

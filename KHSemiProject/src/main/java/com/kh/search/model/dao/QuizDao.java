@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.StringJoiner;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.PageInfo;
@@ -120,82 +121,70 @@ public class QuizDao {
 	    int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 	    int endRow = startRow + pi.getBoardLimit() - 1;
 
-	    StringBuilder sql = new StringBuilder("SELECT * FROM (SELECT ROWNUM RNUM, A.* FROM (SELECT QUIZ_NUMBER, QUIZ_TITLE ");
-	    
-	    // 1. ORDER BY에 따른 쿼리 변경
-	    if(orderby == 1) {
-	        sql.append("FROM (SELECT QUIZ_NUMBER, COUNT(*) ")
-	           .append("FROM QUIZ_LOG GROUP BY QUIZ_NUMBER ORDER BY COUNT(*) DESC) ")
-	           .append("JOIN QUIZ USING (QUIZ_NUMBER) ");
-	    } else if(orderby == 2){
-	        sql.append("FROM QUIZ ");
-	    } else if(orderby == 3) {
-	        sql.append("FROM (SELECT QUIZ_NUMBER, AVG(QUIZ_RATE_RATING) ")
-	           .append("FROM QUIZ_RATE GROUP BY QUIZ_NUMBER ORDER BY AVG(QUIZ_RATE_RATING) DESC) ")
-	           .append("JOIN QUIZ USING (QUIZ_NUMBER) ");
-	    }
+	    // 기본 SELECT 쿼리
+	    String sql = "SELECT * FROM ( " +
+	                 "    SELECT A.*, ROWNUM AS RNUM FROM ( " +
+	                 "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE ";
 
-	    // 2. 기본 JOIN 조건 추가
-	    sql.append("JOIN CATEGORY USING (CATEGORY_NUMBER) ")
-	       .append("JOIN MEMBER USING (MEMBER_NUMBER) ");
-
-	    // 3. 태그 리스트가 있으면 QUIZ_TAG와 JOIN
-	    if (tagList != null && !tagList.isEmpty()) {
-	        sql.append("JOIN QUIZ_TAG USING (QUIZ_NUMBER) ");
-	    }
-
-	    // 4. WHERE 조건 추가
-	    boolean sqlWhere = false;
-	    
-	    if (category != 0) {
-	        sql.append("WHERE CATEGORY_NUMBER = ? ");
-	        sqlWhere = true;
-	    }
-
-	    if (search_text != null && !search_text.trim().isEmpty()) {
-	        if (sqlWhere) {
-	            sql.append("AND ");
-	        } else {
-	            sql.append("WHERE ");
-	            sqlWhere = true;
-	        }
-	        if (search_type == 1) {
-	            sql.append("QUIZ_TITLE LIKE ? ");
-	        } else if (search_type == 2) {
-	            sql.append("MEMBER_NICKNAME LIKE ? ");
-	        }
-	    }
-
-	    if (tagList != null && !tagList.isEmpty()) {
-	        if (sqlWhere) {
-	            sql.append("AND ");
-	        } else {
-	            sql.append("WHERE ");
-	            sqlWhere = true;
-	        }
-	        sql.append("TAG_NAME IN (");
-	        for (int i = 0; i < tagList.size(); i++) {
-	            sql.append("?");
-	            if (i < tagList.size() - 1) {
-	                sql.append(", ");
-	            }
-	        }
-	        sql.append(") ");
-	    }
-
-	    // 5. ORDER BY 구문 추가
-	    sql.append("ORDER BY ");
-	    if (orderby == 1 || orderby == 3) {
-	        sql.append("ROWNUM DESC ");
+	    // ORDER BY에 따른 쿼리 변경
+	    if (orderby == 1) {
+	        sql += "        FROM (SELECT QUIZ_NUMBER, COUNT(*) " +
+	               "        FROM QUIZ_LOG GROUP BY QUIZ_NUMBER ORDER BY COUNT(*) DESC) QL " +
+	               "        JOIN QUIZ Q ON QL.QUIZ_NUMBER = Q.QUIZ_NUMBER ";
 	    } else if (orderby == 2) {
-	        sql.append("QUIZ_NUMBER DESC ");
+	        sql += "        FROM QUIZ Q ";
+	    } else if (orderby == 3) {
+	        sql += "        FROM (SELECT QUIZ_NUMBER, AVG(QUIZ_RATE_RATING) " +
+	               "        FROM QUIZ_RATE GROUP BY QUIZ_NUMBER ORDER BY AVG(QUIZ_RATE_RATING) DESC) QR " +
+	               "        JOIN QUIZ Q ON QR.QUIZ_NUMBER = Q.QUIZ_NUMBER ";
 	    }
 
-	    // 6. 페이징 처리
-	    sql.append(") A) WHERE RNUM BETWEEN ? AND ?");
+	    // 기본 조인 및 WHERE 절 시작
+	    sql += "        JOIN CATEGORY C ON Q.CATEGORY_NUMBER = C.CATEGORY_NUMBER " +
+	           "        JOIN MEMBER M ON Q.MEMBER_NUMBER = M.MEMBER_NUMBER ";
+
+	    // 태그 필터링 추가
+	    if (tagList != null && !tagList.isEmpty()) {
+	        sql += "        JOIN QUIZ_TAG QT ON Q.QUIZ_NUMBER = QT.QUIZ_NUMBER ";
+	    }
+
+	    // WHERE 절 필터링
+	    sql += "        WHERE 1 = 1 ";  // 기본 WHERE 절
+
+	    // 카테고리 필터링
+	    if (category != 0) {
+	        sql += "        AND C.CATEGORY_NUMBER = ? ";
+	    }
+
+	    // 검색 필터링
+	    if (search_text != null && !search_text.trim().isEmpty()) {
+	        if (search_type == 1) {
+	            sql += "        AND Q.QUIZ_TITLE LIKE ? ";
+	        } else if (search_type == 2) {
+	            sql += "        AND M.MEMBER_NICKNAME LIKE ? ";
+	        }
+	    }
+
+	    // 태그 리스트 필터링
+	    if (tagList != null && !tagList.isEmpty()) {
+	        // 태그 수에 따라 ?를 동적으로 생성
+	        StringJoiner sj = new StringJoiner(", ");
+	        for (int i = 0; i < tagList.size(); i++) {
+	            sj.add("?");
+	        }
+	        sql += "        AND QT.TAG_NAME IN (" + sj.toString() + ") ";
+	        sql += "        GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE ";
+	        sql += "        HAVING COUNT(DISTINCT QT.TAG_NAME) = ? ";
+	    } else {
+	        sql += "        GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE ";
+	    }
+
+	    // 페이징 및 최종 WHERE 절
+	    sql += "    ) A WHERE ROWNUM <= ? " +
+	           ") WHERE RNUM >= ?";
 
 	    try {
-	        pstmt = conn.prepareStatement(sql.toString());
+	        pstmt = conn.prepareStatement(sql);
 
 	        int paramIndex = 1;
 
@@ -214,19 +203,20 @@ public class QuizDao {
 	            for (String tag : tagList) {
 	                pstmt.setString(paramIndex++, tag);
 	            }
+	            pstmt.setInt(paramIndex++, tagList.size());  // 태그 개수 바인딩
 	        }
 
 	        // 페이징 바인딩
-	        pstmt.setInt(paramIndex++, startRow);
 	        pstmt.setInt(paramIndex++, endRow);
+	        pstmt.setInt(paramIndex++, startRow);
 
 	        // 쿼리 실행
 	        rset = pstmt.executeQuery();
 
 	        while (rset.next()) {
 	            Quiz q = new Quiz();
-	            q.setQuiz_number(rset.getInt("quiz_number"));
-	            q.setQuiz_title(rset.getString("quiz_title"));
+	            q.setQuiz_number(rset.getInt("QUIZ_NUMBER"));
+	            q.setQuiz_title(rset.getString("QUIZ_TITLE"));
 	            list.add(q);
 	        }
 	    } catch (SQLException e) {
@@ -238,6 +228,9 @@ public class QuizDao {
 	    return list;
 	}
 
+		
+		
+		
 	public ArrayList<Tag> selectTagList(Connection conn, String searchText) {
 		ArrayList<Tag> list = new ArrayList<>();
 		

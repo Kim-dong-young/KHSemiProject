@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	    }
 	});
 
+ 
 
     // '질문 추가' 버튼 클릭 이벤트
     addQuestionBtn.addEventListener('click', addNewQuestion);
@@ -123,4 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // 첫 번째 페이지로 이동
     updatePageCount();
     goToPage(1);
+
+
 });
