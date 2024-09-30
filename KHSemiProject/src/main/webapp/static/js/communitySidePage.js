@@ -1,7 +1,6 @@
 function initSide(){
-    console.log("initSide")
     selectPopBoard();
-    setInterval(selectPopBoard, 3000);
+    // setInterval(selectPopBoard, 3000);
 }
 
 function selectPopBoard(){
@@ -13,8 +12,9 @@ function selectPopBoard(){
             for(let board of res){
                 str += (
                     "<tr>"+
-                    "<td class='tab'>" + board.communityTab + "</td>" +
-                    "<td class='title'>" + board.communityTitle + "</td>" +
+                    "<td class='tab' data-tab-no=\'"+ board.communityTabNo +"\' onclick=\"location.href='community?cpage=1&tno=" + board.communityTabNo +"\'\">" + board.communityTab + "</td>" +
+                    "<td class='title' onclick=\"location.href='board?cpage=1&no="+ board.communityNo 
+                                                                +"&comment=1&tno="+ board.communityTabNo +"\'\">" + board.communityTitle + "</td>" +
                     "<td class='author'>" + board.memberId + "</td>" +
                     "<td class='comment-num'>["+ board.commentCount + "]<img src='static/img/comment-icon.png'></td>" +
                     "</tr>"
@@ -26,6 +26,28 @@ function selectPopBoard(){
                 str += "현재 조회된 인기글이 없습니다."
             }
             popList.innerHTML = str;
+
+            const categoryList = document.querySelectorAll(".hot-bulletin-list td.tab");
+
+            for(let category of categoryList){
+                switch(category.getAttribute("data-tab-no")) {
+                    case "1":
+                        category.style.color = "#FF4040";
+                        break;
+                    case "2":
+                        category.style.color = "#55C62C";
+                        break;
+                    case "3":
+                        category.style.color = "#407BFF";
+                        break;
+                    case "4":
+                        category.style.color = "#FF4DED";
+                        break;
+                    default :
+                        category.style.color = "black";
+                        break;
+                }
+            }
         },
         error : function(){
             console.log("인기글 조회 실패");

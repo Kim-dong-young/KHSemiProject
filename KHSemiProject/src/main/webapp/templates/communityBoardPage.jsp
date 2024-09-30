@@ -43,7 +43,6 @@ crossorigin="anonymous"></script>
 
 </head>
 <body>
-
     <div class="board-tab">
         <ul>
             <li><button id="t" onclick="location.href='<%=contextPath%>/community?cpage=1'">전체</button></li>
@@ -75,11 +74,12 @@ crossorigin="anonymous"></script>
                         <td colspan="6">게시글이 없습니다.</td>
                     </tr>
                 <% } else { %>
-
                     <% if( tno == null ) { %>
                         <% for(Board b : boardList) { %>
                             <tr>
-                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'">
+                                    <%=b.getCommunityTab()%>
+                                </td>
                                 <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                                 <td class="author"><%=b.getMemberId()%></td>
                                 <td class="comment-num">[<%=b.getCommentCount()%>]<img src="static/img/comment-icon.png"></td>
@@ -90,7 +90,7 @@ crossorigin="anonymous"></script>
                     <% } else { %>
                         <% for(Board b : boardList) { %>
                             <tr>
-                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                 <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
                                 <td class="author"><%=b.getMemberId()%></td>
                                 <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
