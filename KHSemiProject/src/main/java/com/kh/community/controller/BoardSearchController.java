@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.common.PageInfo;
-import com.kh.community.model.dao.BoardDao;
 import com.kh.community.model.vo.Board;
 import com.kh.community.model.vo.Category;
 import com.kh.community.service.BoardService;
@@ -55,13 +54,40 @@ public class BoardSearchController extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		String tabNo = request.getParameter("tno");
 		
-		if(searchOption.equals("all")) {
-			if(tabNo == null) {
-				listCount = bService.searchListCount(searchText);
-			} else {
-				listCount = bService.searchBoardTabListCount(Integer.parseInt(tabNo), searchText);
-			}
+		switch(searchOption) {
+			case "all" :
+				if(tabNo == null) {
+					listCount = bService.searchListCount(searchText);
+				} else {
+					listCount = bService.searchBoardTabCount(Integer.parseInt(tabNo), searchText);
+				}
+				break;
+				
+			case "title" :
+				if(tabNo == null) {
+					listCount = bService.searchTitleCount(searchText);
+				} else {
+					listCount = bService.searchTitleTabCount(Integer.parseInt(tabNo), searchText);
+				}
+				break;
+				
+			case "content" :
+				if(tabNo == null) {
+					listCount = bService.searchContentCount(searchText);
+				} else {
+					listCount = bService.searchContentTabCount(Integer.parseInt(tabNo), searchText);
+				}
+				break;
+				
+			case "writer" :
+				if(tabNo == null) {
+					listCount = bService.searchWriterCount(searchText);
+				} else {
+					listCount = bService.searchWriterTabCount(Integer.parseInt(tabNo), searchText);
+				}
+				break;
 		}
+
 		
 		// int 나누기 int => int, double로 형변환 후 계산 -> if 나머지 있다면 max Page = 몫 + 1;
 		maxPage = (int) Math.ceil( (double)listCount / boardLimit);
@@ -72,12 +98,38 @@ public class BoardSearchController extends HttpServlet {
 		PageInfo pageInfo = new PageInfo(listCount, currentPage, pageBarLimit, boardLimit, maxPage, startPage, endPage);
 		ArrayList<Board> boardList = new ArrayList<>();
 		
-		if(searchOption.equals("all")) {
-			if(tabNo == null) {
-				boardList = bService.searchList(pageInfo, searchText);
-			} else {
-				boardList = bService.searchBoardTabList(pageInfo, Integer.parseInt(tabNo), searchText);
-			}
+		switch(searchOption) {
+			case "all" :
+				if(tabNo == null) {
+					boardList = bService.searchList(pageInfo, searchText);
+				} else {
+					boardList = bService.searchBoardTabList(pageInfo, Integer.parseInt(tabNo), searchText);
+				}
+				break;
+				
+			case "title" :
+				if(tabNo == null) {
+					boardList = bService.searchTitleList(pageInfo, searchText);
+				} else {
+					boardList = bService.searchTitleTabList(pageInfo, Integer.parseInt(tabNo), searchText);
+				}
+				break;
+				
+			case "content" :
+				if(tabNo == null) {
+					boardList = bService.searchContentList(pageInfo, searchText);
+				} else {
+					boardList = bService.searchContentTabList(pageInfo, Integer.parseInt(tabNo), searchText);
+				}
+				break;
+				
+			case "writer" :
+				if(tabNo == null) {
+					boardList = bService.searchWriterList(pageInfo, searchText);
+				} else {
+					boardList = bService.searchWriterTabList(pageInfo, Integer.parseInt(tabNo), searchText);
+				}
+				break;
 		}
 		
 		ArrayList<Category> category = bService.selectCategory();

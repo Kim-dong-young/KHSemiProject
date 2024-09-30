@@ -126,14 +126,14 @@ crossorigin="anonymous"></script>
 
             <div class="option2">
                 <!-- 맨 처음으로 가는 버튼 -->
-                <% if (request.getParameter("searchOption") == null ) { %>
+                <% if (request.getParameter("searchOption") == null ) { %> <!-- 검색하지 않고, 그냥 페이징 바 버튼 눌러서 이동할 때 -->
                     <% if ( tno == null ) { %>
                         <button onclick="location.href='<%=contextPath%>/community?cpage=1'">&lt;&lt;</button>
                     <% } else { %>
                         <button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=tno%>'">&lt;&lt;</button>
                     <% } %>
-                <% } else { %>
-                    <% if ( tno == null ) { %>
+                <% } else { %> <!-- 검색하고, 페이징 바를 통해 이동할때 -->
+                    <% if ( tno == null ) { %> <!-- tno가 null이면 전체 탭 -->
                         <button onclick="location.href='<%=contextPath%>/search.bo?cpage=1&searchText=${searchText}&searchOption=${searchOption}'">&lt;&lt;</button>
                     <% } else { %>
                         <button onclick="location.href='<%=contextPath%>/search.bo?cpage=1&tno=<%=tno%>&searchText=${searchText}&searchOption=${searchOption}'">&lt;&lt;</button>

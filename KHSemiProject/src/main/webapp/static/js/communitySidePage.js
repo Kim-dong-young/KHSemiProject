@@ -20,6 +20,17 @@ function selectPopBoard(){
                     "</tr>"
                 )
             }
+            /* i < 5 조건 하드코딩 나중에 고치자 */
+            for (let i = res.length; i < 5; i++) {
+                str += (
+                    "<tr>" +
+                    "<td>&nbsp;</td>" +
+                    "<td>&nbsp;</td>" +
+                    "<td>&nbsp;</td>" +
+                    "<td>&nbsp;</td>" +
+                    "</tr>"
+                );
+            }
 
             const popList = document.querySelector(".hot-bulletin-list > table");
             if(str === ""){
