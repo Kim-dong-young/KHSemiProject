@@ -280,16 +280,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>service.quiz</display-name>
-    <servlet-name>service.quiz</servlet-name>
-    <servlet-class>com.kh.quiz.service.createQuizService</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>service.quiz</servlet-name>
-    <url-pattern>/service.quiz</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>create.dao</display-name>
     <servlet-name>create.dao</servlet-name>
     <servlet-class>com.kh.createQuiz.model.vo.CreateQuizDao</servlet-class>
