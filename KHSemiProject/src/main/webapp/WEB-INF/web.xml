@@ -209,7 +209,7 @@
     <servlet-name>AjaxQuizTagListController</servlet-name>
     <url-pattern>/tgSearch.sl</url-pattern>
   </servlet-mapping>
-<servlet>
+  <servlet>
     <description></description>
     <display-name>delete.co</display-name>
     <servlet-name>delete.co</servlet-name>
@@ -228,5 +228,15 @@
   <servlet-mapping>
     <servlet-name>tab.bo</servlet-name>
     <url-pattern>/tab.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>delete.me</display-name>
+    <servlet-name>delete.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete.me</servlet-name>
+    <url-pattern>/delete.me</url-pattern>
   </servlet-mapping>
 </web-app>
