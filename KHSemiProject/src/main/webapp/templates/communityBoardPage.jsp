@@ -19,6 +19,7 @@
     int pageBarLimit = pageInfo.getPageBarLimit();
 
     String tno = request.getParameter("tno");
+    request.setAttribute("optional",tno);
 %>
 
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body onload="initBoard(<%=tno%>)">
+<body>
 
     <div class="board-tab">
         <ul>
@@ -57,12 +58,12 @@ crossorigin="anonymous"></script>
         <div class="board-info">
             <table>
                 <tr>
-                    <td class="tab">탭</td>
-                    <td class="title">제목</td>
-                    <td class="author">작성자</td>
-                    <td class="comment-num" style="color:black;">댓글</td>
-                    <td class="date">작성일</td>
-                    <td class="viewcount">조회수</td>
+                    <th class="tab">탭</th>
+                    <th class="title">제목</th>
+                    <th class="author">작성자</th>
+                    <th class="comment-num" style="color:black;">댓글</th>
+                    <th class="date">작성일</th>
+                    <th class="viewcount">조회수</th>
                 </tr>
             </table>
         </div>
@@ -81,7 +82,7 @@ crossorigin="anonymous"></script>
                                 <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                 <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                                 <td class="author"><%=b.getMemberId()%></td>
-                                <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
+                                <td class="comment-num">[<%=b.getCommentCount()%>]<img src="static/img/comment-icon.png"></td>
                                 <td class="date"><%=b.getCommunityDate()%></td>
                                 <td class="viewcount"><%=b.getCommunityViewcount()%></td>
                             </tr>

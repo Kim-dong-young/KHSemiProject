@@ -1,12 +1,10 @@
-document.addEventListener('load', initSide());
-
 function initSide(){
+    console.log("initSide")
     selectPopBoard();
     setInterval(selectPopBoard, 3000);
 }
 
 function selectPopBoard(){
-    console.log("함수 실행됨")
     $.ajax({
         url:"poplist.bo",
         method :"post",

@@ -1,6 +1,4 @@
 
-const maxFileNum = 5;
-let curFileNum = 0;
 
 function selectTab(_this){
     const blist = document.querySelectorAll(".tab-select button");
@@ -31,6 +29,10 @@ function checkEmptyTab(){
     }
 }
 /*
+
+const maxFileNum = 5;
+let curFileNum = 0;
+
 function loadImg(_input){
     //_input.files[0] -> 선택된 파일이 담김
     // 파일을 읽어들이는 객체
