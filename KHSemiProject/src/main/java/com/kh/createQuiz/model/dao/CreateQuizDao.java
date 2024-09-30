@@ -1,40 +1,36 @@
 package com.kh.createQuiz.model.dao;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-/**
- * Servlet implementation class CreateQuizDao
- */
-public class CreateQuizDao extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateQuizDao() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+import javax.sql.DataSource;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+public class CreateQuizDao {
+
+	private DataSource dataSource;
+
+	// Quiz 삽입 메서드
+	public void insertQuiz(String title, String explanation, String category, String tag,
+			InputStream thumbnailInputStream) throws SQLException {
+		String sql = "INSERT INTO quiz (title, explanation, category, tag, thumbnail) VALUES (?, ?, ?, ?, ?)";
+
+		try (Connection conn = dataSource.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setString(1, title);
+			ps.setString(2, explanation);
+			ps.setString(3, category);
+			ps.setString(4, tag);
+
+			// BLOB 데이터 처리 (이미지 파일)
+			if (thumbnailInputStream != null) {
+				ps.setBlob(5, thumbnailInputStream);
+			} else {
+				ps.setNull(5, java.sql.Types.BLOB); // 이미지가 없을 때 처리
+			}
+
+			ps.executeUpdate();
+		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
