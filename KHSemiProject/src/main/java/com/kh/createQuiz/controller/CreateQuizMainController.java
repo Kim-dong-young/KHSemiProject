@@ -30,6 +30,21 @@ public class CreateQuizMainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		String quizTitle = request.getParameter("title");
+		String quizExplanation = request.getParameter("explanation");
+		String quizCategory = request.getParameter("category");
+		String quizTag = request.getParameter("tag");
+		String[] createQuizArr = request.getParameterValues("createQuiz");
+		
+		String createQuiz = "";
+		if(createQuizArr != null) {
+			createQuiz = String.join(",", createQuizArr);
+		}
+		
+		
+		
+		request.getRequestDispatcher("static/templates/CreateQuizMain.jsp").forward(request, response);
+		
 	}
 
 	/**

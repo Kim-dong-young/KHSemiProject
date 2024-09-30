@@ -1,6 +1,6 @@
 package com.kh.createQuiz.service;
 
-import com.kh.createQuiz.model.vo.CreateQuizDao;
+import com.kh.createQuiz.model.dao.CreateQuizDao;
 
 public interface createQuizService {
 	
