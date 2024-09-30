@@ -5,6 +5,8 @@
 	String alertMsg = (String)session.getAttribute("alertMsg");
 
 	Member loginMember = (Member)session.getAttribute("loginMember");
+
+    String pageName = (String)request.getAttribute("pageName");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
+    <!-- JavaScript -->
+    <script src="<%=request.getContextPath()%>/static/js/menu.js"></script>
     <!-- jQuery -->
     <script 
         src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -30,7 +34,11 @@
 
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/default.css">
 </head>
+<% if(pageName != null ) { %>
+<body onload="init('${pageName}', '${optional}')">
+<% } else { %>
 <body>
+<% } %>
 	<%@ include file="loginModal.jsp" %>
 	<% if(alertMsg != null) {%>
 		<script>

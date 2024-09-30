@@ -73,6 +73,9 @@ public class BoardMainController extends HttpServlet {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("category", category);
+		
+		request.setAttribute("pageName", "communityMainPage");
+		request.setAttribute("optional", tabNo);
 
 		request.getRequestDispatcher("templates/communityMainPage.jsp").forward(request, response);
 	}

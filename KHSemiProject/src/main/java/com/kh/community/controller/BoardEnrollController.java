@@ -33,6 +33,9 @@ public class BoardEnrollController extends HttpServlet {
 		
 		request.setAttribute("category", categoryList);
 		
+		request.setAttribute("pageName", "communityWritePage");
+		request.setAttribute("optional", request.getAttribute("tabNo"));
+		
 		request.getRequestDispatcher("templates/communityWritePage.jsp").forward(request, response);
 	}
 

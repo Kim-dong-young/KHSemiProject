@@ -110,6 +110,9 @@ public class BoardViewController extends HttpServlet {
 		request.setAttribute("cPageInfo", cPageInfo);
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("category", category);
+		
+		request.setAttribute("pageName", "communityViewPage");
+		request.setAttribute("optional", tabNo);
 
 		request.getRequestDispatcher("templates/communityViewPage.jsp").forward(request, response);
 	}

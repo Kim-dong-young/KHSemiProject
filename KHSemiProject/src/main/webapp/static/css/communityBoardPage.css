@@ -58,7 +58,7 @@ dl, ol, ul{
     table-layout: fixed; /* 테이블 밖으로 글자 삐져나옴 방지 */
 }
 
-.board-content td{
+.board-content td, .board-content th{
     padding-left:10px;
     padding-right:10px;
 }
@@ -96,8 +96,14 @@ dl, ol, ul{
     width:15%;
 }
 
-.viewcount{
+th.viewcount {
     width:12%;
+    text-align : center;
+}
+
+td.viewcount {
+    width:12%;
+    text-align : center;
 }
 
 /* 글기, 정렬기준 및 페이지 표시 영역 */
