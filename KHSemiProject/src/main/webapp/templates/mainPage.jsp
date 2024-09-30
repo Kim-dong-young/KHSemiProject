@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page buffer="16kb" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- 스와이프 라이브러리-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
 <link rel="stylesheet" href="static/css/mainPageContent.css">
 <link rel="stylesheet" href="static/css/communityBoardPage.css">
 
 <script src="static/js/mainPage.js"></script>
+
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
@@ -24,14 +31,53 @@
                     <li><button>장르</button></li>
                 </ul>
             </div>
-            <div>
-                <div class="quiz-list">
-                    <ul>
-                        <li class="quiz-box">
-                            <div class="thumbnail">썸네일</div>
-                            <div class="title">제목</div>
-                        </li>
-                    </ul>
+            <div class="my-swiper-box">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="thumbnail">1썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">2썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">3썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">4썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">5썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">6썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">7썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">8썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">9썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">10썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                    </div>
+                    <!-- Add Navigation buttons if needed -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
         </div>
@@ -175,12 +221,20 @@
                     <hr>
                     <div id="serial-attendance">
                         <div>연속 출석 일수</div>
+                        <%if(loginMember != null) {%>
                         <div><%=loginMember.getCheckContinueCnt() %>회</div>
+                        <%} else { %>
+                        <div>0회</div>
+                        <%} %>
                     </div>
                     <hr>
                     <div id="total-attendance">
                         <div>총 출석 일수</div>
+                        <%if(loginMember != null) {%>
                         <div>${totalAt }회</div>
+                        <%} else { %>
+                        <div>0회</div>
+                        <%} %>
                     </div>
                     <hr>
                     <div id="solve-a-quiz">

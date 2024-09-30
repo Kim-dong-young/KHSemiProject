@@ -1,11 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.kh.member.model.vo.Member;
-import com.kh.search.model.vo.Quiz;
-import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -31,7 +28,11 @@ public class PersonalPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-			
+		
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+		
+		request.setAttribute("pageName", "personalPage");
+		request.setAttribute("optional", memberNo);
 		request.getRequestDispatcher("templates/personalPage.jsp").forward(request, response);
 	}
 
