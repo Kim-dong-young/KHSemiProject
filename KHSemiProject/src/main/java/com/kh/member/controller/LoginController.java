@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 		
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("memberPwd");		
-		String path = request.getParameter("origin");
+		String path = request.getParameter("path");
 		
 		System.out.println(path);
 		Member loginMember = new MemberService().loginMember(memberId, memberPwd);
@@ -59,7 +59,6 @@ public class LoginController extends HttpServlet {
 
 			session.setAttribute("totalAt", totalAt);
 			
-			//request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/main.me");
 		}
 	}

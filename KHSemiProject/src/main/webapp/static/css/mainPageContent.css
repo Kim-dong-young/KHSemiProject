@@ -37,44 +37,26 @@
     font-size: 17px;
 }
 
-/* 좀더 찾아봐야됨 */
-.quiz-list{ 
-    /* border: 1px solid black; */
-    margin: 0 1px;
+.my-swiper-box{
     height: 223px;
-}
-
-.quiz-list>ul{
-    display: flex;
-    flex-wrap: nowrap;
     /* border: 1px solid black; */
-    height: 100%;
 }
 
-.quiz-box{
-    width: 250px;
-    /* border: 1px solid black; */
-    margin-right: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.swiper-wrapper {
+    padding: 0 10px;
 }
 
-.quiz-box>div{
-    /* border: 1px solid black; */
-    width: 100%;
-}
-
-.thumbnail{
+.swiper-slide .thumbnail{
     border-radius: 10px;
     border: 1px solid black;
-    height: 75%;
+    height: 180px;
 }
 
-.title{
+.swiper-slide .title{
+    margin-top: 10px;
     border-radius: 10px;
     border: 1px solid black;
-    height: 20%;
+    height: 30px;
 }
 
 #content2{
