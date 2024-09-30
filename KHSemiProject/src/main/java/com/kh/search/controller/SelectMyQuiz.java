@@ -1,10 +1,11 @@
-package com.kh.community.controller;
+package com.kh.search.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.kh.community.model.vo.Category;
-import com.kh.community.service.BoardService;
+import com.google.gson.Gson;
+import com.kh.search.model.vo.Quiz;
+import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,15 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardEnrollController
+ * Servlet implementation class SelectMyQuiz
  */
-public class BoardEnrollController extends HttpServlet {
+public class SelectMyQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardEnrollController() {
+    public SelectMyQuiz() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +30,14 @@ public class BoardEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectUserCategory();
+		request.setCharacterEncoding("UTF-8");
 		
-		request.setAttribute("category", categoryList);
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
-		request.setAttribute("pageName", "communityWritePage");
-		request.setAttribute("optional", request.getAttribute("tabNo"));
+		ArrayList<Quiz> list = new SearchService().selectMyQuiz(memberNo);
 		
-		request.getRequestDispatcher("templates/communityWritePage.jsp").forward(request, response);
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
 			} else {
 				session.setAttribute("loginMember", loginMember);
 			}
-			
+
 			session.setAttribute("totalAt", totalAt);
 			
 			//request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);

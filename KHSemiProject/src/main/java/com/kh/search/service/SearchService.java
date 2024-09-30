@@ -1,5 +1,7 @@
 package com.kh.search.service;
 
+import static com.kh.common.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -32,5 +34,12 @@ public class SearchService {
 		ArrayList<Tag> list = new QuizDao().selectTagList(conn, searchText);
 		return list;
 	}
-
+	
+	public ArrayList<Quiz> selectMyQuiz(int memberNo) {
+		Connection conn = getConnection();
+		ArrayList<Quiz> list = new QuizDao().selectMyQuiz(conn, memberNo);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }

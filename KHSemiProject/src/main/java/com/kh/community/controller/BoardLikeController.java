@@ -1,10 +1,9 @@
 package com.kh.community.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import com.kh.community.model.vo.Category;
 import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,15 +11,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardEnrollController
+ * Servlet implementation class BoardLikeController
  */
-public class BoardEnrollController extends HttpServlet {
+public class BoardLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardEnrollController() {
+    public BoardLikeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +28,14 @@ public class BoardEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectUserCategory();
+		request.setCharacterEncoding("UTF-8");
 		
-		request.setAttribute("category", categoryList);
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 		
-		request.setAttribute("pageName", "communityWritePage");
-		request.setAttribute("optional", request.getAttribute("tabNo"));
+		int likeCount = new BoardService().increaseLike(memberNo, boardNo);
 		
-		request.getRequestDispatcher("templates/communityWritePage.jsp").forward(request, response);
+		response.getWriter().print(likeCount);
 	}
 
 	/**

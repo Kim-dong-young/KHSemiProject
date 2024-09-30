@@ -1,10 +1,11 @@
-package com.kh.community.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.kh.community.model.vo.Category;
-import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
+import com.kh.search.model.vo.Quiz;
+import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,15 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardEnrollController
+ * Servlet implementation class PersonalPageController
  */
-public class BoardEnrollController extends HttpServlet {
+public class PersonalPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardEnrollController() {
+    public PersonalPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +30,9 @@ public class BoardEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectUserCategory();
-		
-		request.setAttribute("category", categoryList);
-		
-		request.setAttribute("pageName", "communityWritePage");
-		request.setAttribute("optional", request.getAttribute("tabNo"));
-		
-		request.getRequestDispatcher("templates/communityWritePage.jsp").forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+			
+		request.getRequestDispatcher("templates/personalPage.jsp").forward(request, response);
 	}
 
 	/**

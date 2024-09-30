@@ -71,6 +71,14 @@ public class BoardService {
 		close(conn);
 		return categoryList;
 	}
+	
+	public ArrayList<Category> selectUserCategory() {
+		Connection conn = getConnection();
+		ArrayList<Category> categoryList = new BoardDao().selectUserCategory(conn);
+		
+		close(conn);
+		return categoryList;
+	}
 
 	public int insertBoard(Board b) {
 		Connection conn = getConnection();
@@ -139,7 +147,7 @@ public class BoardService {
 		ArrayList<Board> boardList;
 		
 		if(tabNo == 0) {
-			boardList = new BoardDao().selectBoardSortedPop(conn, pageInfo, tabNo);
+			boardList = new BoardDao().selectBoardPopList(conn, pageInfo, tabNo);
 		} else {
 			boardList = new BoardDao().selectBoardTabList(conn, pageInfo ,tabNo);
 		}
@@ -152,11 +160,46 @@ public class BoardService {
 		Connection conn = getConnection();
 		int boardCount;
 		
-		boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		if(tabNo == 0) {
+			boardCount = new BoardDao().selectBoardPopListCount(conn, tabNo);
+		} else {
+			boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
+		}
 
 		close(conn);
 		return boardCount;
 	}
 
+	public int increaseLike(int memberNo, int boardNo) {
+		Connection conn = getConnection();
+		BoardDao bDao = new BoardDao();
+		// 조회 결과가 없으면(= 해당 유저가 해당 게시글 좋아요를 안눌렀다면) result1 = 0
+		int result1 = bDao.selectLikeMember(conn, memberNo, boardNo);
+		int result2 = bDao.increaseLike(conn, memberNo, boardNo);
+		int likeCount = 0;
+		
+		if(result1 == 0 && result2 > 0) {
+			commit(conn);
+			likeCount = bDao.countBoardLike(conn, boardNo);
+		} else if( result2 == -1 ){
+			rollback(conn);
+			likeCount = result2;
+		}
+		else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return likeCount;
+	}
 
+	public ArrayList<Board> selectBoardTop5() {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().selectBoardTop5(conn);
+
+		close(conn);
+		return boardList;
+	}
+
+	
 }

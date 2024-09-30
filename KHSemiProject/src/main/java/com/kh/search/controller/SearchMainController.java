@@ -78,7 +78,7 @@ public class SearchMainController extends HttpServlet {
 				}
 			}
 		} else {
-			tagList = null;
+			tagList = new ArrayList<String>();
 		}
 		
 		quizCount = new SearchService().selectQuizCount(category, search_type, search_text, orderby, tagList);
@@ -137,6 +137,8 @@ public class SearchMainController extends HttpServlet {
 		System.out.println(list);
 		
 		//ArrayList<Tag> tagLi = request.getpara
+		
+		request.setAttribute("pageName", "searchMainPage"); 
 		
 		request.getRequestDispatcher("templates/searchMainPage.jsp").forward(request, response);
 	}

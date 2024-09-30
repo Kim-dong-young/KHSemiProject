@@ -5,7 +5,8 @@
                 com.kh.common.PageInfo, 
                 java.util.ArrayList, 
                 com.kh.community.model.vo.Board,
-                com.kh.community.model.vo.Comment" %>
+                com.kh.community.model.vo.Comment,
+                com.kh.community.model.vo.Category" %>
 <% 
     Board currentBoard = (Board)request.getAttribute("board"); 
 
@@ -15,9 +16,12 @@
 
     PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	ArrayList<Board> boardList = (ArrayList<Board>)request.getAttribute("boardList");
+
+    ArrayList<Category> category = (ArrayList<Category>)request.getAttribute("category");
     
     int cpage = Integer.parseInt(request.getParameter("cpage"));
     int comment = Integer.parseInt(request.getParameter("comment"));
+    String tno = request.getParameter("tno");
 
     int currentPage = pageInfo.getCurrentPage();
     int startPage = pageInfo.getStartPage();
@@ -54,17 +58,17 @@ integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
 crossorigin="anonymous"></script>
 
 </head>
-<body onload="init()">
+<body >
 	<%@ include file="common/menu.jsp" %>
 	<input id="errorMsg" type="hidden" value='<%=request.getAttribute("errorMsg") == null ? "" : request.getAttribute("errorMsg") %>'>
 
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
-		<p>자유 게시판</p>
+		<p onclick="location.href='<%=contextPath%>/community?cpage=1'">자유 게시판</p>
         <div class="wrapper">
 			<div class="board">
                 <div class="bulletin-content">
 					<div class="bulletin-title">
-                        <span class="board-tab"><%=currentBoard.getCommunityTab()%></span>
+                        <span class="board-tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=currentBoard.getCommunityTabNo()%>'"><%=currentBoard.getCommunityTab()%></span>
                         <span><%=currentBoard.getCommunityTitle()%></span>
                         <% if( loginMember != null && loginMember.getMemberNo() == currentBoard.getMemberNo() ) { %>
                             <button onclick="location.href='<%=contextPath%>/delete.bo?bno=<%=currentBoard.getCommunityNo()%>&cpage=<%=cpage%>&comment=<%=cCurrentPage%>'"><img src="static/img/trash-icon.png">삭제</button>
@@ -80,7 +84,7 @@ crossorigin="anonymous"></script>
                         <div class="data-info">
                             <span class="after-vline">작성일: <%=currentBoard.getCommunityDate()%></span>
                             <span class="after-vline">조회수: <%=currentBoard.getCommunityViewcount()%></span>
-                            <span class="after-vline">좋아요: <%=currentBoard.getLikeCount()%></span>
+                            <span name="likeCount" class="after-vline">좋아요: <%=currentBoard.getLikeCount()%></span>
                             <span>댓글: <%=commentCount%></span>
                         </div>
                     </div>
@@ -96,7 +100,11 @@ crossorigin="anonymous"></script>
                     </div>
 
                     <div class="bulletin-option">
-                        <button class="like-button"><img src="static/img/thumbup-icon.png">좋아요</button>
+                        <% if( loginMember != null ) { %>
+                            <button class="like-button" onclick="increaseLike(<%=currentBoard.getCommunityNo()%>)"><img src="static/img/thumbup-icon.png">좋아요</button>
+                        <% } else { %>
+                            <button class="like-button" onclick='alert("로그인한 유저만 좋아요를 누를 수 있습니다.")'><img src="static/img/thumbup-icon.png">좋아요</button>
+                        <% } %>
                         <button class="report-button"><img src="static/img/flag-icon.png">신고</button>
                     </div>
                 </div>
@@ -178,45 +186,43 @@ crossorigin="anonymous"></script>
 
 
 <!-- ================================================ 하단 게시글 목록 ==================================================== -->
-
-
-
                 <div>
-                    <div class="board-tab">
-                        <ul>
-                            <li><button style="background-color: #FF9139;">전체</button></li>
-                            <li><button>인기글</button></li>
-                            <li><button>공지</button></li>
-                            <li><button>질문</button></li>
-                            <li><button>풀이</button></li>
-                            <li><button>잡담</button></li>
-                        </ul>
+                <div class="board-tab">
+                    <ul>
+                        <li><button id="t" onclick="location.href='<%=contextPath%>/community?cpage=1'">전체</button></li>
+                        <li><button id="t0" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=0'">인기글</button></li>
+                        <% for( Category c : category ) { %>
+                            <li><button id="t<%=c.getTabNumber()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=c.getTabNumber()%>'"><%=c.getTabName()%></button></li>
+                        <% } %>
+                    </ul>
+                </div>
+
+                <div class="board-content">
+                    <div class="board-info">
+                        <table>
+                            <tr>
+                                <td class="tab">탭</td>
+                                <td class="title">제목</td>
+                                <td class="author">작성자</td>
+                                <td class="comment-num" style="color:black;">댓글</td>
+                                <td class="date">작성일</td>
+                                <td class="viewcount">조회수</td>
+                            </tr>
+                        </table>
                     </div>
-                
-                    <div class="board-content">
-                        <div class="board-info">
-                            <table>
+
+                    <div class="board-list">
+                        <table>
+                            <% if(boardList.isEmpty()) { %>
                                 <tr>
-                                    <td class="tab">탭</td>
-                                    <td class="title">제목</td>
-                                    <td class="author">작성자</td>
-                                    <td class="comment-num" style="color:black;">댓글</td>
-                                    <td class="date">작성일</td>
-                                    <td class="viewcount">조회수</td>
+                                    <td colspan="6">게시글이 없습니다.</td>
                                 </tr>
-                            </table>
-                        </div>
-                
-                        <div class="board-list">
-                            <table>
-                                <% if(boardList.isEmpty()) { %>
-                                    <tr>
-                                        <td colspan="6">게시글이 없습니다.</td>
-                                    </tr>
-                                <% } else { %>
+                            <% } else { %>
+
+                                <% if( tno == null ) { %>
                                     <% for(Board b : boardList) { %>
                                         <tr>
-                                            <td class="tab"><%=b.getCommunityTab()%></td>
+                                            <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                             <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                                             <td class="author"><%=b.getMemberId()%></td>
                                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
@@ -224,89 +230,125 @@ crossorigin="anonymous"></script>
                                             <td class="viewcount"><%=b.getCommunityViewcount()%></td>
                                         </tr>
                                     <% } %>
-                                    <% for(int i=boardList.size(); i < boardLimit; i++) { %>
+                                <% } else { %>
+
+                                    <% for(Board b : boardList) { %>
                                         <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
+                                            <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                            <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
+                                            <td class="author"><%=b.getMemberId()%></td>
+                                            <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
+                                            <td class="date"><%=b.getCommunityDate()%></td>
+                                            <td class="viewcount"><%=b.getCommunityViewcount()%></td>
                                         </tr>
                                     <% } %>
                                 <% } %>
-                            </table>
-                        </div>
-                
-                        <div class="board-option">
-                            <div class="option1">
-                                <select>
-                                    <option>최신순</option>
-                                    <option>인기순</option> <!-- 좋아요 순 -->
-                                    <option>댓글순</option>
-                                </select>
-                            </div>
-                
-                            <div class="option2">
-                                <!-- 맨 처음으로 가는 버튼 -->
-                                <button onclick="location.href='<%=contextPath%>/community?cpage=1&no=<%=currentBoard.getCommunityNo()%>'">&lt;&lt;</button>
-                                
-                                <!-- 페이징바 단위 만큼 앞으로 이동하는 버튼 -->
-                                <% if(startPage != 1) { %>
-                                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>&no=<%=currentBoard.getCommunityNo()%>'">&lt;</button>
-                                <% } else { %>
-                                    <button disabled>&lt;</button>
+            
+                                <% for(int i=boardList.size(); i < boardLimit; i++) { %>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
                                 <% } %>
-                
-                                <!-- 페이지 이동 버튼 -->
-                                <%for(int i=startPage; i <= endPage; i ++) { %>
-                                    <% if(i == currentPage) { %>
-                                        <button disabled><%=i %></button>
+
+                            <% } %>
+                        </table>
+                    </div>
+
+                    <div class="board-option">
+                        <div class="option1">
+                            <select>
+                                <option>최신순</option>
+                                <option>인기순</option> <!-- 좋아요 순 -->
+                                <option>댓글순</option>
+                            </select>
+                        </div>
+
+                        <div class="option2">
+                            <!-- 맨 처음으로 가는 버튼 -->
+                            <% if ( tno == null ) { %>
+                                <button onclick="location.href='<%=contextPath%>/community?cpage=1'">&lt;&lt;</button>
+                            <% } else { %>
+                                <button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=tno%>'">&lt;&lt;</button>
+                            <% } %>
+                            
+                            <!-- 페이징바 단위 만큼 앞으로 이동하는 버튼 -->
+                            <% if(startPage != 1) { %>
+                                <% if ( tno == null ) { %>
+                                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>'">&lt;</button>
+                                <% } else { %>
+                                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>&tno=<%=tno%>'">&lt;</button>
+                                <% } %>
+                            <% } else { %>
+                                <button disabled>&lt;</button>
+                            <% } %>
+
+                            <!-- 페이지 이동 버튼 -->
+                            <%for(int i=startPage; i <= endPage; i ++) { %>
+                                <% if(i == currentPage) { %>
+                                    <button disabled><%=i %></button>
+                                <% } else { %>
+                                    <% if ( tno == null ) { %>
+                                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>'"><%=i %></button>
                                     <% } else { %>
-                                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>&no=<%=currentBoard.getCommunityNo()%>'"><%=i %></button>
+                                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>&tno=<%=tno%>'"><%=i %></button>
                                     <% } %>
                                 <% } %>
-                
-                                <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
-                                <% if( (startPage + pageBarLimit < maxPage) ) { %>
-                                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>&no=<%=currentBoard.getCommunityNo()%>'">&gt;</button>
+                            <% } %>
+
+                            <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
+                            <% if( (startPage + pageBarLimit < maxPage) ) { %>
+                                <% if ( tno == null ) { %>
+                                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
                                 <% } else { %>
-                                    <button disabled>&gt;</button>
+                                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>&tno=<%=tno%>'">&gt;</button>
                                 <% } %>
-                
-                                <!-- 맨 뒤로 가는 버튼 -->
-                                <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>&no=<%=currentBoard.getCommunityNo()%>'">&gt;&gt;</button>
-                            </div>
-                
-                            <div class="option1">
-                                <% if ( loginMember != null ) { %>
-                                    <a href="<%=contextPath%>/write.bo"><img src="static/img/pen-icon-white.png">글쓰기</a>
-                                <% } else { %>
-                                    <a onclick="alert('로그인한 유저만 글을 작성할 수 있습니다.')"><img src="static/img/pen-icon-white.png">글쓰기</a>
-                                <% } %>
-                            </div>
+                            <% } else { %>
+                                <button disabled>&gt;</button>
+                            <% } %>
+
+                            <!-- 맨 뒤로 가는 버튼 -->
+                            <% if ( tno == null ) { %>
+                                <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>'">&gt;&gt;</button>
+                            <% } else { %>
+                                <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>&tno=<%=tno%>'">&gt;&gt;</button>
+                            <% } %>
                         </div>
-                
-                        <form class="search-form">
-                            <div class="option2">
-                                <input type="text">
-                            </div>
-                
-                            <div class="option1">
-                                <select>
-                                    <option>전체</option>
-                                    <option>제목</option> <!-- 좋아요 순 -->
-                                    <option>내용</option>
-                                    <option>글쓴이</option>
-                                </select>
-                            </div>
-                            
-                            <div class="option1">
-                                <button><img src="static/img/search-icon.png">검색</button>
-                            </div>
-                        </form>
+
+                        <div class="option1">
+                            <% if ( loginMember != null ) { %>
+                                <a href="<%=contextPath%>/write.bo"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                            <% } else { %>
+                                <a onclick="alert('로그인한 유저만 글을 작성할 수 있습니다.')"><img src="static/img/pen-icon-white.png">글쓰기</a>
+                            <% } %>
+                        </div>
                     </div>
+
+                    <form class="search-form">
+                        <div class="option2">
+                            <input type="text">
+                        </div>
+
+                        <div class="option1">
+                            <select>
+                                <option>전체</option>
+                                <option>제목</option> <!-- 좋아요 순 -->
+                                <option>내용</option>
+                                <option>글쓴이</option>
+                            </select>
+                        </div>
+                        
+                        <div class="option1">
+                            <button><img src="static/img/search-icon.png">검색</button>
+                        </div>
+                    </form>
                 </div>
+                </div>
+
 			</div>
             
             <div class="board-side">

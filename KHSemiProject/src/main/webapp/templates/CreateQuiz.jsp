@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 String contextPath = request.getContextPath();
-System.out.println("Context Path: " + contextPath);
+
 %>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ System.out.println("Context Path: " + contextPath);
 				</div>
 			</div>
 
-			
+
 			<div class="quiz-content" id="quiz-content-wrapper">
 				<div class="quiz-slide">
 					<div class="question-type">
@@ -48,35 +48,36 @@ System.out.println("Context Path: " + contextPath);
 					</div>
 
 					<div class="question-input">
-						<label for="question-1">질문 내용:</label> 
-						<input type="text" id="question-1" placeholder="질문을 입력하세요">
+						<label for="question-1">질문 내용:</label> <input type="text"
+							id="question-1" placeholder="질문을 입력하세요">
 					</div>
 
 					<div class="media">
-						<input type="file">
+						<input type="text" placeholder="링크를 복사하여 붙여넣거나 이미지파일을 업로드하세요.">
+						<br>
+						<br> <input type="file">
 					</div>
 
 					<div class="time-limit">
-						<label>제한시간</label>
-						<input type="radio" name="time-1" value="15"> 15초 
-						<input type="radio" name="time-1" value="30"> 30초 
-						<input type="radio" name="time-1" value="45"> 45초
+						<label>제한시간</label> <input type="radio" name="time-1" value="15">
+						15초 <input type="radio" name="time-1" value="30"> 30초 <input
+							type="radio" name="time-1" value="45"> 45초
 					</div>
 
 					<div class="hint-answer">
-						<label for="hint-1">힌트:</label> 
-						<input type="text" id="hint-1" placeholder="없을 경우 '.'을 입력해 주세요"> 
-						<label for="answer-1">정답:</label>
+						<label for="hint-1">힌트:</label> <input type="text" id="hint-1"
+							placeholder="없을 경우 '.'을 입력해 주세요"> <label for="answer-1">정답:</label>
 						<input type="text" id="answer-1" placeholder="정답을 입력해 주세요">
 					</div>
 
 					<div class="buttons">
 						<button class="home-btn">
-							<a href="<%=contextPath%>/main.me"> 
-								<img src="<%=contextPath%>/static/img/homebtn.png" width="130px" height="45px">
+							<a href="<%=contextPath%>/main.me"> <img
+								src="<%=contextPath%>/static/img/homebtn.png" width="130px"
+								height="45px">
 							</a>
 						</button>
-						<button class="create-btn">질문 생성하기</button>
+						<button class="create-btn" onclick="saveQuiz()">질문 생성하기</button>
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,8 @@ package com.kh.community.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.kh.community.model.vo.Category;
+import com.google.gson.Gson;
+import com.kh.community.model.vo.Board;
 import com.kh.community.service.BoardService;
 
 import jakarta.servlet.ServletException;
@@ -12,15 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardEnrollController
+ * Servlet implementation class BoardNowPopListController
  */
-public class BoardEnrollController extends HttpServlet {
+public class BoardNowPopListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardEnrollController() {
+    public BoardNowPopListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,15 +29,11 @@ public class BoardEnrollController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectUserCategory();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		ArrayList<Board> boardList = new BoardService().selectBoardTop5();
+		response.setContentType("application/json; charset=utf-8");
 		
-		request.setAttribute("category", categoryList);
-		
-		request.setAttribute("pageName", "communityWritePage");
-		request.setAttribute("optional", request.getAttribute("tabNo"));
-		
-		request.getRequestDispatcher("templates/communityWritePage.jsp").forward(request, response);
+		new Gson().toJson(boardList, response.getWriter());
 	}
 
 	/**
