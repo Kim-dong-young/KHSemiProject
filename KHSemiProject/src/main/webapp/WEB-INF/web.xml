@@ -240,6 +240,15 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>delete.me</display-name>
+    <servlet-name>delete.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete.me</servlet-name>
+    <url-pattern>/delete.me</url-pattern>
+    </servlet-mapping>
+	<servlet>
     <display-name>like.bo</display-name>
     <servlet-name>like.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardLikeController</servlet-class>
@@ -249,7 +258,7 @@
     <url-pattern>/like.bo</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<description></description>
+    <description></description>
     <display-name>poplist.bo</display-name>
     <servlet-name>poplist.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardNowPopListController</servlet-class>
@@ -259,7 +268,7 @@
     <url-pattern>/poplist.bo</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<description></description>
+    <description></description>
     <display-name>myquiz.sl</display-name>
     <servlet-name>myquiz.sl</servlet-name>
     <servlet-class>com.kh.search.controller.SelectMyQuiz</servlet-class>
@@ -267,5 +276,25 @@
   <servlet-mapping>
     <servlet-name>myquiz.sl</servlet-name>
     <url-pattern>/myquiz.sl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>service.cr</display-name>
+    <servlet-name>service.cr</servlet-name>
+    <servlet-class>com.kh.quiz.controller.CreateQuizService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>service.cr</servlet-name>
+    <url-pattern>/service.cr</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>create.dao</display-name>
+    <servlet-name>create.dao</servlet-name>
+    <servlet-class>com.kh.createQuiz.model.vo.CreateQuizDao</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>create.dao</servlet-name>
+    <url-pattern>/create.dao</url-pattern>
   </servlet-mapping>
 </web-app>

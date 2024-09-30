@@ -1,25 +1,25 @@
-package com.kh.member.controller;
+package com.kh.createQuiz.controller;
 
 import java.io.IOException;
 
-import com.kh.member.service.MemberService;
-
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class userset4Controller
+ * Servlet implementation class CreateQuizMainController
  */
-public class userset4Controller extends HttpServlet {
+
+@WebServlet(name = "create.quiz", urlPatterns= {"/create.quiz"})
+public class CreateQuizMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public userset4Controller() {
+    public CreateQuizMainController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,8 @@ public class userset4Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("templates/userset4.jsp").forward(request, response);	
+		request.setCharacterEncoding("UTF-8");
+		
 	}
 
 	/**
