@@ -13,7 +13,7 @@ function init(pageName, optional){
             initSide()
             break;
         case "searchMainPage":
-            initSide()
+            tagSearchAjax()
             break;
     }
 }
