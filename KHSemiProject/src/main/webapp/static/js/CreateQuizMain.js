@@ -13,21 +13,3 @@ document.getElementById('thumbnail').addEventListener('change', function(event) 
     }
 });
 
-// 퀴즈 저장 함수
-function saveQuiz() {
-    const title = document.getElementById('quiz-title').value;
-    const description = document.getElementById('quiz-description').value;
-    const category = document.getElementById('category').value;
-    const tag = document.getElementById('tag').value;
-
-    const quizData = {
-        title: title,
-        description: description,
-        category: category,
-        tag: tag
-    };
-
-    // 로컬 스토리지에 저장
-    localStorage.setItem('quizData', JSON.stringify(quizData));
-    alert('퀴즈가 저장되었습니다!');
-}

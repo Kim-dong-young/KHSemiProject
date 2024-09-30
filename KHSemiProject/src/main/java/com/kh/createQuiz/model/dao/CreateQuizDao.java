@@ -1,4 +1,4 @@
-package com.kh.createQuiz.model.vo;
+package com.kh.createQuiz.model.dao;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
