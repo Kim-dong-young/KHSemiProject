@@ -306,7 +306,7 @@
   <servlet-mapping>
     <servlet-name>SearchClickController</servlet-name>
     <url-pattern>/click.sl</url-pattern>
-    </servlet-mapping>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>search.bo</display-name>
@@ -316,5 +316,15 @@
   <servlet-mapping>
     <servlet-name>search.bo</servlet-name>
     <url-pattern>/search.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>reply.co</display-name>
+    <servlet-name>reply.co</servlet-name>
+    <servlet-class>com.kh.community.controller.CommentReplyInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reply.co</servlet-name>
+    <url-pattern>/reply.co</url-pattern>
   </servlet-mapping>
 </web-app>
