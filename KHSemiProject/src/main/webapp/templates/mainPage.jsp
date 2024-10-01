@@ -86,7 +86,7 @@
 		                            <div class="donut-chart" data-persent="70">
 		                                <span class="donut-text"></span>
 		                            </div>
-		                            <div class="content-rate">업적 달성률</div>
+		                            <div class="content-rate">122112업적 달성률</div>
 		                        </div>
 		                        <div>
 		                            <div class="donut-chart" data-persent="50">
