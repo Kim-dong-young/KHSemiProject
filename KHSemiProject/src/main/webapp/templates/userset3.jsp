@@ -24,20 +24,26 @@
     <fieldset>
     <section id="notifications" class="content-section">
             <h2>내 정보 설정</h2>
-                <form>
+                <form action="${pageContext.request.contextPath}/userUpdate.me" method="post">
+                    <input type="hidden" name="memberId" value="${loginMember.memberId }">
                     <div class="notifications-details">
-                            <label for="email">이메일:</label>
-                            <input type="text" id="email" name="email">
+                            <label for="memberemail">이메일:</label>
+                            <input type="text" id="memberemail" name="memberemail">
                             <label for="phone">전화번호:</label>
                             <input type="text" id="phone" name="phone">
                             <label for="address">주소:</label>
                             <input type="text" id="address" name="address">
                         </div>
-                    <button type="submit">변경</button>
+                    <button id="edit-update-btn" type="submit">변경</button>
                 </form>
+                <script>
+                    document.getElementById("edit-update-btn").onclick = function() {
+                        
+                    }
+
+                </script>
             </section>
         </fieldset>
         </main>
-    <script src="static/js/userset.js"></script>
 </body>
 </html>

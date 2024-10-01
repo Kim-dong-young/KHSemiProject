@@ -25,7 +25,6 @@ public class userset3Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher("templates/userset3.jsp").forward(request, response);
 	}
 
