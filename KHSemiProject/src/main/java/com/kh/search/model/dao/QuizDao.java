@@ -290,4 +290,88 @@ public class QuizDao {
 		
 		return list;
 	}
+
+	public Quiz detailQuiz(Connection conn, int quiz_number) {
+		Quiz q = new Quiz();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("detailQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quiz_number);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				q.setQuiz_number(rset.getInt("quiz_number"));
+				q.setQuiz_title(rset.getString("quiz_title"));
+				q.setQuiz_modify_date(rset.getString("quiz_modify_date"));
+				q.setMember_name(rset.getString("member_name"));
+				q.setCategory_name(rset.getString("category_name"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return q;
+	}
+
+	public int quizViewCount(Connection conn, int num) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("quizViewCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Tag> TagArray(Connection conn, int num) {
+		ArrayList<Tag> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("TagArray");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Tag t = new Tag();
+				t.setQuizTag(rset.getString("tag_name"));
+				
+				
+				list.add(t);
+							
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+	}	
 }

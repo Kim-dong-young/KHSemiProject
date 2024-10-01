@@ -287,7 +287,7 @@
                         <p align="center">조건에 맞는 퀴즈가 존재하지 않스빈다.</p>
                     <% } else { %>
                         <% for(Quiz q : list) { %>
-                            <div class="video-priview" onclick="location.href='searchClickPage.jsp'">
+                            <div class="video-priview" onclick="clickQuiz(<%=q.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
                                     <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                                 </div>
@@ -304,7 +304,17 @@
                 </section>
             </div>
 
-            
+            <script>
+                function clickQuiz(qnum){
+                    const tagList = document.getElementsByClassName("tag-clicked");
+                    let String = "";
+                    for (let tag of tagList){
+                        String += tag.value + "!";
+                    }
+                    location.href='<%=contextPath%>/click.sl?cpage=' + <%=currentPage%> + '&category=${param.category}&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
+                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value) + '&tag_list=' + encodeURIComponent(String) + '&quiz_number=' + qnum
+                }
+            </script>
 
             <div class="option2">
                 <%if(currentPage > 1) { %>

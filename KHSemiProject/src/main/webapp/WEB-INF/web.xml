@@ -299,6 +299,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>SearchClickController</display-name>
+    <servlet-name>SearchClickController</servlet-name>
+    <servlet-class>com.kh.search.controller.SearchClickController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchClickController</servlet-name>
+    <url-pattern>/click.sl</url-pattern>
+    </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>search.bo</display-name>
     <servlet-name>search.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardSearchController</servlet-class>

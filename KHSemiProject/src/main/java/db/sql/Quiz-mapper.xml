@@ -16,6 +16,29 @@
 		 WHERE MEMBER_NUMBER = ?
 	</entry>
 
+	<entry key="detailQuiz">
+		SELECT QUIZ_NUMBER,
+			   QUIZ_TITLE,
+			   QUIZ_MODIFY_DATE,
+			   MEMBER_NAME,
+			   CATEGORY_NAME
+		  FROM QUIZ
+		  JOIN CATEGORY USING (CATEGORY_NUMBER)
+		  JOIN MEMBER USING (MEMBER_NUMBER)
+		  WHERE QUIZ_NUMBER = ?
+	</entry>
+	
+	<entry key="quizViewCount">
+		SELECT COUNT(*) AS COUNT
+		FROM QUIZ_LOG
+		WHERE QUIZ_NUMBER = ?
+	</entry>
+	
+	<entry key="TagArray">
+		SELECT TAG_NAME
+		FROM QUIZ_TAG
+		WHERE QUIZ_NUMBER = ?
+	</entry>
 	
 </properties>
 
