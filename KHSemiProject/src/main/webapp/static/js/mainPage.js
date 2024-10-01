@@ -5,7 +5,6 @@ function initSwiper() {
         spaceBetween: 10,
         loop: true,
 
-
         // Navigation arrows
         navigation: {
           nextEl: '.swiper-button-next',

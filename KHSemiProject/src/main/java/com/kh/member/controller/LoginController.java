@@ -33,19 +33,22 @@ public class LoginController extends HttpServlet {
 		
 		String memberId = request.getParameter("memberId");
 		String memberPwd = request.getParameter("memberPwd");		
-		String path = request.getParameter("path");
 		
-		System.out.println(path);
+		String contextPath = request.getContextPath(); // contextPath
+		String path = request.getParameter("path");    // js에서 받아온 pathname
+		String checkPath = contextPath + path;          // contextPath + pathname
+		
+		System.out.println(checkPath);
 		Member loginMember = new MemberService().loginMember(memberId, memberPwd);
 		
 		HttpSession session = request.getSession();		
 		if(loginMember == null) {
 			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
 			
-			if(path.equals("/KHSemiProject/templates/mainPage.jsp") ) {
-				response.sendRedirect(request.getContextPath() + "/main.me");
+			if(checkPath.equals(contextPath)) {
+				response.sendRedirect(contextPath);
 			} else {
-				response.sendRedirect(request.getContextPath());
+				response.sendRedirect(path);
 			}
 		} else {
 			int totalAt = new MemberService().totalAttendance(loginMember.getMemberNo());
@@ -59,8 +62,14 @@ public class LoginController extends HttpServlet {
 
 			session.setAttribute("totalAt", totalAt);
 			
-			response.sendRedirect(request.getContextPath() + "/main.me");
+			if(checkPath.equals(contextPath)) {
+				response.sendRedirect(contextPath + "/main.me");
+			} else {
+				response.sendRedirect(path);
+			}
 		}
+		
+		
 	}
 
 	/**
