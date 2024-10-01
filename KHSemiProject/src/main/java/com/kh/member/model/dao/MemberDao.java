@@ -49,7 +49,10 @@ public class MemberDao {
 						rset.getDate("member_join_date"),
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
-						rset.getString("member_introduce")
+						rset.getString("member_introduce"),
+						rset.getString("email"),
+						rset.getString("address"),
+						rset.getString("phone")
 						);
 			} else {
 				System.out.println("일치하는 정보가 없습니다.");
@@ -138,7 +141,10 @@ public class MemberDao {
 						rset.getDate("member_join_date"),
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
-						rset.getString("member_introduce")
+						rset.getString("member_introduce"),
+						rset.getString("email"),
+						rset.getString("address"),
+						rset.getString("phone")
 						);
 			}
 		} catch (SQLException e) {
@@ -175,7 +181,10 @@ public class MemberDao {
 						rset.getDate("member_join_date"),
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
-						rset.getString("member_introduce")
+						rset.getString("member_introduce"),
+						rset.getString("email"),
+						rset.getString("address"),
+						rset.getString("phone")
 						);
 			}
 		} catch (SQLException e) {
