@@ -147,7 +147,7 @@ public class BoardService {
 		ArrayList<Board> boardList;
 		
 		if(tabNo == 0) {
-			boardList = new BoardDao().selectBoardPopList(conn, pageInfo, tabNo);
+			boardList = new BoardDao().selectBoardPopList(conn, pageInfo);
 		} else {
 			boardList = new BoardDao().selectBoardTabList(conn, pageInfo ,tabNo);
 		}
@@ -161,7 +161,7 @@ public class BoardService {
 		int boardCount;
 		
 		if(tabNo == 0) {
-			boardCount = new BoardDao().selectBoardPopListCount(conn, tabNo);
+			boardCount = new BoardDao().selectBoardPopListCount(conn);
 		} else {
 			boardCount = new BoardDao().selectBoardTabListCount(conn, tabNo);
 		}
@@ -200,6 +200,183 @@ public class BoardService {
 		close(conn);
 		return boardList;
 	}
+
+	public int searchListCount(String searchText) {
+		Connection conn = getConnection();
+		int boardCount = new BoardDao().searchListCount(conn, searchText);
+		
+		close(conn);
+		return boardCount;
+	}
+
+	public int searchBoardTabCount(int tabNo, String searchText) {
+		Connection conn = getConnection();
+		int boardCount;
+		
+		if(tabNo == 0) {
+			boardCount = new BoardDao().searchBoardPopListCount(conn, searchText);
+		} else {
+			boardCount = new BoardDao().searchBoardTabListCount(conn, tabNo, searchText);
+		}
+
+		close(conn);
+		return boardCount;
+	}
+
+	public ArrayList<Board> searchList(PageInfo pageInfo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().searchList(conn, pageInfo, searchText);
+		
+		close(conn);
+		return boardList;
+	}
+
+	public ArrayList<Board> searchBoardTabList(PageInfo pageInfo, int tabNo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList;
+		
+		if(tabNo == 0) {
+			boardList = new BoardDao().searchBoardPopList(conn, pageInfo, searchText);
+		} else {
+			boardList = new BoardDao().searchBoardTabList(conn, pageInfo ,tabNo, searchText);
+		}
+		
+		close(conn);
+		return boardList;
+	}
+
+	public int searchTitleCount(String searchText) {
+		Connection conn = getConnection();
+		int boardCount = new BoardDao().searchTitleCount(conn, searchText);
+		
+		close(conn);
+		return boardCount;
+	}
+
+	public int searchTitleTabCount(int tabNo, String searchText) {
+		Connection conn = getConnection();
+		int boardCount;
+		
+		if(tabNo == 0) {
+			boardCount = new BoardDao().searchTitlePopListCount(conn, searchText);
+		} else {
+			boardCount = new BoardDao().searchTitleTabListCount(conn, tabNo, searchText);
+		}
+
+		close(conn);
+		return boardCount;
+	}
+
+	public ArrayList<Board> searchTitleList(PageInfo pageInfo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().searchTitleList(conn, pageInfo, searchText);
+		
+		close(conn);
+		return boardList;
+	}
+
+	public ArrayList<Board> searchTitleTabList(PageInfo pageInfo, int tabNo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList;
+		
+		if(tabNo == 0) {
+			boardList = new BoardDao().searchTitlePopList(conn, pageInfo, searchText);
+		} else {
+			boardList = new BoardDao().searchTitleTabList(conn, pageInfo ,tabNo, searchText);
+		}
+		
+		close(conn);
+		return boardList;
+	}
+
+	public int searchContentCount(String searchText) {
+		Connection conn = getConnection();
+		int boardCount = new BoardDao().searchContentCount(conn, searchText);
+		
+		close(conn);
+		return boardCount;
+	}
+
+	public int searchContentTabCount(int tabNo, String searchText) {
+		Connection conn = getConnection();
+		int boardCount;
+		
+		if(tabNo == 0) {
+			boardCount = new BoardDao().searchContentPopListCount(conn, searchText);
+		} else {
+			boardCount = new BoardDao().searchContentTabListCount(conn, tabNo, searchText);
+		}
+
+		close(conn);
+		return boardCount;
+	}
+
+	public ArrayList<Board> searchContentList(PageInfo pageInfo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().searchContentList(conn, pageInfo, searchText);
+		
+		close(conn);
+		return boardList;
+	}
+
+	public ArrayList<Board> searchContentTabList(PageInfo pageInfo, int tabNo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList;
+		
+		if(tabNo == 0) {
+			boardList = new BoardDao().searchContentPopList(conn, pageInfo, searchText);
+		} else {
+			boardList = new BoardDao().searchContentTabList(conn, pageInfo ,tabNo, searchText);
+		}
+		
+		close(conn);
+		return boardList;
+	}
+
+	public int searchWriterCount(String searchText) {
+		Connection conn = getConnection();
+		int boardCount = new BoardDao().searchWriterCount(conn, searchText);
+		
+		close(conn);
+		return boardCount;
+	}
+
+	public int searchWriterTabCount(int tabNo, String searchText) {
+		Connection conn = getConnection();
+		int boardCount;
+		
+		if(tabNo == 0) {
+			boardCount = new BoardDao().searchWriterPopListCount(conn, searchText);
+		} else {
+			boardCount = new BoardDao().searchWriterTabListCount(conn, tabNo, searchText);
+		}
+
+		close(conn);
+		return boardCount;
+	}
+
+	public ArrayList<Board> searchWriterList(PageInfo pageInfo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList = new BoardDao().searchWriterList(conn, pageInfo, searchText);
+		
+		close(conn);
+		return boardList;
+	}
+
+	public ArrayList<Board> searchWriterTabList(PageInfo pageInfo, int tabNo, String searchText) {
+		Connection conn = getConnection();
+		ArrayList<Board> boardList;
+		
+		if(tabNo == 0) {
+			boardList = new BoardDao().searchWriterPopList(conn, pageInfo, searchText);
+		} else {
+			boardList = new BoardDao().searchWritertTabList(conn, pageInfo ,tabNo, searchText);
+		}
+		
+		close(conn);
+		return boardList;
+	}
+
 
 	
 }

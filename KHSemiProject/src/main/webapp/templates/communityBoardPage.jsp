@@ -43,7 +43,6 @@ crossorigin="anonymous"></script>
 
 </head>
 <body>
-
     <div class="board-tab">
         <ul>
             <li><button id="t" onclick="location.href='<%=contextPath%>/community?cpage=1'">전체</button></li>
@@ -75,11 +74,12 @@ crossorigin="anonymous"></script>
                         <td colspan="6">게시글이 없습니다.</td>
                     </tr>
                 <% } else { %>
-
                     <% if( tno == null ) { %>
                         <% for(Board b : boardList) { %>
                             <tr>
-                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'">
+                                    <%=b.getCommunityTab()%>
+                                </td>
                                 <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                                 <td class="author"><%=b.getMemberId()%></td>
                                 <td class="comment-num">[<%=b.getCommentCount()%>]<img src="static/img/comment-icon.png"></td>
@@ -90,7 +90,7 @@ crossorigin="anonymous"></script>
                     <% } else { %>
                         <% for(Board b : boardList) { %>
                             <tr>
-                                <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                 <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
                                 <td class="author"><%=b.getMemberId()%></td>
                                 <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
@@ -126,18 +126,34 @@ crossorigin="anonymous"></script>
 
             <div class="option2">
                 <!-- 맨 처음으로 가는 버튼 -->
-                <% if ( tno == null ) { %>
-                    <button onclick="location.href='<%=contextPath%>/community?cpage=1'">&lt;&lt;</button>
-                <% } else { %>
-                    <button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=tno%>'">&lt;&lt;</button>
+                <% if (request.getParameter("searchOption") == null ) { %> <!-- 검색하지 않고, 그냥 페이징 바 버튼 눌러서 이동할 때 -->
+                    <% if ( tno == null ) { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=1'">&lt;&lt;</button>
+                    <% } else { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=tno%>'">&lt;&lt;</button>
+                    <% } %>
+                <% } else { %> <!-- 검색하고, 페이징 바를 통해 이동할때 -->
+                    <% if ( tno == null ) { %> <!-- tno가 null이면 전체 탭 -->
+                        <button onclick="location.href='<%=contextPath%>/search.bo?cpage=1&searchText=${searchText}&searchOption=${searchOption}'">&lt;&lt;</button>
+                    <% } else { %>
+                        <button onclick="location.href='<%=contextPath%>/search.bo?cpage=1&tno=<%=tno%>&searchText=${searchText}&searchOption=${searchOption}'">&lt;&lt;</button>
+                    <% } %>
                 <% } %>
                 
                 <!-- 페이징바 단위 만큼 앞으로 이동하는 버튼 -->
                 <% if(startPage != 1) { %>
-                    <% if ( tno == null ) { %>
-                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>'">&lt;</button>
+                    <% if (request.getParameter("searchOption") == null ) { %>
+                        <% if ( tno == null ) { %>
+                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>'">&lt;</button>
+                        <% } else { %>
+                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>&tno=<%=tno%>'">&lt;</button>
+                        <% } %>
                     <% } else { %>
-                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage - 1%>&tno=<%=tno%>'">&lt;</button>
+                        <% if ( tno == null ) { %>
+                            <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=startPage - 1%>&searchText=${searchText}&searchOption=${searchOption}'">&lt;</button>
+                        <% } else { %>
+                            <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=startPage - 1%>&tno=<%=tno%>&searchText=${searchText}&searchOption=${searchOption}'">&lt;</button>
+                        <% } %>
                     <% } %>
                 <% } else { %>
                     <button disabled>&lt;</button>
@@ -148,30 +164,54 @@ crossorigin="anonymous"></script>
                     <% if(i == currentPage) { %>
                         <button disabled><%=i %></button>
                     <% } else { %>
-                        <% if ( tno == null ) { %>
-                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>'"><%=i %></button>
+                        <% if (request.getParameter("searchOption") == null ) { %>
+                            <% if ( tno == null ) { %>
+                                <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>'"><%=i %></button>
+                            <% } else { %>
+                                <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>&tno=<%=tno%>'"><%=i %></button>
+                            <% } %>
                         <% } else { %>
-                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=i%>&tno=<%=tno%>'"><%=i %></button>
+                            <% if ( tno == null ) { %>
+                                <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=i%>&searchText=${searchText}&searchOption=${searchOption}'"><%=i %></button>
+                            <% } else { %>
+                                <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=i%>&tno=<%=tno%>&searchText=${searchText}&searchOption=${searchOption}'"><%=i %></button>
+                            <% } %>
                         <% } %>
                     <% } %>
                 <% } %>
 
                 <!-- 페이징바 단위 만큼 뒤로 이동하는 버튼 -->
                 <% if( (startPage + pageBarLimit < maxPage) ) { %>
-                    <% if ( tno == null ) { %>
-                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
+                    <% if (request.getParameter("searchOption") == null ) { %>
+                        <% if ( tno == null ) { %>
+                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>'">&gt;</button>
+                        <% } else { %>
+                            <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>&tno=<%=tno%>'">&gt;</button>
+                        <% } %>
                     <% } else { %>
-                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=startPage + pageBarLimit%>&tno=<%=tno%>'">&gt;</button>
+                        <% if ( tno == null ) { %>
+                            <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=startPage + pageBarLimit%>&searchText=${searchText}&searchOption=${searchOption}'">&gt;</button>
+                        <% } else { %>
+                            <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=startPage + pageBarLimit%>&tno=<%=tno%>&searchText=${searchText}&searchOption=${searchOption}'">&gt;</button>
+                        <% } %>
                     <% } %>
                 <% } else { %>
                     <button disabled>&gt;</button>
                 <% } %>
 
                 <!-- 맨 뒤로 가는 버튼 -->
-                <% if ( tno == null ) { %>
-                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>'">&gt;&gt;</button>
+                <% if (request.getParameter("searchOption") == null ) { %>
+                    <% if ( tno == null ) { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>'">&gt;&gt;</button>
+                    <% } else { %>
+                        <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>&tno=<%=tno%>'">&gt;&gt;</button>
+                    <% } %>
                 <% } else { %>
-                    <button onclick="location.href='<%=contextPath%>/community?cpage=<%=maxPage%>&tno=<%=tno%>'">&gt;&gt;</button>
+                    <% if ( tno == null ) { %>
+                        <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=maxPage%>&searchText=${searchText}&searchOption=${searchOption}'">&gt;&gt;</button>
+                    <% } else { %>
+                        <button onclick="location.href='<%=contextPath%>/search.bo?cpage=<%=maxPage%>&tno=<%=tno%>&searchText=${searchText}&searchOption=${searchOption}'">&gt;&gt;</button>
+                    <% } %>
                 <% } %>
             </div>
 
@@ -184,22 +224,26 @@ crossorigin="anonymous"></script>
             </div>
         </div>
 
-        <form class="search-form">
+        <form class="search-form" action="<%=contextPath%>/search.bo">
+            <input type="hidden" name="cpage" value="1">
+            <% if( tno != null ) { %>
+                <input type="hidden" name="tno" value="<%=tno%>">
+            <% } %>
             <div class="option2">
-                <input type="text">
+                <input name="searchText" type="text">
             </div>
 
             <div class="option1">
-                <select>
-                    <option>전체</option>
-                    <option>제목</option> <!-- 좋아요 순 -->
-                    <option>내용</option>
-                    <option>글쓴이</option>
+                <select name="searchOption">
+                    <option value="all">전체</option>
+                    <option value="title">제목</option> <!-- 좋아요 순 -->
+                    <option value="content">내용</option>
+                    <option value="writer">글쓴이</option>
                 </select>
             </div>
             
             <div class="option1">
-                <button><img src="static/img/search-icon.png">검색</button>
+                <button type="submit"><img src="static/img/search-icon.png">검색</button>
             </div>
         </form>
     </div>
