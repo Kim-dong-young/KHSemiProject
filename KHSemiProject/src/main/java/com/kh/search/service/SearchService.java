@@ -42,4 +42,22 @@ public class SearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+
+	public Quiz detailQuiz(int quiz_number) {
+		Connection conn = getConnection();
+		Quiz q = new QuizDao().detailQuiz(conn, quiz_number);
+		return q;
+	}
+
+	public int quizViewCount(int num) {
+		Connection conn = getConnection();
+		int result = new QuizDao().quizViewCount(conn, num);
+		return result;
+	}
+
+	public ArrayList<Tag> TagArray(int num) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Tag> list = new QuizDao().TagArray(conn, num);
+		return list;
+	}
 }
