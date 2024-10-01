@@ -116,6 +116,6 @@
     SET MEMBER_EMAIL = ?, 
         PHONE = ?, 
         ADDRESS = ?
-    WHERE MEMBER_ID = ?
+    WHERE MEMBER_NUMBER = ?
 </entry>
 </properties>

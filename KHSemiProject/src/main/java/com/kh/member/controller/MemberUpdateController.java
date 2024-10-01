@@ -34,6 +34,7 @@ public class MemberUpdateController extends HttpServlet {
 		String memberemail = request.getParameter("memberemail");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
+		String memberNo = request.getParameter("memberNo");
 		
 		Member m = new Member(phone,address,memberemail);
 		

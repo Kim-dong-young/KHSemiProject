@@ -375,7 +375,7 @@ public class MemberDao {
 			pstmt.setString(1, m.getEmail());
 			pstmt.setString(2, m.getPhone());
 			pstmt.setString(3, m.getAddress());
-			pstmt.setString(4, m.getMemberId());
+			pstmt.setInt(4, m.getMemberNo());
 			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {
