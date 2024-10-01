@@ -60,4 +60,21 @@ public class SearchService {
 		ArrayList<Tag> list = new QuizDao().TagArray(conn, num);
 		return list;
 	}
+
+	public String quizRateAvg(int num) {
+		Connection conn = JDBCTemplate.getConnection();
+		String str = new QuizDao().quizRateAvg(conn, num);
+		return str;
+	}
+
+	public ArrayList<Quiz> simularQuizList(ArrayList<Tag> tagArr) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Quiz> qArr = new QuizDao().simularQuizList(conn, tagArr);
+		return qArr;
+	}
+
+	public boolean markInsert(int num) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -327,4 +327,14 @@
     <servlet-name>userUpdate.me</servlet-name>
     <url-pattern>/userUpdate.me</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxQuizMarkController</display-name>
+    <servlet-name>AjaxQuizMarkController</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxQuizMarkController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxQuizMarkController</servlet-name>
+    <url-pattern>/mkQuiz.sl</url-pattern>
+  </servlet-mapping>
 </web-app>
