@@ -77,4 +77,12 @@ public class SearchService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public ArrayList<Quiz> selectLatestQuiz() {
+		Connection conn = getConnection();
+		ArrayList<Quiz> list = new QuizDao().selectLatestQuiz(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }
