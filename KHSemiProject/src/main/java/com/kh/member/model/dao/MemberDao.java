@@ -50,7 +50,7 @@ public class MemberDao {
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
 						rset.getString("member_introduce"),
-						rset.getString("email"),
+						rset.getString("member_email"),
 						rset.getString("address"),
 						rset.getString("phone")
 						);
@@ -142,7 +142,7 @@ public class MemberDao {
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
 						rset.getString("member_introduce"),
-						rset.getString("email"),
+						rset.getString("member_email"),
 						rset.getString("address"),
 						rset.getString("phone")
 						);
@@ -182,7 +182,7 @@ public class MemberDao {
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
 						rset.getString("member_introduce"),
-						rset.getString("email"),
+						rset.getString("member_email"),
 						rset.getString("address"),
 						rset.getString("phone")
 						);
@@ -352,6 +352,30 @@ public class MemberDao {
 			
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, memberPwd);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateMember(Connection conn, Member m) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getEmail());
+			pstmt.setString(2, m.getPhone());
+			pstmt.setString(3, m.getAddress());
+			pstmt.setString(4, m.getMemberId());
 			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {

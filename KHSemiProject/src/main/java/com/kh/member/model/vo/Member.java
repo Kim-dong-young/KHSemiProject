@@ -13,7 +13,7 @@ public class Member {
 	private int checkContinueCnt;
 	private String status;
 	private String introduce;
-	private String email;
+	private String memberemail;
 	private String address;
 	private String phone;
 	
@@ -22,7 +22,7 @@ public class Member {
 	}
 
 	public Member(int memberNo, String memberId, String memberPwd, String memberNickName, int exp, String memberImg,
-			Date joinDate, int checkContinueCnt, String status, String introduce, String email , String address, String phone) {
+			Date joinDate, int checkContinueCnt, String status, String introduce, String memberemail , String address, String phone) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -34,7 +34,7 @@ public class Member {
 		this.checkContinueCnt = checkContinueCnt;
 		this.status = status;
 		this.introduce = introduce;
-		this.email = email;
+		this.memberemail = memberemail;
 		this.address = address;
 		this.phone = phone;
 	}
@@ -127,11 +127,11 @@ public class Member {
 	}
 
 	public String getEmail() {
-		return email;
+		return memberemail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String memberemail) {
+		this.memberemail = memberemail;
 	}
 
 	public String getAddress() {
@@ -155,7 +155,7 @@ public class Member {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
 				+ ", memberNickName=" + memberNickName + ", exp=" + exp + ", memberImg=" + memberImg + ", joinDate="
 				+ joinDate + ", checkContinueCnt=" + checkContinueCnt + ", status=" + status + ", introduce="
-				+ introduce + ", email=" + email + ", address=" + address + ", phone=" + phone + "]";
+				+ introduce + ", memberemail=" + memberemail + ", address=" + address + ", phone=" + phone + "]";
 	}
 
 	

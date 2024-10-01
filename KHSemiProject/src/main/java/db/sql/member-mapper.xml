@@ -11,7 +11,10 @@
 			   MEMBER_JOIN_DATE,
 			   MEMBER_CHECK_CONTINUECOUNT,
 			   MEMBER_STATUS,
-			   MEMBER_INTRODUCE
+			   MEMBER_INTRODUCE,
+			   MEMBER_EMAIL,
+			   ADDRESS,
+			   PHONE
 		  FROM MEMBER
 		 WHERE MEMBER_ID = ? 
 		   AND MEMBER_PWD = ? 
@@ -108,4 +111,11 @@
 		WHERE MEMBER_ID = ?
 			AND MEMBER_PWD = ?
 	</entry>
+	<entry key="updateMember">
+    UPDATE MEMBER
+    SET MEMBER_EMAIL = ?, 
+        PHONE = ?, 
+        ADDRESS = ?
+    WHERE MEMBER_ID = ?
+</entry>
 </properties>
