@@ -1,6 +1,6 @@
 function initSide(){
     selectPopBoard();
-    // setInterval(selectPopBoard, 3000);
+    setInterval(selectPopBoard, 3000);
 }
 
 function selectPopBoard(){
