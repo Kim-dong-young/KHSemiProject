@@ -34,13 +34,3 @@ function increaseLike(boardNo){
         }
     })
 }
-
-function writeReply(cno){
-    const replyform = document.querySelector("form[name=reply-form-"+cno+"]");
-
-    if(replyform.style.display === "none"){
-        replyform.style.display = "block";
-    } else {
-        replyform.style.display = "none";
-    }
-}

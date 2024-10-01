@@ -26,8 +26,7 @@
             <h2>내 정보 설정</h2>
                 <form>
                     <div class="notifications-details">
-                            <label for="email">이메일:</label>
-                            <input type="text" id="email" name="email">
+                        
                             <label for="phone">전화번호:</label>
                             <input type="text" id="phone" name="phone">
                             <label for="address">주소:</label>

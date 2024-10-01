@@ -26,6 +26,8 @@
                     <div class="profile-details">
 
                         <label for="nickname">닉네임:</label>
+                        <input type="text" id="nickname" name="nickname" placeholder="현재 닉네임">
+                        <label for="nickname">이메일:</label>
                         <input type="text" id="email" name="email" placeholder="이메일을 입력">
                         <label for="bio">자기소개:</label>
                         <textarea id="bio" name="bio" rows="4" placeholder="자기소개를 입력하세요..."></textarea>

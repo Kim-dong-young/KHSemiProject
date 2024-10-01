@@ -377,39 +377,6 @@ public class BoardService {
 		return boardList;
 	}
 
-	public int insertCommentReply(Comment comment) {
-		Connection conn = getConnection();
-		int result = new BoardDao().insertCommentReply(conn, comment);
-		
-		if(result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		return result;
-	}
 
-	public ArrayList<Comment> selectReplyList(PageInfo cPageInfo, int boardNo, ArrayList<Comment> commentList) {
-		Connection conn = getConnection();
-		
-		String parentNo = "";
-		for(Comment cm : commentList) {
-			parentNo += cm.getCommentNo() + ",";
-		}
-		
-		if(parentNo.length() > 0) {
-			parentNo = parentNo.substring(0,parentNo.length()-1);
-		}
-		
-		ArrayList<Comment> replyList = new BoardDao().selectReplyList(conn, cPageInfo, boardNo, parentNo);
-		
-		close(conn);
-		return replyList;
-	}
-
-
-	
 	
 }

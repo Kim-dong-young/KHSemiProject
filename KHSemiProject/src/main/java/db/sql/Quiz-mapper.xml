@@ -20,9 +20,8 @@
 		SELECT QUIZ_NUMBER,
 			   QUIZ_TITLE,
 			   QUIZ_MODIFY_DATE,
-			   MEMBER_NICKNAME,
-			   CATEGORY_NAME,
-			   QUIZ_EXPLANATION
+			   MEMBER_NAME,
+			   CATEGORY_NAME
 		  FROM QUIZ
 		  JOIN CATEGORY USING (CATEGORY_NUMBER)
 		  JOIN MEMBER USING (MEMBER_NUMBER)
@@ -40,7 +39,6 @@
 		FROM QUIZ_TAG
 		WHERE QUIZ_NUMBER = ?
 	</entry>
-<<<<<<< HEAD
 	<entry key="selectLatestQuiz">
 		SELECT *
   		FROM (SELECT ROW_NUMBER() OVER(ORDER BY QUIZ_NUMBER DESC) AS RNO,
@@ -49,16 +47,6 @@
 		  		FROM QUIZ)
           	   WHERE RNO BETWEEN 1 AND 10
 	</entry>
-=======
-	
-	<entry key="quizRateAvg">
-		SELECT ROUND(AVG(QUIZ_RATE_RATING), 2) AS AVG
-		FROM QUIZ_RATE
-		GROUP BY QUIZ_NUMBER
-		HAVING QUIZ_NUMBER = ?
-	</entry>
-	
->>>>>>> 209854fc8118e6079f5567598ed277cbef95e7ba
 </properties>
 
 

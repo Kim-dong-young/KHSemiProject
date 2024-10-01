@@ -126,7 +126,7 @@
     <description></description>
     <display-name>create.quiz</display-name>
     <servlet-name>create.quiz</servlet-name>
-    <servlet-class>com.kh.createQuiz.controller.CreateQuizMainController</servlet-class>
+    <servlet-class>com.kh.quiz.controller.CreateQuizMainController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>create.quiz</servlet-name>
@@ -306,7 +306,7 @@
   <servlet-mapping>
     <servlet-name>SearchClickController</servlet-name>
     <url-pattern>/click.sl</url-pattern>
-  </servlet-mapping>
+    </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>search.bo</display-name>
@@ -316,34 +316,5 @@
   <servlet-mapping>
     <servlet-name>search.bo</servlet-name>
     <url-pattern>/search.bo</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>reply.co</display-name>
-    <servlet-name>reply.co</servlet-name>
-    <servlet-class>com.kh.community.controller.CommentReplyInsertController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>reply.co</servlet-name>
-    <url-pattern>/reply.co</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <display-name>userUpdate.me</display-name>
-    <servlet-name>userUpdate.me</servlet-name>
-    <servlet-class>com.kh.member.controller.MemberUpdateController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>userUpdate.me</servlet-name>
-    <url-pattern>/userUpdate.me</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AjaxQuizMarkController</display-name>
-    <servlet-name>AjaxQuizMarkController</servlet-name>
-    <servlet-class>com.kh.search.controller.AjaxQuizMarkController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AjaxQuizMarkController</servlet-name>
-    <url-pattern>/mkQuiz.sl</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -8,14 +8,7 @@ public class Quiz {
 	private String member_number;
 	private String category_number;
 	private String member_name;
-	public String getQuiz_explanation() {
-		return quiz_explanation;
-	}
-	public void setQuiz_explanation(String quiz_explanation) {
-		this.quiz_explanation = quiz_explanation;
-	}
 	private String category_name;
-	private String quiz_explanation;
 	public String getMember_name() {
 		return member_name;
 	}

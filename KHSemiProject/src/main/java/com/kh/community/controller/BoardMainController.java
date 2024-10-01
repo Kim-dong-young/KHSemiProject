@@ -46,7 +46,7 @@ public class BoardMainController extends HttpServlet {
 		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		String tabNo = request.getParameter("tno");
-
+		
 		if(tabNo == null) {
 			listCount = bService.selectListCount();
 		} else {

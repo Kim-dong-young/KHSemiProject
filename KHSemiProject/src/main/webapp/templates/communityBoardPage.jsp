@@ -117,6 +117,11 @@ crossorigin="anonymous"></script>
 
         <div class="board-option">
             <div class="option1">
+                <select>
+                    <option>최신순</option>
+                    <option>인기순</option> <!-- 좋아요 순 -->
+                    <option>댓글순</option>
+                </select>
             </div>
 
             <div class="option2">

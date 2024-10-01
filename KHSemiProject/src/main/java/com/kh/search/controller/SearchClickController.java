@@ -1,9 +1,7 @@
 package com.kh.search.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import com.kh.search.model.vo.Tag;
 import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
@@ -32,13 +30,9 @@ public class SearchClickController extends HttpServlet {
 		
 		int num = Integer.parseInt(request.getParameter("quiz_number"));
 		
-		ArrayList<Tag> tagArr = new SearchService().TagArray(num);
-		
 		request.setAttribute("Quiz", new SearchService().detailQuiz(num));
 		request.setAttribute("viewCount", new SearchService().quizViewCount(num));
-		request.setAttribute("TagArr", tagArr);
-		request.setAttribute("quiz_rate", new SearchService().quizRateAvg(num));
-		request.setAttribute("list", new SearchService().simularQuizList(tagArr));
+		request.setAttribute("TagArr", new SearchService().TagArray(num));
 		request.getRequestDispatcher("templates/searchClickPage.jsp").forward(request, response);
 	}
 

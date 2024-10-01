@@ -19,7 +19,7 @@ String contextPath = request.getContextPath();
 		<div class="header">
 			<img src="<%=contextPath%>/static/img/QuizLogo.png" alt="Quiz Logo" class="logo">
 		</div>
-		<form class="quiz-form" action="<%=contextPath%>/create.quiz" method="post" enctype="multipart/form-data">
+		<form class="quiz-form" action="<%=contextPath%>/create.quiz" method="post" enctype="multipart/form-data" >
 			<label for="quiz-title">퀴즈 제목:</label> 
 			<input type="text" id="quiz-title" name="title" placeholder="제목을 입력해주세요."> 
 				<label for="quiz-description">퀴즈 설명:</label>
@@ -39,14 +39,14 @@ String contextPath = request.getContextPath();
 					<label for="category">카테고리:</label> 
 					<select id="category" name="category">
 						<option value="">선택</option>
-						<option value="1" name="humor">유머</option>
-						<option value="2" name="art_literature">예술/문학</option>
-						<option value="3" name="world">세계</option>
-						<option value="4" name="history">역사</option>
-						<option value="5" name="language">언어</option>
-						<option value="6" name="science_nature">과학/자연</option>
-						<option value="7" name="sports">스포츠</option>
-						<option value="8" name="etc">기타</option>
+						<option value="humor">유머</option>
+						<option value="art_literature">예술/문학</option>
+						<option value="world">세계</option>
+						<option value="history">역사</option>
+						<option value="language">언어</option>
+						<option value="science_nature">과학/자연</option>
+						<option value="sports">스포츠</option>
+						<option value="etc">기타</option>
 					</select>
 				</div>
 
