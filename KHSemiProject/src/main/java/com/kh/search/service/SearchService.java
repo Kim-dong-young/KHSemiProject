@@ -60,4 +60,12 @@ public class SearchService {
 		ArrayList<Tag> list = new QuizDao().TagArray(conn, num);
 		return list;
 	}
+	
+	public ArrayList<Quiz> selectLatestQuiz() {
+		Connection conn = getConnection();
+		ArrayList<Quiz> list = new QuizDao().selectLatestQuiz(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }
