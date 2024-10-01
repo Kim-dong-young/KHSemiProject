@@ -21,7 +21,6 @@ function init(pageName, optional){
             break;
         case "mainPage":
             initSwiper()
-            initrecommend()
 			break;
         case "searchMainPage":
             tagSearchAjax()

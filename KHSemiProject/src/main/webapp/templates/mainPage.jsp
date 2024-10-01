@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page buffer="16kb" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.ArrayList, com.kh.search.model.vo.Quiz"%>
-<%
-	ArrayList<Quiz> list = ((ArrayList<Quiz>)request.getAttribute("qList"));
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,25 +25,55 @@
             <div>이런 퀴즈는 어떤가요?~</div>
             <div class="recommend-button">
                 <ul>
-                    <li><button class="custom-btn" value="" onclick="turn(0)" disabled>최신</button></li>
-                    <li><button class="custom-btn" value="" onclick="turn(1)">조회</button></li>
-                    <li><button class="custom-btn" value="" onclick="turn(2)">평점</button></li>
-                    <!-- <li><button class="custom-btn" value="" onclick="turn(4)">장르</button></li> -->
+                    <li><button>최신</button></li>
+                    <li><button>조회</button></li>
+                    <li><button>평점</button></li>
+                    <li><button>장르</button></li>
                 </ul>
             </div>
             <div class="my-swiper-box">
                 <div class="swiper">
                     <div class="swiper-wrapper">
-                    <%if(list.isEmpty()) {%>
-                        조회된 정보가 없습니다.
-                    <%} else {%>
-                    	<%for(Quiz q : list) {%>
-	                    	<div class="swiper-slide">
-	                            <div class="thumbnail"><%=q.getQuiz_number() %>썸네일입니다.</div>
-	                            <div class="title"><%=q.getQuiz_title() %></div>
-	                        </div>
-                        <%} %>
-                    <%} %>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">1썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">2썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">3썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">4썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">5썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">6썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">7썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">8썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">9썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="thumbnail">10썸네일입니다.</div>
+                            <div class="title">제목입니다.</div>
+                        </div>
                     </div>
                     <!-- Add Navigation buttons if needed -->
                     <div class="swiper-button-next"></div>

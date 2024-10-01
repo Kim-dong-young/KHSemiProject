@@ -32,17 +32,9 @@
     margin-right: 10px;
 }
 
-.recommend-button .custom-btn {
-    width: 75px;
+.recommend-button > ul > li > button{
     height: 30px;
-    border: 2px solid #FF9139;
-    background: white;
-    border-radius: 20px;
-}
-
-.recommend-button .custom-btn:disabled {
-    background: #FF9139;
-    color: black;
+    font-size: 17px;
 }
 
 .my-swiper-box{

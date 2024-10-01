@@ -1,17 +1,11 @@
 package com.kh.main.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import com.google.gson.Gson;
-import com.kh.search.model.vo.Quiz;
-import com.kh.search.service.SearchService;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Servlet implementation class MainPageController
@@ -34,10 +28,6 @@ public class MainPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("pageName", "mainPage");
 		
-		ArrayList<Quiz> quizList = new SearchService().selectLatestQuiz();
-		
-		request.setAttribute("qList", quizList);
-	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 	}
 

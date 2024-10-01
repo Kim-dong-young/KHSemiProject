@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 		String memberPwd = request.getParameter("memberPwd");		
 		
 		String contextPath = request.getContextPath(); // contextPath
-		String path = request.getParameter("path");    // js에서 받아온 url
+		String path = request.getParameter("path");    // js에서 받아온 pathname
 		String checkPath = contextPath + path;          // contextPath + pathname
 		
 		System.out.println(checkPath);

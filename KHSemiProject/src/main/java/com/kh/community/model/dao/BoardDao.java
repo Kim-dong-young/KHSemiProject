@@ -1530,6 +1530,92 @@ public class BoardDao {
 		
 		return boardList;
 	}
+
+	public int insertCommentReply(Connection conn, Comment comment) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCommentReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentParentNo());
+			pstmt.setInt(2, comment.getCommunityNo());
+			pstmt.setInt(3, comment.getMemberNo());
+			pstmt.setString(4, comment.getCommentContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Comment> selectReplyList(Connection conn, PageInfo cPageInfo, int boardNo, String parentNo) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		ArrayList<Comment> replyList = new ArrayList<>();
+		
+		String sql = "SELECT COMMUNITY_COMMENT_NUMBER ,"
+				+ "		   COMMUNITY_PARENT_NUMBER ,"
+				+ "		   COMMUNITY_NUMBER ,"
+				+ "		   MEMBER_NICKNAME ,"
+				+ "		   MEMBER_NUMBER ,"
+				+ "		   COMMUNITY_COMMENT_CONTENT"
+				+ "		FROM"
+				+ "		("
+				+ "		    SELECT COMMUNITY_COMMENT_NUMBER ,"
+				+ "			   COMMUNITY_PARENT_NUMBER ,"
+				+ "			   COMMUNITY_NUMBER ,"
+				+ "			   MEMBER_NICKNAME ,"
+				+ "			   MEMBER_NUMBER ,"
+				+ "			   COMMUNITY_COMMENT_CONTENT ,"
+				+ "		       ROW_NUMBER() OVER(ORDER BY COMMUNITY_COMMENT_DATE) AS RNUM"
+				+ "		    FROM COMMUNITY_COMMENT"
+				+ "		  JOIN MEMBER USING (MEMBER_NUMBER)"
+				+ "		 WHERE COMMUNITY_NUMBER = ? "
+				+ "           AND COMMUNITY_PARENT_NUMBER IN (" + parentNo + ")"
+				+ "		   AND COMMUNITY_PARENT_NUMBER IS NOT NULL"
+				+ "		)"
+				+ "		WHERE RNUM BETWEEN ? AND ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (cPageInfo.getCurrentPage() - 1) * cPageInfo.getBoardLimit() + 1;
+			int endRow = startRow + cPageInfo.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, boardNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Comment comment = new Comment(
+							rset.getInt("COMMUNITY_COMMENT_NUMBER"),
+							rset.getInt("COMMUNITY_PARENT_NUMBER"),
+							rset.getInt("COMMUNITY_NUMBER"),
+							rset.getString("MEMBER_NICKNAME"),
+							rset.getInt("MEMBER_NUMBER"),
+							rset.getString("COMMUNITY_COMMENT_CONTENT")
+						);
+				
+				replyList.add(comment);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return replyList;
+	}
 	
 	
 }

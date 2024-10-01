@@ -13,13 +13,16 @@ public class Member {
 	private int checkContinueCnt;
 	private String status;
 	private String introduce;
+	private String memberemail;
+	private String address;
+	private String phone;
 	
 	public Member() {
 		super();
 	}
 
 	public Member(int memberNo, String memberId, String memberPwd, String memberNickName, int exp, String memberImg,
-			Date joinDate, int checkContinueCnt, String status, String introduce) {
+			Date joinDate, int checkContinueCnt, String status, String introduce, String memberemail , String address, String phone) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -31,6 +34,9 @@ public class Member {
 		this.checkContinueCnt = checkContinueCnt;
 		this.status = status;
 		this.introduce = introduce;
+		this.memberemail = memberemail;
+		this.address = address;
+		this.phone = phone;
 	}
 
 	public Member(String memberId, String memberPwd, String memberNickName) {
@@ -120,13 +126,39 @@ public class Member {
 		this.introduce = introduce;
 	}
 
+	public String getEmail() {
+		return memberemail;
+	}
+
+	public void setEmail(String memberemail) {
+		this.memberemail = memberemail;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
 				+ ", memberNickName=" + memberNickName + ", exp=" + exp + ", memberImg=" + memberImg + ", joinDate="
 				+ joinDate + ", checkContinueCnt=" + checkContinueCnt + ", status=" + status + ", introduce="
-				+ introduce + "]";
+				+ introduce + ", memberemail=" + memberemail + ", address=" + address + ", phone=" + phone + "]";
 	}
+
+	
 	
 	
 }
