@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-@WebServlet("/create.quiz")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10) // 최대 10MB 파일 업로드 허용
 public class CreateQuizMainController extends HttpServlet {
 
