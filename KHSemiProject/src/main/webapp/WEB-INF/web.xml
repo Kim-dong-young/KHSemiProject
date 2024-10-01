@@ -126,7 +126,7 @@
     <description></description>
     <display-name>create.quiz</display-name>
     <servlet-name>create.quiz</servlet-name>
-    <servlet-class>com.kh.quiz.controller.CreateQuizMainController</servlet-class>
+    <servlet-class>com.kh.createQuiz.controller.CreateQuizMainController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>create.quiz</servlet-name>
