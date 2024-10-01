@@ -1,23 +1,25 @@
-package com.kh.member.controller;
+package com.kh.search.controller;
 
 import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogoutController
+ * Servlet implementation class AjaxQuizMarkController
  */
-public class LogoutController extends HttpServlet {
+public class AjaxQuizMarkController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutController() {
+    public AjaxQuizMarkController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,14 +28,12 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//로그아웃 처리 -> session만료시키기 == 세션을 무효화시키기
-		String path = request.getParameter("path");
-		System.out.println(path);
+		int num = Integer.parseInt(request.getParameter("quizNum"));
 		
-		HttpSession session = request.getSession();
-		session.invalidate();
+		boolean mark = new SearchService().markInsert(num);
 		
-		response.sendRedirect(request.getContextPath() + "/main.me"); // /jsp
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(mark, response.getWriter());
 	}
 
 	/**
