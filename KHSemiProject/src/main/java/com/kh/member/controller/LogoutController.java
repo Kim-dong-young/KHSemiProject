@@ -27,6 +27,9 @@ public class LogoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//로그아웃 처리 -> session만료시키기 == 세션을 무효화시키기
+		String path = request.getParameter("path");
+		System.out.println(path);
+		
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
