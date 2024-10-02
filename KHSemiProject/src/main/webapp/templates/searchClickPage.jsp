@@ -63,15 +63,30 @@
         <div id="div-top">
             <div id="image-div">
                 <div class="image-container">
-                    <img src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="" id="image-playing">
+                    <%if(q.getThumbnail() == null){ %>
+                        <img id="image-playing" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                    <% } else { %>
+                        <img id="image-playing" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
+                    <% } %>
                     <div id="image-divs">
                         <div id="image-divs-1"><%=rate%></div>
                         <div id="image-divs-2"><%=viewCount%></div>
                     </div>
                 </div>
                 <div>
-                    <button onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=${param.category}&orderby=${param.orderby}&search_type=${param.search_type}'
-                                        + '&search_text=' + '${param.search_text}' + '&tag_list=${param.tag_list}'">뒤로가기</button>
+                    <c:choose>
+                        <c:when test="${param.page eq '1'}">
+                            <button onclick="location.href='<%=contextPath%>/main.me'">뒤로가기</button>
+                        </c:when>
+                        <c:when test="${param.page eq '2'}">
+                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'">뒤로가기</button>
+                        </c:when>
+                        <c:when test="${param.page eq '3'}">
+                            <button onclick="location.href='<%=contextPath%>/personal.me'">뒤로가기</button>
+                        </c:when>
+                    </c:choose>
+
+                    
                     <c:choose>
                         <c:when test="${empty loginMember}">
                         </c:when>
@@ -139,7 +154,11 @@
                         <% if(qq.getQuiz_number() != q.getQuiz_number()) { %>
                             <div class="video-priview" onclick="clickQuiz(<%=qq.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
-                                    <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                    <%if(q.getThumbnail() == null){ %>
+                                        <img class="thumbnail" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                    <% } else { %>
+                                        <img class="thumbnail" src="<%=contextPath%>/<%=qq.getThumbnail()%>" alt="">
+                                    <% } %>
                                 </div>
                                 <div class="video-info-grid">
                                     <div class="video-info">

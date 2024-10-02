@@ -310,13 +310,7 @@
 
             <script>
                 function clickQuiz(qnum){
-                    const tagList = document.getElementsByClassName("tag-clicked");
-                    let String = "";
-                    for (let tag of tagList){
-                        String += tag.value + "!";
-                    }
-                    location.href='<%=contextPath%>/click.sl?cpage=' + <%=currentPage%> + '&category=${param.category}&orderby=${param.orderby}&search_type=' + encodeURIComponent(document.getElementById('search-select').value)
-                                        + '&search_text=' + encodeURIComponent(document.getElementById('search-text').value) + '&tag_list=' + encodeURIComponent(String) + '&quiz_number=' + qnum
+                    location.href='<%=contextPath%>/click.sl?' + 'quiz_number=' + qnum + '&page=2'
                 }
             </script>
 
