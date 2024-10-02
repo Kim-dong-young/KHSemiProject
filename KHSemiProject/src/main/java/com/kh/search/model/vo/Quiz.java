@@ -8,14 +8,26 @@ public class Quiz {
 	private String member_number;
 	private String category_number;
 	private String member_name;
+	private String thumbnail;
+	
+	private String category_name;
+	private String quiz_explanation;
+	
+	
+	
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 	public String getQuiz_explanation() {
 		return quiz_explanation;
 	}
 	public void setQuiz_explanation(String quiz_explanation) {
 		this.quiz_explanation = quiz_explanation;
 	}
-	private String category_name;
-	private String quiz_explanation;
+	
 	public String getMember_name() {
 		return member_name;
 	}
@@ -28,8 +40,12 @@ public class Quiz {
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
 	}
+	public Quiz() {
+		super();
+	}
 	public Quiz(int quiz_number, String quiz_title, String quiz_date, String quiz_modify_date, String member_number,
-			String category_number, String member_name, String category_name) {
+			String category_number, String member_name, String thumbnail, String category_name,
+			String quiz_explanation) {
 		super();
 		this.quiz_number = quiz_number;
 		this.quiz_title = quiz_title;
@@ -38,21 +54,10 @@ public class Quiz {
 		this.member_number = member_number;
 		this.category_number = category_number;
 		this.member_name = member_name;
+		this.thumbnail = thumbnail;
 		this.category_name = category_name;
+		this.quiz_explanation = quiz_explanation;
 	}
-	public Quiz() {
-		super();
-	}
-	public Quiz(int quiz_number, String quiz_title, String quiz_date, String quiz_modify_date, String member_number,
-			String category_number) {
-		super();
-		this.quiz_number = quiz_number;
-		this.quiz_title = quiz_title;
-		this.quiz_date = quiz_date;
-		this.quiz_modify_date = quiz_modify_date;
-		this.member_number = member_number;
-		this.category_number = category_number;
-	}	
 	@Override
 	public String toString() {
 		return "Quiz [quiz_number=" + quiz_number + ", quiz_title=" + quiz_title + ", quiz_date=" + quiz_date

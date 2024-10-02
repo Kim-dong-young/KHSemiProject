@@ -25,8 +25,9 @@
     <section id="notifications" class="content-section">
             <h2>내 정보 설정</h2>
                 <form action="${pageContext.request.contextPath}/userUpdate.me" method="post">
-                    <input type="hidden" name="memberId" value="${loginMember.memberId }">
                     <div class="notifications-details">
+                            <input type="hidden" name="memberId" value="${loginMember.memberId }">
+                            <input type="hidden" name="memberNickName" value="${loginMember.memberNickName}">
                             <label for="memberemail">이메일:</label>
                             <input type="text" id="memberemail" name="memberemail">
                             <label for="phone">전화번호:</label>

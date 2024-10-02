@@ -22,16 +22,19 @@ public class CreateQuizDao {
 			pstmt.setString(2, explanation);
 			pstmt.setString(3, category);
 			pstmt.setString(4, tag);
+			if(tag != null) {
+				
+			}
 
-			// BLOB 데이터 처리 (이미지 파일)
+			
 			if (thumbnailInputStream != null) {
 				pstmt.setBlob(5, thumbnailInputStream);
 			} else {
-				pstmt.setNull(5, java.sql.Types.BLOB); // 이미지가 없을 때 처리
+				pstmt.setNull(5, java.sql.Types.BLOB); 
 			}
 
 			pstmt.executeUpdate();
-			conn.commit(); // 필요 시 커밋
+			conn.commit();
 
 		}
 	}

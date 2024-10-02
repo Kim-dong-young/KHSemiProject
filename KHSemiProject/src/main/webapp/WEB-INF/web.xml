@@ -358,6 +358,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>AjaxQuizMarkInitController</display-name>
+    <servlet-name>AjaxQuizMarkInitController</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxQuizMarkInitController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxQuizMarkInitController</servlet-name>
+    <url-pattern>/mkQuizInit.sl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>inquiry.sl</display-name>
     <servlet-name>inquiry.sl</servlet-name>
     <servlet-class>com.kh.search.controller.AjaxTopTenInquiryController</servlet-class>

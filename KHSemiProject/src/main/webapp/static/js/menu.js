@@ -25,5 +25,8 @@ function init(pageName, optional){
         case "searchMainPage":
             tagSearchAjax()
             break;
+        case "searchClickPage":
+            init()
+            break;
     }
 }

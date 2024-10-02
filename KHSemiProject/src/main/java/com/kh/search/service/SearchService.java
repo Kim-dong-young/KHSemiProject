@@ -1,6 +1,8 @@
 package com.kh.search.service;
 
+import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -72,11 +74,6 @@ public class SearchService {
 		ArrayList<Quiz> qArr = new QuizDao().simularQuizList(conn, tagArr);
 		return qArr;
 	}
-
-	public boolean markInsert(int num) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public ArrayList<Quiz> selectLatestQuiz() {
 		Connection conn = getConnection();
@@ -85,11 +82,48 @@ public class SearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+		
+    public int markInsert(int quiznum, int memberNum) {
+        Connection conn = getConnection();
+        int list = 0;
+        if(!new QuizDao().markSelect(conn, quiznum, memberNum)) {
+            list = new QuizDao().markInsert(conn, quiznum, memberNum);
+            if(list > 0) {
+                commit(conn);
+                list = 1;
+            } else {
+                rollback(conn);
+            }
+        } else {
+            list = new QuizDao().markDelete(conn, quiznum, memberNum);
+            if(list > 0) {
+                commit(conn);
+                list = 2;
+            } else {
+                rollback(conn);
+            }
+        }
+        
+        
+        
+        
+        JDBCTemplate.close(conn);
+        return list;
+    }
+
+    public int markSelect(int quizNum, int memberNum) {
+        Connection conn = getConnection();
+        if(new QuizDao().markSelect(conn, quizNum, memberNum)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 	
 	public ArrayList<Quiz> selectInquiryQuiz() {
 		Connection conn = getConnection();
 		ArrayList<Quiz> list = new QuizDao().selectInquiryQuiz(conn);
-		
+	
 		JDBCTemplate.close(conn);
 		return list;
 	}

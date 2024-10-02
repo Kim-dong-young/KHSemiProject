@@ -58,7 +58,7 @@ CREATE TABLE QUIZ(
     QUIZ_explanation varchar2(500),
     MEMBER_number number not null,
     CATEGORY_number number not null,
-    THUMBNAIL BLOB,
+    THUMBNAIL VARCHAR2(1500),
     PRIMARY KEY(QUIZ_number),
     FOREIGN KEY(MEMBER_number) references MEMBER(MEMBER_number),
     FOREIGN KEY(CATEGORY_number) references CATEGORY(CATEGORY_number)
@@ -177,6 +177,10 @@ CREATE TABLE COMMUNITY_COMMENT(
     MEMBER_number number not null,
     COMMUNITY_COMMENT_content varchar2(500) not null,
     COMMUNITY_COMMENT_date date default SYSDATE not null,
+    COMMENT_GROUP NUMBER DEFAULT 0,
+    COMMENT_DEPTH NUMBER DEFAULT 0,
+    COMMENT_ORDER NUMBER DEFAULT 0,
+    COMMENT_CHILD_COUNT NUMBER DEFAULT 0,
     PRIMARY KEY (COMMUNITY_COMMENT_number),
     FOREIGN KEY (COMMUNITY_parent_number) references COMMUNITY_COMMENT(COMMUNITY_COMMENT_number),
     FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number),
@@ -231,18 +235,12 @@ CREATE TABLE RP(
 
 CREATE TABLE IMGS_file (
     IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- 이미지 ID
-    IMGS_file_data BLOB ,              -- 이미지 파일 자체
+    IMGS_link_path VARCHAR2(1500),              -- 이미지 파일 경로
     IMGS_file_name VARCHAR2(255),     -- 이미지 파일 이름
     IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- 업로드 날짜
     FOREIGN KEY (IMGS_file_id) references PROBLEM(problem_number)
 );
-CREATE TABLE IMGS_link (
-    IMGS_link_id NUMBER PRIMARY KEY NOT NULL,       -- 이미지 ID
-    IMGS_link_path VARCHAR2(1500),          -- 이미지 파일 경로 또는 URL
-    IMGS_link_name VARCHAR2(255),          -- 이미지 파일 이름
-    IMGS_link_upload_date DATE DEFAULT SYSDATE,   -- 업로드 날짜
-    FOREIGN KEY (IMGS_link_id) references PROBLEM(problem_number)
-);
+
 
 
 CREATE SEQUENCE SEQ_MNO
