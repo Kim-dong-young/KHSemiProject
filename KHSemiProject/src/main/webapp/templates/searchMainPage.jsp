@@ -28,7 +28,7 @@
 <body>
     <%@ include file="common/menu.jsp" %>
 
-    <link rel="stylesheet" href="static/css/searchMainPage.css">
+    <link rel="stylesheet" href="<%=contextPath%>/static/css/searchMainPage.css">
     <script>
         let tttList = [];
         <% if (tagList != null && !tagList.isEmpty()){ %>
@@ -46,35 +46,35 @@
         <div class="wrapper">
             <div class="category-div" >
                 <div onclick="categorySearch(1)" <c:if test="${param.category == 1}"> style="background-color: bisque;" </c:if>>
-                    <img src="static/img/searchMainPage/Happy.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Happy.png" alt="">
                     <p>유머</p>
                 </div>
                 <div onclick="categorySearch(2)" <c:if test="${param.category == 2}"> style="background-color: bisque;"</c:if>>
-                    <img src="static/img/searchMainPage/Paint Palette.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Paint Palette.png" alt="">
                     <p>예술/문학</p>
                 </div>
                 <div onclick="categorySearch(3)" <c:if test="${param.category == 3}"> style="background-color: bisque;"</c:if>>
-                    <img src="static/img/searchMainPage/Geography.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Geography.png" alt="">
                     <p>세계</p>
                 </div>
                 <div onclick="categorySearch(4)" <c:if test="${param.category == 4}"> style="background-color: bisque;"</c:if>>
-                    <img src="static/img/searchMainPage/Colosseum.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Colosseum.png" alt="">
                     <p>역사</p>
                 </div>
                 <div onclick="categorySearch(5)" <c:if test="${param.category == 5}"> style="background-color: bisque;"</c:if>>
-                    <img src="static/img/searchMainPage/Language.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Language.png" alt="">
                     <p>언어</p>
                 </div>
                 <div onclick="categorySearch(6)" <c:if test="${param.category == 6}"> style="background-color: bisque;"</c:if>>
-                    <img src="static/img/searchMainPage/Test Tube.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Test Tube.png" alt="">
                     <p>과학/자연</p>
                 </div>
                 <div onclick="categorySearch(7)" <c:if test="${param.category == 7}"> style="background-color: bisque;"</c:if>>
-                    <img src="static/img/searchMainPage/Game Soccer.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Game Soccer.png" alt="">
                     <p>스포츠</p>
                 </div>
                 <div onclick="categorySearch(8)" <c:if test="${param.category == 8}"> style="background-color: bisque;"</c:if>>
-                    <img src="static/img/searchMainPage/Question Mark.png" alt="">
+                    <img src="<%=contextPath%>/static/img/searchMainPage/Question Mark.png" alt="">
                     <p>기타</p>
                 </div>
                 <script>
@@ -104,7 +104,7 @@
                     </select>
                     <input type="text" id="search-text" value="${param.search_text}" onkeypress="if(window.event.keyCode==13){searchComfirm()}">
 
-                    <input type="image" src="static/img/icon.png" id="search-submit" onclick="searchComfirm()">
+                    <input type="image" src="<%=contextPath%>/static/img/icon.png" id="search-submit" onclick="searchComfirm()">
                 </div>
             </div>
 
@@ -163,7 +163,7 @@
                         <input type="text" onchange="tagSearchAjax()">
                     </div>
                     <div id="tag-search-exit-button" onclick="closeTagPopup()">
-                        <input type="image" src="static/img/searchMainPage/back.png" onclick="pageChange(<%=currentPage%>)">
+                        <input type="image" src="<%=contextPath%>/static/img/searchMainPage/back.png" onclick="pageChange(<%=currentPage%>)">
                     </div>
                 </div>
                 <br>
@@ -289,7 +289,11 @@
                         <% for(Quiz q : list) { %>
                             <div class="video-priview" onclick="clickQuiz(<%=q.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
-                                    <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                    <%if(q.getThumbnail() == null){ %>
+                                        <img class="thumbnail" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                    <% } else { %>
+                                        <img class="thumbnail" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
+                                    <% } %>
                                 </div>
                                 <div class="video-info-grid">
                                     <div class="video-info">
