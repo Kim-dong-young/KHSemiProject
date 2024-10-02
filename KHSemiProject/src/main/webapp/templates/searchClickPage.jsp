@@ -84,6 +84,9 @@
                         <c:when test="${param.page eq '3'}">
                             <button onclick="location.href='<%=contextPath%>/personal.me'">뒤로가기</button>
                         </c:when>
+                        <c:otherwise>
+                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'">뒤로가기</button>
+                        </c:otherwise>
                     </c:choose>
 
                     
@@ -94,12 +97,21 @@
                             <button onclick="clickMark(<%=q.getQuiz_number()%>, ${loginMember.memberNo})" id="Mark">북마크</button>
                         </c:otherwise>
                     </c:choose>
-                    <button>공유</button>
+                    <button id="share-button" onclick="share('<%=contextPath%>', <%=q.getQuiz_number()%>)">공유</button>
                     <button>신고</button>
                     <button>플레이</button>
                 </div>
             </div>
             <script>
+                function share(a, b){
+                    window.navigator.clipboard.writeText(window.location.origin + a + '/click.sl?quiz_number=' + b)
+                        .then(() => {
+                            document.getElementById("share-button").innerText = '링크복사 완료!'
+                        })
+                        .catch(err => {
+                            console.error('텍스트 복사에 실패했습니다: ', err);
+                        });
+                }
                 function clickMark(aaa, bbb){
                     $.ajax({
                         url: "mkQuiz.sl",
