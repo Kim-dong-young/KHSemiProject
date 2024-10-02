@@ -39,6 +39,7 @@ public class SearchClickController extends HttpServlet {
 		request.setAttribute("TagArr", tagArr);
 		request.setAttribute("quiz_rate", new SearchService().quizRateAvg(num));
 		request.setAttribute("list", new SearchService().simularQuizList(tagArr));
+		request.setAttribute("pageName", "searchClickPage"); 
 		request.getRequestDispatcher("templates/searchClickPage.jsp").forward(request, response);
 	}
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="com.kh.common.PageInfo, java.util.ArrayList, com.kh.search.model.vo.Quiz, com.kh.search.model.vo.Tag" %>
+    <%@ page import="com.kh.common.PageInfo, java.util.ArrayList, com.kh.search.model.vo.Quiz, com.kh.search.model.vo.Tag, com.kh.member.model.vo.Member" %>
 <%
     Quiz q = (Quiz)request.getAttribute("Quiz");
     int viewCount = (int)request.getAttribute("viewCount");
@@ -8,6 +8,7 @@
     if (rate.equals("")){
         rate = "0";
     }
+
     ArrayList<Quiz> list = (ArrayList<Quiz>)request.getAttribute("list");
     ArrayList<Tag> tagList = (ArrayList<Tag>)request.getAttribute("TagArr");
 %>
@@ -22,6 +23,41 @@
 <body>
     <%@ include file="common/menu.jsp" %>
     
+    <script>
+        function init(){
+            <c:choose>
+                <c:when test="${empty loginMember}">
+                </c:when>
+                <c:otherwise>
+                    $.ajax({
+                    url: "mkQuizInit.sl",
+                    contentType: "application/json",
+                    data: {
+                        quizNum:  <%=q.getQuiz_number()%>, 
+                        member: ${loginMember.memberNo}
+                    },
+                    success: function(res){
+                        const mk = document.getElementById("Mark");
+                        console.log(res)
+                        if(res == 1){
+                            mk.classList.add('marked');
+                        } else {
+                            mk.classList.remove('marked');
+                        }
+                        
+                        
+                    },
+                    error: function(){
+                        console.log("태그 조회용 ajax통신 실패")
+                    }
+                })
+                </c:otherwise>
+            </c:choose>
+        }
+    </script>
+
+
+
 	<link rel="stylesheet" href="static/css/searchClickPage.css">
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
         <div id="div-top">
@@ -36,27 +72,40 @@
                 <div>
                     <button onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=${param.category}&orderby=${param.orderby}&search_type=${param.search_type}'
                                         + '&search_text=' + '${param.search_text}' + '&tag_list=${param.tag_list}'">뒤로가기</button>
-                    <!-- <% if(loginMember != null){ %>
-                        <button onclick="clickMark()" id="Mark">북마크</button>
-                    <% } %> -->
+                    <c:choose>
+                        <c:when test="${empty loginMember}">
+                        </c:when>
+                        <c:otherwise>
+                            <button onclick="clickMark(<%=q.getQuiz_number()%>, ${loginMember.memberNo})" id="Mark">북마크</button>
+                        </c:otherwise>
+                    </c:choose>
                     <button>공유</button>
                     <button>신고</button>
                     <button>플레이</button>
                 </div>
             </div>
             <script>
-                function clickMark(){
+                function clickMark(aaa, bbb){
                     $.ajax({
                         url: "mkQuiz.sl",
                         contentType: "application/json",
                         data: {
-                            quizNum: <%=q.getQuiz_number()%>
-                            
+                            quizNum:  aaa,
+                            member: bbb
                         },
                         success: function(res){
                             const mk = document.getElementById("Mark");
-                            mk.classList.add('marked');
-                            mk.classList.remove('marked');
+                            console.log(res)
+                            if(res == 1){
+                                mk.classList.add('marked');
+                            } else {
+                                mk.classList.remove('marked');
+                            }
+                            
+                            
+                        },
+                        error: function(){
+                            console.log("태그 조회용 ajax통신 실패")
                         }
                     })
                 }
