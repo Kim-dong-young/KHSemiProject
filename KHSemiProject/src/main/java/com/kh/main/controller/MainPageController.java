@@ -7,7 +7,6 @@ import com.kh.search.model.vo.Quiz;
 import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MainPageController
  */
-@WebServlet(name = "main.me", urlPatterns = { "/main.me" })
 public class MainPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
