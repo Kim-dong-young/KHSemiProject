@@ -46,8 +46,6 @@ public class Member {
 		this.memberNickName = memberNickName;
 	}
 	
-	
-
 	public Member(String memberId, String memberNickName, String memberemail, String address, String phone) {
 		super();
 		this.memberId = memberId;

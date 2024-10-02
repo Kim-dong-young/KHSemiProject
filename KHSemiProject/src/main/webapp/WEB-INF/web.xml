@@ -346,4 +346,14 @@
     <servlet-name>AjaxQuizMarkController</servlet-name>
     <url-pattern>/mkQuiz.sl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>profile.me</display-name>
+    <servlet-name>profile.me</servlet-name>
+    <servlet-class>com.kh.member.controller.MemberProfileController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>profile.me</servlet-name>
+    <url-pattern>/profile.me</url-pattern>
+  </servlet-mapping>
 </web-app>
