@@ -11,7 +11,7 @@ public class CreateQuizService {
 			InputStream thumbnailInputStream) {
 		try {
 			// DAO 호출하여 Quiz 및 이미지 데이터를 DB에 저장
-			createQuizDao.insertQuiz(title, explanation, category, tag, thumbnailInputStream);
+			createQuizDao.insertquiz(title, explanation, category, tag, thumbnailInputStream);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
