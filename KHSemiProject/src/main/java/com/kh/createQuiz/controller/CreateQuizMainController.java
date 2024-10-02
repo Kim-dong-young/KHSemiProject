@@ -26,7 +26,7 @@ public class CreateQuizMainController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
 		// 퀴즈 생성 페이지로 포워딩
 		request.getRequestDispatcher("/templates/CreateQuizMain.jsp").forward(request, response);
 		// Form에서 받은 데이터를 처리
@@ -50,7 +50,7 @@ public class CreateQuizMainController extends HttpServlet {
 					response.sendRedirect(request.getContextPath() + "/quiz.cr");
 				} else {
 					// 실패 시 에러 페이지로 이동
-					response.sendRedirect(request.getContextPath() + "/main.me");
+					response.sendRedirect(request.getContextPath() + "/create.quiz");
 				} 
 	}
 
