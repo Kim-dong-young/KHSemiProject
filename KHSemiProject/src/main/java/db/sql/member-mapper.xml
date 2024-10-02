@@ -118,10 +118,11 @@
 			AND MEMBER_PWD = ?
 	</entry>
 	<entry key="updateMember">
-    UPDATE MEMBER
-    SET MEMBER_EMAIL = ?, 
-        PHONE = ?, 
-        ADDRESS = ?
-    WHERE MEMBER_NUMBER = ?
+   UPDATE MEMBER
+	SET MEMBER_NICKNAME = ?,
+	    MEMBER_EMAIL = ?,
+	    PHONE = ?,
+	    ADDRESS = ?
+	WHERE MEMBER_ID = ?
 </entry>
 </properties>
