@@ -33,7 +33,7 @@ public class AttendanceController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int memberNo = Integer.parseInt(request.getParameter("MemberNo"));		
 		int atCheck  = new MemberService().attendanceCheck(memberNo);
-		int upDateTotalAt = new MemberService().totalAttendance(memberNo);
+		int updateTotalAt = new MemberService().totalAttendance(memberNo);
 				
 		Member updateMem = new MemberService().selectMember(memberNo);
 		
@@ -43,7 +43,7 @@ public class AttendanceController extends HttpServlet {
 		} else {
 			session.setAttribute("alertMsg", "출석 완료");	
 			session.setAttribute("loginMember", updateMem);
-			session.setAttribute("totalAt", upDateTotalAt);
+			session.setAttribute("totalAt", updateTotalAt);
 		}
 		
 		response.sendRedirect(request.getContextPath() + "/main.me");

@@ -13,12 +13,14 @@ function initSwiper() {
     }); 
 }
 
-function turn(activeIndex) {
-  // 모든 버튼을 선택
-  const buttons = document.querySelectorAll('.custom-btn');
+function turn(name) {
+  let buttons = document.querySelectorAll('.recommend-button .custom-btn');
 
-  // 모든 버튼을 순회하며 클릭된 버튼은 비활성화, 나머지 버튼은 활성화
-  buttons.forEach((button, index) => {
-      button.disabled = (index === activeIndex); // 클릭된 버튼만 비활성화
-  });
+  for(let i = 0; i < buttons.length; i++) {
+    if (buttons[i].name === name) {
+      buttons[i].disabled = true;  // 클릭된 버튼 비활성화
+    } else {
+        buttons[i].disabled = false; // 나머지 버튼 활성화
+    }
+  }
 }
