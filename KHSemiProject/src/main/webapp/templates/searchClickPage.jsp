@@ -17,11 +17,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="static/css/searchClickPage.css">
+    
 </head>
 <body>
     <%@ include file="common/menu.jsp" %>
-	
+    
+	<link rel="stylesheet" href="static/css/searchClickPage.css">
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
         <div id="div-top">
             <div id="image-div">
@@ -35,9 +36,9 @@
                 <div>
                     <button onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=${param.category}&orderby=${param.orderby}&search_type=${param.search_type}'
                                         + '&search_text=' + '${param.search_text}' + '&tag_list=${param.tag_list}'">뒤로가기</button>
-                    <% if(loginMember != null){ %>
+                    <!-- <% if(loginMember != null){ %>
                         <button onclick="clickMark()" id="Mark">북마크</button>
-                    <% } %>
+                    <% } %> -->
                     <button>공유</button>
                     <button>신고</button>
                     <button>플레이</button>
@@ -49,8 +50,8 @@
                         url: "mkQuiz.sl",
                         contentType: "application/json",
                         data: {
-                            quizNum: <%=q.getQuiz_number()%>,
-                            userNum: <%=loginMember.getMemberNumber()%>
+                            quizNum: <%=q.getQuiz_number()%>
+                            
                         },
                         success: function(res){
                             const mk = document.getElementById("Mark");
@@ -87,7 +88,7 @@
                 <% } else { %>
                     <% for(Quiz qq : list) { %>
                         <% if(qq.getQuiz_number() != q.getQuiz_number()) { %>
-                            <div class="video-priview" onclick="clickQuiz(<%=qq.getQuiz_number()%>)"></div>
+                            <div class="video-priview" onclick="clickQuiz(<%=qq.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
                                     <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
                                 </div>

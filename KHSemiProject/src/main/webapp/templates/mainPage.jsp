@@ -29,9 +29,9 @@
             <div>이런 퀴즈는 어떤가요?~</div>
             <div class="recommend-button">
                 <ul>
-                    <li><button class="custom-btn" value="" onclick="turn(0)" disabled>최신</button></li>
-                    <li><button class="custom-btn" value="" onclick="turn(1)">조회</button></li>
-                    <li><button class="custom-btn" value="" onclick="turn(2)">평점</button></li>
+                    <li><button class="custom-btn" name="latest" value="latest" onclick="turn(this.name)" disabled>최신</button></li>
+                    <li><button class="custom-btn" name="inquiry" value="inquiry" onclick="turn(this.name)">조회</button></li>
+                    <li><button class="custom-btn" name="grade" value="grade" onclick="turn(this.name)">평점</button></li>
                 </ul>
             </div>
             <div class="my-swiper-box">
