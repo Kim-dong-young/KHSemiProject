@@ -111,6 +111,7 @@ crossorigin="anonymous"></script>
                 </div>
 
                 <div class="bulletin-comment">
+                    <!--
                     <% for(Comment cm : commentList) { %>
                         <div class="comment">
                             <div class="comment-left">
@@ -148,7 +149,7 @@ crossorigin="anonymous"></script>
                             </div>
                         </div>
                     <% } %>
-
+                    -->
 
                     <% for(Comment cm : replyList) { %>
                         <div class="comment">
