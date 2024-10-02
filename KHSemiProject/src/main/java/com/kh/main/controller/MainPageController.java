@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MainPageController
  */
-@WebServlet(name = "main.me", urlPatterns = { "/main.me" })
 public class MainPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
