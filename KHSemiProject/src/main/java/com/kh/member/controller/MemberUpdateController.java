@@ -31,23 +31,25 @@ public class MemberUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String memberemail = request.getParameter("memberemail");
+		String memberId = request.getParameter("memberId");
+		String memberNickName = request.getParameter("memberNickName");
+		String memberEmail = request.getParameter("memberEmail");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
-		String memberNo = request.getParameter("memberNo");
 		
-		Member m = new Member(phone,address,memberemail);
+		Member m = new Member(memberId,memberNickName,memberEmail,phone,address);
 		
 		Member updateMem = new MemberService().updateMember(m);
 		
-		HttpSession session = request.getSession();
 		if(updateMem == null) {
-			session.setAttribute("alrtMsg", "회원정보 수정에 실패하였습니다.");
+			request.setAttribute("errorMsg", "회원정보 수정에 실패하였습니다.");
 		}else {
+			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", updateMem);
-			session.setAttribute("alrtMsg", "회원정보 수정에 성공하였습니다.");
+			session.setAttribute("alertMsg", "성공적으로 수정하였습니다.");
+			
+			response.sendRedirect(request.getContextPath() + "/userset3.me");
 		}
-		response.sendRedirect(request.getContextPath() + "/userset3.me");
 	}
 
 	/**
