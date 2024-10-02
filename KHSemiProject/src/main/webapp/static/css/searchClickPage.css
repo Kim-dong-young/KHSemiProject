@@ -126,3 +126,8 @@
     border-width: 0.5px;
     width: 100%;
 }
+
+
+.marked{
+    background-color: red;
+}

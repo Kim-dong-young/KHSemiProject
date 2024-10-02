@@ -55,6 +55,32 @@
 		  		FROM QUIZ)
           	   WHERE RNO BETWEEN 1 AND 10
 	</entry>
+	
+	<entry key="markSelect">
+		SELECT *
+		 FROM BOOKMARK
+		 WHERE MEMBER_NUMBER = ?
+		 AND QUIZ_NUMBER = ?
+	</entry>
+	
+	<entry key="markInsert">
+		INSERT INTO BOOKMARK
+		VALUES
+		(
+			?,
+			?
+		)
+	
+	
+	</entry>
+	
+	<entry key="markDelete">
+		DELETE
+		  FROM BOOKMARK
+		 WHERE MEMBER_NUMBER = ?
+		 AND QUIZ_NUMBER = ?
+	
+	</entry>
 </properties>
 
 

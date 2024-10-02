@@ -1,5 +1,7 @@
 package com.kh.search.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -507,5 +509,86 @@ public class QuizDao {
 		
 		return list;
 		
+	}
+
+	public int markInsert(Connection conn, int quiznum, int memberNum) {
+		int b = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("markInsert");
+		
+
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNum);
+			pstmt.setInt(2, quiznum);
+			
+			b = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		return b;
+	}
+
+	public boolean markSelect(Connection conn, int quizNum, int memberNum) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("markSelect");
+		boolean init = false;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNum);
+			pstmt.setInt(2, quizNum);
+			rset = pstmt.executeQuery();
+			init = rset.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return init;
+	}
+
+	public int markDelete(Connection conn, int quiznum, int memberNum) {
+		int b = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("markDelete");
+		
+
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNum);
+			pstmt.setInt(2, quiznum);
+			
+			b = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		return b;
 	}
 }
