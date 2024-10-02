@@ -346,14 +346,52 @@
     <servlet-name>AjaxQuizMarkController</servlet-name>
     <url-pattern>/mkQuiz.sl</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>profile.me</display-name>
     <servlet-name>profile.me</servlet-name>
     <servlet-class>com.kh.member.controller.MemberProfileController</servlet-class>
   </servlet>
-  <servlet-mapping>
+  
+  	<servlet-mapping>
     <servlet-name>profile.me</servlet-name>
     <url-pattern>/profile.me</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+	<description></description>
+    <display-name>latest.sl</display-name>
+    <servlet-name>latest.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxTopTenLatestController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>latest.sl</servlet-name>
+    <url-pattern>/latest.sl</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>AjaxQuizMarkInitController</display-name>
+    <servlet-name>AjaxQuizMarkInitController</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxQuizMarkInitController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>AjaxQuizMarkInitController</servlet-name>
+    <url-pattern>/mkQuizInit.sl</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>inquiry.sl</display-name>
+    <servlet-name>inquiry.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxTopTenInquiryController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>inquiry.sl</servlet-name>
+    <url-pattern>/inquiry.sl</url-pattern>
   </servlet-mapping>
 </web-app>

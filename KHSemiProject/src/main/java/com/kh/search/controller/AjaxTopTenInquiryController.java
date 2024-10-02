@@ -1,26 +1,27 @@
 package com.kh.search.controller;
 
-import java.io.IOException;
-
-import com.google.gson.Gson;
-import com.kh.member.model.vo.Member;
-import com.kh.search.service.SearchService;
-
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.kh.search.model.vo.Quiz;
+import com.kh.search.service.SearchService;
 
 /**
- * Servlet implementation class AjaxQuizMarkController
+ * Servlet implementation class AjaxTopTenInquiry
  */
-public class AjaxQuizMarkController extends HttpServlet {
+public class AjaxTopTenInquiryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxQuizMarkController() {
+    public AjaxTopTenInquiryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +30,12 @@ public class AjaxQuizMarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int quizNum = Integer.parseInt(request.getParameter("quizNum"));
-		int memberNum = Integer.parseInt(request.getParameter("member"));
+		request.setCharacterEncoding("UTF-8");
 		
-		int mark = new SearchService().markInsert(quizNum, memberNum);
+		ArrayList<Quiz> list = new SearchService().selectInquiryQuiz();
 		
-		System.out.println("데이터들어옴");
-		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(mark, response.getWriter());
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

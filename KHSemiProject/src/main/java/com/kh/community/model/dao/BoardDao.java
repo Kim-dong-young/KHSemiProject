@@ -1560,29 +1560,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ArrayList<Comment> replyList = new ArrayList<>();
 		
-		String sql = "SELECT COMMUNITY_COMMENT_NUMBER ,"
-				+ "		   COMMUNITY_PARENT_NUMBER ,"
-				+ "		   COMMUNITY_NUMBER ,"
-				+ "		   MEMBER_NICKNAME ,"
-				+ "		   MEMBER_NUMBER ,"
-				+ "		   COMMUNITY_COMMENT_CONTENT"
-				+ "		FROM"
-				+ "		("
-				+ "		    SELECT COMMUNITY_COMMENT_NUMBER ,"
-				+ "			   COMMUNITY_PARENT_NUMBER ,"
-				+ "			   COMMUNITY_NUMBER ,"
-				+ "			   MEMBER_NICKNAME ,"
-				+ "			   MEMBER_NUMBER ,"
-				+ "			   COMMUNITY_COMMENT_CONTENT ,"
-				+ "		       ROW_NUMBER() OVER(ORDER BY COMMUNITY_COMMENT_DATE) AS RNUM"
-				+ "		    FROM COMMUNITY_COMMENT"
-				+ "		  JOIN MEMBER USING (MEMBER_NUMBER)"
-				+ "		 WHERE COMMUNITY_NUMBER = ? "
-				+ "           AND COMMUNITY_PARENT_NUMBER IN (" + parentNo + ")"
-				+ "		   AND COMMUNITY_PARENT_NUMBER IS NOT NULL"
-				+ "		)"
-				+ "		WHERE RNUM BETWEEN ? AND ?";
-		
+		String sql = prop.getProperty("selectReplyList");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -1615,6 +1593,83 @@ public class BoardDao {
 		}
 		
 		return replyList;
+	}
+
+	public Comment selectComment(Connection conn, int commentNo) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Comment comment = null;
+		
+		String sql = prop.getProperty("selectComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,commentNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				comment = new Comment(
+							rset.getInt("COMMENT_GROUP"),
+							rset.getInt("COMMENT_DEPTH"),
+							rset.getInt("COMMENT_ORDER"),
+							rset.getInt("COMMENT_CHILD_COUNT")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return comment;
+	}
+
+	public int updateParentOrder(Connection conn, Comment comment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateParentOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentNo());
+			pstmt.setInt(2, comment.getCommentGroup());
+			pstmt.setInt(3, comment.getCommentOrder());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateParentCount(Connection conn, Comment comment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateParentCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentNo());
+			pstmt.setInt(2, comment.getCommentNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	

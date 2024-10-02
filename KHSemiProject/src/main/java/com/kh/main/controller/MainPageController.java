@@ -7,7 +7,6 @@ import com.kh.search.model.vo.Quiz;
 import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
