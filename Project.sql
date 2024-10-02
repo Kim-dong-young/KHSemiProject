@@ -39,9 +39,6 @@ CREATE TABLE MEMBER(
     MEMBER_check_continueCount NUMBER DEFAULT 0 NOT NULL,
     MEMBER_status VARCHAR2(1) DEFAULT 'Y' NOT NULL,
     MEMBER_introduce VARCHAR2(100),
-    MEMBER_EMAIL VARCHAR2(100),
-    ADDRESS VARCHAR2(100),
-    PHONE VARCHAR2(13),
     PRIMARY KEY(MEMBER_number)
 );
     
@@ -231,17 +228,17 @@ CREATE TABLE RP(
 );
 
 CREATE TABLE IMGS_file (
-    IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- ï¿½Ì¹ï¿½ï¿½ï¿½ ID
-    IMGS_file_data BLOB ,              -- ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
-    IMGS_file_name VARCHAR2(255),     -- ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
-    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½Â¥
+    IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- ÀÌ¹ÌÁö ID
+    IMGS_file_data BLOB ,              -- ÀÌ¹ÌÁö ÆÄÀÏ ÀÚÃ¼
+    IMGS_file_name VARCHAR2(255),     -- ÀÌ¹ÌÁö ÆÄÀÏ ÀÌ¸§
+    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- ¾÷·Îµå ³¯Â¥
     FOREIGN KEY (IMGS_file_id) references PROBLEM(problem_number)
 );
 CREATE TABLE IMGS_link (
-    IMGS_link_id NUMBER PRIMARY KEY NOT NULL,       -- ï¿½Ì¹ï¿½ï¿½ï¿½ ID
-    IMGS_link_path VARCHAR2(1500),          -- ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ URL
-    IMGS_link_name VARCHAR2(255),          -- ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
-    IMGS_link_upload_date DATE DEFAULT SYSDATE,   -- ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½Â¥
+    IMGS_link_id NUMBER PRIMARY KEY NOT NULL,       -- ÀÌ¹ÌÁö ID
+    IMGS_link_path VARCHAR2(1500),          -- ÀÌ¹ÌÁö ÆÄÀÏ °æ·Î ¶Ç´Â URL
+    IMGS_link_name VARCHAR2(255),          -- ÀÌ¹ÌÁö ÆÄÀÏ ÀÌ¸§
+    IMGS_link_upload_date DATE DEFAULT SYSDATE,   -- ¾÷·Îµå ³¯Â¥
     FOREIGN KEY (IMGS_link_id) references PROBLEM(problem_number)
 );
 

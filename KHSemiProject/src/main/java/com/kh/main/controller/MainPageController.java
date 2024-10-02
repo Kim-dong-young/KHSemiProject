@@ -1,16 +1,20 @@
 package com.kh.main.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.kh.search.model.vo.Quiz;
+import com.kh.search.service.SearchService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Servlet implementation class MainPageController
  */
-@WebServlet(name = "main.me", urlPatterns = { "/main.me" })
 public class MainPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,6 +32,10 @@ public class MainPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("pageName", "mainPage");
 		
+		ArrayList<Quiz> quizList = new SearchService().selectLatestQuiz();
+		
+		request.setAttribute("qList", quizList);
+	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 	}
 

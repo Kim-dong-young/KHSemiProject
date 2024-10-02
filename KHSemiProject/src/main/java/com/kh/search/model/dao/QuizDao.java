@@ -444,7 +444,7 @@ public class QuizDao {
 	    }
 	    sql += placeholders.toString() + ") " +
 	           "GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE " +
-	           "HAVING COUNT(DISTINCT QT.TAG_NAME) = ? " +
+//	           "HAVING COUNT(DISTINCT QT.TAG_NAME) = ? " +
 	           "ORDER BY VIEWS DESC";
 
 	    try {
@@ -456,8 +456,9 @@ public class QuizDao {
 	        for (Tag tag : tagArr) {
 	            pstmt.setString(paramIndex++, tag.getQuizTag());
 	        }
-	        pstmt.setInt(paramIndex++, tagArr.size()); // HAVING 절에 태그 개수 바인딩
-
+			/*
+			 * pstmt.setInt(paramIndex++, tagArr.size()); // HAVING 절에 태그 개수 바인딩
+			 */
 	        // 쿼리 실행
 	        rset = pstmt.executeQuery();
 
@@ -476,5 +477,35 @@ public class QuizDao {
 	    }
 
 	    return list;
-	}	
+	}
+	
+	public ArrayList<Quiz> selectLatestQuiz(Connection conn) {
+		ArrayList<Quiz> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLatestQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Quiz q = new Quiz();
+				q.setQuiz_number(rset.getInt("quiz_number"));
+				q.setQuiz_title(rset.getString("quiz_title"));
+				
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+	}
 }
