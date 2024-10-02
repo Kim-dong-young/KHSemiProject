@@ -124,5 +124,11 @@
 	    PHONE = ?,
 	    ADDRESS = ?
 	WHERE MEMBER_ID = ?
-</entry>
+	</entry>
+	<entry key="updateProfile">
+	UPDATE MEMBER
+	SET MEMBER_NICKNAME = ?,
+		MEMBER_INTRODUCE = ?
+	WHERE MEMBER_ID = ?
+	</entry>
 </properties>

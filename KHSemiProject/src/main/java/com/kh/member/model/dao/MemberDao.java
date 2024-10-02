@@ -387,4 +387,29 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int updateProfile(Connection conn, Member p) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, p.getMemberNickName());
+			pstmt.setString(2, p.getIntroduce());
+			pstmt.setString(3,  p.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
+
+
+

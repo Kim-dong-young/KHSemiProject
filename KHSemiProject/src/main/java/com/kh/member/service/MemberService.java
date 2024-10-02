@@ -147,4 +147,20 @@ public class MemberService {
 		}
 		return updateMember;
 	}
+
+
+	public Member updateProfile(Member p) {
+		Connection conn = getConnection();
+		int result = new MemberDao().updateProfile(conn, p);
+		
+		Member updateProfile = null;
+		if(result > 0) {
+			commit(conn);
+			
+			updateProfile = new MemberDao().selectMember(conn, p.getMemberId());
+		}else {
+			rollback(conn);
+		}
+		return null;
+	}
 }

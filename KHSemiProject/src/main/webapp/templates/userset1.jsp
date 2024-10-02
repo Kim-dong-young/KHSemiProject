@@ -22,20 +22,26 @@
         <fieldset>
             <section id="profile-settings" class="content-section">
                 <h2>프로필 설정</h2>
-                <form>
+                <form action="${pageContext.request.contextPath}/profile.me" method="post">
                     <div class="profile-details">
-
-                        <label for="nickname">닉네임:</label>
-                        <input type="text" id="email" name="email" placeholder="이메일을 입력">
-                        <label for="bio">자기소개:</label>
-                        <textarea id="bio" name="bio" rows="4" placeholder="자기소개를 입력하세요..."></textarea>
+                        <input type="hidden" name="memberId" value="${loginMember.memberId }">
+                        
+                        <label for="memberNickName">닉네임:</label>
+                        <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임">
+                        <label for="Introduce">자기소개:</label>
+                        <textarea id="Introduce" name="Introduce" rows="4" placeholder="자기소개를 입력하세요..."></textarea>
                     </div>
                     <button type="submit">저장</button>
                 </form>
+                <script>
+                    document.getElementById("edit-update-btn").onclick = function() {
+                        
+                    }
+
+                </script>
             </section>
         </fieldset>
         </main>
-    <script src="static/js/userset.js"></script>
     </div>
 </body>
 </html>

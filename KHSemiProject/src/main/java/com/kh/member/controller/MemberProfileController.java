@@ -12,15 +12,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MemberUpdateController
+ * Servlet implementation class MemberProfileController
  */
-public class MemberUpdateController extends HttpServlet {
+public class MemberProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController() {
+    public MemberProfileController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +33,23 @@ public class MemberUpdateController extends HttpServlet {
 		
 		String memberId = request.getParameter("memberId");
 		String memberNickName = request.getParameter("memberNickName");
-		String memberEmail = request.getParameter("memberEmail");
-		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
+		String Introduce = request.getParameter("Introduce");
 		
-		Member m = new Member(memberId,memberNickName,memberEmail,phone,address);
+		Member p = new Member(memberId,memberNickName,Introduce);
+		p.setMemberId(memberId);
+		p.setMemberNickName(memberNickName);
+		p.setIntroduce(Introduce);
 		
-		Member updateMem = new MemberService().updateMember(m);
+		Member updateProfile = new MemberService().updateProfile(p);
 		
-		if(updateMem == null) {
-			request.setAttribute("errorMsg", "회원정보 수정에 실패하였습니다.");
+		if(updateProfile == null) {
+			request.setAttribute("errorMsg", "프로필 수정에 실패하였습니다.");
 		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", updateMem);
-			session.setAttribute("alertMsg", "성공적으로 수정하였습니다.");
+			session.setAttribute("loginUser", updateProfile);
+			session.setAttribute("alertMsg", "프로필 수정에 성공하였습니다.");
 		}
-		response.sendRedirect(request.getContextPath() + "/userset3.me");
+		response.sendRedirect(request.getContextPath() + "/userset.me");
 	}
 
 	/**
