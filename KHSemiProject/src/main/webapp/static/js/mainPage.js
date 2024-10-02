@@ -1,5 +1,7 @@
+let swiper;
+
 function initSwiper() {
-  const swiper = new Swiper('.swiper', {
+  swiper = new Swiper('.swiper', {
       // Optional parameters
       slidesPerView: 6,
       spaceBetween: 10,
@@ -28,24 +30,24 @@ function turn(name) {
 }
 
 function selectRate(name) {
-  const swiperbox = document.querySelector('.swiper-wrapper');
-
-  if(swiperbox.innerHTML !== "") {
-    swiperbox.innerHTML = ""
-  }
-  
   $.ajax({
     url: name + ".sl",
     type: "post",
     success: function(res) {
       console.log(res);
+      
+      swiper.removeAllSlides();
 
       for(let list of res) {
-        swiperbox.innerHTML += "<div class='swiper-slide'>" + 
-	                                "<div class='thumbnail'>" + list.quiz_number + "썸네일입니다.</div>" + 
-	                                "<div class='title'>" + list.quiz_title + "</div>" + 
-	                              "</div>"
+        let swiperSlide = "<div class='swiper-slide'>" + 
+        "<div class='thumbnail'>" + list.quiz_number + "썸네일입니다.</div>" + 
+        "<div class='title'>" + list.quiz_title + "</div>" + 
+        "</div>"
+
+        swiper.appendSlide(swiperSlide);
       }
+      
+      swiper.update();
     },
     error: function() {
       swiperbox.innerHTML += "<div> 조회된 내용이 없습니다.</div>"

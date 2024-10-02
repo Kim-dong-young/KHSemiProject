@@ -127,4 +127,12 @@ public class SearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	
+	public ArrayList<Quiz> selectGradeQuiz() {
+		Connection conn = getConnection();
+		ArrayList<Quiz> list = new QuizDao().selectGradeQuiz(conn);
+	
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }

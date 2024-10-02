@@ -12,7 +12,7 @@ public class Quiz {
 	
 	private String category_name;
 	private String quiz_explanation;
-	
+	private double quiz_rate;
 	
 	
 	public String getThumbnail() {
@@ -43,6 +43,7 @@ public class Quiz {
 	public Quiz() {
 		super();
 	}
+
 	public Quiz(int quiz_number, String quiz_title, String quiz_date, String quiz_modify_date, String member_number,
 			String category_number, String member_name, String thumbnail, String category_name,
 			String quiz_explanation) {
@@ -100,6 +101,14 @@ public class Quiz {
 	public void setCategory_number(String category_number) {
 		this.category_number = category_number;
 	}
+	public double getQuiz_rate() {
+		return quiz_rate;
+	}
+	public void setQuiz_rate(double quiz_rate) {
+		this.quiz_rate = quiz_rate;
+	}
+	
+	
 	
 	
 }
