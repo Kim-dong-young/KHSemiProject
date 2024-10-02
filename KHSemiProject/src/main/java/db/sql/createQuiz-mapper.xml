@@ -10,6 +10,7 @@
 		QUIZ_MODIFY_DATE,
 		QUIZ_EXPLANATION,
 		CATEGORY_NUMBER,
+		TAG_NAME,
 		THUMBNAIL
 		)
 		VALUES
@@ -18,6 +19,7 @@
 		?,
 		SYSDATE,
 		SYSDATE,
+		?,
 		?,
 		?,
 		?
