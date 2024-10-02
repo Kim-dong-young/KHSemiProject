@@ -1560,29 +1560,7 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		ArrayList<Comment> replyList = new ArrayList<>();
 		
-		String sql = "SELECT COMMUNITY_COMMENT_NUMBER ,"
-				+ "		   COMMUNITY_PARENT_NUMBER ,"
-				+ "		   COMMUNITY_NUMBER ,"
-				+ "		   MEMBER_NICKNAME ,"
-				+ "		   MEMBER_NUMBER ,"
-				+ "		   COMMUNITY_COMMENT_CONTENT"
-				+ "		FROM"
-				+ "		("
-				+ "		    SELECT COMMUNITY_COMMENT_NUMBER ,"
-				+ "			   COMMUNITY_PARENT_NUMBER ,"
-				+ "			   COMMUNITY_NUMBER ,"
-				+ "			   MEMBER_NICKNAME ,"
-				+ "			   MEMBER_NUMBER ,"
-				+ "			   COMMUNITY_COMMENT_CONTENT ,"
-				+ "		       ROW_NUMBER() OVER(ORDER BY COMMUNITY_COMMENT_DATE) AS RNUM"
-				+ "		    FROM COMMUNITY_COMMENT"
-				+ "		  JOIN MEMBER USING (MEMBER_NUMBER)"
-				+ "		 WHERE COMMUNITY_NUMBER = ? "
-				+ "           AND COMMUNITY_PARENT_NUMBER IN (" + parentNo + ")"
-				+ "		   AND COMMUNITY_PARENT_NUMBER IS NOT NULL"
-				+ "		)"
-				+ "		WHERE RNUM BETWEEN ? AND ?";
-		
+		String sql = prop.getProperty("selectReplyList");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -1681,9 +1659,8 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, comment.getCommentGroup());
-			pstmt.setInt(2, comment.getCommentOrder());
-			pstmt.setInt(3, comment.getCommentDepth());
+			pstmt.setInt(1, comment.getCommentNo());
+			pstmt.setInt(2, comment.getCommentNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
