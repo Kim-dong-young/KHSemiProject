@@ -11,23 +11,31 @@ INSERT INTO COMMUNITY_TAB (TAB_NUMBER, TAB_NAME)
 VALUES (4, '풀이');
 
 
-INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (1, 'admin', 'admin', '관리자', 0, NULL, to_date('09/21/2024', 'MM/DD/RRRR'), 4, 'Y', '관리자 계정');
+INSERT INTO MEMBER  
+VALUES (1, 'admin', 'admin', '관리자', 0, NULL, to_date('09/21/2024', 'MM/DD/RRRR'), 4, 'Y', '관리자 계정', NULL, NULL, NULL);
 
-INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (2, 'user01', 'pass01', 'test01', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 3, 'Y', '안녕하세요. 잘부탁드립니다.');
+INSERT INTO MEMBER
+VALUES (2, 'user01', 'pass01', 'test01', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 3, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
-INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (3, 'user02', 'pass02', 'test02', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.');
+INSERT INTO MEMBER
+VALUES (3, 'user02', 'pass02', 'test02', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
-INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (4, 'user03', 'pass03', 'test03', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.');
+INSERT INTO MEMBER
+VALUES (4, 'user03', 'pass03', 'test03', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
-INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (5, 'user04', 'pass04', 'test04', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.');
+INSERT INTO MEMBER
+VALUES (5, 'user04', 'pass04', 'test04', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
-INSERT INTO MEMBER (MEMBER_NUMBER, MEMBER_ID, MEMBER_PWD, MEMBER_NICKNAME, MEMBER_EXP, MEMBER_IMAGE, MEMBER_JOIN_DATE, MEMBER_CHECK_CONTINUECOUNT, MEMBER_STATUS, MEMBER_INTRODUCE) 
-VALUES (6, 'user05', 'pass05', 'test05', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.');
+INSERT INTO MEMBER
+VALUES (6, 'user05', 'pass05', 'test05', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
+
+insert into DAILY_CHECK values(1, sysdate-4, 1);
+insert into DAILY_CHECK values(2, sysdate-4, 2);
+insert into DAILY_CHECK values(3, sysdate-3, 1);
+insert into DAILY_CHECK values(4, sysdate-3, 2);
+insert into DAILY_CHECK values(5, sysdate-2, 1);
+insert into DAILY_CHECK values(6, sysdate-2, 2);
+insert into DAILY_CHECK values(7, sysdate-1, 1);
 
 
 INSERT INTO COMMUNITY (COMMUNITY_NUMBER, COMMUNITY_TITLE, COMMUNITY_CONTENT, TAB_NUMBER, COMMUNITY_VIEWCOUNT, COMMUNITY_DATE, MEMBER_NUMBER) 
@@ -1088,9 +1096,6 @@ INSERT INTO COMMUNITY_LIKE (MEMBER_NUMBER, COMMUNITY_NUMBER)
 VALUES (2, 255);
 
 INSERT INTO COMMUNITY_LIKE (MEMBER_NUMBER, COMMUNITY_NUMBER) 
-VALUES (2, 255);
-
-INSERT INTO COMMUNITY_LIKE (MEMBER_NUMBER, COMMUNITY_NUMBER) 
 VALUES (3, 255);
 
 INSERT INTO COMMUNITY_LIKE (MEMBER_NUMBER, COMMUNITY_NUMBER) 
@@ -1184,24 +1189,78 @@ INSERT INTO COMMUNITY_LIKE (MEMBER_NUMBER, COMMUNITY_NUMBER)
 VALUES (5, 237);
 
 
--- 시퀀스 생성 --
-DROP SEQUENCE SEQ_COMMUNITY;
-DROP SEQUENCE SEQ_COMMUNITY_COMMENT;
+INSERT INTO CATEGORY
+VALUES (1, '유머');
+INSERT INTO CATEGORY
+VALUES (2, '예술 / 문학');
+INSERT INTO CATEGORY
+VALUES (3, '세계');
+INSERT INTO CATEGORY
+VALUES (4, '역사');
+INSERT INTO CATEGORY
+VALUES (5, '언어');
+INSERT INTO CATEGORY
+VALUES (6, '과학 / 자연');
+INSERT INTO CATEGORY
+VALUES (7, '스포츠');
+INSERT INTO CATEGORY
+VALUES (8, '기타');
 
-CREATE SEQUENCE SEQ_COMMUNITY
-    INCREMENT BY 1
-    START WITH 264;
-    
-CREATE SEQUENCE SEQ_COMMUNITY_COMMENT
-    INCREMENT BY 1
-    START WITH 73;
+INSERT INTO QUIZ
+VALUES (1, '인물이름맞추기', SYSDATE, SYSDATE, '야호', 1, 2, '');
+INSERT INTO QUIZ
+VALUES (2, '사람들이 사는 방법', SYSDATE, SYSDATE, '나는 나의 오호', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (3, '태정태세문단세', SYSDATE, SYSDATE, '이게대체 무슨 소리야', 1, 3, '');
+INSERT INTO QUIZ
+VALUES (4, '끼얏호우 하핳하', SYSDATE, SYSDATE, '모두 다 죽어라!', 1, 2, '');
+INSERT INTO QUIZ
+VALUES (5, '나는 나다', SYSDATE, SYSDATE, '나는 나이기 때문이다.', 1, 4, '');
+INSERT INTO QUIZ
+VALUES (6, '너는 누구인가?', SYSDATE, SYSDATE, '나는 너가 아니기 때문에 모른다.', 1, 5, '');
+INSERT INTO QUIZ
+VALUES (7, '허ㅓ허ㅓㅓㅓ', SYSDATE, SYSDATE, 'ㅗㅕㅜㅏㅏㅓㅑㅏ,ㅜㅏㅝㅑㅜㅘ', 1, 6, '');
+INSERT INTO QUIZ
+VALUES (8, '세세ㅔㅔ셋ㄱ스', SYSDATE, SYSDATE, 'ㅅㄱ', 1, 7, '');
+INSERT INTO QUIZ
+VALUES (9, '수고바위', SYSDATE, SYSDATE, '머지했어요', 1, 8, '');
+INSERT INTO QUIZ
+VALUES (10, '아ㅏㅏㅏ앙ㅇ아ㅏ앙ㅇㅇ아ㅏ', SYSDATE, SYSDATE, '응기잇', 1, 3, '');
+INSERT INTO QUIZ
+VALUES (11, '하야다ㅜ야ㅏㅜ댜아ㅓㅎ', SYSDATE, SYSDATE, 'ㅁㅇㅍㄷㅎㄹ', 1, 2, '');
+INSERT INTO QUIZ
+VALUES (12, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (13, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (14, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (15, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (16, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (17, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (18, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (19, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (20, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (21, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
+INSERT INTO QUIZ
+VALUES (22, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, '');
 
-insert into DAILY_CHECK values(1, sysdate-4, 1);
-insert into DAILY_CHECK values(2, sysdate-4, 2);
-insert into DAILY_CHECK values(3, sysdate-3, 1);
-insert into DAILY_CHECK values(4, sysdate-3, 2);
-insert into DAILY_CHECK values(5, sysdate-2, 1);
-insert into DAILY_CHECK values(6, sysdate-2, 2);
-insert into DAILY_CHECK values(7, sysdate-1, 1);
+INSERT INTO QUIZ_TAG
+VALUES ('유머', 3);
+
+INSERT INTO QUIZ_TAG
+VALUES ('사람', 1);
+
+INSERT INTO QUIZ_TAG
+VALUES ('유머', 4);
+
+INSERT INTO QUIZ_TAG
+VALUES ('사람', 3);
 
 COMMIT;
