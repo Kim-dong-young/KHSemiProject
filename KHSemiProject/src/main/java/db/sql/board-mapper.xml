@@ -837,13 +837,11 @@
 	<entry key="updateParentOrder">
 		UPDATE COMMUNITY_COMMENT
 		   SET COMMENT_ORDER = COMMENT_ORDER + 1
-		 WHERE COMMENT_NO != ?
+		 WHERE COMMUNITY_COMMENT_NUMBER != ?
 		   AND COMMENT_GROUP = ?
 		   AND COMMENT_ORDER &gt;= ?
 	</entry>
 	<entry key="updateParentCount">
-	    -- https://gent.tistory.com/640
-	    
 		UPDATE COMMUNITY_COMMENT
 		   SET COMMENT_CHILD_COUNT = COMMENT_CHILD_COUNT + 1
 		 WHERE COMMUNITY_COMMENT_NUMBER 
@@ -857,6 +855,6 @@
 		  CONNECT BY PRIOR COMMUNITY_PARENT_NUMBER = COMMUNITY_COMMENT_NUMBER
 		       -- 탐색의 시작 조건
 		       -- START WITH 탐색 시작 위치
-		  START WITH COMMUNITY_COMMENT_NUMBER = ? );
+		  START WITH COMMUNITY_COMMENT_NUMBER = ? )
 	</entry>
 </properties>
