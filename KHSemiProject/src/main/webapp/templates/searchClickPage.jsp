@@ -63,15 +63,33 @@
         <div id="div-top">
             <div id="image-div">
                 <div class="image-container">
-                    <img src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="" id="image-playing">
+                    <%if(q.getThumbnail() == null){ %>
+                        <img id="image-playing" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                    <% } else { %>
+                        <img id="image-playing" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
+                    <% } %>
                     <div id="image-divs">
                         <div id="image-divs-1"><%=rate%></div>
                         <div id="image-divs-2"><%=viewCount%></div>
                     </div>
                 </div>
                 <div>
-                    <button onclick="location.href='<%=contextPath%>/main.sl?cpage=${param.cpage}&category=${param.category}&orderby=${param.orderby}&search_type=${param.search_type}'
-                                        + '&search_text=' + '${param.search_text}' + '&tag_list=${param.tag_list}'">뒤로가기</button>
+                    <c:choose>
+                        <c:when test="${param.page eq '1'}">
+                            <button onclick="location.href='<%=contextPath%>/main.me'">뒤로가기</button>
+                        </c:when>
+                        <c:when test="${param.page eq '2'}">
+                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'">뒤로가기</button>
+                        </c:when>
+                        <c:when test="${param.page eq '3'}">
+                            <button onclick="location.href='<%=contextPath%>/personal.me'">뒤로가기</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'">뒤로가기</button>
+                        </c:otherwise>
+                    </c:choose>
+
+                    
                     <c:choose>
                         <c:when test="${empty loginMember}">
                         </c:when>
@@ -79,12 +97,21 @@
                             <button onclick="clickMark(<%=q.getQuiz_number()%>, ${loginMember.memberNo})" id="Mark">북마크</button>
                         </c:otherwise>
                     </c:choose>
-                    <button>공유</button>
+                    <button id="share-button" onclick="share('<%=contextPath%>', <%=q.getQuiz_number()%>)">공유</button>
                     <button>신고</button>
                     <button>플레이</button>
                 </div>
             </div>
             <script>
+                function share(a, b){
+                    window.navigator.clipboard.writeText(window.location.origin + a + '/click.sl?quiz_number=' + b)
+                        .then(() => {
+                            document.getElementById("share-button").innerText = '링크복사 완료!'
+                        })
+                        .catch(err => {
+                            console.error('텍스트 복사에 실패했습니다: ', err);
+                        });
+                }
                 function clickMark(aaa, bbb){
                     $.ajax({
                         url: "mkQuiz.sl",
@@ -139,7 +166,11 @@
                         <% if(qq.getQuiz_number() != q.getQuiz_number()) { %>
                             <div class="video-priview" onclick="clickQuiz(<%=qq.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
-                                    <img class="thumbnail" src="static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                    <%if(q.getThumbnail() == null){ %>
+                                        <img class="thumbnail" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                    <% } else { %>
+                                        <img class="thumbnail" src="<%=contextPath%>/<%=qq.getThumbnail()%>" alt="">
+                                    <% } %>
                                 </div>
                                 <div class="video-info-grid">
                                     <div class="video-info">
