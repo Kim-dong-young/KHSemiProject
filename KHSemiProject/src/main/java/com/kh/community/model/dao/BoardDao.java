@@ -1616,6 +1616,84 @@ public class BoardDao {
 		
 		return replyList;
 	}
+
+	public Comment selectComment(Connection conn, int commentNo) {
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		Comment comment = null;
+		
+		String sql = prop.getProperty("selectComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,commentNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				comment = new Comment(
+							rset.getInt("COMMENT_GROUP"),
+							rset.getInt("COMMENT_DEPTH"),
+							rset.getInt("COMMENT_ORDER"),
+							rset.getInt("COMMENT_CHILD_COUNT")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return comment;
+	}
+
+	public int updateParentOrder(Connection conn, Comment comment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateParentOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentNo());
+			pstmt.setInt(2, comment.getCommentGroup());
+			pstmt.setInt(3, comment.getCommentOrder());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateParentCount(Connection conn, Comment comment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateParentCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentGroup());
+			pstmt.setInt(2, comment.getCommentOrder());
+			pstmt.setInt(3, comment.getCommentDepth());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 }

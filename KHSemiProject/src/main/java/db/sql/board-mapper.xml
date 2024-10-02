@@ -820,4 +820,26 @@
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="selectComment">
+		 SELECT COMMENT_GROUP ,
+				COMMENT_DEPTH ,
+				COMMENT_ORDER ,
+				COMMENT_CHILD_COUNT
+		   FROM COMMUNITY_COMMENT
+		  WHERE COMMUNITY_COMMENT_NUMBER = ?
+	</entry>
+	<entry key="updateParentOrder">
+		UPDATE COMMUNITY_COMMENT
+		   SET COMMENT_ORDER = COMMENT_ORDER + 1
+		 WHERE COMMENT_NO != ?
+		   AND COMMENT_GROUP = ?
+		   AND COMMENT_ORDER &gt;= ?
+	</entry>
+	<entry key="updateParentCount">
+			UPDATE COMMUNITY_COMMENT
+		   SET COMMENT_CHILD_COUNT = COMMENT_CHILD_COUNT + 1
+		 WHERE COMMENT_GROUP = ?
+           AND ( COMMENT_ORDER &lt; ?
+		   AND   COMMENT_DEPTH &lt; ? )
+	</entry>
 </properties>

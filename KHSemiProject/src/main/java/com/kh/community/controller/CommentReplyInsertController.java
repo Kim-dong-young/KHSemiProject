@@ -29,6 +29,8 @@ public class CommentReplyInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BoardService bService = new BoardService();
+		
 		int userNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 		String content = request.getParameter("commentContent");
 		String communityNo = request.getParameter("no");
@@ -43,7 +45,15 @@ public class CommentReplyInsertController extends HttpServlet {
 		comment.setCommunityNo(Integer.parseInt(communityNo));
 		comment.setCommentParentNo(Integer.parseInt(parentNo));
 		
-		int result = new BoardService().insertCommentReply(comment);
+		// 대댓글의 순서 및 깊이를 계산하기 위해 부모 댓글의 정보를 불러온다
+		boolean isSuccess = false;
+		Comment parentComment = bService.selectComment(Integer.parseInt(parentNo));
+		if(parentComment != null) {
+			comment.setCommentGroup(parentComment.getCommentGroup());
+			comment.setCommentDepth(parentComment.getCommentDepth());
+			comment.setCommentOrder(parentComment.getCommentOrder() + parentComment.getCommentChildCount() + 1);
+			isSuccess = bService.insertCommentReply(comment);
+		}
 		
 		response.sendRedirect("board?cpage="+ cpage +"&no="+ communityNo +"&comment=" + cmtPage);
 	}

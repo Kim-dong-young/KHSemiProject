@@ -377,18 +377,24 @@ public class BoardService {
 		return boardList;
 	}
 
-	public int insertCommentReply(Comment comment) {
+	public boolean insertCommentReply(Comment comment) {
 		Connection conn = getConnection();
-		int result = new BoardDao().insertCommentReply(conn, comment);
+		BoardDao bDao = new BoardDao();
+		Boolean isSuccess = false;
 		
-		if(result > 0) {
+		int result1 = bDao.insertCommentReply(conn, comment);
+		int result2 = bDao.updateParentOrder(conn, comment);
+		int result3 = bDao.updateParentCount(conn, comment);
+		
+		if(result1 > 0 && result2 >= 0 && result3 >= 0) {
 			commit(conn);
+			isSuccess = true;
 		} else {
 			rollback(conn);
 		}
 		
 		close(conn);
-		return result;
+		return isSuccess;
 	}
 
 	public ArrayList<Comment> selectReplyList(PageInfo cPageInfo, int boardNo, ArrayList<Comment> commentList) {
@@ -407,6 +413,14 @@ public class BoardService {
 		
 		close(conn);
 		return replyList;
+	}
+
+	public Comment selectComment(int commentNo) {
+		Connection conn = getConnection();
+		Comment comment = new BoardDao().selectComment(conn, commentNo);
+		
+		close(conn);
+		return comment;
 	}
 
 
