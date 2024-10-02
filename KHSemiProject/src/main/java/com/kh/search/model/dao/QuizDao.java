@@ -313,7 +313,7 @@ public class QuizDao {
 		
 		return list;
 	}
-
+	
 	public Quiz detailQuiz(Connection conn, int quiz_number) {
 		Quiz q = new Quiz();
 		PreparedStatement pstmt = null;
@@ -512,47 +512,105 @@ public class QuizDao {
 		
 	}
 
-	public int markInsert(Connection conn, int quiznum, int memberNum) {
-		int b = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("markInsert");
-		
+    public int markInsert(Connection conn, int quiznum, int memberNum) {
+        int b = 0;
+        
+        PreparedStatement pstmt = null;
+        
+        String sql = prop.getProperty("markInsert");
+        
 
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, memberNum);
-			pstmt.setInt(2, quiznum);
-			
-			b = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		
-		
-		
-		return b;
-	}
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, memberNum);
+            pstmt.setInt(2, quiznum);
+            
+            b = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        
+        
+        
+        
+        
+        return b;
+    }
 
-	public boolean markSelect(Connection conn, int quizNum, int memberNum) {
+    public boolean markSelect(Connection conn, int quizNum, int memberNum) {
+        
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("markSelect");
+        boolean init = false;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberNum);
+            pstmt.setInt(2, quizNum);
+            rset = pstmt.executeQuery();
+            init = rset.next();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            JDBCTemplate.close(rset);
+            JDBCTemplate.close(pstmt);
+        }
+        
+        return init;
+    }
+
+    public int markDelete(Connection conn, int quiznum, int memberNum) {
+        int b = 0;
+        
+        PreparedStatement pstmt = null;
+        
+        String sql = prop.getProperty("markDelete");
+        
+
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, memberNum);
+            pstmt.setInt(2, quiznum);
+            
+            b = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        
+        
+        
+        
+        
+        return b;
+    }
+
+	public ArrayList<Quiz> selectInquiryQuiz(Connection conn) {
+		ArrayList<Quiz> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("markSelect");
-		boolean init = false;
+		String sql = prop.getProperty("selectinquiryQuiz");
+	
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memberNum);
-			pstmt.setInt(2, quizNum);
+			
 			rset = pstmt.executeQuery();
-			init = rset.next();
+			while(rset.next()) {
+				Quiz q = new Quiz();
+				q.setQuiz_number(rset.getInt("quiz_number"));
+				q.setQuiz_title(rset.getString("quiz_title"));
+				
+				list.add(q);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -560,36 +618,8 @@ public class QuizDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		
-		return init;
-	}
 
-	public int markDelete(Connection conn, int quiznum, int memberNum) {
-		int b = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("markDelete");
-		
+		return list;
 
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, memberNum);
-			pstmt.setInt(2, quiznum);
-			
-			b = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		
-		
-		
-		return b;
 	}
 }
