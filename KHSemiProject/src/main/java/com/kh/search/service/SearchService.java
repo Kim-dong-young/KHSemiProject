@@ -44,7 +44,7 @@ public class SearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
-
+	
 	public Quiz detailQuiz(int quiz_number) {
 		Connection conn = getConnection();
 		Quiz q = new QuizDao().detailQuiz(conn, quiz_number);
@@ -82,42 +82,49 @@ public class SearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+		
+    public int markInsert(int quiznum, int memberNum) {
+        Connection conn = getConnection();
+        int list = 0;
+        if(!new QuizDao().markSelect(conn, quiznum, memberNum)) {
+            list = new QuizDao().markInsert(conn, quiznum, memberNum);
+            if(list > 0) {
+                commit(conn);
+                list = 1;
+            } else {
+                rollback(conn);
+            }
+        } else {
+            list = new QuizDao().markDelete(conn, quiznum, memberNum);
+            if(list > 0) {
+                commit(conn);
+                list = 2;
+            } else {
+                rollback(conn);
+            }
+        }
+        
+        
+        
+        
+        JDBCTemplate.close(conn);
+        return list;
+    }
+
+    public int markSelect(int quizNum, int memberNum) {
+        Connection conn = getConnection();
+        if(new QuizDao().markSelect(conn, quizNum, memberNum)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 	
-	
-	public int markInsert(int quiznum, int memberNum) {
+	public ArrayList<Quiz> selectInquiryQuiz() {
 		Connection conn = getConnection();
-		int list = 0;
-		if(!new QuizDao().markSelect(conn, quiznum, memberNum)) {
-			list = new QuizDao().markInsert(conn, quiznum, memberNum);
-			if(list > 0) {
-				commit(conn);
-				list = 1;
-			} else {
-				rollback(conn);
-			}
-		} else {
-			list = new QuizDao().markDelete(conn, quiznum, memberNum);
-			if(list > 0) {
-				commit(conn);
-				list = 2;
-			} else {
-				rollback(conn);
-			}
-		}
-		
-		
-		
-		
+		ArrayList<Quiz> list = new QuizDao().selectInquiryQuiz(conn);
+	
 		JDBCTemplate.close(conn);
 		return list;
-	}
-
-	public int markSelect(int quizNum, int memberNum) {
-		Connection conn = getConnection();
-		if(new QuizDao().markSelect(conn, quizNum, memberNum)) {
-			return 1;
-		} else {
-			return 0;
-		}
 	}
 }

@@ -130,16 +130,16 @@ public class QuizDao {
 	    // ORDER BY에 따른 SELECT 절 및 JOIN 절 변경
 	    if (orderby == 1) {
 	        // 조회수 순 정렬
-	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, NVL(COUNT(QL.QUIZ_LOG_NUMBER), 0) AS VIEW_COUNT ";
+	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL NVL(COUNT(QL.QUIZ_LOG_NUMBER), 0) AS VIEW_COUNT ";
 	        sql += "        FROM QUIZ Q ";
 	        sql += "        LEFT JOIN QUIZ_LOG QL ON Q.QUIZ_NUMBER = QL.QUIZ_NUMBER ";
 	    } else if (orderby == 2) {
 	        // 최신순 정렬
-	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.QUIZ_DATE ";
+	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL, Q.QUIZ_DATE ";
 	        sql += "        FROM QUIZ Q ";
 	    } else if (orderby == 3) {
 	        // 평점 순 정렬
-	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, NVL(AVG(QR.QUIZ_RATE_RATING), 0) AS AVG_RATING ";
+	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL, NVL(AVG(QR.QUIZ_RATE_RATING), 0) AS AVG_RATING ";
 	        sql += "        FROM QUIZ Q ";
 	        sql += "        LEFT JOIN QUIZ_RATE QR ON Q.QUIZ_NUMBER = QR.QUIZ_NUMBER ";
 	    }
@@ -171,7 +171,7 @@ public class QuizDao {
 	    }
 
 	    // GROUP BY 절 구성
-	    String groupByClause = "        GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE";
+	    String groupByClause = "        GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL";
 
 	    if (orderby == 2) {
 	        // 최신순 정렬 시 날짜 추가
@@ -239,6 +239,7 @@ public class QuizDao {
 	            Quiz q = new Quiz();
 	            q.setQuiz_number(rset.getInt("QUIZ_NUMBER"));
 	            q.setQuiz_title(rset.getString("QUIZ_TITLE"));
+	            q.setThumbnail(rset.getString("THUMBNAIL"));
 	            list.add(q);
 	        }
 	    } catch (SQLException e) {
@@ -312,7 +313,7 @@ public class QuizDao {
 		
 		return list;
 	}
-
+	
 	public Quiz detailQuiz(Connection conn, int quiz_number) {
 		Quiz q = new Quiz();
 		PreparedStatement pstmt = null;
@@ -445,7 +446,7 @@ public class QuizDao {
 	        placeholders.add("?");
 	    }
 	    sql += placeholders.toString() + ") " +
-	           "GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE " +
+	           "GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL " +
 //	           "HAVING COUNT(DISTINCT QT.TAG_NAME) = ? " +
 	           "ORDER BY VIEWS DESC";
 
@@ -511,47 +512,105 @@ public class QuizDao {
 		
 	}
 
-	public int markInsert(Connection conn, int quiznum, int memberNum) {
-		int b = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("markInsert");
-		
+    public int markInsert(Connection conn, int quiznum, int memberNum) {
+        int b = 0;
+        
+        PreparedStatement pstmt = null;
+        
+        String sql = prop.getProperty("markInsert");
+        
 
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, memberNum);
-			pstmt.setInt(2, quiznum);
-			
-			b = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		
-		
-		
-		return b;
-	}
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, memberNum);
+            pstmt.setInt(2, quiznum);
+            
+            b = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        
+        
+        
+        
+        
+        return b;
+    }
 
-	public boolean markSelect(Connection conn, int quizNum, int memberNum) {
+    public boolean markSelect(Connection conn, int quizNum, int memberNum) {
+        
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("markSelect");
+        boolean init = false;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberNum);
+            pstmt.setInt(2, quizNum);
+            rset = pstmt.executeQuery();
+            init = rset.next();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            JDBCTemplate.close(rset);
+            JDBCTemplate.close(pstmt);
+        }
+        
+        return init;
+    }
+
+    public int markDelete(Connection conn, int quiznum, int memberNum) {
+        int b = 0;
+        
+        PreparedStatement pstmt = null;
+        
+        String sql = prop.getProperty("markDelete");
+        
+
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, memberNum);
+            pstmt.setInt(2, quiznum);
+            
+            b = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        
+        
+        
+        
+        
+        return b;
+    }
+
+	public ArrayList<Quiz> selectInquiryQuiz(Connection conn) {
+		ArrayList<Quiz> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("markSelect");
-		boolean init = false;
+		String sql = prop.getProperty("selectinquiryQuiz");
+	
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memberNum);
-			pstmt.setInt(2, quizNum);
+			
 			rset = pstmt.executeQuery();
-			init = rset.next();
+			while(rset.next()) {
+				Quiz q = new Quiz();
+				q.setQuiz_number(rset.getInt("quiz_number"));
+				q.setQuiz_title(rset.getString("quiz_title"));
+				
+				list.add(q);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -559,36 +618,8 @@ public class QuizDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		
-		return init;
-	}
 
-	public int markDelete(Connection conn, int quiznum, int memberNum) {
-		int b = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("markDelete");
-		
+		return list;
 
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, memberNum);
-			pstmt.setInt(2, quiznum);
-			
-			b = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		
-		
-		
-		return b;
 	}
 }
