@@ -300,6 +300,7 @@ public class QuizDao {
 				Quiz q = new Quiz();
 				q.setQuiz_number(rset.getInt("quiz_number"));
 				q.setQuiz_title(rset.getString("quiz_title"));
+				q.setThumbnail(rset.getString("thumbnail"));
 				
 				list.add(q);
 			}
@@ -332,6 +333,7 @@ public class QuizDao {
 				q.setMember_name(rset.getString("member_nickname"));
 				q.setCategory_name(rset.getString("category_name"));
 				q.setQuiz_explanation(rset.getString("quiz_explanation"));
+				q.setThumbnail(rset.getString("THUMBNAIL"));
 				
 			}
 		} catch (SQLException e) {
@@ -434,7 +436,7 @@ public class QuizDao {
 	    PreparedStatement pstmt = null;
 	    ResultSet rset = null;
 
-	    String sql = "SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, NVL(SUM(QL.QUIZ_LOG_COUNT), 0) AS VIEWS " +
+	    String sql = "SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL, NVL(SUM(QL.QUIZ_LOG_COUNT), 0) AS VIEWS " +
 	                 "FROM QUIZ Q " +
 	                 "JOIN QUIZ_TAG QT ON Q.QUIZ_NUMBER = QT.QUIZ_NUMBER " +
 	                 "LEFT JOIN QUIZ_LOG QL ON Q.QUIZ_NUMBER = QL.QUIZ_NUMBER " +
@@ -469,6 +471,7 @@ public class QuizDao {
 	            Quiz q = new Quiz();
 	            q.setQuiz_number(rset.getInt("QUIZ_NUMBER"));
 	            q.setQuiz_title(rset.getString("QUIZ_TITLE"));
+	            q.setThumbnail(rset.getString("THUMBNAIL"));
 	            list.add(q);
 	        }
 	    } catch (SQLException e) {
