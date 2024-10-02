@@ -444,7 +444,7 @@ public class QuizDao {
 	    }
 	    sql += placeholders.toString() + ") " +
 	           "GROUP BY Q.QUIZ_NUMBER, Q.QUIZ_TITLE " +
-	           "HAVING COUNT(DISTINCT QT.TAG_NAME) = ? " +
+//	           "HAVING COUNT(DISTINCT QT.TAG_NAME) = ? " +
 	           "ORDER BY VIEWS DESC";
 
 	    try {
@@ -456,8 +456,9 @@ public class QuizDao {
 	        for (Tag tag : tagArr) {
 	            pstmt.setString(paramIndex++, tag.getQuizTag());
 	        }
-	        pstmt.setInt(paramIndex++, tagArr.size()); // HAVING 절에 태그 개수 바인딩
-
+			/*
+			 * pstmt.setInt(paramIndex++, tagArr.size()); // HAVING 절에 태그 개수 바인딩
+			 */
 	        // 쿼리 실행
 	        rset = pstmt.executeQuery();
 
