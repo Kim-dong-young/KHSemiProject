@@ -346,4 +346,24 @@
     <servlet-name>AjaxQuizMarkController</servlet-name>
     <url-pattern>/mkQuiz.sl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>latest.sl</display-name>
+    <servlet-name>latest.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxTopTenLatestController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>latest.sl</servlet-name>
+    <url-pattern>/latest.sl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>inquiry.sl</display-name>
+    <servlet-name>inquiry.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxTopTenInquiryController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>inquiry.sl</servlet-name>
+    <url-pattern>/inquiry.sl</url-pattern>
+  </servlet-mapping>
 </web-app>

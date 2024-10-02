@@ -42,7 +42,7 @@ public class SearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
-
+	
 	public Quiz detailQuiz(int quiz_number) {
 		Connection conn = getConnection();
 		Quiz q = new QuizDao().detailQuiz(conn, quiz_number);
@@ -81,6 +81,14 @@ public class SearchService {
 	public ArrayList<Quiz> selectLatestQuiz() {
 		Connection conn = getConnection();
 		ArrayList<Quiz> list = new QuizDao().selectLatestQuiz(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+	public ArrayList<Quiz> selectInquiryQuiz() {
+		Connection conn = getConnection();
+		ArrayList<Quiz> list = new QuizDao().selectInquiryQuiz(conn);
 		
 		JDBCTemplate.close(conn);
 		return list;

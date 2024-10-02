@@ -310,7 +310,7 @@ public class QuizDao {
 		
 		return list;
 	}
-
+	
 	public Quiz detailQuiz(Connection conn, int quiz_number) {
 		Quiz q = new Quiz();
 		PreparedStatement pstmt = null;
@@ -508,4 +508,36 @@ public class QuizDao {
 		return list;
 		
 	}
+	
+	public ArrayList<Quiz> selectInquiryQuiz(Connection conn) {
+		ArrayList<Quiz> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectinquiryQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Quiz q = new Quiz();
+				q.setQuiz_number(rset.getInt("quiz_number"));
+				q.setQuiz_title(rset.getString("quiz_title"));
+				
+				list.add(q);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	
 }
