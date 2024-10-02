@@ -17,13 +17,6 @@ function initLoad(optional) {
                                                 "<div class='title'>" + myQuiz.quiz_title + "</div>" + 
                                             "<div>"
                 }
-
-                // 생성한 HTML을 innerHTML로 삽입
-                if (interestList) {
-                    interestList.innerHTML = htmlContent;
-                } else {
-                    console.error('Element with class "interestList" not found.');
-                }
             },
             error: function() {
                 alert("조회 실패");
