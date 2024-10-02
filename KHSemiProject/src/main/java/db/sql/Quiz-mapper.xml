@@ -89,11 +89,22 @@
 		SELECT *
   		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY COUNT(QUIZ_NUMBER) DESC) AS RNO,
                QUIZ_NUMBER,
-               QUIZ_TITLE,
-               COUNT(QUIZ_NUMBER)
+               QUIZ_TITLE
           FROM QUIZ_LOG
           JOIN QUIZ USING(QUIZ_NUMBER)
          GROUP BY QUIZ_NUMBER, QUIZ_TITLE)
+ 		 WHERE RNO BETWEEN 1 AND 10
+	</entry>
+	
+	<entry key="selectGradeQuiz">
+		SELECT *
+  		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY AVG(QUIZ_RATE_RATING) DESC, COUNT(QUIZ_NUMBER) DESC, QUIZ_TITLE) AS RNO,
+               		   QUIZ_NUMBER,
+               		   QUIZ_TITLE,
+               		   TRUNC(AVG(QUIZ_RATE_RATING), 2) AS QUIZ_RATE_RATING
+          		  FROM QUIZ_RATE
+          		  JOIN QUIZ USING(QUIZ_NUMBER)
+         		 GROUP BY QUIZ_NUMBER, QUIZ_TITLE)
  		 WHERE RNO BETWEEN 1 AND 10
 	</entry>
 </properties>
