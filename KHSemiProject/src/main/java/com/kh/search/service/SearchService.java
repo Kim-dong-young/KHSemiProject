@@ -34,6 +34,7 @@ public class SearchService {
 	public ArrayList<Tag> selectTagList(String searchText) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Tag> list = new QuizDao().selectTagList(conn, searchText);
+		JDBCTemplate.close(conn);
 		return list;
 	}
 	
@@ -48,30 +49,35 @@ public class SearchService {
 	public Quiz detailQuiz(int quiz_number) {
 		Connection conn = getConnection();
 		Quiz q = new QuizDao().detailQuiz(conn, quiz_number);
+		JDBCTemplate.close(conn);
 		return q;
 	}
 
 	public int quizViewCount(int num) {
 		Connection conn = getConnection();
 		int result = new QuizDao().quizViewCount(conn, num);
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
 	public ArrayList<Tag> TagArray(int num) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Tag> list = new QuizDao().TagArray(conn, num);
+		JDBCTemplate.close(conn);
 		return list;
 	}
 
 	public String quizRateAvg(int num) {
 		Connection conn = JDBCTemplate.getConnection();
 		String str = new QuizDao().quizRateAvg(conn, num);
+		JDBCTemplate.close(conn);
 		return str;
 	}
 
 	public ArrayList<Quiz> simularQuizList(ArrayList<Tag> tagArr) {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Quiz> qArr = new QuizDao().simularQuizList(conn, tagArr);
+		JDBCTemplate.close(conn);
 		return qArr;
 	}
 	
@@ -114,8 +120,10 @@ public class SearchService {
     public int markSelect(int quizNum, int memberNum) {
         Connection conn = getConnection();
         if(new QuizDao().markSelect(conn, quizNum, memberNum)) {
+        	JDBCTemplate.close(conn);
             return 1;
         } else {
+        	JDBCTemplate.close(conn);
             return 0;
         }
     }
