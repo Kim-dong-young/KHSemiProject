@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import com.kh.createQuiz.model.vo.CreateQuiz;
 
-public class CreateQuizDAO {
+public class CreateQuizDao {
 
 
  public int insertQuiz(Connection conn, CreateQuiz quiz) throws SQLException {

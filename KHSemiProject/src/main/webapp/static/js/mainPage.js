@@ -6,7 +6,7 @@ function initSwiper() {
       slidesPerView: 6,
       spaceBetween: 10,
       loop: true,
-
+      allowTouchMove: false,
       // Navigation arrows
       navigation: {
         nextEl: '.swiper-button-next',

@@ -38,10 +38,10 @@
                 <div class="swiper">
                     <div class="swiper-wrapper">
                     <%if(list.isEmpty()) {%>
-                        조회된 정보가 없습니다.
+                        <div class="swiper-slide">조회된 정보가 없습니다.</div>
                     <%} else {%>
                     	<%for(Quiz q : list) {%>
-	                    	<div class="swiper-slide">
+	                    	<div class="swiper-slide" onclick="location.href='<%=contextPath%>/click.sl?quiz_number=<%=q.getQuiz_number() %>&page=1'" style="cursor: pointer">
 	                            <div class="thumbnail"><%=q.getQuiz_number() %>썸네일입니다.</div>
 	                            <div class="title"><%=q.getQuiz_title() %></div>
 	                        </div>
