@@ -13,11 +13,13 @@ import com.kh.createQuiz.model.vo.CreateQuiz;
 public class CreateQuizService {
     private CreateQuizDAO quizDAO = new CreateQuizDAO();
 
-    public int createQuiz(CreateQuiz quiz) throws SQLException {
+    public int createQuiz(CreateQuiz quiz) {
         Connection conn = getConnection();
         try {
             quizDAO.insertQuizWithTag(conn, quiz);
-        } finally {
+        } catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
             close(conn);
         }
 		return 0;
