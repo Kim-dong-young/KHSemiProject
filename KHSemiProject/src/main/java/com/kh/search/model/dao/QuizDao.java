@@ -500,6 +500,7 @@ public class QuizDao {
 				Quiz q = new Quiz();
 				q.setQuiz_number(rset.getInt("quiz_number"));
 				q.setQuiz_title(rset.getString("quiz_title"));
+				q.setThumbnail(rset.getString("thumbnail"));
 				
 				list.add(q);
 			}
@@ -611,6 +612,7 @@ public class QuizDao {
 				Quiz q = new Quiz();
 				q.setQuiz_number(rset.getInt("quiz_number"));
 				q.setQuiz_title(rset.getString("quiz_title"));
+				q.setThumbnail(rset.getString("thumbnail"));
 				
 				list.add(q);
 			}
@@ -641,6 +643,7 @@ public class QuizDao {
 				Quiz q = new Quiz();
 				q.setQuiz_number(rset.getInt("quiz_number"));
 				q.setQuiz_title(rset.getString("quiz_title"));
+				q.setThumbnail(rset.getString("thumbnail"));
 				q.setQuiz_rate(rset.getDouble("quiz_rate_rating"));
 				list.add(q);
 			}

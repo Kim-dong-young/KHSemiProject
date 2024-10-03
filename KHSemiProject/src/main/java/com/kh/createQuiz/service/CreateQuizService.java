@@ -7,11 +7,11 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.kh.createQuiz.model.dao.CreateQuizDao;
+import com.kh.createQuiz.model.dao.CreateQuizDAO;
 import com.kh.createQuiz.model.vo.CreateQuiz;
 
 public class CreateQuizService {
-    private CreateQuizDao quizDAO = new CreateQuizDao();
+    private CreateQuizDAO quizDAO = new CreateQuizDAO();
 
     public int createQuiz(CreateQuiz quiz) {
         Connection conn = getConnection();
