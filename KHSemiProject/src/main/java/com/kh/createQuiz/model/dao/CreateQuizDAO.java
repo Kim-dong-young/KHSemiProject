@@ -9,7 +9,7 @@ import com.kh.createQuiz.model.vo.CreateQuiz;
 public class CreateQuizDAO {
 
 
- public int insertQuiz(Connection conn, CreateQuiz quiz) throws SQLException {
+ public void insertQuiz(Connection conn, CreateQuiz quiz)  {
      String query = "INSERT INTO QUIZ (QUIZ_number, QUIZ_title, QUIZ_explanation, MEMBER_number, CATEGORY_number, THUMBNAIL) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
      try (PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -19,11 +19,13 @@ public class CreateQuizDAO {
          pstmt.setInt(4, quiz.getMEMBER_NUMBER());
          pstmt.setInt(5, quiz.getCATEGORY_NUMBER());
          pstmt.setString(6, quiz.getTHUMBNAIL());
-         return pstmt.executeUpdate();
-     }
+         return;
+     } catch (SQLException e) {
+		e.printStackTrace();
+	}
  }
 
- // QUIZ_TAG 테이블에 데이터 삽입
+
  public int insertQuizTag(Connection conn, CreateQuiz quiz) throws SQLException {
      String query = "INSERT INTO QUIZ_TAG (TAG_name, QUIZ_number) VALUES (?, ?)";
      try (PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -33,7 +35,7 @@ public class CreateQuizDAO {
      }
  }
 
- // 트랜잭션을 처리하는 메서드
+
  public void insertQuizWithTag(Connection conn, CreateQuiz quiz) throws SQLException {
      try {
          conn.setAutoCommit(false);

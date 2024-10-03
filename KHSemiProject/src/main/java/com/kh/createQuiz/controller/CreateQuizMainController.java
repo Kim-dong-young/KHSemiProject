@@ -32,9 +32,9 @@ public class CreateQuizMainController extends HttpServlet {
 		String categoryNumber = request.getParameter("category");
 		String tagName = request.getParameter("tag");
 
-		// categoryNumber가 null이거나 비어있는지 체크
+		
 		if (categoryNumber == null || categoryNumber.trim().isEmpty()) {
-			categoryNumber = "0"; // 기본값 설정 (예시)
+			categoryNumber = "0"; 
 		}
 
 		String categoryName = "";
@@ -69,7 +69,7 @@ public class CreateQuizMainController extends HttpServlet {
 			break;
 		}
 
-		// tagName이 비어있다면 categoryName으로 설정
+		
 		if (tagName == null || tagName.trim().isEmpty()) {
 			tagName = categoryName;
 		}
@@ -94,20 +94,15 @@ public class CreateQuizMainController extends HttpServlet {
 				request.setAttribute("errorMsg", "퀴즈 생성에 실패했습니다.");
 				request.getRequestDispatcher("/main.me").forward(request, response);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			request.setAttribute("errorMsg", "SQL 오류가 발생했습니다.");
-			request.getRequestDispatcher("/main.me").forward(request, response); // 오류 페이지로 리다이렉트
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "잘못된 카테고리 번호입니다.");
-			request.getRequestDispatcher("/main.me").forward(request, response); // 오류 페이지로 리다이렉트
+			request.getRequestDispatcher("/main.me").forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
