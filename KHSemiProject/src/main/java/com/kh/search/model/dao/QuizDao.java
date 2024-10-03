@@ -414,7 +414,7 @@ public class QuizDao {
 			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				str += rset.getDouble("count");		
+				str += rset.getDouble("AVG");		
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
