@@ -321,6 +321,7 @@ public class BoardDao {
 			pstmt.setInt(1, comment.getCommunityNo());
 			pstmt.setInt(2, comment.getMemberNo());
 			pstmt.setString(3, comment.getCommentContent());
+			pstmt.setInt(4, comment.getCommentGroup());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -1544,6 +1545,9 @@ public class BoardDao {
 			pstmt.setInt(2, comment.getCommunityNo());
 			pstmt.setInt(3, comment.getMemberNo());
 			pstmt.setString(4, comment.getCommentContent());
+			pstmt.setInt(5, comment.getCommentGroup());
+			pstmt.setInt(6, comment.getCommentDepth());
+			pstmt.setInt(7, comment.getCommentOrder());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -1555,7 +1559,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Comment> selectReplyList(Connection conn, PageInfo cPageInfo, int boardNo, String parentNo) {
+	public ArrayList<Comment> selectReplyList(Connection conn, PageInfo cPageInfo, int boardNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		ArrayList<Comment> replyList = new ArrayList<>();
@@ -1663,6 +1667,56 @@ public class BoardDao {
 			pstmt.setInt(2, comment.getCommentNo());
 			
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectMaxCommentGroupNo(Connection conn, int communityNo) {
+		int result = -1;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectMaxCommentGroupNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, communityNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("MAX_GROUP_NO");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectCommentNo(Connection conn) {
+		int result = -1;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectCommentNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("SEQ_NO");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

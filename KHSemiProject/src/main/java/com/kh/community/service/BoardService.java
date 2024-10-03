@@ -383,6 +383,10 @@ public class BoardService {
 		Boolean isSuccess = false;
 		
 		int result1 = bDao.insertCommentReply(conn, comment);
+		
+		int curSeqNo = bDao.selectCommentNo(conn);
+		if(curSeqNo > 0) comment.setCommentNo(curSeqNo);
+		
 		int result2 = bDao.updateParentOrder(conn, comment);
 		int result3 = bDao.updateParentCount(conn, comment);
 		
@@ -400,16 +404,7 @@ public class BoardService {
 	public ArrayList<Comment> selectReplyList(PageInfo cPageInfo, int boardNo, ArrayList<Comment> commentList) {
 		Connection conn = getConnection();
 		
-		String parentNo = "";
-		for(Comment cm : commentList) {
-			parentNo += cm.getCommentNo() + ",";
-		}
-		
-		if(parentNo.length() > 0) {
-			parentNo = parentNo.substring(0,parentNo.length()-1);
-		}
-		
-		ArrayList<Comment> replyList = new BoardDao().selectReplyList(conn, cPageInfo, boardNo, parentNo);
+		ArrayList<Comment> replyList = new BoardDao().selectReplyList(conn, cPageInfo, boardNo);
 		
 		close(conn);
 		return replyList;
@@ -421,6 +416,14 @@ public class BoardService {
 		
 		close(conn);
 		return comment;
+	}
+
+	public int selectMaxCommentGroupNo(int communityNo) {
+		Connection conn = getConnection();
+		int result = new BoardDao().selectMaxCommentGroupNo(conn, communityNo);
+		
+		close(conn);
+		return result;
 	}
 
 
