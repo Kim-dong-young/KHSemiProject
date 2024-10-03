@@ -6,7 +6,7 @@ function initSwiper() {
       slidesPerView: 6,
       spaceBetween: 10,
       loop: true,
-
+      allowTouchMove: false,
       // Navigation arrows
       navigation: {
         nextEl: '.swiper-button-next',
@@ -15,7 +15,7 @@ function initSwiper() {
     }); 
 }
 
-function turn(name) {
+function turn(name, path) {
   let buttons = document.querySelectorAll('.recommend-button .custom-btn');
 
   for(let i = 0; i < buttons.length; i++) {
@@ -26,10 +26,10 @@ function turn(name) {
     }
   }
 
-  selectRate(name)
+  selectRate(name, path)
 }
 
-function selectRate(name) {
+function selectRate(name, path) {
   $.ajax({
     url: name + ".sl",
     type: "post",
@@ -39,9 +39,9 @@ function selectRate(name) {
       swiper.removeAllSlides();
 
       for(let list of res) {
-        let swiperSlide = "<div class='swiper-slide'>" + 
-        "<div class='thumbnail'>" + list.quiz_number + "썸네일입니다.</div>" + 
-        "<div class='title'>" + list.quiz_title + "</div>" + 
+        let swiperSlide = "<div class='swiper-slide' onclick=location.href='" + path + "/click.sl?quiz_number=" + list.quiz_number + "&page=1' style='cursor: pointer'>" + 
+        "<div class='thumbnail'> <img src=" + path + "/" + list.thumbnail + "></div>" + 
+        "<div class='title'>" + list.quiz_number + ". " + list.quiz_title + "</div>" + 
         "</div>"
 
         swiper.appendSlide(swiperSlide);

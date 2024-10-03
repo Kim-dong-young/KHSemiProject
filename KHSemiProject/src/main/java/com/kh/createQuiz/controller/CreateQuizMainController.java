@@ -92,12 +92,12 @@ public class CreateQuizMainController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/quiz.cr");
 			} else {
 				request.setAttribute("errorMsg", "퀴즈 생성에 실패했습니다.");
-				request.getRequestDispatcher("/main.me").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/main.me");
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "잘못된 카테고리 번호입니다.");
-			request.getRequestDispatcher("/main.me").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/main.me");
 		}
 	}
 
