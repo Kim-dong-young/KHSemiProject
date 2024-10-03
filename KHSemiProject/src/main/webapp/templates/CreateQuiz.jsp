@@ -53,9 +53,7 @@ String contextPath = request.getContextPath();
 					</div>
 
 					<div class="media">
-						<input type="text" placeholder="링크를 복사하여 붙여넣거나 이미지파일을 업로드하세요.">
-						<br>
-						<br> <input type="file">
+						 <input type="file">
 					</div>
 
 					<div class="time-limit">

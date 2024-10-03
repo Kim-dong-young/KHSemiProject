@@ -1,21 +1,25 @@
 package com.kh.createQuiz.service;
 
-import java.io.InputStream;
-import com.kh.createQuiz.model.dao.CreateQuizDao;
+
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.kh.createQuiz.model.dao.CreateQuizDAO;
+import com.kh.createQuiz.model.vo.CreateQuiz;
 
 public class CreateQuizService {
+    private CreateQuizDAO quizDAO = new CreateQuizDAO();
 
-	private CreateQuizDao createQuizDao;
-
-	public boolean createQuiz(String title, String explanation, String category, String tag,
-			InputStream thumbnailInputStream) {
-		try {
-			// DAO 호출하여 Quiz 및 이미지 데이터를 DB에 저장
-			createQuizDao.insertquiz(title, explanation, category, tag, thumbnailInputStream);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+    public int createQuiz(CreateQuiz quiz) throws SQLException {
+        Connection conn = getConnection();
+        try {
+            quizDAO.insertQuizWithTag(conn, quiz);
+        } finally {
+            close(conn);
+        }
+		return 0;
+    }
 }

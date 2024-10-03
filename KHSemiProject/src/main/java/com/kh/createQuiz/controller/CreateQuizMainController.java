@@ -1,62 +1,114 @@
 package com.kh.createQuiz.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.sql.SQLException;
 
+import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.service.CreateQuizService;
-
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10) // 최대 10MB 파일 업로드 허용
 public class CreateQuizMainController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private CreateQuizService quizService = new CreateQuizService();
 
-	private CreateQuizService createQuizService;
-
-	@Override
-	public void init() throws ServletException {
-		super.init();
-		createQuizService = new CreateQuizService(); // CreateQuizService 초기화
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CreateQuizMainController() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		// 퀴즈 생성 페이지로 포워딩
+		// 퀴즈 생성 페이지로 이동
 		request.getRequestDispatcher("/templates/CreateQuizMain.jsp").forward(request, response);
-		// Form에서 받은 데이터를 처리
-				String title = request.getParameter("title");
-				String explanation = request.getParameter("explanation");
-				String category = request.getParameter("category");
-				String tag = request.getParameter("tag");
 
-				// 파일 데이터 처리
-				Part thumbnailPart = request.getPart("thumbnail"); // input file name="thumbnail"
-				InputStream thumbnailInputStream = null;
-				if (thumbnailPart != null && thumbnailPart.getSize() > 0) {
-					thumbnailInputStream = thumbnailPart.getInputStream();
-				}
+		String quizTitle = request.getParameter("title");
+		String quizExplanation = request.getParameter("explanation");
+		String categoryNumber = request.getParameter("category");
+		String tagName = request.getParameter("tag");
 
-				// Quiz 생성 서비스 호출
-				boolean isCreated = createQuizService.createQuiz(title, explanation, category, tag, thumbnailInputStream);
+		// categoryNumber가 null이거나 비어있는지 체크
+		if (categoryNumber == null || categoryNumber.trim().isEmpty()) {
+			categoryNumber = "0"; // 기본값 설정 (예시)
+		}
 
-				if (isCreated) {
-					// 성공 시 리다이렉트
-					response.sendRedirect(request.getContextPath() + "/quiz.cr");
-				} else {
-					// 실패 시 에러 페이지로 이동
-					response.sendRedirect(request.getContextPath() + "/create.quiz");
-				} 
+		String categoryName = "";
+
+		switch (categoryNumber) {
+		case "1":
+			categoryName = "유머";
+			break;
+		case "2":
+			categoryName = "예술/문학";
+			break;
+		case "3":
+			categoryName = "세계";
+			break;
+		case "4":
+			categoryName = "역사";
+			break;
+		case "5":
+			categoryName = "언어";
+			break;
+		case "6":
+			categoryName = "과학/자연";
+			break;
+		case "7":
+			categoryName = "스포츠";
+			break;
+		case "8":
+			categoryName = "기타";
+			break;
+		default:
+			categoryName = "미정";
+			break;
+		}
+
+		// tagName이 비어있다면 categoryName으로 설정
+		if (tagName == null || tagName.trim().isEmpty()) {
+			tagName = categoryName;
+		}
+
+		System.out.println("Title: " + quizTitle);
+		System.out.println("Explanation: " + quizExplanation);
+		System.out.println("Category Number: " + categoryNumber);
+		System.out.println("Tag: " + tagName);
+
+		CreateQuiz quiz = new CreateQuiz();
+		quiz.setQUIZ_TITLE(quizTitle);
+		quiz.setQUIZ_EXPLANATION(quizExplanation);
+		quiz.setCATEGORY_NUMBER(Integer.parseInt(categoryNumber));
+		quiz.setTAG_NAME(tagName);
+
+		int result;
+		try {
+			result = quizService.createQuiz(quiz);
+			if (result > 0) {
+				response.sendRedirect(request.getContextPath() + "/quiz.cr");
+			} else {
+				request.setAttribute("errorMsg", "퀴즈 생성에 실패했습니다.");
+				request.getRequestDispatcher("/main.me").forward(request, response);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "SQL 오류가 발생했습니다.");
+			request.getRequestDispatcher("/main.me").forward(request, response); // 오류 페이지로 리다이렉트
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "잘못된 카테고리 번호입니다.");
+			request.getRequestDispatcher("/main.me").forward(request, response); // 오류 페이지로 리다이렉트
+		}
 	}
 
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }
