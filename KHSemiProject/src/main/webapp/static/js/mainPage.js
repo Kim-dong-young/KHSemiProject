@@ -40,7 +40,7 @@ function selectRate(name, path) {
 
       for(let list of res) {
         let swiperSlide = "<div class='swiper-slide' onclick=location.href='" + path + "/click.sl?quiz_number=" + list.quiz_number + "&page=1' style='cursor: pointer'>" + 
-        "<div class='thumbnail'> <img src=" + path + "/" + list.thumbnail + "></div>" + 
+        "<div class='thumbnail'><img src=" + path + "/" + list.thumbnail + "></div>" + 
         "<div class='title'>" + list.quiz_number + ". " + list.quiz_title + "</div>" + 
         "</div>"
 

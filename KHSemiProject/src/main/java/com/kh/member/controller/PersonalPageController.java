@@ -33,6 +33,7 @@ public class PersonalPageController extends HttpServlet {
 		
 		request.setAttribute("pageName", "personalPage");
 		request.setAttribute("optional", memberNo);
+		
 		request.getRequestDispatcher("templates/personalPage.jsp").forward(request, response);
 	}
 

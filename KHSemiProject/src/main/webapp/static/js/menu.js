@@ -17,7 +17,7 @@ function init(pageName, optional){
             initSide()
             break;
         case "personalPage":
-            initLoad(optional) // memberNo 전달
+            initLoad(optional)
             break;
         case "mainPage":
             initSwiper()
