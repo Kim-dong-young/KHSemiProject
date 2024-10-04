@@ -29,21 +29,21 @@
             <div>이런 퀴즈는 어떤가요?~</div>
             <div class="recommend-button">
                 <ul>
-                    <li><button class="custom-btn" name="latest" value="latest" onclick="turn(this.name)" disabled>최신</button></li>
-                    <li><button class="custom-btn" name="inquiry" value="inquiry" onclick="turn(this.name)">조회</button></li>
-                    <li><button class="custom-btn" name="grade" value="grade" onclick="turn(this.name)">평점</button></li>
+                    <li><button class="custom-btn" name="latest" value="latest" onclick="turn(this.name, '<%=contextPath%>')" disabled>최신</button></li>
+                    <li><button class="custom-btn" name="inquiry" value="inquiry" onclick="turn(this.name, '<%=contextPath%>')">조회</button></li>
+                    <li><button class="custom-btn" name="grade" value="grade" onclick="turn(this.name, '<%=contextPath%>')">평점</button></li>
                 </ul>
             </div>
             <div class="my-swiper-box">
                 <div class="swiper">
                     <div class="swiper-wrapper">
                     <%if(list.isEmpty()) {%>
-                        조회된 정보가 없습니다.
+                        <div class="swiper-slide">조회된 정보가 없습니다.</div>
                     <%} else {%>
                     	<%for(Quiz q : list) {%>
-	                    	<div class="swiper-slide">
-	                            <div class="thumbnail"><%=q.getQuiz_number() %>썸네일입니다.</div>
-	                            <div class="title"><%=q.getQuiz_title() %></div>
+	                    	<div class="swiper-slide" onclick="location.href='<%=contextPath%>/click.sl?quiz_number=<%=q.getQuiz_number() %>&page=1'" style="cursor: pointer">
+	                            <div class="thumbnail"><img src="<%=contextPath%>/<%=q.getThumbnail() %>"></div>
+	                            <div class="title"><%=q.getQuiz_number()%>. <%=q.getQuiz_title() %></div>
 	                        </div>
                         <%} %>
                     <%} %>

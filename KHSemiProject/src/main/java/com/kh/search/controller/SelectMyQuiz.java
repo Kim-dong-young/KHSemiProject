@@ -2,6 +2,7 @@ package com.kh.search.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.kh.search.model.vo.Quiz;
@@ -36,8 +37,12 @@ public class SelectMyQuiz extends HttpServlet {
 		
 		ArrayList<Quiz> list = new SearchService().selectMyQuiz(memberNo);
 		
+		HashMap<String, Object> result = new HashMap<>();
+	    result.put("qList", list);
+	    result.put("contextPath", request.getContextPath());
+		
 		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(list, response.getWriter());
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	/**

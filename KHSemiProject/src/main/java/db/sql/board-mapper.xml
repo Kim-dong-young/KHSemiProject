@@ -127,7 +127,8 @@
 		    COMMUNITY_NUMBER,
 		    MEMBER_NUMBER,
 		    COMMUNITY_COMMENT_CONTENT,
-		    COMMUNITY_COMMENT_DATE
+		    COMMUNITY_COMMENT_DATE,
+		    COMMENT_GROUP
 		)
 		VALUES
 		(
@@ -135,7 +136,8 @@
 		    ?,
 		    ?,
 		    ?,
-		    SYSDATE
+		    SYSDATE,
+		    ?
 		)
 	</entry>
 	<entry key="deleteComment">
@@ -785,7 +787,10 @@
 		    COMMUNITY_NUMBER,
 		    MEMBER_NUMBER,
 		    COMMUNITY_COMMENT_CONTENT,
-		    COMMUNITY_COMMENT_DATE
+		    COMMUNITY_COMMENT_DATE,
+		    COMMENT_GROUP,
+		    COMMENT_DEPTH,
+		    COMMENT_ORDER
 		)
 		VALUES
 		(
@@ -794,7 +799,10 @@
 		    ?,
 		    ?,
 		    ?,
-		    SYSDATE
+		    SYSDATE,
+		    ?,
+		    ?,
+		    ?
 		)
 	</entry>
 	<entry key="selectReplyList">
@@ -819,7 +827,7 @@
 		           COMMENT_DEPTH,
 		           COMMENT_ORDER,
 		           COMMENT_CHILD_COUNT,
-		           ROW_NUMBER() OVER(ORDER BY COMMENT_ORDER, COMMUNITY_COMMENT_DATE) AS RNUM
+		           ROW_NUMBER() OVER(ORDER BY COMMENT_GROUP, COMMENT_ORDER) AS RNUM
 		    FROM COMMUNITY_COMMENT
 		    JOIN MEMBER USING (MEMBER_NUMBER)
 		    WHERE COMMUNITY_NUMBER = ?
@@ -844,17 +852,25 @@
 	<entry key="updateParentCount">
 		UPDATE COMMUNITY_COMMENT
 		   SET COMMENT_CHILD_COUNT = COMMENT_CHILD_COUNT + 1
-		 WHERE COMMUNITY_COMMENT_NUMBER 
-		 	IN
+         WHERE COMMUNITY_COMMENT_NUMBER != ?
+		   AND COMMUNITY_COMMENT_NUMBER IN
 		    ( 
 		      SELECT COMMUNITY_COMMENT_NUMBER
 		        FROM COMMUNITY_COMMENT
-		       WHERE COMMUNITY_COMMENT_NUMBER != ?
 		       -- 재귀적으로 부모 댓글 번호를 탐색한다.
 		       -- CONNECT BY PRIOR 부모컬럼 = 자식컬럼
 		  CONNECT BY PRIOR COMMUNITY_PARENT_NUMBER = COMMUNITY_COMMENT_NUMBER
 		       -- 탐색의 시작 조건
 		       -- START WITH 탐색 시작 위치
 		  START WITH COMMUNITY_COMMENT_NUMBER = ? )
+	</entry>
+	<entry key="selectMaxCommentGroupNo">
+		SELECT MAX(COMMENT_GROUP) AS MAX_GROUP_NO
+		  FROM COMMUNITY_COMMENT
+		 WHERE COMMUNITY_NUMBER = ?
+	</entry>
+	<entry key="selectCommentNo">
+		SELECT SEQ_COMMUNITY_COMMENT.CURRVAL AS SEQ_NO
+		  FROM DUAL
 	</entry>
 </properties>
