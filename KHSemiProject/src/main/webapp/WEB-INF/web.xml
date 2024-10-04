@@ -376,4 +376,14 @@
     <servlet-name>grade.sl</servlet-name>
     <url-pattern>/grade.sl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>insert.quiz</display-name>
+    <servlet-name>insert.quiz</servlet-name>
+    <servlet-class>com.kh.createQuiz.controller.InsertQuizMain</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insert.quiz</servlet-name>
+    <url-pattern>/insert.quiz</url-pattern>
+  </servlet-mapping>
 </web-app>
