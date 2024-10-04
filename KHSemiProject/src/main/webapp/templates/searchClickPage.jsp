@@ -69,93 +69,95 @@
                         <img id="image-playing" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
                     <% } %>
                     <div id="image-divs">
-                        <div id="image-divs-1"><%=rate%></div>
-                        <div id="image-divs-2"><%=viewCount%></div>
+                        <div id="image-divs-1"><img src="<%=contextPath%>/static/img/searchClickPage/rank.png" alt=""><%=rate%></div>
+                        <div id="image-divs-2"><img src="<%=contextPath%>/static/img/searchClickPage/viewcount.png" alt=""><%=viewCount%></div>
                     </div>
                 </div>
                 <div>
                     <c:choose>
                         <c:when test="${param.page eq '1'}">
-                            <button onclick="location.href='<%=contextPath%>/main.me'">뒤로가기</button>
+                            <button onclick="location.href='<%=contextPath%>/main.me'"><img src="<%=contextPath%>/static/img/searchClickPage/goback.png" alt=""></button>
                         </c:when>
                         <c:when test="${param.page eq '2'}">
-                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'">뒤로가기</button>
+                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'"><img src="<%=contextPath%>/static/img/searchClickPage/goback.png" alt=""></button>
                         </c:when>
                         <c:when test="${param.page eq '3'}">
-                            <button onclick="location.href='<%=contextPath%>/personal.me'">뒤로가기</button>
+                            <button onclick="location.href='<%=contextPath%>/personal.me'"><img src="<%=contextPath%>/static/img/searchClickPage/goback.png" alt=""></button>
                         </c:when>
                         <c:otherwise>
-                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'">뒤로가기</button>
+                            <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'"><img src="<%=contextPath%>/static/img/searchClickPage/goback.png" alt=""></button>
                         </c:otherwise>
                     </c:choose>
+                    <button id="playenter"><img src="<%=contextPath%>/static/img/searchClickPage/play.png" alt="">PLAY</button>
+                </div>
+            </div>
+            
+            <div id="content-text">
+                <div id="title">
+                    <div><%=q.getCategory_name()%></div>
+                    <div>제목<%=q.getQuiz_title()%></div>
+                </div>
+                <div id="explanation">
+                    <div>
+                        설명<%=q.getQuiz_explanation()%>
+                    </div>
+                    <div>
+                    <% for (int i = 0; i < tagList.size(); i++){ %>
+                        <button>#<%=tagList.get(i).getQuizTag()%></button>
+                    <% } %>
+                    </div>
+                </div>
+                <div>
+
 
                     
                     <c:choose>
                         <c:when test="${empty loginMember}">
                         </c:when>
                         <c:otherwise>
-                            <button onclick="clickMark(<%=q.getQuiz_number()%>, ${loginMember.memberNo})" id="Mark">북마크</button>
+                            <button onclick="clickMark(<%=q.getQuiz_number()%>, ${loginMember.memberNo})" id="Mark"><img src="<%=contextPath%>/static/img/searchClickPage/mark.png" alt=""> 북마크</button>
                         </c:otherwise>
                     </c:choose>
-                    <button id="share-button" onclick="share('<%=contextPath%>', <%=q.getQuiz_number()%>)">공유</button>
-                    <button>신고</button>
-                    <button>플레이</button>
-                </div>
-            </div>
-            <script>
-                function share(a, b){
-                    window.navigator.clipboard.writeText(window.location.origin + a + '/click.sl?quiz_number=' + b)
-                        .then(() => {
-                            document.getElementById("share-button").innerText = '링크복사 완료!'
-                        })
-                        .catch(err => {
-                            console.error('텍스트 복사에 실패했습니다: ', err);
-                        });
-                }
-                function clickMark(aaa, bbb){
-                    $.ajax({
-                        url: "mkQuiz.sl",
-                        contentType: "application/json",
-                        data: {
-                            quizNum:  aaa,
-                            member: bbb
-                        },
-                        success: function(res){
-                            const mk = document.getElementById("Mark");
-                            console.log(res)
-                            if(res == 1){
-                                mk.classList.add('marked');
-                            } else {
-                                mk.classList.remove('marked');
-                            }
-                            
-                            
-                        },
-                        error: function(){
-                            console.log("태그 조회용 ajax통신 실패")
-                        }
-                    })
-                }
-            </script>
-            <div>
-                <div>
-                    <div><%=q.getCategory_name()%></div>
-                    <p><%=q.getQuiz_title()%></p>
-                </div>
-                <div>
-                    <div>
-                        <%=q.getQuiz_explanation()%>
-                    </div>
-                    <br>
-                    <% for (int i = 0; i < tagList.size(); i++){ %>
-                        <button>#<%=tagList.get(i).getQuizTag()%></button>
-                    <% } %>
-                </div>
-                <div>
-                    
+                    <button id="share-button" onclick="share('<%=contextPath%>', <%=q.getQuiz_number()%>)"><img src="<%=contextPath%>/static/img/searchClickPage/share.png" alt=""> 공유</button>
+                    <button> <img src="<%=contextPath%>/static/img/searchClickPage/singo.png" alt=""> 신고</button>
                 </div>
             </div>
         </div>
+        <script>
+            function share(a, b){
+                window.navigator.clipboard.writeText(window.location.origin + a + '/click.sl?quiz_number=' + b)
+                    .then(() => {
+                        document.getElementById("share-button").innerText = '링크복사 완료!'
+                    })
+                    .catch(err => {
+                        console.error('텍스트 복사에 실패했습니다: ', err);
+                    });
+            }
+            function clickMark(aaa, bbb){
+                $.ajax({
+                    url: "mkQuiz.sl",
+                    contentType: "application/json",
+                    data: {
+                        quizNum:  aaa,
+                        member: bbb
+                    },
+                    success: function(res){
+                        const mk = document.getElementById("Mark");
+                        console.log(res)
+                        if(res == 1){
+                            mk.classList.add('marked');
+                        } else {
+                            mk.classList.remove('marked');
+                        }
+                        
+                        
+                    },
+                    error: function(){
+                        console.log("태그 조회용 ajax통신 실패")
+                    }
+                })
+            }
+        </script>
         <div>
             <p>유사한 퀴즈</p>
             <section class="video-flex" id="video-flex">
