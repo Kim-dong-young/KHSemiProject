@@ -1,18 +1,23 @@
 package com.kh.createQuiz.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.service.CreateQuizService;
+import com.kh.createQuiz.service.CreateQuizServiceImpl;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * CreateQuizMainController 
+ */
+
 public class CreateQuizMainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CreateQuizService quizService = new CreateQuizService();
+	private CreateQuizService quizService = new CreateQuizServiceImpl();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -24,8 +29,7 @@ public class CreateQuizMainController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 퀴즈 생성 페이지로 이동
-		request.getRequestDispatcher("/templates/CreateQuizMain.jsp").forward(request, response);
+		
 
 		String quizTitle = request.getParameter("title");
 		String quizExplanation = request.getParameter("explanation");
