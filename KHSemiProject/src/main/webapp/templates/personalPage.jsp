@@ -26,7 +26,7 @@
 			<div class="search-sub-opt">
 				<div class="recommend-button">
 					<ul>
-						<li><button class="custom-btn" name="latest" value="latest">최신</button></li>
+						<li><button class="custom-btn" name="latest" value="latest" disabled>최신</button></li>
 						<li><button class="custom-btn" name="inquiry" value="inquiry">조회</button></li>
 						<li><button class="custom-btn" name="grade" value="grade">평점</button></li>
 					</ul>

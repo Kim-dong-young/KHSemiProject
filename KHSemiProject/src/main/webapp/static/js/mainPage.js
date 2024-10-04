@@ -7,6 +7,7 @@ function initSwiper() {
       spaceBetween: 10,
       loop: true,
       allowTouchMove: false,
+      initialSlide: 0,
       // Navigation arrows
       navigation: {
         nextEl: '.swiper-button-next',
@@ -34,8 +35,6 @@ function selectRate(name, path) {
     url: name + ".sl",
     type: "post",
     success: function(res) {
-      console.log(res);
-      
       swiper.removeAllSlides();
 
       for(let list of res) {
@@ -46,11 +45,10 @@ function selectRate(name, path) {
 
         swiper.appendSlide(swiperSlide);
       }
-      
       swiper.update();
+
+      swiper.loopDestroy();
+      swiper.loopCreate();
     },
-    error: function() {
-      swiperbox.innerHTML += "<div> 조회된 내용이 없습니다.</div>"
-    }
   });
 }

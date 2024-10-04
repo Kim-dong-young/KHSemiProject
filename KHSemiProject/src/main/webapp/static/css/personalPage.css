@@ -58,8 +58,9 @@
 
 .search-sub-opt{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
+    padding: 0 235px;
 }
 
 .recommend-button > ul{
@@ -83,8 +84,12 @@
     color: black;
 }
 
+.sub-opt-rating {
+    margin-right: 35px;
+}
+
 .leftBox {
-    margin-top: 50px;
+    margin-top: 15px;
     display: flex;
     justify-content: center;
     width: 100%;
