@@ -1,6 +1,6 @@
 package com.kh.createQuiz.service;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -15,13 +15,17 @@ public class CreateQuizServiceImpl implements CreateQuizService {
     @Override
     public int createQuiz(CreateQuiz quiz) {
         Connection conn = getConnection();
-        try {
-            return quizDAO.insertQuizWithTag(conn, quiz);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return 0; // 예외 발생 시 0 반환
-        } finally {
-            close(conn);
+        
+        int result = quizDAO.insertQuiz(conn, quiz);
+        
+        if(result > 0) {
+        	commit(conn);
+        } else {
+        	rollback(conn);
         }
+        
+        close(conn);
+        
+        return result;
     }
 }

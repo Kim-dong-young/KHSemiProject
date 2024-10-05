@@ -1,27 +1,60 @@
 package com.kh.createQuiz.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import com.kh.createQuiz.model.vo.CreateQuiz;
 
 public class CreateQuizDAO {
-
-	public void insertQuiz(Connection conn, CreateQuiz quiz) {
-		String query = "INSERT INTO QUIZ (QUIZ_number, QUIZ_title, QUIZ_explanation, MEMBER_number, CATEGORY_number, THUMBNAIL) "
-				+ "VALUES (?, ?, ?, ?, ?, ?)";
-		try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setInt(1, quiz.getQUIZ_NUMBER()); // 이 부분의 값이 잘 설정되어 있는지 확인
-			pstmt.setString(2, quiz.getQUIZ_TITLE());
-			pstmt.setString(3, quiz.getQUIZ_EXPLANATION());
-			pstmt.setInt(4, quiz.getMEMBER_NUMBER());
-			pstmt.setInt(5, quiz.getCATEGORY_NUMBER());
-			pstmt.setString(6, quiz.getTHUMBNAIL());
-			pstmt.executeUpdate(); // 이 라인이 없으면 데이터베이스에 값이 저장되지 않음
-		} catch (SQLException e) {
+	private Properties prop = new Properties();
+	
+	public CreateQuizDAO() {
+		String filePath = CreateQuizDAO.class.getResource("/db/sql/Quiz-mapper.xml").getPath();
+		
+		try {
+			prop.loadFromXML(new FileInputStream(filePath));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int insertQuiz(Connection conn, CreateQuiz quiz) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertQuiz");
+		System.out.println(sql);
+		try {
+			
+			System.out.println(quiz.getQUIZ_TITLE());
+			System.out.println(quiz.getQUIZ_EXPLANATION());
+			System.out.println(quiz.getMEMBER_NUMBER());
+			System.out.println(quiz.getCATEGORY_NUMBER());
+			System.out.println(quiz.getTHUMBNAIL());
+			
+			pstmt = conn.prepareStatement(sql);
+			
+            pstmt.setString(1, quiz.getQUIZ_TITLE());
+            pstmt.setString(2, quiz.getQUIZ_EXPLANATION());
+            pstmt.setInt(3, quiz.getMEMBER_NUMBER());
+            pstmt.setInt(4, quiz.getCATEGORY_NUMBER());
+            pstmt.setString(5, quiz.getTHUMBNAIL());
+            
+            result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	// 태그 정보를 데이터베이스에 삽입

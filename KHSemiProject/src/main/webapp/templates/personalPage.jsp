@@ -12,17 +12,33 @@
 	<%@ include file="common/menu.jsp" %>
     <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
 		<div class="topBox">
-			<div class="sub-option">
-				<select name="opt">
-					<option value="1">내가 만든 문제</option>
-					<option value="2">북마크한 문제</option>
-					<option value="3">내가 풀었던 문제</option>
-				</select>
-			</div>
 			<div class="search">
+				<div class="sub-option">
+					<select name="opt">
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+						<option value="titleNContent">제목+내용</option>
+					</select>
+				</div>
 	            <input class="search-bar" type="search" placeholder="검색 키워드를 입력하세요...">
 				<button class="search-button"><img src="static/img/search-icon.png"></button>
 	        </div>
+			<div class="search-sub-opt">
+				<div class="recommend-button">
+					<ul>
+						<li><button class="custom-btn" name="latest" value="latest" disabled>최신</button></li>
+						<li><button class="custom-btn" name="inquiry" value="inquiry">가나다</button></li>
+						<!-- <li><button class="custom-btn" name="grade" value="grade"></button></li> -->
+					</ul>
+				</div>
+				<div class="sub-opt-rating">
+					<select name="opt">
+						<option value="create">내가 만든 문제</option>
+						<option value="bookmark">북마크한 문제</option>
+						<option value="solved">내가 풀었던 문제</option>
+					</select>
+				</div>
+			</div>
 		</div>
     	<div class="leftBox">
 	        <div class="interestList">

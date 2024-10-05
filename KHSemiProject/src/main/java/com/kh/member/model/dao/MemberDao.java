@@ -74,7 +74,6 @@ public class MemberDao {
 		
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertMember");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemberId());

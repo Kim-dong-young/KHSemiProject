@@ -1,9 +1,15 @@
 function initLoad(optional) {
+    let reBtn = document.querySelectorAll('.custom-btn')
+
+    listLoad(optional);
+}
+
+function listLoad(optional) {
     $.ajax({
-        url: "myquiz.sl",    // 서버로 보낼 URL
-        type: "post",        // POST 요청
+        url: "createlatest.sl",    
+        type: "post",        
         data: {
-            memberNo: optional    // 서버로 보낼 데이터
+            memberNo: optional
         },
         success: function(res) {
             console.log(res.qList);
@@ -18,7 +24,13 @@ function initLoad(optional) {
             }
         },
         error: function() {
-            alert("조회 실패");
+            const interestList = document.querySelector('.interestList');
+
+            interestList.innerHTML += "<div>조회실패</div>"
         }
     });
+}
+
+function search() {
+
 }

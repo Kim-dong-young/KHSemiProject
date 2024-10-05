@@ -16,13 +16,13 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SelectMyQuiz
  */
-public class SelectMyQuiz extends HttpServlet {
+public class AjaxCreateLatestQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectMyQuiz() {
+    public AjaxCreateLatestQuiz() {
         super();
         // TODO Auto-generated constructor stub
     }
