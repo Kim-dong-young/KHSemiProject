@@ -104,15 +104,12 @@ public class BoardViewController extends HttpServlet {
 				cLimit, cMaxPage, cStartPage, cEndPage);
 		
 		ArrayList<Comment> commentList = bService.selectCommentList(cPageInfo, boardNo);
-		ArrayList<Comment> replyList = bService.selectReplyList(cPageInfo, boardNo, commentList);
 		ArrayList<Category> category = bService.selectCategory();
 		
 		request.setAttribute("commentCount", cCount);
 		request.setAttribute("cPageInfo", cPageInfo);
 		request.setAttribute("commentList", commentList);
-		request.setAttribute("replyList", replyList);
 		request.setAttribute("category", category);
-		
 		request.setAttribute("pageName", "communityViewPage");
 		request.setAttribute("optional", tabNo);
 
