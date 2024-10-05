@@ -128,12 +128,21 @@ public class BoardService {
 		return isSuccess;
 	}
 
-	public int deleteMemberComment(int commentNo) {
+	public int deleteMemberComment(Comment comment) {
+		BoardDao bDao = new BoardDao();
 		Connection conn = getConnection();
-		int result = new BoardDao().deleteMemberComment(conn, commentNo);
+		int result = 0;
 		
-		if(result > 0) {
+		// 대댓글 삭제시, 나머지 댓글들의 순서는 바뀔수도 있고 바뀌지 않을수도 있다. (맨 끝 댓글 삭제시)
+		int result1 = bDao.updateCommentOrder(conn, comment);
+		int result2 = bDao.updateChildCount(conn, comment);
+		// 대댓글 삭제시, 그룹 내 최상위 댓글의 상태가 N일 경우에만 삭제한다 => 삭제가 안될수도 있다.
+		int result3 = bDao.deleteMemberComment(conn, comment);
+		int result4 = bDao.deleteParentComment(conn, comment);
+		
+		if(result1 >= 0 && result2 > 0 && result3 > 0 && result4 >= 0) {
 			commit(conn);
+			result = 1;
 		} else {
 			rollback(conn);
 		}
@@ -401,18 +410,20 @@ public class BoardService {
 		return isSuccess;
 	}
 
-	public ArrayList<Comment> selectReplyList(PageInfo cPageInfo, int boardNo, ArrayList<Comment> commentList) {
+	/*
+	public ArrayList<Comment> selectReplyList(PageInfo cPageInfo, int boardNo) {
 		Connection conn = getConnection();
 		
-		ArrayList<Comment> replyList = new BoardDao().selectReplyList(conn, cPageInfo, boardNo);
+		ArrayList<Comment> replyList = new BoardDao().selectCommentList(conn, cPageInfo, boardNo);
 		
 		close(conn);
 		return replyList;
 	}
-
-	public Comment selectComment(int commentNo) {
+	*/
+	
+	public Comment selectCommentDisplayInfo(int commentNo) {
 		Connection conn = getConnection();
-		Comment comment = new BoardDao().selectComment(conn, commentNo);
+		Comment comment = new BoardDao().selectCommentDisplayInfo(conn, commentNo);
 		
 		close(conn);
 		return comment;
@@ -424,6 +435,22 @@ public class BoardService {
 		
 		close(conn);
 		return result;
+	}
+
+	public int updateCommentStatus(Comment comment) {
+		Connection conn = getConnection();
+		int result = new BoardDao().updateCommentStatus(conn, comment);
+		
+		close(conn);
+		return result;
+	}
+
+	public Comment selectComment(int commentNo) {
+		Connection conn = getConnection();
+		Comment comment = new BoardDao().selectComment(conn, commentNo);
+		
+		close(conn);
+		return comment;
 	}
 
 

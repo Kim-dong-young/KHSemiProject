@@ -50,6 +50,23 @@ public class Comment {
 		this.commentDate = commentDate;
 	}
 
+	public Comment(int commentNo, int commentParentNo, int communityNo, int memberNo, String commentContent,
+			String commentDate, int commentGroup, int commentDepth, int commentOrder, int commentChildCount,
+			String commentStatus) {
+		super();
+		this.commentNo = commentNo;
+		this.commentParentNo = commentParentNo;
+		this.communityNo = communityNo;
+		this.memberNo = memberNo;
+		this.commentContent = commentContent;
+		this.commentDate = commentDate;
+		this.commentGroup = commentGroup;
+		this.commentDepth = commentDepth;
+		this.commentOrder = commentOrder;
+		this.commentChildCount = commentChildCount;
+		this.commentStatus = commentStatus;
+	}
+
 	public Comment(int commentNo, int commentParentNo, int communityNo, int memberNo, String memberName,
 			String commentContent, String commentDate, int commentGroup, int commentDepth, int commentOrder,
 			int commentChildCount, String commentStatus) {

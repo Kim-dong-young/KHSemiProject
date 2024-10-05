@@ -59,6 +59,8 @@
 		  FROM COMMUNITY_COMMENT
 		 WHERE COMMUNITY_NUMBER = ?
 	</entry>
+	<!--
+	옛날 selectCommentList 코드
 	<entry key="selectCommentList">
 		SELECT COMMUNITY_COMMENT_NUMBER ,
 			   COMMUNITY_PARENT_NUMBER ,
@@ -82,6 +84,7 @@
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	-->
 	<entry key="increaseViewCount">
 		UPDATE COMMUNITY
 		   SET COMMUNITY_VIEWCOUNT = COMMUNITY_VIEWCOUNT + 1
@@ -805,13 +808,13 @@
 		    ?
 		)
 	</entry>
-	<entry key="selectReplyList">
+	<entry key="selectCommentList">
 		SELECT COMMUNITY_COMMENT_NUMBER,
 		       COMMUNITY_PARENT_NUMBER,
 		       COMMUNITY_NUMBER,
 		       MEMBER_NICKNAME,
 		       MEMBER_NUMBER,
-		       COMMUNITY_COMMENT_CONTENT,
+			   COMMUNITY_COMMENT_CONTENT,
 		       COMMENT_GROUP,
 		       COMMENT_DEPTH,
 		       COMMENT_ORDER,
@@ -822,7 +825,10 @@
 		           COMMUNITY_NUMBER,
 		           MEMBER_NICKNAME,
 		           MEMBER_NUMBER,
-		           COMMUNITY_COMMENT_CONTENT,
+		           CASE
+                   		WHEN COMMENT_STATUS = 'N' THEN '삭제된 댓글입니다'
+                 		ELSE COMMUNITY_COMMENT_CONTENT
+		       	   END AS COMMUNITY_COMMENT_CONTENT,
 		           COMMENT_GROUP,
 		           COMMENT_DEPTH,
 		           COMMENT_ORDER,
@@ -834,7 +840,7 @@
 		)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	<entry key="selectComment">
+	<entry key="selectCommentDisplayInfo">
 		 SELECT COMMENT_GROUP ,
 				COMMENT_DEPTH ,
 				COMMENT_ORDER ,
@@ -872,5 +878,64 @@
 	<entry key="selectCommentNo">
 		SELECT SEQ_COMMUNITY_COMMENT.CURRVAL AS SEQ_NO
 		  FROM DUAL
+	</entry>
+	<entry key="selectComment">
+		 SELECT COMMUNITY_COMMENT_NUMBER ,
+				COMMUNITY_PARENT_NUMBER ,
+				COMMUNITY_NUMBER ,
+				MEMBER_NUMBER ,
+				COMMUNITY_COMMENT_CONTENT ,
+				COMMUNITY_COMMENT_DATE ,
+				COMMENT_GROUP ,
+				COMMENT_DEPTH ,
+				COMMENT_ORDER ,
+				COMMENT_CHILD_COUNT ,
+				COMMENT_STATUS 
+		   FROM COMMUNITY_COMMENT
+		  WHERE COMMUNITY_COMMENT_NUMBER = ?
+	</entry>
+	<entry key="selectCommentChildCount">
+		SELECT COMMENT_CHILD_COUNT
+		  FROM COMMUNITY_COMMENT
+		 WHERE COMMUNITY_COMMENT_NUMBER = ?
+	</entry>
+	<entry key="updateCommentStatus">
+		UPDATE COMMUNITY_COMMENT
+		   SET COMMENT_STATUS = 'N'
+		 WHERE COMMUNITY_COMMENT_NUMBER = ?
+	</entry>
+	<entry key="updateCommentOrder">
+		UPDATE COMMUNITY_COMMENT
+		   SET COMMENT_ORDER = COMMENT_ORDER - 1
+		 WHERE COMMENT_GROUP = ?
+		   AND COMMENT_ORDER &gt;= ?
+	</entry>
+	<entry key="updateChildCount">
+		UPDATE COMMUNITY_COMMENT
+		   SET COMMENT_CHILD_COUNT = COMMENT_CHILD_COUNT - 1
+         WHERE COMMUNITY_COMMENT_NUMBER IN
+		    ( 
+		      SELECT COMMUNITY_COMMENT_NUMBER
+		        FROM COMMUNITY_COMMENT
+		       -- 재귀적으로 부모 댓글 번호를 탐색한다.
+		       -- CONNECT BY PRIOR 부모컬럼 = 자식컬럼
+		  CONNECT BY PRIOR COMMUNITY_PARENT_NUMBER = COMMUNITY_COMMENT_NUMBER
+		       -- 탐색의 시작 조건
+		       -- START WITH 탐색 시작 위치
+		  START WITH COMMUNITY_COMMENT_NUMBER = ? )
+	</entry>
+	<entry key="deleteParentComment">
+		DELETE 
+		  FROM COMMUNITY_COMMENT
+		 WHERE COMMENT_GROUP = ?
+		   AND COMMUNITY_PARENT_NUMBER IS NULL -- PARENT가 NULL이면 최상위 댓글
+		   AND COMMENT_STATUS = 'N'
+		   AND NOT EXISTS (
+		        SELECT *
+		        FROM COMMUNITY_COMMENT
+		        WHERE COMMUNITY_NUMBER = ?
+		            AND COMMENT_GROUP = ?
+		            AND COMMENT_STATUS = 'Y'
+    		)
 	</entry>
 </properties>
