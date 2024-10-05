@@ -135,7 +135,7 @@ crossorigin="anonymous"></script>
 
                                         <% if( (cm.getMemberNo() == loginMember.getMemberNo()) ) { %>
                                             <button class="after-vline">신고</button>
-                                            <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>'">삭제</button>
+                                            <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cCurrentPage%>'">삭제</button>
                                         <% } else { %>
                                             <button>신고</button>
                                         <% } %>
