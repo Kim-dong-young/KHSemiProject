@@ -1,4 +1,10 @@
 function initLoad(optional) {
+    let reBtn = document.querySelectorAll('.custom-btn')
+
+    listLoad(optional);
+}
+
+function listLoad(optional) {
     $.ajax({
         url: "createlatest.sl",    
         type: "post",        

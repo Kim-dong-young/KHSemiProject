@@ -113,6 +113,31 @@
          		 GROUP BY QUIZ_NUMBER, QUIZ_TITLE, THUMBNAIL)
  		 WHERE RNO BETWEEN 1 AND 10
 	</entry>
+	
+	<entry key="insertQuiz">
+		INSERT INTO QUIZ
+        (
+            QUIZ_NUMBER,
+            QUIZ_TITLE,
+            QUIZ_DATE,
+            QUIZ_MODIFY_DATE,
+            QUIZ_EXPLANATION,
+            MEMBER_NUMBER,
+            CATEGORY_NUMBER,
+            THUMBNAIL
+        )
+        VALUES
+        (
+            SEQ_QUIZ.NEXTVAL,
+            ?,
+            SYSDATE,
+            SYSDATE,
+            ?,
+            ?,
+            ?,
+            ?
+        )
+	</entry>
 </properties>
 
 

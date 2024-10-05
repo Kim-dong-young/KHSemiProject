@@ -26,8 +26,8 @@
 			<div class="search-sub-opt">
 				<div class="recommend-button">
 					<ul>
-						<li><button class="custom-btn" name="latest" value="latest" disabled onclick="search()">최신</button></li>
-						<li><button class="custom-btn" name="inquiry" value="inquiry" onclick="search()">가나다</button></li>
+						<li><button class="custom-btn" name="latest" value="latest" disabled>최신</button></li>
+						<li><button class="custom-btn" name="inquiry" value="inquiry">가나다</button></li>
 						<!-- <li><button class="custom-btn" name="grade" value="grade"></button></li> -->
 					</ul>
 				</div>
