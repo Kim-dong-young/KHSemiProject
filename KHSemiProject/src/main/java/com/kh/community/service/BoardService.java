@@ -438,8 +438,18 @@ public class BoardService {
 	}
 
 	public int updateCommentStatus(Comment comment) {
+		BoardDao bDao = new BoardDao();
 		Connection conn = getConnection();
-		int result = new BoardDao().updateCommentStatus(conn, comment);
+		int result = 0;
+		int result1 = bDao.updateCommentStatus(conn, comment);
+		int result2 = bDao.deleteParentComment(conn, comment);
+		
+		if(result1 > 0 && result2 >= 0) {
+			commit(conn);
+			result = 1;
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		return result;

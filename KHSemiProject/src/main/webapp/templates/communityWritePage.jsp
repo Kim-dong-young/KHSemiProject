@@ -22,9 +22,9 @@
         <div class="wrapper">
             <div class="board">
 
-                <form method="post" action="<%=contextPath%>/insert.bo" onsubmit="return checkEmptyTab();">
+                <form method="post" action="<%=contextPath%>/insert.bo" onsubmit="return checkEmptyTab(this);">
                     <input type="hidden" name="userNo" value="<%=loginMember.getMemberNo()%>">
-                    <input type="hidden" name="tab">
+                    <input type="hidden" name="tab" value="">
 
                     <!-- SummerNote 공부 후 추?가 할듯 
                     <div style="display:none;">

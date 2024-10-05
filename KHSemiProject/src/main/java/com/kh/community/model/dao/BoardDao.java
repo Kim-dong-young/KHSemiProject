@@ -1587,7 +1587,12 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("MEMBER_NICKNAME"),
 							rset.getInt("MEMBER_NUMBER"),
-							rset.getString("COMMUNITY_COMMENT_CONTENT")
+							rset.getString("COMMUNITY_COMMENT_CONTENT"),
+							rset.getInt("COMMENT_GROUP"),
+							rset.getInt("COMMENT_DEPTH"),
+							rset.getInt("COMMENT_ORDER"),
+							rset.getInt("COMMENT_CHILD_COUNT"),
+							rset.getString("COMMENT_STATUS")
 						);
 				
 				replyList.add(comment);
