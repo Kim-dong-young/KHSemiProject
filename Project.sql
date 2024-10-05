@@ -19,7 +19,6 @@ DROP TABLE DAILY_CHECK CASCADE CONSTRAINTS;
 DROP TABLE QUIZ_COMMENT CASCADE CONSTRAINTS;
 DROP TABLE RP CASCADE CONSTRAINTS;
 DROP TABLE IMGS_file CASCADE CONSTRAINTS;
-DROP TABLE IMGS_link CASCADE CONSTRAINTS;
 
 DROP SEQUENCE SEQ_MNO;
 DROP SEQUENCE SEQ_DCNO;
@@ -235,10 +234,10 @@ CREATE TABLE RP(
 );
 
 CREATE TABLE IMGS_file (
-    IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- 이미지 ID
-    IMGS_link_path VARCHAR2(1500),              -- 이미지 파일 경로
-    IMGS_file_name VARCHAR2(255),     -- 이미지 파일 이름
-    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- 업로드 날짜
+    IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- ????? ID
+    IMGS_link_path VARCHAR2(1500),              -- ????? ???? ???
+    IMGS_file_name VARCHAR2(255),     -- ????? ???? ???
+    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- ???ε? ???
     FOREIGN KEY (IMGS_file_id) references PROBLEM(problem_number)
 );
 
@@ -262,7 +261,6 @@ CREATE SEQUENCE SEQ_COMMUNITY_COMMENT
 CREATE SEQUENCE SEQ_QUIZ
     INCREMENT BY 1
     START WITH 23;
-
 
 
 
