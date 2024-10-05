@@ -35,6 +35,12 @@ public class CreateQuizMainController extends HttpServlet {
         String quizExplanation = request.getParameter("explanation");
         String categoryNumber = request.getParameter("category");
         String tagName = request.getParameter("tag");
+        
+        // 입력된 값 콘솔에 출력
+        System.out.println("Quiz Title: " + quizTitle);
+        System.out.println("Quiz Explanation: " + quizExplanation);
+        System.out.println("Category Number: " + categoryNumber);
+        System.out.println("Tag Name: " + tagName);
 
         if (categoryNumber == null || categoryNumber.trim().isEmpty()) {
             categoryNumber = "0"; 
