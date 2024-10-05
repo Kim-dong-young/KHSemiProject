@@ -34,7 +34,8 @@ public class CreateQuizMainController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+    	String changeName = null;
+    	
     	//enctype이 multipart/form-data로 전송이 되었는지 체크
 		if(JakartaServletFileUpload.isMultipartContent(request)) {
 			System.out.println("성공");
@@ -56,7 +57,7 @@ public class CreateQuizMainController extends HttpServlet {
 			
 			//요청(request)으로부터 파일아이템 파싱
 			List<FileItem> formItems = upload.parseRequest(request);
-			
+
 			//추가할 데이터
 			CreateQuiz cQuiz = new CreateQuiz();
 			
@@ -86,7 +87,7 @@ public class CreateQuizMainController extends HttpServlet {
 						//고유한 파일명 생성
 						String tmpName = "quiz_" + System.currentTimeMillis();
 						String type = originName.substring(originName.lastIndexOf("."));
-						String changeName = tmpName + type; //서버에 저장할 파일명
+						changeName = tmpName + type; //서버에 저장할 파일명
 						
 						File f = new File(savePath, changeName);
 						item.write(f.toPath()); //지정한 경로에 파일 업로드
@@ -103,7 +104,7 @@ public class CreateQuizMainController extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/list.th");
 			} else { //실패 -> 업로드된 파일 삭제해주고 에러페이지
 				if(cQuiz != null) {
-					 new File("/" + cQuiz.getTHUMBNAIL()).delete();
+					 new File(savePath + changeName).delete();
 				 }
 				 request.setAttribute("alertMsg", "사진게시글 작성 실패");
 				 response.sendRedirect(request.getContextPath() + "/main.me");
