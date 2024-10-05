@@ -1,7 +1,6 @@
 package com.kh.createQuiz.model.vo;
 
 public class CreateQuiz {
-
 	private int QUIZ_NUMBER;
 	private String QUIZ_TITLE;
 	private String QUIZ_DATE;
