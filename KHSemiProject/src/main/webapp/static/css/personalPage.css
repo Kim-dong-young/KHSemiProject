@@ -5,6 +5,11 @@
     flex-direction: column; /* 세로로 쌓이게 하기 위해 */
 }
 
+select option {
+    text-align: center;
+    text-align-last: center;
+}
+
 .topBox {  
     margin-top: 100px;
     /* border: 1px solid black;   */
@@ -29,9 +34,8 @@
     border-radius: 50px 0 0 50px;
     border: 1px solid #FF9139;
     border-right: none;
-    padding-left: 10px;
+    padding: 0 5px;
     outline: none;
-    text-align: center;
 }
 
 .search-bar{

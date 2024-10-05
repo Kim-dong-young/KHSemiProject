@@ -10,11 +10,14 @@
 	</entry>
 
 	<entry key="selectMyQuiz">
-		SELECT QUIZ_NUMBER,
-			   QUIZ_TITLE,
-			   THUMBNAIL
-		  FROM QUIZ
-		 WHERE MEMBER_NUMBER = ?
+		SELECT *
+          FROM (SELECT ROWNUM AS RNO,
+                       QUIZ_NUMBER,
+                       QUIZ_TITLE,
+                       THUMBNAIL
+                  FROM QUIZ
+                 WHERE MEMBER_NUMBER = ?)
+         ORDER BY RNO DESC
 	</entry>
 
 	<entry key="detailQuiz">

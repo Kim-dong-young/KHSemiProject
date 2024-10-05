@@ -35,6 +35,8 @@ function selectRate(name, path) {
     url: name + ".sl",
     type: "post",
     success: function(res) {
+      console.log(res)
+
       swiper.removeAllSlides();
 
       for(let list of res) {
@@ -47,8 +49,10 @@ function selectRate(name, path) {
       }
       swiper.update();
 
-      swiper.loopDestroy();
-      swiper.loopCreate();
+      // swiper.loopDestroy();
+      // swiper.loopCreate();
+      
+      swiper.slideToLoop(0); 
     },
   });
 }

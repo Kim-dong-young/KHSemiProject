@@ -269,13 +269,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>myquiz.sl</display-name>
-    <servlet-name>myquiz.sl</servlet-name>
-    <servlet-class>com.kh.search.controller.SelectMyQuiz</servlet-class>
+    <display-name>createlatest.sl</display-name>
+    <servlet-name>createlatest.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxCreateLatestQuiz</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>myquiz.sl</servlet-name>
-    <url-pattern>/myquiz.sl</url-pattern>
+    <servlet-name>createlatest.sl</servlet-name>
+    <url-pattern>/createlatest.sl</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
