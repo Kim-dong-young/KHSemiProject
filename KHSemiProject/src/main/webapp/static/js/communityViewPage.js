@@ -44,3 +44,15 @@ function writeReply(cno){
         replyform.style.display = "none";
     }
 }
+
+function submitComment(_this){
+    const text =  _this.querySelector("textarea[name=commentContent]");
+    text.value = text.value.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+    if(text.value.trim() === ""){
+        alert("공백 댓글은 입력하실 수 없습니다.")
+        return false;
+    } else{
+        return true;
+    }
+}

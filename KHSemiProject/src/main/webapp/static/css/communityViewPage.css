@@ -177,12 +177,15 @@ span{
     border-top:none;
     border-bottom:none;
     padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .comment{
     display:flex;
     justify-content: flex-start;
-    width:100%;
+    flex-grow: 1; /* flex로 남은 공간 차지 */
     padding-bottom: 12px;
 }
 
@@ -201,11 +204,23 @@ span{
 }
 
 .comment-right{
-    width:calc(100%-60px);
+    flex-grow: 1; /* flex로 남은 공간 차지 */
+}
+
+.comment-right .comment-write{
+    flex-grow: 1; /* flex로 남은 공간 차지 */
+    border-top: 1px solid #989898;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .comment-content span{
     font-weight: 450;
+}
+
+.comment-content p{
+    font-weight: 450;
+    margin-bottom: 0;
 }
 
 .comment-option button{

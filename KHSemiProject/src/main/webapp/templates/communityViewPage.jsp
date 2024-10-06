@@ -12,7 +12,6 @@
 
     PageInfo cPageInfo = (PageInfo)request.getAttribute("cPageInfo");
     ArrayList<Comment> commentList = (ArrayList<Comment>)request.getAttribute("commentList");
-    ArrayList<Comment> replyList = (ArrayList<Comment>)request.getAttribute("replyList");
     int commentCount = (Integer)request.getAttribute("commentCount");
 
     PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -111,9 +110,8 @@ crossorigin="anonymous"></script>
                 </div>
 
                 <div class="bulletin-comment">
-                    <!--
                     <% for(Comment cm : commentList) { %>
-                        <div class="comment">
+                        <div class="comment" style="margin-left:<%=cm.getCommentDepth() * 50%>px">
                             <div class="comment-left">
                                 <img src="static/img/test.png">
                             </div>
@@ -123,21 +121,21 @@ crossorigin="anonymous"></script>
                                     <span><%=cm.getMemberName()%></span>
                                 </div>
                                 <div class="comment-content">
-                                    <span><%=cm.getCommentContent()%></span>
+                                    <p><%=cm.getCommentContent()%></p>
                                 </div>
                                 <div class="comment-option">
                                     <% if( loginMember != null ) { %>
                                         <button class="after-vline" onclick="writeReply(<%=cm.getCommentNo()%>)">답글</button>
-                                        <form name="reply-form-<%=cm.getCommentNo()%>" style="display:none;" method="post" action="<%=contextPath%>/reply.co?cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>&pno=<%=cm.getCommentNo()%>">
+                                        <form name="reply-form-<%=cm.getCommentNo()%>" style="display:none;" method="post" onsubmit="return submitComment(this);" action="<%=contextPath%>/reply.co?cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cCurrentPage%>&pno=<%=cm.getCommentNo()%>">
                                             <div class="comment-write">
-                                                <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다."></textarea>
+                                                <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다." wrap="hard"></textarea>
                                                 <button type="submit"><img src="static/img/comment-icon.png">작성</button>
                                             </div>
                                         </form>
 
                                         <% if( (cm.getMemberNo() == loginMember.getMemberNo()) ) { %>
                                             <button class="after-vline">신고</button>
-                                            <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>'">삭제</button>
+                                            <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cCurrentPage%>'">삭제</button>
                                         <% } else { %>
                                             <button>신고</button>
                                         <% } %>
@@ -149,46 +147,6 @@ crossorigin="anonymous"></script>
                             </div>
                         </div>
                     <% } %>
-                    -->
-
-                    <% for(Comment cm : replyList) { %>
-                        <div class="comment">
-                            <div class="comment-left">
-                                <img src="static/img/test.png">
-                            </div>
-    
-                            <div class="comment-right">
-                                <div class="user-info">
-                                    <span><%=cm.getMemberName()%></span>
-                                </div>
-                                <div class="comment-content">
-                                    <span><%=cm.getCommentContent()%></span>
-                                </div>
-                                <div class="comment-option">
-                                    <% if( loginMember != null ) { %>
-                                        <button class="after-vline" onclick="writeReply(<%=cm.getCommentNo()%>)">답글</button>
-                                        <form name="reply-form-<%=cm.getCommentNo()%>" style="display:none;" method="post" action="<%=contextPath%>/reply.co?cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>&pno=<%=cm.getCommentNo()%>">
-                                            <div class="comment-write">
-                                                <textarea name="commentContent" placeholder="댓글은 자신의 얼굴을 비추는 거울입니다."></textarea>
-                                                <button type="submit"><img src="static/img/comment-icon.png">작성</button>
-                                            </div>
-                                        </form>
-
-                                        <% if( (cm.getMemberNo() == loginMember.getMemberNo()) ) { %>
-                                            <button class="after-vline">신고</button>
-                                            <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cMaxPage%>'">삭제</button>
-                                        <% } else { %>
-                                            <button>신고</button>
-                                        <% } %>
-                                    <% } else { %>
-                                        <button class="after-vline" onclick="alert('로그인한 유저만 답글을 작성할 수 있습니다.')">답글</button>
-                                        <button onclick="alert('로그인한 유저만 신고할 수 있습니다.')">신고</button>
-                                    <% } %>
-                                </div>
-                            </div>
-                        </div>
-                    <% } %>
-
                 </div>
 
                 <div class="comment-page">

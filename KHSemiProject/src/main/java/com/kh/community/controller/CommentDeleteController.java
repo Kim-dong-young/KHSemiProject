@@ -2,6 +2,7 @@ package com.kh.community.controller;
 
 import java.io.IOException;
 
+import com.kh.community.model.vo.Comment;
 import com.kh.community.service.BoardService;
 
 import jakarta.servlet.ServletException;
@@ -27,12 +28,20 @@ public class CommentDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BoardService bService = new BoardService();
 		String communityNo = request.getParameter("no");
 		String cpage = request.getParameter("cpage");
 		String cmtPage = request.getParameter("comment");
 		
 		int commentNo = Integer.parseInt(request.getParameter("cno"));
-		int result = new BoardService().deleteMemberComment(commentNo);
+		Comment comment = bService.selectComment(commentNo);
+		
+		int result = 0;
+		if(comment.getCommentChildCount() > 0) {
+			result = bService.updateCommentStatus(comment);
+		} else {
+			result = bService.deleteMemberComment(comment);
+		}
 		
 		response.sendRedirect("board?cpage="+ cpage +"&no="+ communityNo +"&comment=" + cmtPage);
 	}

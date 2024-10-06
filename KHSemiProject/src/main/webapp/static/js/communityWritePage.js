@@ -14,9 +14,9 @@ function selectTab(_this){
     }
 }
 
-function checkEmptyTab(){
-    const text =  document.querySelector("textarea[name=content]");
-    text.replace(/\r\n/g, '<br/>'); /* 엔터입력 처리 */
+function checkEmptyTab(_this){
+    const text =  _this.querySelector("textarea[name=content]");
+    text.value = text.value.replace(/(?:\r\n|\r|\n)/g, '<br>'); /* 엔터입력 처리 */
 
     const tabInput = document.querySelector("input[name=tab]");
 

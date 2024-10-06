@@ -162,6 +162,8 @@ public class BoardDao {
 		return result;
 	}
 
+	/*
+	// 이전 댓글 검색 코드
 	public ArrayList<Comment> selectCommentList(Connection conn, PageInfo cPageInfo, int boardNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -202,6 +204,7 @@ public class BoardDao {
 		
 		return commentList;
 	}
+	*/
 
 	public int increaseViewCount(Connection conn, int communityNo) {
 		int result = 0;
@@ -396,7 +399,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public int deleteMemberComment(Connection conn, int commentNo) {
+	public int deleteMemberComment(Connection conn, Comment comment) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -405,7 +408,7 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, commentNo);
+			pstmt.setInt(1, comment.getCommentNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -1559,12 +1562,12 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Comment> selectReplyList(Connection conn, PageInfo cPageInfo, int boardNo) {
+	public ArrayList<Comment> selectCommentList(Connection conn, PageInfo cPageInfo, int boardNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		ArrayList<Comment> replyList = new ArrayList<>();
 		
-		String sql = prop.getProperty("selectReplyList");
+		String sql = prop.getProperty("selectCommentList");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -1584,7 +1587,12 @@ public class BoardDao {
 							rset.getInt("COMMUNITY_NUMBER"),
 							rset.getString("MEMBER_NICKNAME"),
 							rset.getInt("MEMBER_NUMBER"),
-							rset.getString("COMMUNITY_COMMENT_CONTENT")
+							rset.getString("COMMUNITY_COMMENT_CONTENT"),
+							rset.getInt("COMMENT_GROUP"),
+							rset.getInt("COMMENT_DEPTH"),
+							rset.getInt("COMMENT_ORDER"),
+							rset.getInt("COMMENT_CHILD_COUNT"),
+							rset.getString("COMMENT_STATUS")
 						);
 				
 				replyList.add(comment);
@@ -1599,12 +1607,12 @@ public class BoardDao {
 		return replyList;
 	}
 
-	public Comment selectComment(Connection conn, int commentNo) {
+	public Comment selectCommentDisplayInfo(Connection conn, int commentNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		Comment comment = null;
 		
-		String sql = prop.getProperty("selectComment");
+		String sql = prop.getProperty("selectCommentDisplayInfo");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -1696,6 +1704,7 @@ public class BoardDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		
@@ -1717,6 +1726,159 @@ public class BoardDao {
 			if(rset.next()) {
 				result = rset.getInt("SEQ_NO");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Comment selectComment(Connection conn, int commentNo) {
+		Comment comment = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, commentNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				comment = new Comment(
+							rset.getInt("COMMUNITY_COMMENT_NUMBER"),
+							rset.getInt("COMMUNITY_PARENT_NUMBER"),
+							rset.getInt("COMMUNITY_NUMBER"),
+							rset.getInt("MEMBER_NUMBER"),
+							rset.getString("COMMUNITY_COMMENT_CONTENT"),
+							rset.getString("COMMUNITY_COMMENT_DATE"),
+							rset.getInt("COMMENT_GROUP"),
+							rset.getInt("COMMENT_DEPTH"),
+							rset.getInt("COMMENT_ORDER"),
+							rset.getInt("COMMENT_CHILD_COUNT"),
+							rset.getString("COMMENT_STATUS")
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return comment;
+	}
+
+	public int selectCommentChildCount(Connection conn, int commentNo) {
+		int result = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectCommentChildCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, commentNo);
+
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("COMMENT_CHILD_COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateCommentStatus(Connection conn, Comment comment) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCommentStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, comment.getCommentNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateCommentOrder(Connection conn, Comment comment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCommentOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentGroup());
+			pstmt.setInt(2, comment.getCommentOrder());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateChildCount(Connection conn, Comment comment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateChildCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteParentComment(Connection conn, Comment comment) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteParentComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, comment.getCommentGroup());
+			pstmt.setInt(2, comment.getCommunityNo());
+			pstmt.setInt(3, comment.getCommentGroup());
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

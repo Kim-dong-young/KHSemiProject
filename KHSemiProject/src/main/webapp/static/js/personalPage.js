@@ -1,12 +1,17 @@
 function initLoad(optional) {
-    let reBtn = document.querySelectorAll('.custom-btn')
-
-    listLoad(optional);
+    let showOpt = document.querySelector('select[name="showOpt"').value
+    listLoad(optional, showOpt);
 }
 
-function listLoad(optional) {
+function changeVal() {
+    
+
+    listLoad(optional, showOpt)
+}
+
+function listLoad(optional, showOpt) {
     $.ajax({
-        url: "createlatest.sl",    
+        url: showOpt + "latest.sl",    
         type: "post",        
         data: {
             memberNo: optional
