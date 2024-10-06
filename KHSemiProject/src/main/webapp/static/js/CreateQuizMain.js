@@ -13,3 +13,4 @@ document.getElementById('thumbnail').addEventListener('change', function(event) 
     }
 });
 
+
