@@ -37,15 +37,7 @@ public class SearchService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
-	
-	public ArrayList<Quiz> selectMyQuiz(int memberNo) {
-		Connection conn = getConnection();
-		ArrayList<Quiz> list = new QuizDao().selectMyQuiz(conn, memberNo);
 		
-		JDBCTemplate.close(conn);
-		return list;
-	}
-	
 	public Quiz detailQuiz(int quiz_number) {
 		Connection conn = getConnection();
 		Quiz q = new QuizDao().detailQuiz(conn, quiz_number);
@@ -140,6 +132,22 @@ public class SearchService {
 		Connection conn = getConnection();
 		ArrayList<Quiz> list = new QuizDao().selectGradeQuiz(conn);
 	
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+	public ArrayList<Quiz> selectCreateQuiz(int memberNo, String btnValue) {
+		Connection conn = getConnection();
+		ArrayList<Quiz> list = new QuizDao().selectCreateQuiz(conn, memberNo, btnValue);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+	public ArrayList<Quiz> selectbookmarkQuiz(int memberNo, String btnValue) {
+		Connection conn = getConnection();
+		ArrayList<Quiz> list = new QuizDao().selectbookmarkQuiz(conn, memberNo, btnValue);
+		
 		JDBCTemplate.close(conn);
 		return list;
 	}
