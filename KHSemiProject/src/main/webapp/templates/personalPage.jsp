@@ -26,13 +26,12 @@
 			<div class="search-sub-opt">
 				<div class="recommend-button">
 					<ul>
-						<li><button class="custom-btn" name="latest" value="latest" disabled>최신</button></li>
-						<li><button class="custom-btn" name="inquiry" value="inquiry">가나다</button></li>
-						<!-- <li><button class="custom-btn" name="grade" value="grade"></button></li> -->
+						<li><button class="custom-btn" name="latest" value="latest" disabled onclick="ChangebtnVal(<%=loginMember.getMemberNo()%>, this.name)">최신</button></li>
+						<li><button class="custom-btn" name="inquiry" value="inquiry" onclick="ChangebtnVal(<%=loginMember.getMemberNo()%>, this.name)">가나다</button></li>
 					</ul>
 				</div>
 				<div class="sub-opt-rating">
-					<select name="showOpt" onchange="changeVal()">
+					<select name="showOpt" onchange="ChangeSelVal(<%=loginMember.getMemberNo()%>)">
 						<option value="create" selected>내가 만든 문제</option>
 						<option value="bookmark">북마크한 문제</option>
 						<option value="solved">내가 풀었던 문제</option>

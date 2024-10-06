@@ -9,7 +9,7 @@
         ORDER BY COUNT DESC
 	</entry>
 
-	<entry key="selectMyQuiz">
+	<entry key="latestCreateRate">
 		SELECT *
           FROM (SELECT ROWNUM AS RNO,
                        QUIZ_NUMBER,
@@ -137,6 +137,37 @@
             ?,
             ?
         )
+	</entry>
+	
+	<entry key="inquiryCreateRate">
+		SELECT QUIZ_NUMBER,
+       	   	   QUIZ_TITLE,
+               THUMBNAIL
+  		  FROM QUIZ
+ 		 WHERE MEMBER_NUMBER = ?
+ 		 ORDER BY QUIZ_TITLE
+	</entry>
+	
+	<entry key="latestBookMarkRate">
+		SELECT *
+          FROM (SELECT ROWNUM AS RNO,
+                       q.QUIZ_NUMBER,
+                       QUIZ_TITLE,
+                       THUMBNAIL
+                  FROM BOOKMARK b
+                  JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+                  WHERE b.MEMBER_NUMBER = ?)
+         ORDER BY RNO DESC
+	</entry>
+	
+	<entry key="inquiryBookMarkRate">
+		SELECT q.QUIZ_NUMBER,
+       		   QUIZ_TITLE,
+       		   THUMBNAIL
+  		  FROM BOOKMARK b
+  		  JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+ 		 WHERE b.MEMBER_NUMBER = ?
+ 		 ORDER BY QUIZ_TITLE
 	</entry>
 </properties>
 
