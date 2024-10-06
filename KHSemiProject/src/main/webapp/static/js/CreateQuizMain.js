@@ -13,7 +13,6 @@ document.getElementById('thumbnail').addEventListener('change', function(event) 
     }
 });
 
-<<<<<<< HEAD
 // 카테고리 선택 시 태그 입력 처리
 const categorySelect = document.getElementById('category');
 const tagInput = document.getElementById('tag');
@@ -46,6 +45,3 @@ window.addEventListener('load', function() {
         tagInput.disabled = true;
     }
 });
-=======
-
->>>>>>> 34fc244c587f6a00306b34f3ac83286458c168c8
