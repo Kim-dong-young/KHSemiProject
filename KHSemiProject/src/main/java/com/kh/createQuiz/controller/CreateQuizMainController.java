@@ -9,7 +9,6 @@ import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 
-import com.kh.community.service.BoardService;
 import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.service.CreateQuizService;
 import com.kh.createQuiz.service.CreateQuizServiceImpl;
@@ -99,10 +98,10 @@ public class CreateQuizMainController extends HttpServlet {
 			
 			int result = quizService.createQuiz(cQuiz);
 			
-			if(result > 0) { //성공 -> 게시글 목록(jsp/list.bo?cage=1)
+			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "사진게시글 작성 성공");
-				response.sendRedirect(request.getContextPath() + "/list.th");
-			} else { //실패 -> 업로드된 파일 삭제해주고 에러페이지
+				response.sendRedirect(request.getContextPath() + "/quiz.cr");
+			} else { 
 				if(cQuiz != null) {
 					 new File(savePath + changeName).delete();
 				 }
