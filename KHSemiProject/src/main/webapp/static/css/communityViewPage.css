@@ -221,6 +221,7 @@ span{
 .comment-content p{
     font-weight: 450;
     margin-bottom: 0;
+    white-space: pre-wrap; /* 댓글 줄바꿈 적용 */
 }
 
 .comment-option button{

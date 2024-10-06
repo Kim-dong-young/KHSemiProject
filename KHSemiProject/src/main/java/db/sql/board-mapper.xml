@@ -940,4 +940,23 @@
 		            AND COMMENT_STATUS = 'Y'
     		)
 	</entry>
+	<entry key="insertAttachmentList">
+		INSERT
+		INTO COMMUNITY_IMG(
+						 FILE_NO,
+						 COMMUNITY_NUMBER,
+						 ORIGIN_NAME,
+						 CHANGE_NAME,
+						 FILE_PATH,
+						 FILE_LEVEL
+						)
+				 VALUES(
+				 		 SEQ_COMMUNITY_IMG.NEXTVAL,
+				 		 SEQ_COMMUNITY.CURRVAL,
+				 		 ?,
+				 		 ?,
+				 		 ?,
+				 		 ?
+				 		)
+	</entry>
 </properties>

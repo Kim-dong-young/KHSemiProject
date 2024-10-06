@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.PageInfo;
+import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
 import com.kh.community.model.vo.Category;
 import com.kh.community.model.vo.Comment;
@@ -298,7 +299,7 @@ public class BoardDao {
 			
 			pstmt.setString(1, b.getCommunityTitle());
 			pstmt.setString(2, b.getCommunityContent());
-			pstmt.setInt(3, Integer.parseInt(b.getMemberId()));
+			pstmt.setInt(3, b.getMemberNo());
 			pstmt.setInt(4, Integer.parseInt(b.getCommunityTab()));
 			
 			result = pstmt.executeUpdate();
@@ -1879,6 +1880,33 @@ public class BoardDao {
 			pstmt.setInt(3, comment.getCommentGroup());
 			
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertAttachmentList(Connection conn, ArrayList<Attachment> list) {
+		int result = 1; // insert = 처리된 행 수 반환
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertAttachmentList");
+		
+		try {
+			for(Attachment at : list) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, at.getOriginName());
+				pstmt.setString(2, at.getChangeName());
+				pstmt.setString(3, at.getFilePath());
+				pstmt.setInt(4, at.getFileLevel());
+				
+				result = pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
