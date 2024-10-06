@@ -16,13 +16,13 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SelectMyQuiz
  */
-public class AjaxCreateLatestQuiz extends HttpServlet {
+public class AjaxSelectMyQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private SearchService searchService = new SearchService();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxCreateLatestQuiz() {
+    public AjaxSelectMyQuiz() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +34,21 @@ public class AjaxCreateLatestQuiz extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		String selectValue = request.getParameter("selName");
+		String btnValue = request.getParameter("btnName");
 		
-		ArrayList<Quiz> list = new SearchService().selectMyQuiz(memberNo);
+		ArrayList<Quiz> list = null;
+		
+		switch(selectValue) {
+		case "create":
+			list = searchService.selectCreateQuiz(memberNo, btnValue);
+			break;
+		case "bookmark":
+			list = searchService.selectbookmarkQuiz(memberNo, btnValue);
+			break;
+		case "solved":
+//			list = searchService.selectsolvedQuiz(memberNo, btnValue);
+		}
 		
 		HashMap<String, Object> result = new HashMap<>();
 	    result.put("qList", list);
