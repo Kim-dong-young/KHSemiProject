@@ -32,8 +32,8 @@
 					</ul>
 				</div>
 				<div class="sub-opt-rating">
-					<select name="opt">
-						<option value="create">내가 만든 문제</option>
+					<select name="showOpt" onchange="changeVal()">
+						<option value="create" selected>내가 만든 문제</option>
 						<option value="bookmark">북마크한 문제</option>
 						<option value="solved">내가 풀었던 문제</option>
 					</select>
