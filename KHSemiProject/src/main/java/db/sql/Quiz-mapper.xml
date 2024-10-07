@@ -168,6 +168,7 @@
  		 WHERE b.MEMBER_NUMBER = ?
  		 ORDER BY QUIZ_TITLE
 	</entry>
+<<<<<<< HEAD
 	<entry key="searchLatestCreateTitle">
 		SELECT *
   		  FROM (SELECT ROWNUM AS RNO,
@@ -288,6 +289,26 @@
           JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
          WHERE b.MEMBER_NUMBER = ? AND (QUIZ_TITLE LIKE ? OR QUIZ_EXPLANATION LIKE ?)
          ORDER BY QUIZ_TITLE
+=======
+	
+	<entry key="insertProblems">
+	INSERT INTO PROBLEM(
+		PROBLEM_number;
+		PROBLEM_content;
+		PROBLEM_media_kind;
+		PROBLEM_media;
+		PROBLEM_hint;
+		QUIZ_number;
+	)
+	VALUES(
+		SEQ_PNO.NEXTVAL,
+		?,
+		?,
+		?,
+		?,
+		SEQ_PNO.CURRVAL
+	)
+>>>>>>> 9a6c370e40cdcffaba36f79bdf12a388f3db4e89
 	</entry>
 </properties>
 

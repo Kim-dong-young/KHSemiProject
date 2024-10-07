@@ -12,6 +12,27 @@ function initView(tno){
     const tab = tno !== null ? document.querySelector("#t"+tno) : document.querySelector("#t") ;
 
     tab.style.backgroundColor = "#FF9139"
+    
+    const categoryList = document.querySelectorAll(".tab");
+    for(let category of categoryList){
+        switch(category.getAttribute("data-tab-no")) {
+            case "1":
+                category.style.color = "#FF4040";
+                break;
+            case "2":
+                category.style.color = "#55C62C";
+                break;
+            case "3":
+                category.style.color = "#407BFF";
+                break;
+            case "4":
+                category.style.color = "#FF4DED";
+                break;
+            default :
+                category.style.color = "black";
+                break;
+        }
+    }
 }
 
 function increaseLike(boardNo){
@@ -55,4 +76,67 @@ function submitComment(_this){
     } else{
         return true;
     }
+}
+
+function changeSubmitBtnBoard(bno, mno){ // 피신고자 커뮤니티 번호, 멤버번호 
+    const reportSubmitBtn = document.getElementById('report-submit-button');
+    reportSubmitBtn.setAttribute('onclick','reportBoard('+ bno +',' + mno + ')');
+}
+
+function changeSubmitBtnComment(cno, mno){ // 피신고자 댓글 번호, 멤버번호
+    const reportSubmitBtn = document.getElementById('report-submit-button');
+    reportSubmitBtn.setAttribute('onclick','reportComment('+ cno +',' + mno + ')');
+}
+
+function reportBoard(bno, mno){ // 피신고자 커뮤니티 번호, 멤버번호 
+    const checkedButton = document.querySelector('#reportForm input[type="radio"][name="reportNumber"]:checked');
+    const reportReason = document.querySelector("#reportForm textarea[name=reportReason]");
+
+    $.ajax({
+        url : "report.bo",
+        type: "post",
+        data : {
+            communityNo : bno,
+            reportedMemberNo : mno,
+            reportNumber : checkedButton.value,
+            reportReason : reportReason.value
+        },
+        success : function(res) {
+            if(res > 0) {
+                alert("성공적으로 신고되었습니다.");
+            } else {
+                alert("이미 신고한 글입니다.");
+            }
+        },
+        error : function() {
+            console.log("신고 AJAX 실패");
+        }
+    })
+}
+
+function reportComment(cno, mno){
+    const checkedButton = document.querySelector('#reportForm input[type="radio"][name="reportNumber"]:checked');
+    const reportReason = document.querySelector("#reportForm textarea[name=reportReason]");
+
+
+    $.ajax({
+        url : "report.co",
+        type: "post",
+        data : {
+            commentNo : cno,
+            reportedMemberNo : mno,
+            reportNumber : checkedButton.value,
+            reportReason : reportReason.value
+        },
+        success : function(res) {
+            if(res > 0) {
+                alert("성공적으로 신고되었습니다.");
+            } else {
+                alert("이미 신고한 글입니다.");
+            }
+        },
+        error : function() {
+            console.log("신고 AJAX 실패");
+        }
+    })
 }

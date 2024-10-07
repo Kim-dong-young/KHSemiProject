@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
+import com.kh.common.ReportInfo;
 import com.kh.community.model.dao.BoardDao;
 import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
@@ -471,6 +472,45 @@ public class BoardService {
 		
 		close(conn);
 		return attachList;
+	}
+
+	public ArrayList<Attachment> selectThumbnailList(ArrayList<Board> boardList) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> attachList = new BoardDao().selectThumbnailList(conn, boardList);
+		
+		close(conn);
+		return attachList;
+	}
+
+	public int insertReportBoard() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int insertReportBoard(ReportInfo reportInfo) {
+		Connection conn = getConnection();
+		int result = 0;
+		int selectResult = new BoardDao().selectReportBoard(conn, reportInfo);
+		
+		if(selectResult < 1) { // 조회 결과가 없을 경우에만 신고 테이블에 삽입 ( 중복신고 방지 )
+			result = new BoardDao().insertReportBoard(conn, reportInfo);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public int insertReportComment(ReportInfo reportInfo) {
+		Connection conn = getConnection();
+		int result = 0;
+		int selectResult = new BoardDao().selectReportComment(conn, reportInfo);
+		
+		if(selectResult < 1) { // 조회 결과가 없을 경우에만 신고 테이블에 삽입 ( 중복신고 방지 )
+			result = new BoardDao().insertReportComment(conn, reportInfo);
+		}
+		
+		close(conn);
+		return result;
 	}
 
 

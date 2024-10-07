@@ -102,7 +102,7 @@
                         <option value="1" <c:if test="${param.search_type == 1}">selected</c:if>>제목</option>
                         <option value="2" <c:if test="${param.search_type == 2}">selected</c:if>>제작자</option>
                     </select>
-                    <input type="text" id="search-text" value="${param.search_text}" onkeypress="if(window.event.keyCode==13){searchComfirm()}">
+                    <input type="search" id="search-text" value="${param.search_text}" onkeypress="if(window.event.keyCode==13){searchComfirm()}">
 
                     <input type="image" src="<%=contextPath%>/static/img/icon.png" id="search-submit" onclick="searchComfirm()">
                 </div>
@@ -167,31 +167,15 @@
                     </div>
                 </div>
                 <br>
+                <div id="tag-clear-confirm">
+                    <button onclick="tag_clear()">🧹</button>
+                    <button onclick="pageChange(<%=currentPage%>)">☑️</button>
+                </div>
                 <div id="tag-selected-div">
-
+                    
                 </div>
                 <div id="tag-popup-tags">
-                    <button>
-                        asdf
-                    </button>
-                    <button>
-                        asdf
-                    </button>
-                    <button>
-                        asdf
-                    </button>
-                    <button>
-                        asdf
-                    </button>
-                    <button>
-                        asdf
-                    </button>
-                    <button>
-                        asdf
-                    </button>
-                    <button>
-                        asdf
-                    </button>
+
                 </div>
             </div>
             <script>
@@ -270,13 +254,25 @@
                 }
                 function updateTagSelect(){
                     const divvv = document.getElementById("tag-selected-div");
-                    let tagList = document.getElementsByClassName("tag-clicked");
+                    let tagList = document.querySelectorAll('.tag-clicked');
+                    console.log(tagList)
                     let String = "";
                     for (let tag of tagList){
                         String += "<button onclick='lol(this)' value='" + tag.value + "' class='tag-clicked'>" + tag.innerText + "</button>";
                     }
                     divvv.innerHTML = String;
                     tagSearchAjax();
+                }
+                function tag_clear(){
+                    let tagLiist = document.querySelectorAll('.tag-clicked');
+                    console.log(tagLiist)
+                    for(let sst of tagLiist){
+                        if(sst.classList.contains('tag-clicked')){
+                            sst.classList.remove('tag-clicked');
+                            
+                        }
+                    }
+                    updateTagSelect();
                 }
             </script>
             <br>
@@ -290,7 +286,7 @@
                             <div class="video-priview" onclick="clickQuiz(<%=q.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
                                     <%if(q.getThumbnail() == null){ %>
-                                        <img class="thumbnail" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                        <img class="thumbnail" src="<%=contextPath%>/static/img/default.png" alt="">
                                     <% } else { %>
                                         <img class="thumbnail" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
                                     <% } %>
