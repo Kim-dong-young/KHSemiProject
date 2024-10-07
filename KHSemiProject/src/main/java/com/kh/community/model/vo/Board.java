@@ -12,6 +12,7 @@ public class Board {
 	private int memberNo;
 	private int commentCount;
 	private int likeCount;
+	private String memberImage;
 	
 	public Board() {
 		super();
@@ -54,7 +55,7 @@ public class Board {
 
 	// 게시글 정보 불러오는 생성자
 	public Board(int communityNo,String communityTitle, String communityContent, int communityViewcount,
-			String communityDate, String memberId, int memberNo, String communityTab, int communityTabNo, int likeCount) {
+			String communityDate, String memberId, int memberNo, String communityTab, int communityTabNo, int likeCount, String memberImage) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
@@ -66,6 +67,7 @@ public class Board {
 		this.communityTab = communityTab;
 		this.communityTabNo = communityTabNo;
 		this.likeCount = likeCount;
+		this.memberImage = memberImage;
 	}
 
 	// 전체 생성자
@@ -174,13 +176,21 @@ public class Board {
 		this.likeCount = likeCount;
 	}
 
+	public String getMemberImage() {
+		return memberImage;
+	}
+
+	public void setMemberImage(String memberImage) {
+		this.memberImage = memberImage;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [communityNo=" + communityNo + ", communityTitle=" + communityTitle + ", communityContent="
 				+ communityContent + ", communityTab=" + communityTab + ", communityTabNo=" + communityTabNo
 				+ ", communityViewcount=" + communityViewcount + ", communityDate=" + communityDate + ", memberId="
 				+ memberId + ", memberNo=" + memberNo + ", commentCount=" + commentCount + ", likeCount=" + likeCount
-				+ "]";
+				+ ", memberImage=" + memberImage + "]";
 	}
 
 }

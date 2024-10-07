@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.createQuiz.model.vo.CreateQuiz;
+import com.kh.createQuiz.model.vo.Problem;
 
 public class CreateQuizDAO {
 	private Properties prop = new Properties();
@@ -79,6 +80,29 @@ public class CreateQuizDAO {
 			throw e; 
 		} finally {
 			conn.setAutoCommit(true); 
+		}
+		return 0;
+	}
+
+	public int insertProblems(Connection conn, Problem p) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProblems");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, p.getPROBLEM_number());
+			pstmt.setString(2,p.getPROBLEM_conment());
+			pstmt.setInt(3, p.getPROBLEM_media_kind());
+			pstmt.setString(4, p.getPROBLEM_media());
+			pstmt.setString(5, p.getPROBLEM_hint());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return 0;
 	}
