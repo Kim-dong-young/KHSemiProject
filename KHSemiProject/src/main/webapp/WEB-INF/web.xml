@@ -396,4 +396,13 @@
     <servlet-name>report.bo</servlet-name>
     <url-pattern>/report.bo</url-pattern>
   </servlet-mapping>
+  <servlet>
+      <display-name>problems.co</display-name>
+    <servlet-name>problems.co</servlet-name>
+    <servlet-class>com.kh.createQuiz.controller.problemsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>problems.co</servlet-name>
+    <url-pattern>/problems.co</url-pattern>
+  </servlet-mapping>
 </web-app>
