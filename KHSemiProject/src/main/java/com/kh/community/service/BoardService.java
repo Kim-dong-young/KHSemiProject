@@ -481,6 +481,11 @@ public class BoardService {
 		return attachList;
 	}
 
+	public int insertReportBoard() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 	
 	
