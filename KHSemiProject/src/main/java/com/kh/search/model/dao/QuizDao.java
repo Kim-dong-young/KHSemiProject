@@ -130,7 +130,7 @@ public class QuizDao {
 	    // ORDER BY에 따른 SELECT 절 및 JOIN 절 변경
 	    if (orderby == 1) {
 	        // 조회수 순 정렬
-	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL NVL(COUNT(QL.QUIZ_LOG_NUMBER), 0) AS VIEW_COUNT ";
+	        sql += "        SELECT Q.QUIZ_NUMBER, Q.QUIZ_TITLE, Q.THUMBNAIL, NVL(COUNT(QL.QUIZ_LOG_NUMBER), 0) AS VIEW_COUNT ";
 	        sql += "        FROM QUIZ Q ";
 	        sql += "        LEFT JOIN QUIZ_LOG QL ON Q.QUIZ_NUMBER = QL.QUIZ_NUMBER ";
 	    } else if (orderby == 2) {
