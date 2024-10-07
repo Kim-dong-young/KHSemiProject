@@ -79,7 +79,7 @@ crossorigin="anonymous"></script>
 
                     <div class="bulletin-info">
                         <div class="author-info">
-                            <img src="static/img/test.png">
+                            <img src="<%=contextPath%>/<%=currentBoard.getMemberImage()%>">
                             <span><%=currentBoard.getMemberId()%></span>
                         </div>
 
@@ -105,10 +105,11 @@ crossorigin="anonymous"></script>
                     <div class="bulletin-option">
                         <% if( loginMember != null ) { %>
                             <button class="like-button" onclick="increaseLike(<%=currentBoard.getCommunityNo()%>)"><img src="static/img/thumbup-icon.png">좋아요</button>
+                            <button class="report-button" onclick="changeSubmitBtnBoard(<%=currentBoard.getCommunityNo()%>,<%=currentBoard.getMemberNo()%>)" type="button" data-bs-toggle="modal" data-bs-target="#report-board-modal"><img src="static/img/flag-icon.png">신고</button>
                         <% } else { %>
                             <button class="like-button" onclick='alert("로그인한 유저만 좋아요를 누를 수 있습니다.")'><img src="static/img/thumbup-icon.png">좋아요</button>
+                            <button class="report-button" onclick='alert("로그인한 유저만 신고할 수 있습니다.")'><img src="static/img/flag-icon.png">신고</button>
                         <% } %>
-                        <button class="report-button" type="button" data-bs-toggle="modal" data-bs-target="#report-board-modal"><img src="static/img/flag-icon.png">신고</button>
                     </div>
                 </div>
 
@@ -116,7 +117,7 @@ crossorigin="anonymous"></script>
                     <% for(Comment cm : commentList) { %>
                         <div class="comment" style="margin-left:<%=cm.getCommentDepth() * 50%>px">
                             <div class="comment-left">
-                                <img src="static/img/test.png">
+                                <img src="<%=contextPath%>/<%=cm.getMemberImage()%>">
                             </div>
     
                             <div class="comment-right">
@@ -137,17 +138,14 @@ crossorigin="anonymous"></script>
                                         </form>
 
                                         <% if( (cm.getMemberNo() == loginMember.getMemberNo()) ) { %>
-                                            <button class="after-vline">신고</button>
+                                            <button class="after-vline" onclick="changeSubmitBtnComment(<%=cm.getCommentNo()%>,<%=cm.getMemberNo()%>)" data-bs-toggle="modal" data-bs-target="#report-board-modal">신고</button>
                                             <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cCurrentPage%>'">삭제</button>
                                         <% } else { %>
-                                            <button type="button">신고</button>
+                                            <button type="button" onclick="changeSubmitBtnComment(<%=cm.getCommentNo()%>,<%=cm.getMemberNo()%>)" data-bs-toggle="modal" data-bs-target="#report-board-modal">신고</button>
                                         <% } %>
                                     <% } else { %>
                                         <button class="after-vline" onclick="alert('로그인한 유저만 답글을 작성할 수 있습니다.')">답글</button>
-                                        <button type="button">신고</button>
-                                        <!--
                                         <button onclick="alert('로그인한 유저만 신고할 수 있습니다.')">신고</button>
-                                         -->
                                     <% } %>
                                 </div>
                             </div>
@@ -237,7 +235,7 @@ crossorigin="anonymous"></script>
                                 <% if( tno == null ) { %>
                                     <% for(Board b : boardList) { %>
                                         <tr>
-                                            <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                            <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                             <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                                             <td class="author"><%=b.getMemberId()%></td>
                                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
@@ -249,7 +247,7 @@ crossorigin="anonymous"></script>
 
                                     <% for(Board b : boardList) { %>
                                         <tr>
-                                            <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                            <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                             <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
                                             <td class="author"><%=b.getMemberId()%></td>
                                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
@@ -375,6 +373,7 @@ crossorigin="anonymous"></script>
       
             <!-- Modal Header -->
             <div class="modal-header">
+              <img src="<%=contextPath%>/static/img/flag-icon.png">
               <h4 class="modal-title">신고하기</h4>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
@@ -382,52 +381,62 @@ crossorigin="anonymous"></script>
             <!-- Modal body -->
             <form id="reportForm">
                 <div class="modal-body">
-                    <label>
-                        <input type="radio" name="reportNumber" value="1" checked>
-                        홍보/도배 글입니다.
-                    </label><br>
-                
-                    <label>
-                        <input type="radio" name="reportNumber" value="2">
-                        음란물을 포함하고 있습니다.
-                    </label><br>
-                
-                    <label>
-                        <input type="radio" name="reportNumber" value="3">
-                        불법적인 내용입니다.
-                    </label><br>
-                
-                    <label>
-                        <input type="radio" name="reportNumber" value="4">
-                        욕설이 포함되어있습니다.
-                    </label><br>
-                
-                    <label>
-                        <input type="radio" name="reportNumber" value="5">
-                        혐오발언이 포함되어있습니다.
-                    </label><br>
-                
-                    <label>
-                        <input type="radio" name="reportNumber" value="6">
-                        사칭 글입니다.
-                    </label><br>
-                
-                    <label>
-                        <input type="radio" name="reportNumber" value="7">
-                        괴롭힘 및 따돌림이 포함되었습니다.
-                    </label><br>
-                
-                    <label>
-                        <input type="radio" name="reportNumber" value="8">
-                        기타
-                    </label><br>
+                    <div class="report-choose-area">
+                        <label>
+                            <input type="radio" name="reportNumber" value="1" checked>
+                            <span class="custom-check"></span>
+                            홍보/도배 글입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="2">
+                            <span class="custom-check"></span>
+                            음란물을 포함하고 있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="3">
+                            <span class="custom-check"></span>
+                            불법적인 내용입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="4">
+                            <span class="custom-check"></span>
+                            욕설이 포함되어있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="5">
+                            <span class="custom-check"></span>
+                            혐오발언이 포함되어있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="6">
+                            <span class="custom-check"></span>
+                            사칭 글입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="7">
+                            <span class="custom-check"></span>
+                            괴롭힘 및 따돌림이 포함되었습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="8">
+                            <span class="custom-check"></span>
+                            기타
+                        </label><br>
+                    </div>
 
                     <textarea name="reportReason" wrap="hard" placeholder="자세한 사유를 설명해주세요."></textarea>
                 </div>
         
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                <button type="button" onclick="report(<%=currentBoard.getCommunityNo()%>,<%=currentBoard.getMemberNo()%>);" class="btn btn-danger">제출하기</button>
+                <button type="button" id="report-submit-button" onclick="reportBoard(<%=currentBoard.getCommunityNo()%>,<%=currentBoard.getMemberNo()%>);" class="btn btn-danger">제출하기</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </form> 

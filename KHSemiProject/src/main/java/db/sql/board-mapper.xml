@@ -38,6 +38,7 @@
                C.MEMBER_NUMBER,
 		       CT.TAB_NAME,
 		       C.TAB_NUMBER,
+		       M.MEMBER_IMAGE,
 		       COUNT(CL.MEMBER_NUMBER) AS LIKE_COUNT
 		  FROM COMMUNITY C
 		  JOIN MEMBER M ON(C.MEMBER_NUMBER = M.MEMBER_NUMBER)
@@ -52,7 +53,8 @@
 		       M.MEMBER_NICKNAME,
                C.MEMBER_NUMBER,
 		       CT.TAB_NAME,
-		       C.TAB_NUMBER
+		       C.TAB_NUMBER,
+		       M.MEMBER_IMAGE
 	</entry>
 	<entry key="countBoardComment">
 		SELECT COUNT(*) AS COMMENT_COUNT
@@ -819,7 +821,8 @@
 		       COMMENT_DEPTH,
 		       COMMENT_ORDER,
 		       COMMENT_CHILD_COUNT,
-		       COMMENT_STATUS
+		       COMMENT_STATUS,
+		       MEMBER_IMAGE
 		FROM (
 		    SELECT COMMUNITY_COMMENT_NUMBER,
 		           COMMUNITY_PARENT_NUMBER,
@@ -835,6 +838,7 @@
 		           COMMENT_ORDER,
 		           COMMENT_CHILD_COUNT,
 		           COMMENT_STATUS,
+		           MEMBER_IMAGE,
 		           ROW_NUMBER() OVER(ORDER BY COMMENT_GROUP, COMMENT_ORDER) AS RNUM
 		    FROM COMMUNITY_COMMENT
 		    JOIN MEMBER USING (MEMBER_NUMBER)
@@ -980,5 +984,55 @@
 		 WHERE COMMUNITY_NUMBER = ?
 		   AND FILE_LEVEL = 2
 	  ORDER BY COMMUNITY_NUMBER DESC
+	</entry>
+	<entry key="insertReportBoard">
+		INSERT INTO RP(
+		    RP_NUMBER,
+		    RP_ENCOUNTER_NUMBER,
+		    RP_REASON,
+		    MEMBER_NUMBER,
+		    REPORTED_MEMBER_NUMBER,
+		    COMMUNITY_NUMBER
+		)
+		VALUES(
+		    SEQ_REPORT.NEXTVAL,
+		    ?,
+		    ?,
+		    ?,
+		    ?,
+		    ?
+		)
+	</entry>
+	<entry key="selectReportBoard">
+		SELECT COUNT(*) AS COUNT
+		  FROM RP
+		 WHERE MEMBER_NUMBER = ?
+		   AND REPORTED_MEMBER_NUMBER = ?
+		   AND COMMUNITY_NUMBER = ?
+	</entry>
+	<entry key="selectReportComment">
+		SELECT COUNT(*) AS COUNT
+		  FROM RP
+		 WHERE MEMBER_NUMBER = ?
+		   AND REPORTED_MEMBER_NUMBER = ?
+		   AND COMMUNITY_COMMENT_NUMBER = ?
+	</entry>
+	<entry key="insertReportComment">
+		INSERT INTO RP(
+		    RP_NUMBER,
+		    RP_ENCOUNTER_NUMBER,
+		    RP_REASON,
+		    MEMBER_NUMBER,
+		    REPORTED_MEMBER_NUMBER,
+		    COMMUNITY_COMMENT_NUMBER
+		)
+		VALUES(
+		    SEQ_REPORT.NEXTVAL,
+		    ?,
+		    ?,
+		    ?,
+		    ?,
+		    ?
+		)
 	</entry>
 </properties>

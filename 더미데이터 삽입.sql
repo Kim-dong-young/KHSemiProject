@@ -12,22 +12,22 @@ VALUES (4, '풀이');
 
 
 INSERT INTO MEMBER  
-VALUES (1, 'admin', 'admin', '관리자', 0, NULL, to_date('09/21/2024', 'MM/DD/RRRR'), 4, 'Y', '관리자 계정', NULL, NULL, NULL);
+VALUES (1, 'admin', 'admin', '관리자', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 4, 'Y', '관리자 계정', NULL, NULL, NULL);
 
 INSERT INTO MEMBER
-VALUES (2, 'user01', 'pass01', 'test01', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 3, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
+VALUES (2, 'user01', 'pass01', 'test01', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 3, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
 INSERT INTO MEMBER
-VALUES (3, 'user02', 'pass02', 'test02', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
+VALUES (3, 'user02', 'pass02', 'test02', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
 INSERT INTO MEMBER
-VALUES (4, 'user03', 'pass03', 'test03', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
+VALUES (4, 'user03', 'pass03', 'test03', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
 INSERT INTO MEMBER
-VALUES (5, 'user04', 'pass04', 'test04', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
+VALUES (5, 'user04', 'pass04', 'test04', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
 INSERT INTO MEMBER
-VALUES (6, 'user05', 'pass05', 'test05', 0, '/static/img/userProfile/test.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
+VALUES (6, 'user05', 'pass05', 'test05', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'Y', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
 insert into DAILY_CHECK values(1, sysdate-4, 1);
 insert into DAILY_CHECK values(2, sysdate-4, 2);

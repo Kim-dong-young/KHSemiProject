@@ -13,6 +13,7 @@ public class Comment {
 	private int commentOrder;
 	private int commentChildCount;
 	private String commentStatus;
+	private String memberImage;
 	
 	public Comment() {
 		super();
@@ -50,9 +51,10 @@ public class Comment {
 		this.commentDate = commentDate;
 	}
 
+	/* 댓글 리스트 불러올때 생성자 */
 	public Comment(int commentNo, int commentParentNo, int communityNo, String memberName, int memberNo,
 			String commentContent, int commentGroup, int commentDepth, int commentOrder, int commentChildCount,
-			String commentStatus) {
+			String commentStatus, String memberImage) {
 		super();
 		this.commentNo = commentNo;
 		this.commentParentNo = commentParentNo;
@@ -65,6 +67,7 @@ public class Comment {
 		this.commentOrder = commentOrder;
 		this.commentChildCount = commentChildCount;
 		this.commentStatus = commentStatus;
+		this.memberImage = memberImage;
 	}
 
 	public Comment(int commentNo, int commentParentNo, int communityNo, int memberNo, String commentContent,
@@ -86,7 +89,7 @@ public class Comment {
 
 	public Comment(int commentNo, int commentParentNo, int communityNo, int memberNo, String memberName,
 			String commentContent, String commentDate, int commentGroup, int commentDepth, int commentOrder,
-			int commentChildCount, String commentStatus) {
+			int commentChildCount, String commentStatus, String memberImage) {
 		super();
 		this.commentNo = commentNo;
 		this.commentParentNo = commentParentNo;
@@ -100,6 +103,7 @@ public class Comment {
 		this.commentOrder = commentOrder;
 		this.commentChildCount = commentChildCount;
 		this.commentStatus = commentStatus;
+		this.memberImage = memberImage;
 	}
 
 	public int getCommentNo() {
@@ -198,14 +202,21 @@ public class Comment {
 		this.commentStatus = commentStatus;
 	}
 
+	public String getMemberImage() {
+		return memberImage;
+	}
+
+	public void setMemberImage(String memberImage) {
+		this.memberImage = memberImage;
+	}
+
 	@Override
 	public String toString() {
 		return "Comment [commentNo=" + commentNo + ", commentParentNo=" + commentParentNo + ", communityNo="
 				+ communityNo + ", memberNo=" + memberNo + ", memberName=" + memberName + ", commentContent="
 				+ commentContent + ", commentDate=" + commentDate + ", commentGroup=" + commentGroup + ", commentDepth="
 				+ commentDepth + ", commentOrder=" + commentOrder + ", commentChildCount=" + commentChildCount
-				+ ", commentStatus=" + commentStatus + "]";
+				+ ", commentStatus=" + commentStatus + ", memberImage=" + memberImage + "]";
 	}
-	
 	
 }

@@ -28,6 +28,7 @@ DROP SEQUENCE SEQ_COMMUNITY_COMMENT;
 DROP SEQUENCE SEQ_QUIZ;
 DROP SEQUENCE SEQ_COMMUNITY_IMG;
 DROP SEQUENCE SEQ_BNO;
+DROP SEQUENCE SEQ_REPORT;
 
 CREATE TABLE MEMBER(
     MEMBER_number number not null,
@@ -35,7 +36,7 @@ CREATE TABLE MEMBER(
     MEMBER_pwd varchar2(50) not null,
     MEMBER_nickname varchar2(50) not null,
     MEMBER_exp number DEFAULT 0 not null,
-    MEMBER_image varchar2(50),
+    MEMBER_image varchar2(300) DEFAULT 'static/img/userProfile/guest-icon.png',
     MEMBER_join_date Date default SYSDATE not null,
     MEMBER_check_continueCount NUMBER DEFAULT 0 NOT NULL,
     MEMBER_status VARCHAR2(1) DEFAULT 'Y' NOT NULL,
@@ -242,7 +243,7 @@ CREATE TABLE IMGS_file (
     IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- ????? ID
     IMGS_link_path VARCHAR2(1500),              -- ????? ???? ???
     IMGS_file_name VARCHAR2(255),     -- ????? ???? ???
-    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- ???¥å? ???
+    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- ???Â¥Ã¥? ???
     FOREIGN KEY (IMGS_file_id) references PROBLEM(problem_number)
 );
 
@@ -282,11 +283,12 @@ CREATE SEQUENCE SEQ_QUIZ
 
 CREATE SEQUENCE SEQ_BNO;
 
+
 CREATE SEQUENCE SEQ_PNO
     INCREMENT BY 1
     START WITH 1;
 
-
+CREATE SEQUENCE SEQ_REPORT;
 
 
 
