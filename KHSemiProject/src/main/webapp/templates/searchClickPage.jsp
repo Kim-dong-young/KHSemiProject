@@ -64,7 +64,7 @@
             <div id="image-div">
                 <div class="image-container">
                     <%if(q.getThumbnail() == null){ %>
-                        <img id="image-playing" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                        <img id="image-playing" src="<%=contextPath%>/static/img/default.png" alt="">
                     <% } else { %>
                         <img id="image-playing" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
                     <% } %>
