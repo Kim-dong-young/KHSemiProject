@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.createQuiz.model.vo.CreateQuiz;
+import com.kh.createQuiz.model.vo.Problem;
 
 public class CreateQuizDAO {
 	private Properties prop = new Properties();
@@ -63,22 +64,45 @@ public class CreateQuizDAO {
 		try (PreparedStatement pstmt = conn.prepareStatement(query)) {
 			pstmt.setString(1, quiz.getTAG_NAME());
 			pstmt.setInt(2, quiz.getQUIZ_NUMBER());
-			return pstmt.executeUpdate(); // 영향을 받은 행 수 반환
+			return pstmt.executeUpdate(); 
 		}
 	}
 
 	// 퀴즈와 태그 정보를 함께 삽입
 	public int insertQuizWithTag(Connection conn, CreateQuiz quiz) throws SQLException {
 		try {
-			conn.setAutoCommit(false); // 자동 커밋 해제
-			insertQuiz(conn, quiz); // 퀴즈 삽입
-			insertQuizTag(conn, quiz); // 태그 삽입
-			conn.commit(); // 커밋
+			conn.setAutoCommit(false); 
+			insertQuiz(conn, quiz); 
+			insertQuizTag(conn, quiz);
+			conn.commit(); 
 		} catch (SQLException e) {
-			conn.rollback(); // 롤백
-			throw e; // 예외 재던짐
+			conn.rollback(); 
+			throw e; 
 		} finally {
-			conn.setAutoCommit(true); // 자동 커밋 복구
+			conn.setAutoCommit(true); 
+		}
+		return 0;
+	}
+
+	public int insertProblems(Connection conn, Problem p) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProblems");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, p.getPROBLEM_number());
+			pstmt.setString(2,p.getPROBLEM_conment());
+			pstmt.setInt(3, p.getPROBLEM_media_kind());
+			pstmt.setString(4, p.getPROBLEM_media());
+			pstmt.setString(5, p.getPROBLEM_hint());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		return 0;
 	}

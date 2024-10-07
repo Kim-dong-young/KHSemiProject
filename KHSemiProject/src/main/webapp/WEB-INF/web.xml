@@ -425,4 +425,14 @@
     <servlet-name>AjaxPlayQuizAnswerCheckController</servlet-name>
     <url-pattern>/qzAnswer.pl</url-pattern>
   </servlet-mapping>
+<servlet>
+    <description></description>
+    <display-name>report.co</display-name>
+    <servlet-name>report.co</servlet-name>
+    <servlet-class>com.kh.community.controller.CommentReportController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>report.co</servlet-name>
+    <url-pattern>/report.co</url-pattern>
+  </servlet-mapping>
 </web-app>

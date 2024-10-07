@@ -168,6 +168,25 @@
  		 WHERE b.MEMBER_NUMBER = ?
  		 ORDER BY QUIZ_TITLE
 	</entry>
+	
+	<entry key="insertProblems">
+	INSERT INTO PROBLEM(
+		PROBLEM_number;
+		PROBLEM_content;
+		PROBLEM_media_kind;
+		PROBLEM_media;
+		PROBLEM_hint;
+		QUIZ_number;
+	)
+	VALUES(
+		SEQ_PNO.NEXTVAL,
+		?,
+		?,
+		?,
+		?,
+		SEQ_PNO.CURRVAL
+	)
+	</entry>
 </properties>
 
 

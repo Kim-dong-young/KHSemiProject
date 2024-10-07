@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.PageInfo;
+import com.kh.common.ReportInfo;
 import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
 import com.kh.community.model.vo.Category;
@@ -123,7 +124,8 @@ public class BoardDao {
 							rset.getInt("MEMBER_NUMBER"),
 							rset.getString("TAB_NAME"),
 							rset.getInt("TAB_NUMBER"),
-							rset.getInt("LIKE_COUNT")
+							rset.getInt("LIKE_COUNT"),
+							rset.getString("MEMBER_IMAGE")
 						);
 			}
 		} catch (SQLException e) {
@@ -1593,7 +1595,8 @@ public class BoardDao {
 							rset.getInt("COMMENT_DEPTH"),
 							rset.getInt("COMMENT_ORDER"),
 							rset.getInt("COMMENT_CHILD_COUNT"),
-							rset.getString("COMMENT_STATUS")
+							rset.getString("COMMENT_STATUS"),
+							rset.getString("MEMBER_IMAGE")
 						);
 				
 				replyList.add(comment);
@@ -1988,6 +1991,118 @@ public class BoardDao {
 		}
 		
 		return attachList;
+	}
+
+	public int insertReportBoard(Connection conn, ReportInfo reportInfo) {
+		int result = 0; // insert = 처리된 행 수 반환
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertReportBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reportInfo.getReportEncNo());
+			pstmt.setString(2, reportInfo.getReportReason());
+			pstmt.setInt(3, reportInfo.getMemberNo());
+			pstmt.setInt(4, reportInfo.getReportedMemberNo());
+			pstmt.setInt(5, reportInfo.getCommunityNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectReportBoard(Connection conn, ReportInfo reportInfo) {
+		int result = 1; // insert = 처리된 행 수 반환
+		
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectReportBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reportInfo.getMemberNo());
+			pstmt.setInt(2, reportInfo.getReportedMemberNo());
+			pstmt.setInt(3, reportInfo.getCommunityNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectReportComment(Connection conn, ReportInfo reportInfo) {
+		int result = 1; // insert = 처리된 행 수 반환
+		
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectReportComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reportInfo.getMemberNo());
+			pstmt.setInt(2, reportInfo.getReportedMemberNo());
+			pstmt.setInt(3, reportInfo.getCommunityCommentNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertReportComment(Connection conn, ReportInfo reportInfo) {
+		int result = 0; // insert = 처리된 행 수 반환
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertReportComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reportInfo.getReportEncNo());
+			pstmt.setString(2, reportInfo.getReportReason());
+			pstmt.setInt(3, reportInfo.getMemberNo());
+			pstmt.setInt(4, reportInfo.getReportedMemberNo());
+			pstmt.setInt(5, reportInfo.getCommunityCommentNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	
