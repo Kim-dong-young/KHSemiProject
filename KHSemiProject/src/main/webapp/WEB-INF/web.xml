@@ -415,4 +415,14 @@
     <servlet-name>PlayQuizMainController</servlet-name>
     <url-pattern>/main.pl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxPlayQuizAnswerCheckController</display-name>
+    <servlet-name>AjaxPlayQuizAnswerCheckController</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.AjaxPlayQuizAnswerCheckController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxPlayQuizAnswerCheckController</servlet-name>
+    <url-pattern>/qzAnswer.pl</url-pattern>
+  </servlet-mapping>
 </web-app>
