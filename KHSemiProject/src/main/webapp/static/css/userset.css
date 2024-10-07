@@ -113,9 +113,9 @@ fieldset {
 }
 
 .profile-image {
-    margin-top: 30px;
-    width: 200px;
-    height: 200px;
+    margin-top: 20px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%; /* 원형으로 만들기 */
     border: 3px solid #FFB246; /* 테두리 추가 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
