@@ -27,6 +27,23 @@ public class ReportInfo {
 		super();
 	}
 	
+	/**
+	 * @apiNote 필요한 공통정보 생성자 ( 신고유형, 신고사유, 신고자 멤버번호, 피신고자 멤버번호 )
+	 *          퀴즈번호나 게시글 번호등은 따로 Setter로 설정해주세요.
+	 * @param reportEncNo 신고유형
+	 * @param reportReason 신고사유
+	 * @param memberNo 신고자 멤버번호
+	 * @param reportedMemberNo 피신고자 멤버번호
+	 */
+	public ReportInfo(int reportEncNo, String reportReason, int memberNo, int reportedMemberNo) {
+		super();
+		this.reportEncNo = reportEncNo;
+		this.reportReason = reportReason;
+		this.memberNo = memberNo;
+		this.reportedMemberNo = reportedMemberNo;
+	}
+
+
 	public ReportInfo(int reportNo, int reportEncNo, String reportReason, String reportDate, int memberNo,
 			int reportedMemberNo, int quizNo, int quizCommentNo, int communityNo, int communityCommentNo) {
 		super();

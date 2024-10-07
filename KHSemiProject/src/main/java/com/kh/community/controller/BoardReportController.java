@@ -1,14 +1,15 @@
 package com.kh.community.controller;
 
+import java.io.IOException;
+
+import com.kh.common.ReportInfo;
+import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import com.kh.community.service.BoardService;
-import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class BoardReportController
@@ -33,7 +34,10 @@ public class BoardReportController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("communityNo"));
 		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 		int reportedMemberNo = Integer.parseInt(request.getParameter("reportedMemberNo"));
+		int reportNumber = Integer.parseInt(request.getParameter("reportNumber"));
 		String reportReason = request.getParameter("reportReason");
+		
+		ReportInfo reportInfo = new ReportInfo(reportNumber, reportReason, memberNo, reportedMemberNo);
 		
 		int result = new BoardService().insertReportBoard();
 	}
