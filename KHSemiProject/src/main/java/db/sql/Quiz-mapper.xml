@@ -9,7 +9,7 @@
         ORDER BY COUNT DESC
 	</entry>
 
-	<entry key="latestCreateRate">
+	<entry key="noSearchLatestCreate">
 		SELECT *
           FROM (SELECT ROWNUM AS RNO,
                        QUIZ_NUMBER,
@@ -140,7 +140,7 @@
         )
 	</entry>
 	
-	<entry key="inquiryCreateRate">
+	<entry key="noSearchInquiryCreate">
 		SELECT QUIZ_NUMBER,
        	   	   QUIZ_TITLE,
                THUMBNAIL
@@ -149,7 +149,7 @@
  		 ORDER BY QUIZ_TITLE
 	</entry>
 	
-	<entry key="latestBookMarkRate">
+	<entry key="noSearchLatestBookmark">
 		SELECT q.QUIZ_NUMBER,
                QUIZ_TITLE,
                THUMBNAIL
@@ -159,7 +159,7 @@
          ORDER BY BOOKMARK_NUMBER DESC
 	</entry>
 	
-	<entry key="inquiryBookMarkRate">
+	<entry key="noSearchInquiryBookmark">
 		SELECT q.QUIZ_NUMBER,
        		   QUIZ_TITLE,
        		   THUMBNAIL
@@ -167,6 +167,127 @@
   		  JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
  		 WHERE b.MEMBER_NUMBER = ?
  		 ORDER BY QUIZ_TITLE
+	</entry>
+	<entry key="searchLatestCreateTitle">
+		SELECT *
+  		  FROM (SELECT ROWNUM AS RNO,
+               		   QUIZ_NUMBER,
+               		   QUIZ_TITLE,
+               		   THUMBNAIL,
+               		   QUIZ_EXPLANATION
+          		  FROM QUIZ
+         	     WHERE MEMBER_NUMBER = ? 
+         		   AND QUIZ_TITLE LIKE ?)
+        ORDER BY RNO DESC
+	</entry>
+	<entry key="searchInquiryCreateTitle">
+		SELECT QUIZ_NUMBER,
+       	   	   QUIZ_TITLE,
+               THUMBNAIL
+  		  FROM QUIZ
+ 		 WHERE MEMBER_NUMBER = ? AND QUIZ_TITLE LIKE ?
+ 		 ORDER BY QUIZ_TITLE
+	</entry>
+	<entry key="searchLatestCreateContent">
+		SELECT *
+	      FROM (SELECT ROWNUM AS RNO,
+            		   QUIZ_NUMBER,
+            		   QUIZ_TITLE,
+            		   THUMBNAIL,
+            		   QUIZ_EXPLANATION
+       			  FROM QUIZ
+      			 WHERE MEMBER_NUMBER = ? 
+      			   AND QUIZ_EXPLANATION LIKE ?)
+	    ORDER BY RNO DESC
+	</entry>
+	<entry key="searchInquiryCreateContent">
+		SELECT QUIZ_NUMBER,
+     	   	   QUIZ_TITLE,
+               THUMBNAIL,
+               QUIZ_EXPLANATION
+		  FROM QUIZ
+	 	 WHERE MEMBER_NUMBER = ? AND QUIZ_EXPLANATION LIKE ?
+	 	 ORDER BY QUIZ_TITLE
+	</entry>
+	<entry key="searchLatestCreateTitleNContent">
+		SELECT *
+  		  FROM (SELECT ROWNUM AS RNO,
+               		   QUIZ_NUMBER,
+               		   QUIZ_TITLE,
+               		   THUMBNAIL,
+               		   QUIZ_EXPLANATION
+          		  FROM QUIZ
+         		 WHERE MEMBER_NUMBER = ? 
+         		   AND (QUIZ_TITLE LIKE ? OR QUIZ_EXPLANATION LIKE ?))
+		 ORDER BY RNO DESC
+	</entry>
+	<entry key="searchInquiryCreateTitleNContent">
+		SELECT QUIZ_NUMBER,
+       	   	   QUIZ_TITLE,
+               THUMBNAIL,
+               QUIZ_EXPLANATION
+  		  FROM QUIZ
+ 		 WHERE MEMBER_NUMBER = ? AND (QUIZ_TITLE LIKE ? OR QUIZ_EXPLANATION LIKE ?)
+ 		 ORDER BY QUIZ_TITLE, QUIZ_EXPLANATION, QUIZ_NUMBER DESC
+
+	</entry>
+	<entry key="searchLatestBookmarkTitle">
+		SELECT q.QUIZ_NUMBER,
+               QUIZ_TITLE,
+               THUMBNAIL
+          FROM BOOKMARK b
+          JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+         WHERE b.MEMBER_NUMBER = ? AND QUIZ_TITLE LIKE ?
+         ORDER BY BOOKMARK_NUMBER DESC
+	</entry>
+	<entry key="searchInquiryBookmarkTitle">
+		SELECT q.QUIZ_NUMBER,
+       		   QUIZ_TITLE,
+       		   THUMBNAIL
+  		  FROM BOOKMARK b
+  		  JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+ 		 WHERE b.MEMBER_NUMBER = ? AND QUIZ_TITLE LIKE ?
+ 		 ORDER BY QUIZ_TITLE
+	</entry>
+	<entry key="searchLatestBookmarkContent">
+		SELECT q.QUIZ_NUMBER,
+               QUIZ_TITLE,
+               THUMBNAIL,
+               QUIZ_EXPLANATION
+          FROM BOOKMARK b
+          JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+         WHERE b.MEMBER_NUMBER = ? AND QUIZ_EXPLANATION LIKE ?
+         ORDER BY BOOKMARK_NUMBER DESC
+	</entry>
+	<entry key="searchInquiryBookmarkContent">
+		SELECT q.QUIZ_NUMBER,
+               QUIZ_TITLE,
+               THUMBNAIL,
+               QUIZ_EXPLANATION
+          FROM BOOKMARK b
+          JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+         WHERE b.MEMBER_NUMBER = ? AND QUIZ_EXPLANATION LIKE ?
+         ORDER BY QUIZ_TITLE
+	</entry>
+	<entry key="searchLatestBookmarkTitleNContent">
+		SELECT q.QUIZ_NUMBER,
+               QUIZ_TITLE,
+               THUMBNAIL,
+               QUIZ_EXPLANATION
+          FROM BOOKMARK b
+          JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+         WHERE b.MEMBER_NUMBER = ? AND (QUIZ_TITLE LIKE ? OR QUIZ_EXPLANATION LIKE ?)
+         ORDER BY BOOKMARK_NUMBER DESC
+	</entry>
+	<entry key="searchInquiryBookmarkTitleNContent">
+		SELECT q.QUIZ_NUMBER,
+               QUIZ_TITLE,
+               THUMBNAIL,
+               QUIZ_EXPLANATION
+          FROM BOOKMARK b
+          JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+         WHERE b.MEMBER_NUMBER = ? AND (QUIZ_TITLE LIKE ? OR QUIZ_EXPLANATION LIKE ?)
+         ORDER BY QUIZ_TITLE
 	</entry>
 </properties>
 

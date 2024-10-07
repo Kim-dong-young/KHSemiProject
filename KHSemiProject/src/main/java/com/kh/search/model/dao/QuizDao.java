@@ -627,22 +627,14 @@ public class QuizDao {
 		return list;
 	}
 	
-	public ArrayList<Quiz> selectCreateQuiz(Connection conn, int memberNo, String btnValue) {
+	public ArrayList<Quiz> noSearchMyQuiz(Connection conn, int memberNo, String selectValue, String btnValue) {
 		ArrayList<Quiz> list = new ArrayList<>();
 		System.out.println(memberNo);
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = null;
-		
-		switch(btnValue) {
-		case "latest":
-			sql = prop.getProperty("latestCreateRate");
-			break;
-		case "inquiry":
-			sql = prop.getProperty("inquiryCreateRate");
-		}
-		
+		String sql = prop.getProperty("noSearch" + btnValue + selectValue);
+		System.out.println("noSearch" + btnValue + selectValue);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memberNo);
@@ -667,26 +659,23 @@ public class QuizDao {
 		return list;
 	}
 	
-	public ArrayList<Quiz> selectbookmarkQuiz(Connection conn, int memberNo, String btnValue) {
+	public ArrayList<Quiz> searchMyQuiz(Connection conn,  int memberNo, String selectValue, String btnValue, String searchValue, String serSelValue) {
 		ArrayList<Quiz> list = new ArrayList<>();
 		System.out.println(memberNo);
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = null;
-		
-		switch(btnValue) {
-		case "latest":
-			sql = prop.getProperty("latestBookMarkRate");
-			break;
-		case "inquiry":
-			sql = prop.getProperty("inquiryBookMarkRate");
-		}
+		String sql = prop.getProperty("search" + btnValue + selectValue + serSelValue);
+		System.out.println("search" + btnValue + selectValue + serSelValue);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, "%"+searchValue+"%");
+			
+			if(serSelValue.equals("TitleNContent")) {
+				pstmt.setString(3, "%"+searchValue+"%");
+			}
 			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {

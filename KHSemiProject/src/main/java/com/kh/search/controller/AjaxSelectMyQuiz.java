@@ -36,19 +36,17 @@ public class AjaxSelectMyQuiz extends HttpServlet {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		String selectValue = request.getParameter("selName");
 		String btnValue = request.getParameter("btnName");
+		String searchValue = request.getParameter("searchVal");
+		String serSelValue = request.getParameter("serSelName");
 		
 		ArrayList<Quiz> list = null;
 		
-		switch(selectValue) {
-		case "create":
-			list = searchService.selectCreateQuiz(memberNo, btnValue);
-			break;
-		case "bookmark":
-			list = searchService.selectbookmarkQuiz(memberNo, btnValue);
-			break;
-		case "solved":
-//			list = searchService.selectsolvedQuiz(memberNo, btnValue);
+		if(searchValue == null && serSelValue == null) {
+			list = searchService.noSearchMyQuiz(memberNo, selectValue, btnValue);
+		} else {
+			list = searchService.searchMyQuiz(memberNo, selectValue, btnValue, searchValue, serSelValue);
 		}
+		
 		
 		HashMap<String, Object> result = new HashMap<>();
 	    result.put("qList", list);
