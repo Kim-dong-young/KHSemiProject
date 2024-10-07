@@ -290,7 +290,7 @@
                             <div class="video-priview" onclick="clickQuiz(<%=q.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
                                     <%if(q.getThumbnail() == null){ %>
-                                        <img class="thumbnail" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                        <img class="thumbnail" src="<%=contextPath%>/static/img/default.png" alt="">
                                     <% } else { %>
                                         <img class="thumbnail" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
                                     <% } %>
