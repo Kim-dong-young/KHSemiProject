@@ -22,10 +22,11 @@
         <fieldset>
             <section id="profile-settings" class="content-section">
                 <h2>프로필 설정</h2>
+                    <img src="${pageContext.request.contextPath}/static/img/bold-icon.png" alt="프로필 이미지" class="profile-image">
                 <form action="${pageContext.request.contextPath}/profile.me" method="post">
                     <div class="profile-details">
                         <input type="hidden" name="memberId" value="${loginMember.memberId }">
-                        
+
                         <label for="memberNickName">닉네임:</label>
                         <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임">
                         <label for="Introduce">자기소개:</label>
