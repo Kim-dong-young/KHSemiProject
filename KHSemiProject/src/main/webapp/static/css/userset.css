@@ -57,7 +57,6 @@ form {
     flex-direction: column;
     align-items: center;
     max-width: 600px;
-    margin: 80px auto; /* 위쪽 여백, 가운데 정렬 */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -80,6 +79,7 @@ fieldset {
 .profile-details {
     width: 100%; /* 전체 너비 사용 */
     margin-bottom: 20px; /* 각 섹션 아래에 여백 추가 */
+    
 }
 
 .profile-details label {
@@ -106,9 +106,25 @@ fieldset {
     height: 100px; /* 텍스트 영역의 고정 높이 */
 }
 
+.profile-container {
+    display: flex; /* 플렉스 박스로 설정 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    margin-bottom: 80px; /* 이미지와 폼 사이의 여백 */
+}
+
+.profile-image {
+    margin-top: 30px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* 원형으로 만들기 */
+    border: 3px solid #FFB246; /* 테두리 추가 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
 .personal-details {
     width: 100%; /* 전체 너비 사용 */
     margin-bottom: 20px; /* 각 섹션 아래에 여백 추가 */
+    
 }
 
 .personal-details label {
