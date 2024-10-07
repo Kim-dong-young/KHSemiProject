@@ -959,4 +959,14 @@
 				 		 ?
 				 		)
 	</entry>
+	<entry key="selectAttachmentList">
+		SELECT FILE_NO ,
+			   COMMUNITY_NUMBER ,
+			   ORIGIN_NAME ,
+			   CHANGE_NAME ,
+			   FILE_PATH ,
+			   FILE_LEVEL
+		  FROM COMMUNITY_IMG
+		 WHERE COMMUNITY_NUMBER = ?
+	</entry>
 </properties>
