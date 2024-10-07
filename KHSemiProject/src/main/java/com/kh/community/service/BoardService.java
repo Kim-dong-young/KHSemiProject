@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
 import com.kh.community.model.dao.BoardDao;
+import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
 import com.kh.community.model.vo.Category;
 import com.kh.community.model.vo.Comment;
@@ -80,18 +81,19 @@ public class BoardService {
 		return categoryList;
 	}
 
-	public int insertBoard(Board b) {
+	public int insertBoard(Board b, ArrayList<Attachment> list) {
 		Connection conn = getConnection();
-		int result = new BoardDao().insertBoard(conn,b);
+		int result1 = new BoardDao().insertBoard(conn,b);
+		int result2 = new BoardDao().insertAttachmentList(conn, list);
 		
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
 		} else {
 			rollback(conn);
 		}
 		
 		close(conn);
-		return result;
+		return result1 * result2;
 	}
 
 	public int insertComment(Comment comment) {
@@ -461,6 +463,27 @@ public class BoardService {
 		
 		close(conn);
 		return comment;
+	}
+
+	public ArrayList<Attachment> selectAttachmentList(int boardNo) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> attachList = new BoardDao().selectAttachmentList(conn, boardNo);
+		
+		close(conn);
+		return attachList;
+	}
+
+	public ArrayList<Attachment> selectThumbnailList(ArrayList<Board> boardList) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> attachList = new BoardDao().selectThumbnailList(conn, boardList);
+		
+		close(conn);
+		return attachList;
+	}
+
+	public int insertReportBoard() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

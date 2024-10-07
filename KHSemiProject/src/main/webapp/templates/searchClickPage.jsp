@@ -64,7 +64,7 @@
             <div id="image-div">
                 <div class="image-container">
                     <%if(q.getThumbnail() == null){ %>
-                        <img id="image-playing" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                        <img id="image-playing" src="<%=contextPath%>/static/img/default.png" alt="">
                     <% } else { %>
                         <img id="image-playing" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
                     <% } %>
@@ -95,15 +95,15 @@
             <div id="content-text">
                 <div id="title">
                     <div><%=q.getCategory_name()%></div>
-                    <div>제목<%=q.getQuiz_title()%></div>
+                    <div><%=q.getQuiz_title()%></div>
                 </div>
                 <div id="explanation">
                     <div>
-                        설명<%=q.getQuiz_explanation()%>
+                        <%=q.getQuiz_explanation()%>
                     </div>
                     <div>
                     <% for (int i = 0; i < tagList.size(); i++){ %>
-                        <button>#<%=tagList.get(i).getQuizTag()%></button>
+                        <button style="font-size: 20px;">#<%=tagList.get(i).getQuizTag()%></button>
                     <% } %>
                     </div>
                 </div>

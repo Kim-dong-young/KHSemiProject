@@ -73,7 +73,8 @@
     <entry key="markInsert">
         INSERT INTO BOOKMARK
         VALUES
-        (
+        (	
+        	SEQ_BNO.NEXTVAL,
             ?,
             ?
         )
@@ -149,15 +150,13 @@
 	</entry>
 	
 	<entry key="latestBookMarkRate">
-		SELECT *
-          FROM (SELECT ROWNUM AS RNO,
-                       q.QUIZ_NUMBER,
-                       QUIZ_TITLE,
-                       THUMBNAIL
-                  FROM BOOKMARK b
-                  JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
-                  WHERE b.MEMBER_NUMBER = ?)
-         ORDER BY RNO DESC
+		SELECT q.QUIZ_NUMBER,
+               QUIZ_TITLE,
+               THUMBNAIL
+          FROM BOOKMARK b
+          JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+         WHERE b.MEMBER_NUMBER = ?
+         ORDER BY BOOKMARK_NUMBER DESC
 	</entry>
 	
 	<entry key="inquiryBookMarkRate">
@@ -168,6 +167,25 @@
   		  JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
  		 WHERE b.MEMBER_NUMBER = ?
  		 ORDER BY QUIZ_TITLE
+	</entry>
+	
+	<entry key="problems">
+	INSERT INTO PROBLEM(
+		PROBLEM_number;
+		PROBLEM_content;
+		PROBLEM_media_kind;
+		PROBLEM_media;
+		PROBLEM_hint;
+		QUIZ_number;
+	)
+	VALUES(
+		SEQ_QUIZ.NEXTVAL,
+		?,
+		?,
+		?,
+		?,
+		SEQ_QUIZ.CURRVAL
+	)
 	</entry>
 </properties>
 

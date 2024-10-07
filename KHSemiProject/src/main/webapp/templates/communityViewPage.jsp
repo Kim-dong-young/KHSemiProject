@@ -6,9 +6,11 @@
                 java.util.ArrayList, 
                 com.kh.community.model.vo.Board,
                 com.kh.community.model.vo.Comment,
-                com.kh.community.model.vo.Category" %>
+                com.kh.community.model.vo.Category,
+                com.kh.community.model.vo.Attachment" %>
 <% 
-    Board currentBoard = (Board)request.getAttribute("board"); 
+    Board currentBoard = (Board)request.getAttribute("board");
+    ArrayList<Attachment> attachList = (ArrayList<Attachment>)request.getAttribute("attach"); 
 
     PageInfo cPageInfo = (PageInfo)request.getAttribute("cPageInfo");
     ArrayList<Comment> commentList = (ArrayList<Comment>)request.getAttribute("commentList");
@@ -90,12 +92,13 @@ crossorigin="anonymous"></script>
                     </div>
 
                     <div class="bulletin-input">
-                        <div class="image-input">
-                            <img src="static/img/test.png">
-                        </div>
-                        <div class="image-input">
-                            <img src="static/img/test2.jpg">
-                        </div>
+                        <% if( !attachList.isEmpty() ) { %>
+                            <% for( Attachment at : attachList ) { %>
+                            <div class="image-input">
+                                <img src='<%=contextPath%>/<%=at.getFilePath()%><%=at.getChangeName()%>'>
+                            </div>
+                            <% } %>
+                        <% } %>
                         <p><%=currentBoard.getCommunityContent()%></p>
                     </div>
 
@@ -105,7 +108,7 @@ crossorigin="anonymous"></script>
                         <% } else { %>
                             <button class="like-button" onclick='alert("로그인한 유저만 좋아요를 누를 수 있습니다.")'><img src="static/img/thumbup-icon.png">좋아요</button>
                         <% } %>
-                        <button class="report-button"><img src="static/img/flag-icon.png">신고</button>
+                        <button class="report-button" type="button" data-bs-toggle="modal" data-bs-target="#report-board-modal"><img src="static/img/flag-icon.png">신고</button>
                     </div>
                 </div>
 
@@ -137,11 +140,14 @@ crossorigin="anonymous"></script>
                                             <button class="after-vline">신고</button>
                                             <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cCurrentPage%>'">삭제</button>
                                         <% } else { %>
-                                            <button>신고</button>
+                                            <button type="button">신고</button>
                                         <% } %>
                                     <% } else { %>
                                         <button class="after-vline" onclick="alert('로그인한 유저만 답글을 작성할 수 있습니다.')">답글</button>
+                                        <button type="button">신고</button>
+                                        <!--
                                         <button onclick="alert('로그인한 유저만 신고할 수 있습니다.')">신고</button>
+                                         -->
                                     <% } %>
                                 </div>
                             </div>
@@ -193,8 +199,6 @@ crossorigin="anonymous"></script>
                         <button onclick="alert('로그인한 유저만 댓글을 작성할 수 있습니다.')"><img src="static/img/comment-icon.png">작성</button>
                     </div>
                 <% } %>
-
-
 
 <!-- ================================================ 하단 게시글 목록 ==================================================== -->
                 <div>
@@ -271,12 +275,8 @@ crossorigin="anonymous"></script>
                     </div>
 
                     <div class="board-option">
+
                         <div class="option1">
-                            <select>
-                                <option>최신순</option>
-                                <option>인기순</option> <!-- 좋아요 순 -->
-                                <option>댓글순</option>
-                            </select>
                         </div>
 
                         <div class="option2">
@@ -367,5 +367,73 @@ crossorigin="anonymous"></script>
             </div>
 		</div>
     </div>
+
+    <!-- 신고 Modal -->
+    <div class="modal fade" id="report-board-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">신고하기</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <!-- Modal body -->
+            <form id="reportForm">
+                <div class="modal-body">
+                    <label>
+                        <input type="radio" name="reportNumber" value="1" checked>
+                        홍보/도배 글입니다.
+                    </label><br>
+                
+                    <label>
+                        <input type="radio" name="reportNumber" value="2">
+                        음란물을 포함하고 있습니다.
+                    </label><br>
+                
+                    <label>
+                        <input type="radio" name="reportNumber" value="3">
+                        불법적인 내용입니다.
+                    </label><br>
+                
+                    <label>
+                        <input type="radio" name="reportNumber" value="4">
+                        욕설이 포함되어있습니다.
+                    </label><br>
+                
+                    <label>
+                        <input type="radio" name="reportNumber" value="5">
+                        혐오발언이 포함되어있습니다.
+                    </label><br>
+                
+                    <label>
+                        <input type="radio" name="reportNumber" value="6">
+                        사칭 글입니다.
+                    </label><br>
+                
+                    <label>
+                        <input type="radio" name="reportNumber" value="7">
+                        괴롭힘 및 따돌림이 포함되었습니다.
+                    </label><br>
+                
+                    <label>
+                        <input type="radio" name="reportNumber" value="8">
+                        기타
+                    </label><br>
+
+                    <textarea name="reportReason" wrap="hard" placeholder="자세한 사유를 설명해주세요."></textarea>
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" onclick="report(<%=currentBoard.getCommunityNo()%>,<%=currentBoard.getMemberNo()%>);" class="btn btn-danger">제출하기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form> 
+          </div>
+        </div>
+      </div>
+
 </body>
 </html>

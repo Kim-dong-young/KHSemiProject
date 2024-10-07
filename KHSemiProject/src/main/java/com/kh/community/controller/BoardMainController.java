@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
+import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
 import com.kh.community.model.vo.Category;
 import com.kh.community.service.BoardService;
@@ -70,13 +71,15 @@ public class BoardMainController extends HttpServlet {
 		
 		ArrayList<Category> category = bService.selectCategory();
 		
+		ArrayList<Attachment> attachList = new BoardService().selectThumbnailList(boardList);
+		
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("category", category);
 		
 		request.setAttribute("pageName", "communityMainPage");
 		request.setAttribute("optional", tabNo);
-
+		
 		request.getRequestDispatcher("templates/communityMainPage.jsp").forward(request, response);
 	}
 
