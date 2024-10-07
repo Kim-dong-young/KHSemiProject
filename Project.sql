@@ -70,6 +70,7 @@ CREATE TABLE PROBLEM(
     PROBLEM_number number not null,
     PROBLEM_content varchar2(50),
     PROBLEM_media_kind number,
+    Ptime number not null,
     PROBLEM_media varchar2(50),
     PROBLEM_hint varchar2(50),
     QUIZ_number number not null,
