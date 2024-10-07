@@ -84,7 +84,7 @@ public class CreateQuizMainController extends HttpServlet {
 					
 					if(originName.length() > 0) { //파일을 업로드 했을 때
 						//고유한 파일명 생성
-						String tmpName = "quiz_" + System.currentTimeMillis();
+						String tmpName = "thumbnail_" + System.currentTimeMillis();
 						String type = originName.substring(originName.lastIndexOf("."));
 						changeName = tmpName + type; //서버에 저장할 파일명
 						
