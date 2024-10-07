@@ -3,7 +3,6 @@
     height: 100%;
     margin-left: auto;
     margin-right: auto;
-    
 }
 
 #image-div {
@@ -11,7 +10,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 #image-div > div:nth-child(2){

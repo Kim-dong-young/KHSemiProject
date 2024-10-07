@@ -58,7 +58,7 @@
 
 
 
-	<link rel="stylesheet" href="static/css/searchClickPage.css">
+	<link rel="stylesheet" href="<%=contextPath%>/static/css/searchClickPage.css">
 	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
         <div id="div-top">
             <div id="image-div">
@@ -88,7 +88,13 @@
                             <button onclick="location.href='<%=contextPath%>/main.sl?cpage=1&category=0&search_type=0&orderby=2'"><img src="<%=contextPath%>/static/img/searchClickPage/goback.png" alt=""></button>
                         </c:otherwise>
                     </c:choose>
-                    <button id="playenter"><img src="<%=contextPath%>/static/img/searchClickPage/play.png" alt="">PLAY</button>
+                    <form action="<%= contextPath %>/main.pl" method="POST">
+                        <input type="hidden" name="memberNumber" value="${loginMember.memberNo}">
+                        <input type="hidden" name="quizNumber" value="<%= q.getQuiz_number() %>">
+                        <button type="submit" id="playenter">
+                            <img src="<%= contextPath %>/static/img/searchClickPage/play.png" alt=""> PLAY
+                        </button>
+                    </form>
                 </div>
             </div>
             
