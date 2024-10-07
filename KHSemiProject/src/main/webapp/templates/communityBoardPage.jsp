@@ -4,12 +4,14 @@
     page import="com.kh.common.PageInfo, 
                 java.util.ArrayList, 
                 com.kh.community.model.vo.Board, 
-                com.kh.community.model.vo.Category" 
+                com.kh.community.model.vo.Category,
+                com.kh.community.model.vo.Attachment" 
 %>
 <%
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	ArrayList<Board> boardList = (ArrayList<Board>)request.getAttribute("boardList");
     ArrayList<Category> category = (ArrayList<Category>)request.getAttribute("category");
+    ArrayList<Attachment> attachList = (ArrayList<Attachment>)request.getAttribute("attach"); 
 
     int currentPage = pageInfo.getCurrentPage();
     int startPage = pageInfo.getStartPage();
