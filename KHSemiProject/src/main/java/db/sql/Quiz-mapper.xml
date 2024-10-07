@@ -73,7 +73,8 @@
     <entry key="markInsert">
         INSERT INTO BOOKMARK
         VALUES
-        (
+        (	
+        	SEQ_BNO.NEXTVAL,
             ?,
             ?
         )
@@ -149,15 +150,13 @@
 	</entry>
 	
 	<entry key="latestBookMarkRate">
-		SELECT *
-          FROM (SELECT ROWNUM AS RNO,
-                       q.QUIZ_NUMBER,
-                       QUIZ_TITLE,
-                       THUMBNAIL
-                  FROM BOOKMARK b
-                  JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
-                  WHERE b.MEMBER_NUMBER = ?)
-         ORDER BY RNO DESC
+		SELECT q.QUIZ_NUMBER,
+               QUIZ_TITLE,
+               THUMBNAIL
+          FROM BOOKMARK b
+          JOIN QUIZ q on(b.QUIZ_NUMBER = q.QUIZ_NUMBER)
+         WHERE b.MEMBER_NUMBER = ?
+         ORDER BY BOOKMARK_NUMBER DESC
 	</entry>
 	
 	<entry key="inquiryBookMarkRate">

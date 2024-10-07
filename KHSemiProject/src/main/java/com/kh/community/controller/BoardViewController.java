@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.kh.common.PageInfo;
+import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
 import com.kh.community.model.vo.Category;
 import com.kh.community.model.vo.Comment;
@@ -39,6 +40,9 @@ public class BoardViewController extends HttpServlet {
 		Board board = bService.selectBoard(boardNo);
 		request.setAttribute("board", board);
 		
+		ArrayList<Attachment> attachList = new BoardService().selectAttachmentList(boardNo);
+		request.setAttribute("attach", attachList);
+
 		String tabNo = request.getParameter("tno");
 		request.setAttribute("tno", tabNo);
 		

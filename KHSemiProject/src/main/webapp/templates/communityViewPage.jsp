@@ -6,9 +6,11 @@
                 java.util.ArrayList, 
                 com.kh.community.model.vo.Board,
                 com.kh.community.model.vo.Comment,
-                com.kh.community.model.vo.Category" %>
+                com.kh.community.model.vo.Category,
+                com.kh.community.model.vo.Attachment" %>
 <% 
-    Board currentBoard = (Board)request.getAttribute("board"); 
+    Board currentBoard = (Board)request.getAttribute("board");
+    ArrayList<Attachment> attachList = (ArrayList<Attachment>)request.getAttribute("attach"); 
 
     PageInfo cPageInfo = (PageInfo)request.getAttribute("cPageInfo");
     ArrayList<Comment> commentList = (ArrayList<Comment>)request.getAttribute("commentList");
@@ -90,12 +92,13 @@ crossorigin="anonymous"></script>
                     </div>
 
                     <div class="bulletin-input">
-                        <div class="image-input">
-                            <img src="static/img/test.png">
-                        </div>
-                        <div class="image-input">
-                            <img src="static/img/test2.jpg">
-                        </div>
+                        <% if( !attachList.isEmpty() ) { %>
+                            <% for( Attachment at : attachList ) { %>
+                            <div class="image-input">
+                                <img src='<%=contextPath%>/<%=at.getFilePath()%><%=at.getChangeName()%>'>
+                            </div>
+                            <% } %>
+                        <% } %>
                         <p><%=currentBoard.getCommunityContent()%></p>
                     </div>
 
