@@ -140,11 +140,14 @@ crossorigin="anonymous"></script>
                                             <button class="after-vline">신고</button>
                                             <button onclick="location.href='<%=contextPath%>/delete.co?cno=<%=cm.getCommentNo()%>&cpage=<%=cpage%>&no=<%=currentBoard.getCommunityNo()%>&comment=<%=cCurrentPage%>'">삭제</button>
                                         <% } else { %>
-                                            <button>신고</button>
+                                            <button type="button" data-toggle="modal" data-target="#exampleModal">신고</button>
                                         <% } %>
                                     <% } else { %>
                                         <button class="after-vline" onclick="alert('로그인한 유저만 답글을 작성할 수 있습니다.')">답글</button>
+                                        <button type="button" data-toggle="modal" data-target="#exampleModal">신고</button>
+                                        <!--
                                         <button onclick="alert('로그인한 유저만 신고할 수 있습니다.')">신고</button>
+                                         -->
                                     <% } %>
                                 </div>
                             </div>
@@ -196,8 +199,6 @@ crossorigin="anonymous"></script>
                         <button onclick="alert('로그인한 유저만 댓글을 작성할 수 있습니다.')"><img src="static/img/comment-icon.png">작성</button>
                     </div>
                 <% } %>
-
-
 
 <!-- ================================================ 하단 게시글 목록 ==================================================== -->
                 <div>
@@ -274,12 +275,8 @@ crossorigin="anonymous"></script>
                     </div>
 
                     <div class="board-option">
+
                         <div class="option1">
-                            <select>
-                                <option>최신순</option>
-                                <option>인기순</option> <!-- 좋아요 순 -->
-                                <option>댓글순</option>
-                            </select>
                         </div>
 
                         <div class="option2">
@@ -369,6 +366,28 @@ crossorigin="anonymous"></script>
                 <%@ include file="communitySidePage.jsp" %>
             </div>
 		</div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
     </div>
 </body>
 </html>

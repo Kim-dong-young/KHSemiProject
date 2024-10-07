@@ -969,4 +969,16 @@
 		  FROM COMMUNITY_IMG
 		 WHERE COMMUNITY_NUMBER = ?
 	</entry>
+	<entry key="selectThumbnailList">
+		SELECT FILE_NO ,
+			   COMMUNITY_NUMBER ,
+			   ORIGIN_NAME ,
+			   CHANGE_NAME ,
+			   FILE_PATH ,
+			   FILE_LEVEL
+		  FROM COMMUNITY_IMG
+		 WHERE COMMUNITY_NUMBER = ?
+		   AND FILE_LEVEL = 2
+	  ORDER BY COMMUNITY_NUMBER DESC
+	</entry>
 </properties>

@@ -473,6 +473,14 @@ public class BoardService {
 		return attachList;
 	}
 
+	public ArrayList<Attachment> selectThumbnailList(ArrayList<Board> boardList) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> attachList = new BoardDao().selectThumbnailList(conn, boardList);
+		
+		close(conn);
+		return attachList;
+	}
+
 
 	
 	

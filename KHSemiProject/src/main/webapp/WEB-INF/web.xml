@@ -388,7 +388,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>problems.co</display-name>
+    <display-name>report.bo</display-name>
+    <servlet-name>report.bo</servlet-name>
+    <servlet-class>com.kh.community.controller.BoardReportController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>report.bo</servlet-name>
+    <url-pattern>/report.bo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+      <display-name>problems.co</display-name>
     <servlet-name>problems.co</servlet-name>
     <servlet-class>com.kh.createQuiz.controller.problemsController</servlet-class>
   </servlet>

@@ -1951,6 +1951,44 @@ public class BoardDao {
 		
 		return attachList;
 	}
+
+	public ArrayList<Attachment> selectThumbnailList(Connection conn, ArrayList<Board> boardList) {
+		ResultSet rset = null;
+		ArrayList<Attachment> attachList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectThumbnailList");
+		
+		try {
+			for(Board b : boardList) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, b.getCommunityNo());
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					Attachment attach = new Attachment(
+							rset.getInt("FILE_NO"),
+							rset.getInt("community_number"),
+							rset.getString("origin_name"),
+							rset.getString("change_name"),
+							rset.getString("file_path"),
+							rset.getInt("file_level")
+						);
+				
+					attachList.add(attach);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return attachList;
+	}
 	
 	
 }
