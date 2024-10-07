@@ -169,7 +169,7 @@
  		 ORDER BY QUIZ_TITLE
 	</entry>
 	
-	<entry key="problems">
+	<entry key="insertProblems">
 	INSERT INTO PROBLEM(
 		PROBLEM_number;
 		PROBLEM_content;
@@ -179,12 +179,12 @@
 		QUIZ_number;
 	)
 	VALUES(
-		SEQ_QUIZ.NEXTVAL,
+		SEQ_PNO.NEXTVAL,
 		?,
 		?,
 		?,
 		?,
-		SEQ_QUIZ.CURRVAL
+		SEQ_PNO.CURRVAL
 	)
 	</entry>
 </properties>

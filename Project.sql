@@ -243,7 +243,7 @@ CREATE TABLE IMGS_file (
     IMGS_file_id NUMBER PRIMARY KEY NOT NULL,  -- ????? ID
     IMGS_link_path VARCHAR2(1500),              -- ????? ???? ???
     IMGS_file_name VARCHAR2(255),     -- ????? ???? ???
-    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- ???¥å? ???
+    IMGS_file_upload_date DATE DEFAULT SYSDATE,  -- ???Â¥Ã¥? ???
     FOREIGN KEY (IMGS_file_id) references PROBLEM(problem_number)
 );
 
@@ -283,6 +283,12 @@ CREATE SEQUENCE SEQ_QUIZ
 
 CREATE SEQUENCE SEQ_BNO;
 
+
+CREATE SEQUENCE SEQ_PNO
+    INCREMENT BY 1
+    START WITH 1;
+
 CREATE SEQUENCE SEQ_REPORT;
+
 
 
