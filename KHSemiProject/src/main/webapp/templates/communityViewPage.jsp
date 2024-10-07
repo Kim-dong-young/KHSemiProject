@@ -79,7 +79,7 @@ crossorigin="anonymous"></script>
 
                     <div class="bulletin-info">
                         <div class="author-info">
-                            <img src="static/img/test.png">
+                            <img src="<%=contextPath%>/<%=currentBoard.getMemberImage()%>">
                             <span><%=currentBoard.getMemberId()%></span>
                         </div>
 
@@ -117,7 +117,7 @@ crossorigin="anonymous"></script>
                     <% for(Comment cm : commentList) { %>
                         <div class="comment" style="margin-left:<%=cm.getCommentDepth() * 50%>px">
                             <div class="comment-left">
-                                <img src="static/img/test.png">
+                                <img src="<%=contextPath%>/<%=cm.getMemberImage()%>">
                             </div>
     
                             <div class="comment-right">
@@ -235,7 +235,7 @@ crossorigin="anonymous"></script>
                                 <% if( tno == null ) { %>
                                     <% for(Board b : boardList) { %>
                                         <tr>
-                                            <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                            <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                             <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1'"><%=b.getCommunityTitle()%></td>
                                             <td class="author"><%=b.getMemberId()%></td>
                                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
@@ -247,7 +247,7 @@ crossorigin="anonymous"></script>
 
                                     <% for(Board b : boardList) { %>
                                         <tr>
-                                            <td class="tab" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
+                                            <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                             <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
                                             <td class="author"><%=b.getMemberId()%></td>
                                             <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
