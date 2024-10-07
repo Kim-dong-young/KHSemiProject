@@ -386,4 +386,14 @@
     <servlet-name>insert.quiz</servlet-name>
     <url-pattern>/insert.quiz</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>problems.co</display-name>
+    <servlet-name>problems.co</servlet-name>
+    <servlet-class>com.kh.createQuiz.controller.problemsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>problems.co</servlet-name>
+    <url-pattern>/problems.co</url-pattern>
+  </servlet-mapping>
 </web-app>
