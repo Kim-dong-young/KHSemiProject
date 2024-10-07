@@ -1,5 +1,3 @@
-
-
 function selectTab(_this){
     const blist = document.querySelectorAll(".tab-select button");
     const tabInput = document.querySelector("input[name=tab]");
@@ -28,11 +26,66 @@ function checkEmptyTab(_this){
         return true;
     }
 }
+
+function loadImg(_input, num){
+    //_input.files[0] -> 선택된 파일이 담김
+    // 파일을 읽어들이는 객체
+
+    if(_input.files.length == 1){ // 파일이 하나 선택됬다면
+        const reader = new FileReader();
+
+        // 해당 파일을 읽어들여 해당 파일만의 url 부여
+        reader.readAsDataURL(_input.files[0])
+
+        // 파일 읽어들이기가 완료됬다면 실행되는 함수
+        reader.onload = function(e){
+            switch(num){
+                case 1:
+                    document.getElementById("contain-img1").src = e.target.result;
+                    break;
+                case 2:
+                    document.getElementById("contain-img2").src = e.target.result;
+                    break;
+                case 3:
+                    document.getElementById("contain-img3").src = e.target.result;
+                    break;
+                case 4:
+                    document.getElementById("contain-img4").src = e.target.result;
+                    break;
+                case 5:
+                    document.getElementById("contain-img5").src = e.target.result;
+                    break;
+            }
+        }
+    } else{
+        switch(num){
+            case 1:
+                document.getElementById("contain-img1").src = null;
+                break;
+            case 2:
+                document.getElementById("contain-img2").src = null;
+                break;
+            case 3:
+                document.getElementById("contain-img3").src = null;
+                break;
+            case 4:
+                document.getElementById("contain-img4").src = null;
+                break;
+            case 5:
+                document.getElementById("contain-img5").src = null;
+                break;
+        }
+    }
+
+}
+
+
+function chooseImg(num){
+    const fileInput = document.querySelector("#file" + num);
+    fileInput.click();
+}
+
 /*
-
-const maxFileNum = 5;
-let curFileNum = 0;
-
 function loadImg(_input){
     //_input.files[0] -> 선택된 파일이 담김
     // 파일을 읽어들이는 객체
@@ -44,6 +97,7 @@ function loadImg(_input){
         reader.readAsDataURL(_input.files[0])
         curFileNum++;
 
+        // 파일 읽어들이기가 완료됬다면 실행되는 함수
         reader.onload = function(e){
             const content = document.querySelector("#content");
 
@@ -58,15 +112,5 @@ function loadImg(_input){
         curFileNum--;
     }
 
-}
-
-
-function chooseImg(){
-    if(curFileNum < maxFileNum){
-        const fileInput = document.querySelector("#file" + (curFileNum+1));
-        fileInput.click();
-    } else {
-        alert("파일은 최대 5개까지 업로드 가능합니다.");
-    }
 }
 */
