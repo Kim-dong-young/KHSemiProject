@@ -981,4 +981,54 @@
 		   AND FILE_LEVEL = 2
 	  ORDER BY COMMUNITY_NUMBER DESC
 	</entry>
+	<entry key="insertReportBoard">
+		INSERT INTO RP(
+		    RP_NUMBER,
+		    RP_ENCOUNTER_NUMBER,
+		    RP_REASON,
+		    MEMBER_NUMBER,
+		    REPORTED_MEMBER_NUMBER,
+		    COMMUNITY_NUMBER
+		)
+		VALUES(
+		    SEQ_REPORT.NEXTVAL,
+		    ?,
+		    ?,
+		    ?,
+		    ?,
+		    ?
+		)
+	</entry>
+	<entry key="selectReportBoard">
+		SELECT COUNT(*) AS COUNT
+		  FROM RP
+		 WHERE MEMBER_NUMBER = ?
+		   AND REPORTED_MEMBER_NUMBER = ?
+		   AND COMMUNITY_NUMBER = ?
+	</entry>
+	<entry key="selectReportComment">
+		SELECT COUNT(*) AS COUNT
+		  FROM RP
+		 WHERE MEMBER_NUMBER = ?
+		   AND REPORTED_MEMBER_NUMBER = ?
+		   AND COMMUNITY_COMMENT_NUMBER = ?
+	</entry>
+	<entry key="insertReportComment">
+		INSERT INTO RP(
+		    RP_NUMBER,
+		    RP_ENCOUNTER_NUMBER,
+		    RP_REASON,
+		    MEMBER_NUMBER,
+		    REPORTED_MEMBER_NUMBER,
+		    COMMUNITY_COMMENT_NUMBER
+		)
+		VALUES(
+		    SEQ_REPORT.NEXTVAL,
+		    ?,
+		    ?,
+		    ?,
+		    ?,
+		    ?
+		)
+	</entry>
 </properties>
