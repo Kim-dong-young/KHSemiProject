@@ -124,7 +124,8 @@ public class BoardDao {
 							rset.getInt("MEMBER_NUMBER"),
 							rset.getString("TAB_NAME"),
 							rset.getInt("TAB_NUMBER"),
-							rset.getInt("LIKE_COUNT")
+							rset.getInt("LIKE_COUNT"),
+							rset.getString("MEMBER_IMAGE")
 						);
 			}
 		} catch (SQLException e) {
@@ -1594,7 +1595,8 @@ public class BoardDao {
 							rset.getInt("COMMENT_DEPTH"),
 							rset.getInt("COMMENT_ORDER"),
 							rset.getInt("COMMENT_CHILD_COUNT"),
-							rset.getString("COMMENT_STATUS")
+							rset.getString("COMMENT_STATUS"),
+							rset.getString("MEMBER_IMAGE")
 						);
 				
 				replyList.add(comment);

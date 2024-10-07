@@ -36,7 +36,7 @@ CREATE TABLE MEMBER(
     MEMBER_pwd varchar2(50) not null,
     MEMBER_nickname varchar2(50) not null,
     MEMBER_exp number DEFAULT 0 not null,
-    MEMBER_image varchar2(50),
+    MEMBER_image varchar2(300) DEFAULT 'static/img/userProfile/guest-icon.png',
     MEMBER_join_date Date default SYSDATE not null,
     MEMBER_check_continueCount NUMBER DEFAULT 0 NOT NULL,
     MEMBER_status VARCHAR2(1) DEFAULT 'Y' NOT NULL,
