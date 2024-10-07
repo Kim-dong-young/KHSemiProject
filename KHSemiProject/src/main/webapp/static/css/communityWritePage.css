@@ -112,22 +112,24 @@ span{
     margin:1px;
 }
 
-.content-input > textarea{
+.content-input > div[name=content]{
     width:100%;
     /* input option 25+1+1px content-input margin 12px */
     height:calc(100% - 39px);
     padding:5px;
     background-color: transparent;
     border:none;
-    resize:none;
+    overflow : auto;
+    font-weight: 300;
     /* 
         contentEditable 후 
         overflow:auto;  div를 textarea처럼 스크롤 생성해줌 */
 }
 
-.content-input > textarea:focus{
+.content-input > [contenteditable=true]{
     outline:none;
 }
+
 
 /* 게시글 완료 버튼 영역 */
 .board-write-option{

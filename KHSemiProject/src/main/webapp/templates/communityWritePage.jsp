@@ -40,16 +40,15 @@
 
                         <div class="content-input">
                             <div class="input-option">
-                                <img src="static/img/bold-icon.png">
-                                <img src="static/img/italic-icon.png">
-                                <img src="static/img/underlined-icon.png">
-                                <img src="static/img/strikethrough-icon.png">
-                                <img src="static/img/fontsize-icon.png" style="margin-right:15px;">
-                                <img src="static/img/color-icon.png">
-                                <img src="static/img/fill-icon.png">
+                                <img id="font-bold" src="static/img/bold-icon.png">
+                                <img id="font-italic" src="static/img/italic-icon.png">
+                                <img id="font-underlined" src="static/img/underlined-icon.png">
+                                <img id="font-strikethrough" src="static/img/strikethrough-icon.png">
+                                <img id="font-size" src="static/img/fontsize-icon.png" style="margin-right:15px;">
+                                <img id="font-color" src="static/img/color-icon.png">
+                                <img id="font-fill" src="static/img/fill-icon.png">
                             </div>
-                            <!-- wrap = hard : 텍스트 입력값을 textarea에 맞게 줄바꿈(\n)을 해줌, 안하면 한줄로 쭉 나옴 -->
-                            <textarea name="content" wrap="hard"></textarea>
+                            <div name="content" contenteditable="true"></div>
                         </div>
                     </div>
 

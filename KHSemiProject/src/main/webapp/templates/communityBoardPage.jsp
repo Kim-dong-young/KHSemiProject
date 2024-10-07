@@ -95,7 +95,7 @@ crossorigin="anonymous"></script>
                                 <td class="tab" data-tab-no="<%=b.getCommunityTabNo()%>" onclick="location.href='<%=contextPath%>/community?cpage=1&tno=<%=b.getCommunityTabNo()%>'"><%=b.getCommunityTab()%></td>
                                 <td class="title" onclick="location.href='<%=contextPath%>/board?cpage=<%=currentPage%>&no=<%=b.getCommunityNo()%>&comment=1&tno=<%=tno%>'"><%=b.getCommunityTitle()%></td>
                                 <td class="author"><%=b.getMemberId()%></td>
-                                <td class="comment-num"><%=b.getCommentCount()%><img src="static/img/comment-icon.png"></td>
+                                <td class="comment-num">[<%=b.getCommentCount()%>]<img src="static/img/comment-icon.png"></td>
                                 <td class="date"><%=b.getCommunityDate()%></td>
                                 <td class="viewcount"><%=b.getCommunityViewcount()%></td>
                             </tr>

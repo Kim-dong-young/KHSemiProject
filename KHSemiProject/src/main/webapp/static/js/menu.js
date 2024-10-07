@@ -14,6 +14,7 @@ function init(pageName, optional){
             initSide()
             break;
         case "communityWritePage":
+            initWrite()
             initSide()
             break;
         case "personalPage":

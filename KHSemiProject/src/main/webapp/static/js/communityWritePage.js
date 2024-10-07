@@ -1,3 +1,75 @@
+function initWrite(){
+    /* 
+        https://ko.javascript.info/selection-range
+        https://dev.to/_moehab/documentexeccommand-alternative-5a55
+    */
+    const content = document.querySelector('.content-input div[name=content]');
+    const fontBold = document.getElementById('font-bold');
+    const fontItalic = document.getElementById('font-italic');
+    const fontUnderlined = document.getElementById('font-underlined');
+    const fontStrikeThrough = document.getElementById('font-strikethrough');
+    const fontSize = document.getElementById('font-size');
+    const fontColor = document.getElementById('font-color');
+    const fontfill = document.getElementById('font-fill');
+
+    fontBold.addEventListener('click', function(){
+        const userSelection = window.getSelection();
+        const selectedTextRange = userSelection.getRangeAt(0);
+
+        let node = document.createElement('b');
+        selectedTextRange.surroundContents(node);
+        
+    });
+
+    fontItalic.addEventListener('click', function(){
+        const userSelection = window.getSelection();
+        const selectedTextRange = userSelection.getRangeAt(0);
+
+        let node = document.createElement('i');
+        selectedTextRange.surroundContents(node);
+    });
+
+    fontUnderlined.addEventListener('click', function(){
+        const userSelection = window.getSelection();
+        const selectedTextRange = userSelection.getRangeAt(0);
+
+        let node = document.createElement('u');
+        selectedTextRange.surroundContents(node);
+    });
+
+    fontStrikeThrough.addEventListener('click', function(){
+        const userSelection = window.getSelection();
+        const selectedTextRange = userSelection.getRangeAt(0);
+
+        let node = document.createElement('s');
+        selectedTextRange.surroundContents(node);
+    });
+
+    fontSize.addEventListener('click', function(){
+        const userSelection = window.getSelection();
+        const selectedTextRange = userSelection.getRangeAt(0);
+
+        let node = document.createElement('b');
+        selectedTextRange.surroundContents(node);
+    });
+
+    fontColor.addEventListener('click', function(){
+        const userSelection = window.getSelection();
+        const selectedTextRange = userSelection.getRangeAt(0);
+
+        let node = document.createElement('p');
+        selectedTextRange.surroundContents(node);
+    });
+
+    fontfill.addEventListener('click', function(){
+        const userSelection = window.getSelection();
+        const selectedTextRange = userSelection.getRangeAt(0);
+
+        let node = document.createElement('p');
+        selectedTextRange.surroundContents(node);
+    });
+}
+
 function selectTab(_this){
     const blist = document.querySelectorAll(".tab-select button");
     const tabInput = document.querySelector("input[name=tab]");
