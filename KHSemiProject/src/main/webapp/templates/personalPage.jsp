@@ -14,10 +14,10 @@
 		<div class="topBox">
 			<div class="search">
 				<div class="sub-option">
-					<select name="opt">
-						<option value="title">제목</option>
-						<option value="content">내용</option>
-						<option value="titleNContent">제목+내용</option>
+					<select name="searchOpt">
+						<option value="Title">제목</option>
+						<option value="Content">내용</option>
+						<option value="TitleNContent">제목+내용</option>
 					</select>
 				</div>
 	            <input class="search-bar" type="search" placeholder="검색 키워드를 입력하세요...">
@@ -26,27 +26,22 @@
 			<div class="search-sub-opt">
 				<div class="recommend-button">
 					<ul>
-						<li><button class="custom-btn" name="latest" value="latest" disabled onclick="ChangebtnVal(<%=loginMember.getMemberNo()%>, this.name)">최신</button></li>
-						<li><button class="custom-btn" name="inquiry" value="inquiry" onclick="ChangebtnVal(<%=loginMember.getMemberNo()%>, this.name)">가나다</button></li>
+						<li><button class="custom-btn" name="latest" value="Latest" disabled>최신</button></li>
+						<li><button class="custom-btn" name="inquiry" value="Inquiry">가나다</button></li>
 					</ul>
 				</div>
 				<div class="sub-opt-rating">
-					<select name="showOpt" onchange="ChangeSelVal(<%=loginMember.getMemberNo()%>)">
-						<option value="create" selected>내가 만든 문제</option>
-						<option value="bookmark">북마크한 문제</option>
-						<option value="solved">내가 풀었던 문제</option>
+					<select name="showOpt">
+						<option value="Create" selected>내가 만든 문제</option>
+						<option value="Bookmark">북마크한 문제</option>
+						<option value="Solved">내가 풀었던 문제</option>
 					</select>
 				</div>
 			</div>
 		</div>
     	<div class="leftBox">
 	        <div class="interestList">
-				<!-- <div class="quizbox">
-					<div class="thumnail">썸네일입니다.</div>
-					<div class="title">제목입니다.</div>
-				</div> -->
 	        </div>
-			<div class="rightBox"></div>
         </div>
     </body>
 </html>
