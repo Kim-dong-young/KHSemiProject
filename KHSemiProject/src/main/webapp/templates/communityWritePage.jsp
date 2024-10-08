@@ -46,11 +46,14 @@
                                 <img id="font-strikethrough" src="static/img/strikethrough-icon.png">
                                 <img id="font-size" src="static/img/fontsize-icon.png" style="margin-right:15px;">
                                 <img id="font-color" src="static/img/color-icon.png">
+                                <input id="color-picker" type="color" class="form-control form-control-color" id="myColor" value="#CCCCCC" title="Choose a color">
                                 <img id="font-fill" src="static/img/fill-icon.png">
                             </div>
-                            <div name="content" contenteditable="true"></div>
+                            <div id="editor" contenteditable="true"></div>
                         </div>
                     </div>
+
+                    <textarea name="content" style="display:none;"></textarea>
 
                     <div class="board-write-option">
                         <button type="submit"><img src="static/img/pen-icon-white.png">글쓰기</button>
