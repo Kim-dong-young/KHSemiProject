@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String alertMsg = (String)session.getAttribute("alertMsg"); 
 %>
@@ -40,7 +41,14 @@
             <div class="content">
                 <div class="image"><img src="static/img/section1.png"></div>
                 <div class="login">
-                    <button data-bs-toggle="modal" data-bs-target="#login-modal"><img src="static/img/playbutton.png">시작하기</button>
+                    <c:choose>
+                        <c:when test="${empty loginMember}">
+                            <button data-bs-toggle="modal" data-bs-target="#login-modal"><img src="static/img/playbutton.png">시작하기</button>
+                        </c:when>
+                        <c:otherwise>
+                            <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/playbutton.png">시작하기</button>
+                        </c:otherwise>
+                    </c:choose>
                     <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/google-icon.png">소셜 아이디로 로그인하기</button>
                     <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/guest-icon.png">게스트 계정으로 플레이하기</button>
                 </div>

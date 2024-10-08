@@ -454,12 +454,12 @@ public class QuizDao {
 	    return list;
 	}
 	
-	public ArrayList<Quiz> selectLatestQuiz(Connection conn) {
+	public ArrayList<Quiz> selectTopTenQuiz(Connection conn, String btnValue) {
 		ArrayList<Quiz> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectLatestQuiz");
+		String sql = prop.getProperty("topten" + btnValue);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -566,67 +566,6 @@ public class QuizDao {
         return b;
     }
 
-	public ArrayList<Quiz> selectInquiryQuiz(Connection conn) {
-		ArrayList<Quiz> list = new ArrayList<>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectinquiryQuiz");
-	
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				Quiz q = new Quiz();
-				q.setQuiz_number(rset.getInt("quiz_number"));
-				q.setQuiz_title(rset.getString("quiz_title"));
-				q.setThumbnail(rset.getString("thumbnail"));
-				
-				list.add(q);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-
-		return list;
-
-	}
-	
-	public ArrayList<Quiz> selectGradeQuiz(Connection conn) {
-		ArrayList<Quiz> list = new ArrayList<>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectGradeQuiz");
-	
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				Quiz q = new Quiz();
-				q.setQuiz_number(rset.getInt("quiz_number"));
-				q.setQuiz_title(rset.getString("quiz_title"));
-				q.setThumbnail(rset.getString("thumbnail"));
-				q.setQuiz_rate(rset.getDouble("quiz_rate_rating"));
-				list.add(q);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-
-		return list;
-	}
-	
 	public ArrayList<Quiz> noSearchMyQuiz(Connection conn, int memberNo, String selectValue, String btnValue) {
 		ArrayList<Quiz> list = new ArrayList<>();
 		System.out.println(memberNo);
