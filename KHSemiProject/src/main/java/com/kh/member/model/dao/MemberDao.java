@@ -397,8 +397,9 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, p.getMemberNickName());
-			pstmt.setString(2, p.getIntroduce());
-			pstmt.setString(3,  p.getMemberId());
+			pstmt.setString(2, p.getMemberImg());
+			pstmt.setString(3, p.getIntroduce());
+			pstmt.setString(4,  p.getMemberId());
 			
 			result = pstmt.executeUpdate();
 		}catch(SQLException e) {

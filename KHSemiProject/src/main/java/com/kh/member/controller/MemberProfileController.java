@@ -42,13 +42,16 @@ public class MemberProfileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		System.out.println("서블릿 실행됨");
 		if(JakartaServletFileUpload.isMultipartContent(request)) {
+			System.out.println("멀티파트true 실행됨");
 			// 1.파일 용량 제한(byte)
 			int fileMaxSize = 1024 * 1024 * 10; // 10MB
 			int requestMaxSize = 1024 * 1024 * 20; // 20MB
 			
 			// 2. 전달된 파일을 저장시킬 폴더경로 가져오기
-			String savePath = request.getServletContext().getRealPath("/static/img/userProfile");
+			String savePath = request.getServletContext().getRealPath("static/img/userProfile");
+			System.out.println("savePAth : "+savePath);
 			
 			// 3.DiskFileItemFactory(파일을 임시로 저장) 객체 생성
 			DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
@@ -62,25 +65,17 @@ public class MemberProfileController extends HttpServlet {
 			// 요청(request)으로부터 파일 아이템 파싱
 			List<FileItem> formItems = upload.parseRequest(request);
 			
-			// 추가할 데이터
-			Board b = new Board();
-			ArrayList<Attachment> list = new ArrayList<>();
-			Boolean thumbnailChecked = false;
-			
 			for(FileItem item : formItems) {
 				if(item.isFormField()) { // 일반 파라미터일 경우
 					switch(item.getFieldName()) {
-					case "userNo":
-						b.setMemberNo(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+					case "memberId":
+						item.getString(Charset.forName("utf-8"));  // form 태그 내 input 태그의 name 값과 일치하는 데이터 처리
 						break;
-					case "tab":
-						b.setCommunityTab(item.getString(Charset.forName("utf-8")));
+					case "memberNickName":
+						item.getString(Charset.forName("utf-8"));
 						break;
-					case "title":
-						b.setCommunityTitle(item.getString(Charset.forName("utf-8")));
-						break;
-					case "content":
-						b.setCommunityContent(item.getString(Charset.forName("utf-8")));
+					case "Introduce":
+						item.getString(Charset.forName("utf-8"));
 						break;
 					}
 				}else { // 이미지 파일일 경우
@@ -88,43 +83,32 @@ public class MemberProfileController extends HttpServlet {
 					
 					if(originName.length() > 0) { // 파일을 업로드 했을 경우
 						// 고유한 파일명 생성
-						String tmpNmae = "boardFile_" + System.currentTimeMillis();
+						String tmpNmae = "proFile_" + System.currentTimeMillis();
 						// 파일 형식 ex1) jpg , png 추출
 						String type = originName.substring(originName.lastIndexOf("."));
 						// DB에 저장할 파일명
 						String changeName = tmpNmae + type;
 						
-						File f = new File(savePath, changeName);
+						File f = new File(savePath , changeName);
+						System.out.println(savePath + changeName); // 콘솔창에서 경로 찍히는거 보고 이상하면 알아서 수정
+						
 						item.write(f.toPath()); // 지정된 경로에 파일 업로드
 						
-						Attachment at = new Attachment();
-						at.setOriginName(originName);
-						at.setChangeName(changeName);
-						at.setFilePath("static/img/userProfile/");
-						
-						if(!thumbnailChecked) { // 첫번째로 들어온 이미지 파일을 썸네일로 설정
-							at.setFileLevel(2); // 2 : 썸네일 이미지
-							thumbnailChecked = true;
-						}else {
-							at.setFileLevel(1); // 1 : 기본 이미지
-						}
-						
-						list.add(at);
 					}
 				}
 			}
-			
-			int result = new BoardService().insertBoard(b,list);
 		}
-		
 		
 		String memberId = request.getParameter("memberId");
 		String memberNickName = request.getParameter("memberNickName");
+		String memberImage = request.getParameter("memberImage");
 		String Introduce = request.getParameter("Introduce");
 		
 		Member p = new Member(memberId,memberNickName,Introduce);
+		
 		p.setMemberId(memberId);
 		p.setMemberNickName(memberNickName);
+		p.setMemberImg(memberImage);
 		p.setIntroduce(Introduce);
 		
 		Member updateProfile = new MemberService().updateProfile(p);
