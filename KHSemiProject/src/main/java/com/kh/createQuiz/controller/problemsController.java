@@ -52,7 +52,8 @@ public class problemsController extends HttpServlet {
 
 			Problem p = new Problem();
 			p.setQUIZ_number(((Quiz) request.getAttribute("insertQuiz")).getQuiz_number());
-
+			
+			//반복문을 통해 파일과 파라미터 정보획득
 			for (FileItem item : formItems) {
 				if (item.isFormField()) {
 					switch (item.getFieldName()) {
@@ -95,12 +96,12 @@ public class problemsController extends HttpServlet {
 
 			// 응답 처리
 			if (result > 0) {
-				response.getWriter().write("{\"status\":\"success\"}");
+				
 			} else {
 				if (changeName != null) {
 					new File(savePath + changeName).delete();
 				}
-				response.getWriter().write("{\"status\":\"fail\"}");
+		
 			}
 		}
 	}
