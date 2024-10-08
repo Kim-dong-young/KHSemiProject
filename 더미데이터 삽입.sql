@@ -1487,5 +1487,10 @@ VALUES (3, 3, 7);
 
 INSERT INTO QUIZ_RATE (QUIZ_RATE_RATING, MEMBER_NUMBER, QUIZ_NUMBER) 
 VALUES (2, 2, 2);
+
+INSERT INTO MEMBER
+VALUES (-1, 'GUEST', 'GUEST', 'GUEST', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'N', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
+
+
 COMMIT;
 --ROLLBACK;
