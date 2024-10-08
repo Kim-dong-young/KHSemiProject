@@ -65,17 +65,23 @@ public class MemberProfileController extends HttpServlet {
 			// 요청(request)으로부터 파일 아이템 파싱
 			List<FileItem> formItems = upload.parseRequest(request);
 			
+			// 추가할 데이터
+			Member p = new Member();
+			
 			for(FileItem item : formItems) {
 				if(item.isFormField()) { // 일반 파라미터일 경우
 					switch(item.getFieldName()) {
 					case "memberId":
-						item.getString(Charset.forName("utf-8"));  // form 태그 내 input 태그의 name 값과 일치하는 데이터 처리
+						p.setMemberId(item.getString(Charset.forName("utf-8")));  // form 태그 내 input 태그의 name 값과 일치하는 데이터 처리
 						break;
 					case "memberNickName":
-						item.getString(Charset.forName("utf-8"));
+						p.setMemberNickName(item.getString(Charset.forName("utf-8")));
+						break;
+					case "memberImage":
+						p.setMemberImg(item.getString(Charset.forName("utf-8")));
 						break;
 					case "Introduce":
-						item.getString(Charset.forName("utf-8"));
+						p.setIntroduce(item.getString(Charset.forName("utf-8")));
 						break;
 					}
 				}else { // 이미지 파일일 경우
@@ -94,24 +100,25 @@ public class MemberProfileController extends HttpServlet {
 						
 						item.write(f.toPath()); // 지정된 경로에 파일 업로드
 						
-					}
-				}
+						p.setMemberImg("static/img/userProfile/" + changeName);
 			}
 		}
+			
+		Member result = MemberService.updateMember(p);
 		
-		String memberId = request.getParameter("memberId");
-		String memberNickName = request.getParameter("memberNickName");
-		String memberImage = request.getParameter("memberImage");
-		String Introduce = request.getParameter("Introduce");
-		
-		Member p = new Member(memberId,memberNickName,Introduce);
-		
-		p.setMemberId(memberId);
-		p.setMemberNickName(memberNickName);
-		p.setMemberImg(memberImage);
-		p.setIntroduce(Introduce);
-		
-		Member updateProfile = new MemberService().updateProfile(p);
+//		String memberId = request.getParameter("memberId");
+//		String memberNickName = request.getParameter("memberNickName");
+//		String memberImage = request.getParameter("memberImage");
+//		String Introduce = request.getParameter("Introduce");
+//		
+//		Member p = new Member(memberId,memberNickName,Introduce);
+//		
+//		p.setMemberId(memberId);
+//		p.setMemberNickName(memberNickName);
+//		p.setMemberImg(memberImage);
+//		p.setIntroduce(Introduce);
+//		
+//		Member updateProfile = new MemberService().updateProfile(p);
 		
 		if(updateProfile == null) {
 			request.setAttribute("errorMsg", "프로필 수정에 실패하였습니다.");
