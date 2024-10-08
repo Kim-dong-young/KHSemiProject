@@ -31,10 +31,6 @@ public class MainPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("pageName", "mainPage");
 		
-		ArrayList<Quiz> quizList = new SearchService().selectLatestQuiz();
-		
-		request.setAttribute("qList", quizList);
-	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 	}
 

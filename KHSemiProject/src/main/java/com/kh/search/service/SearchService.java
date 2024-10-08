@@ -73,9 +73,9 @@ public class SearchService {
 		return qArr;
 	}
 	
-	public ArrayList<Quiz> selectLatestQuiz() {
+	public ArrayList<Quiz> selectTopTenQuiz(String btnValue) {
 		Connection conn = getConnection();
-		ArrayList<Quiz> list = new QuizDao().selectLatestQuiz(conn);
+		ArrayList<Quiz> list = new QuizDao().selectTopTenQuiz(conn, btnValue);
 		
 		JDBCTemplate.close(conn);
 		return list;
@@ -119,22 +119,6 @@ public class SearchService {
             return 0;
         }
     }
-	
-	public ArrayList<Quiz> selectInquiryQuiz() {
-		Connection conn = getConnection();
-		ArrayList<Quiz> list = new QuizDao().selectInquiryQuiz(conn);
-	
-		JDBCTemplate.close(conn);
-		return list;
-	}
-	
-	public ArrayList<Quiz> selectGradeQuiz() {
-		Connection conn = getConnection();
-		ArrayList<Quiz> list = new QuizDao().selectGradeQuiz(conn);
-	
-		JDBCTemplate.close(conn);
-		return list;
-	}
 	
 	public ArrayList<Quiz> noSearchMyQuiz(int memberNo, String selectValue, String btnValue) {
 		Connection conn = getConnection();

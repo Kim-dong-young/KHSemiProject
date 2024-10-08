@@ -338,13 +338,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>latest.sl</display-name>
-    <servlet-name>latest.sl</servlet-name>
-    <servlet-class>com.kh.search.controller.AjaxTopTenLatestController</servlet-class>
+    <display-name>topten.sl</display-name>
+    <servlet-name>topten.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxTopTenController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>latest.sl</servlet-name>
-    <url-pattern>/latest.sl</url-pattern>
+    <servlet-name>topten.sl</servlet-name>
+    <url-pattern>/topten.sl</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -355,26 +355,6 @@
   <servlet-mapping>
     <servlet-name>AjaxQuizMarkInitController</servlet-name>
     <url-pattern>/mkQuizInit.sl</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>inquiry.sl</display-name>
-    <servlet-name>inquiry.sl</servlet-name>
-    <servlet-class>com.kh.search.controller.AjaxTopTenInquiryController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>inquiry.sl</servlet-name>
-    <url-pattern>/inquiry.sl</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>grade.sl</display-name>
-    <servlet-name>grade.sl</servlet-name>
-    <servlet-class>com.kh.search.controller.AjaxTopTenGradeController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>grade.sl</servlet-name>
-    <url-pattern>/grade.sl</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
