@@ -2,6 +2,8 @@ function initWrite(){
     /* 
         https://ko.javascript.info/selection-range
         https://dev.to/_moehab/documentexeccommand-alternative-5a55
+        https://jungpaeng.tistory.com/86
+        https://stackoverflow.com/questions/4479151/javascript-how-to-un-surroundcontents-range
     */
     const content = document.querySelector('.content-input div[name=content]');
     const fontBold = document.getElementById('font-bold');
@@ -14,59 +16,212 @@ function initWrite(){
 
     fontBold.addEventListener('click', function(){
         const userSelection = window.getSelection();
-        const selectedTextRange = userSelection.getRangeAt(0);
 
-        let node = document.createElement('b');
-        selectedTextRange.surroundContents(node);
+        const isAllowedContainer = userSelection.baseNode.parentElement?.closest?.('#editor');
+
+        // 선택된 텍스트가 없거나, 에디터 밖이면 종료
+        if( userSelection.rangeCount < 1 || !isAllowedContainer ) return;
+        
+        const selectedTextRange = userSelection.getRangeAt(0); // 드래그한 부분의 range 객체 반환
+        const parentElement = userSelection.anchorNode?.parentElement;  // 드래그한 부분을 감싸는 태그 선택
+        // nodeType = 1 은 해당 부모요소가 <> 태그요소임을 의미
+        // ?. = 옵셔널 체이닝은 존재하지 않을 수 있는 프로퍼티 또는 메서드를 안전하게 호출할 수 있도록 도와줍니다.
+        // 태그요소이고, 중첩된 태그가 아닐때 parentElement를 할당한다. 하나라도 만족하지 않으면 중간에 undefined 반환
+        const selectedElem = parentElement?.nodeType == 1 && parentElement?.children.length < 2 && parentElement;
+        
+        // 이미 해당 스타일 태그로 감싸져 있다면, 스타일 제거
+        if(selectedElem.tagName === 'B') {
+            selectedElem.replaceWith(...selectedElem.childNodes);
+        } 
+        // 스타일을 적용
+        else {
+            const newElem = document.createElement('b');
+            selectedTextRange.surroundContents(newElem);
+            userSelection.removeAllRanges();
+            userSelection.addRange(range);
+            selectedTextRange.collapse(); // 스타일 적용 후 커서를 텍스트 뒤로 이동
+        }
         
     });
 
     fontItalic.addEventListener('click', function(){
         const userSelection = window.getSelection();
-        const selectedTextRange = userSelection.getRangeAt(0);
 
-        let node = document.createElement('i');
-        selectedTextRange.surroundContents(node);
+        const isAllowedContainer = userSelection.baseNode.parentElement?.closest?.('#editor');
+
+        // 선택된 텍스트가 없거나, 에디터 밖이면 종료
+        if( userSelection.rangeCount < 1 || !isAllowedContainer ) return;
+        
+        const selectedTextRange = userSelection.getRangeAt(0); // 드래그한 부분의 range 객체 반환
+        const parentElement = userSelection.anchorNode?.parentElement;  // 드래그한 부분을 감싸는 최상단 태그 선택
+        // nodeType = 1 은 해당 부모요소가 <> 태그요소임을 의미
+        // ?. = 옵셔널 체이닝은 존재하지 않을 수 있는 프로퍼티 또는 메서드를 안전하게 호출할 수 있도록 도와줍니다.
+        // 태그요소이고, 중첩된 태그가 아닐때 parentElement를 할당한다. 하나라도 만족하지 않으면 중간에 undefined 반환
+        const selectedElem = parentElement?.nodeType == 1 && parentElement?.children.length < 2 && parentElement;
+        
+        // 이미 해당 스타일 태그로 감싸져 있다면, 스타일 제거
+        if(selectedElem.tagName === 'I') {
+            selectedElem.replaceWith(...selectedElem.childNodes);
+        } 
+        // 스타일을 적용
+        else {
+            const newElem = document.createElement('i');
+            selectedTextRange.surroundContents(newElem);
+            userSelection.removeAllRanges();
+            userSelection.addRange(range);
+            selectedTextRange.collapse(); // 스타일 적용 후 커서를 텍스트 뒤로 이동
+        }
     });
 
     fontUnderlined.addEventListener('click', function(){
         const userSelection = window.getSelection();
-        const selectedTextRange = userSelection.getRangeAt(0);
 
-        let node = document.createElement('u');
-        selectedTextRange.surroundContents(node);
+        const isAllowedContainer = userSelection.baseNode.parentElement?.closest?.('#editor');
+
+        // 선택된 텍스트가 없거나, 에디터 밖이면 종료
+        if( userSelection.rangeCount < 1 || !isAllowedContainer ) return;
+        
+        const selectedTextRange = userSelection.getRangeAt(0); // 드래그한 부분의 range 객체 반환
+        const parentElement = userSelection.anchorNode?.parentElement;  // 드래그한 부분을 감싸는 태그 선택
+        // nodeType = 1 은 해당 부모요소가 <> 태그요소임을 의미
+        // ?. = 옵셔널 체이닝은 존재하지 않을 수 있는 프로퍼티 또는 메서드를 안전하게 호출할 수 있도록 도와줍니다.
+        // 태그요소이고, 중첩된 태그가 아닐때 parentElement를 할당한다. 하나라도 만족하지 않으면 중간에 undefined 반환
+        const selectedElem = parentElement?.nodeType == 1 && parentElement?.children.length < 2 && parentElement;
+        
+        // 이미 해당 스타일 태그로 감싸져 있다면, 스타일 제거
+        if(selectedElem.tagName === 'U') {
+            selectedElem.replaceWith(...selectedElem.childNodes);
+        } 
+        // 스타일을 적용
+        else {
+            const newElem = document.createElement('u');
+            selectedTextRange.surroundContents(newElem);
+            userSelection.removeAllRanges();
+            userSelection.addRange(range);
+            selectedTextRange.collapse(); // 스타일 적용 후 커서를 텍스트 뒤로 이동
+        }
     });
 
     fontStrikeThrough.addEventListener('click', function(){
         const userSelection = window.getSelection();
-        const selectedTextRange = userSelection.getRangeAt(0);
 
-        let node = document.createElement('s');
-        selectedTextRange.surroundContents(node);
+        const isAllowedContainer = userSelection.baseNode.parentElement?.closest?.('#editor');
+
+        // 선택된 텍스트가 없거나, 에디터 밖이면 종료
+        if( userSelection.rangeCount < 1 || !isAllowedContainer ) return;
+        
+        const selectedTextRange = userSelection.getRangeAt(0); // 드래그한 부분의 range 객체 반환
+        const parentElement = userSelection.anchorNode?.parentElement;  // 드래그한 부분을 감싸는 태그 선택
+        // nodeType = 1 은 해당 부모요소가 <> 태그요소임을 의미
+        // ?. = 옵셔널 체이닝은 존재하지 않을 수 있는 프로퍼티 또는 메서드를 안전하게 호출할 수 있도록 도와줍니다.
+        // 태그요소이고, 중첩된 태그가 아닐때 parentElement를 할당한다. 하나라도 만족하지 않으면 중간에 undefined 반환
+        const selectedElem = parentElement?.nodeType == 1 && parentElement?.children.length < 2 && parentElement;
+        
+        // 이미 해당 스타일 태그로 감싸져 있다면, 스타일 제거
+        if(selectedElem.tagName === 'S') {
+            selectedElem.replaceWith(...selectedElem.childNodes);
+        } 
+        // 스타일을 적용
+        else {
+            const newElem = document.createElement('s');
+            selectedTextRange.surroundContents(newElem);
+            userSelection.removeAllRanges();
+            userSelection.addRange(range);
+            selectedTextRange.collapse(); // 스타일 적용 후 커서를 텍스트 뒤로 이동
+        }
     });
 
     fontSize.addEventListener('click', function(){
         const userSelection = window.getSelection();
-        const selectedTextRange = userSelection.getRangeAt(0);
 
-        let node = document.createElement('b');
-        selectedTextRange.surroundContents(node);
+        const isAllowedContainer = userSelection.baseNode.parentElement?.closest?.('#editor');
+
+        // 선택된 텍스트가 없거나, 에디터 밖이면 종료
+        if( userSelection.rangeCount < 1 || !isAllowedContainer ) return;
+        
+        const selectedTextRange = userSelection.getRangeAt(0); // 드래그한 부분의 range 객체 반환
+        const parentElement = userSelection.anchorNode?.parentElement;  // 드래그한 부분을 감싸는 태그 선택
+        // nodeType = 1 은 해당 부모요소가 <> 태그요소임을 의미
+        // ?. = 옵셔널 체이닝은 존재하지 않을 수 있는 프로퍼티 또는 메서드를 안전하게 호출할 수 있도록 도와줍니다.
+        // 태그요소이고, 중첩된 태그가 아닐때 parentElement를 할당한다. 하나라도 만족하지 않으면 중간에 undefined 반환
+        const selectedElem = parentElement?.nodeType == 1 && parentElement?.children.length < 2 && parentElement;
+        
+        // 이미 해당 스타일 태그로 감싸져 있다면, 스타일 제거
+        if(selectedElem.tagName === 'SPAN') {
+            selectedElem.replaceWith(...selectedElem.childNodes);
+        } 
+        // 스타일을 적용
+        else {
+            const newElem = document.createElement('span');
+            newElem.style.fontSize = '24px';
+
+            selectedTextRange.surroundContents(newElem);
+            userSelection.removeAllRanges();
+            userSelection.addRange(range);
+            selectedTextRange.collapse(); // 스타일 적용 후 커서를 텍스트 뒤로 이동
+        }
     });
 
     fontColor.addEventListener('click', function(){
         const userSelection = window.getSelection();
-        const selectedTextRange = userSelection.getRangeAt(0);
 
-        let node = document.createElement('p');
-        selectedTextRange.surroundContents(node);
+        const isAllowedContainer = userSelection.baseNode.parentElement?.closest?.('#editor');
+
+        // 선택된 텍스트가 없거나, 에디터 밖이면 종료
+        if( userSelection.rangeCount < 1 || !isAllowedContainer ) return;
+        
+        const selectedTextRange = userSelection.getRangeAt(0); // 드래그한 부분의 range 객체 반환
+        const parentElement = userSelection.anchorNode?.parentElement;  // 드래그한 부분을 감싸는 태그 선택
+        // nodeType = 1 은 해당 부모요소가 <> 태그요소임을 의미
+        // ?. = 옵셔널 체이닝은 존재하지 않을 수 있는 프로퍼티 또는 메서드를 안전하게 호출할 수 있도록 도와줍니다.
+        // 태그요소이고, 중첩된 태그가 아닐때 parentElement를 할당한다. 하나라도 만족하지 않으면 중간에 undefined 반환
+        const selectedElem = parentElement?.nodeType == 1 && parentElement?.children.length < 2 && parentElement;
+        
+        // 이미 해당 스타일 태그로 감싸져 있다면, 스타일 제거
+        if(selectedElem.tagName === 'SPAN') {
+            selectedElem.replaceWith(...selectedElem.childNodes);
+        } 
+        // 스타일을 적용
+        else {
+            const newElem = document.createElement('span');
+            newElem.style.color = document.getElementById('color-picker').value;
+
+            selectedTextRange.surroundContents(newElem);
+            userSelection.removeAllRanges();
+            userSelection.addRange(range);
+            selectedTextRange.collapse(); // 스타일 적용 후 커서를 텍스트 뒤로 이동
+        }
     });
 
     fontfill.addEventListener('click', function(){
         const userSelection = window.getSelection();
-        const selectedTextRange = userSelection.getRangeAt(0);
 
-        let node = document.createElement('p');
-        selectedTextRange.surroundContents(node);
+        const isAllowedContainer = userSelection.baseNode.parentElement?.closest?.('#editor');
+
+        // 선택된 텍스트가 없거나, 에디터 밖이면 종료
+        if( userSelection.rangeCount < 1 || !isAllowedContainer ) return;
+        
+        const selectedTextRange = userSelection.getRangeAt(0); // 드래그한 부분의 range 객체 반환
+        const parentElement = userSelection.anchorNode?.parentElement;  // 드래그한 부분을 감싸는 태그 선택
+        // nodeType = 1 은 해당 부모요소가 <> 태그요소임을 의미
+        // ?. = 옵셔널 체이닝은 존재하지 않을 수 있는 프로퍼티 또는 메서드를 안전하게 호출할 수 있도록 도와줍니다.
+        // 태그요소이고, 중첩된 태그가 아닐때 parentElement를 할당한다. 하나라도 만족하지 않으면 중간에 undefined 반환
+        const selectedElem = parentElement?.nodeType == 1 && parentElement?.children.length < 2 && parentElement;
+        
+        // 이미 해당 스타일 태그로 감싸져 있다면, 스타일 제거
+        if(selectedElem.tagName === 'SPAN') {
+            selectedElem.replaceWith(...selectedElem.childNodes);
+        } 
+        // 스타일을 적용
+        else {
+            const newElem = document.createElement('span');
+            newElem.style.backgroundColor = document.getElementById('color-picker').value;
+
+            selectedTextRange.surroundContents(newElem);
+            userSelection.removeAllRanges();
+            userSelection.addRange(range);
+            selectedTextRange.collapse(); // 스타일 적용 후 커서를 텍스트 뒤로 이동
+        }
     });
 }
 
@@ -85,8 +240,9 @@ function selectTab(_this){
 }
 
 function checkEmptyTab(_this){
+    const editor = _this.querySelector("#editor");
     const text =  _this.querySelector("textarea[name=content]");
-    text.value = text.value.replace(/(?:\r\n|\r|\n)/g, '<br>'); /* 엔터입력 처리 */
+    text.value = editor.innerHTML.replace(/(?:\r\n|\r|\n)/g, '<br>'); /* 엔터입력 처리 */
 
     const tabInput = document.querySelector("input[name=tab]");
 
