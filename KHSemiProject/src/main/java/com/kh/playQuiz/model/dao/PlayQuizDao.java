@@ -118,7 +118,7 @@ public class PlayQuizDao {
 		String sql = prop.getProperty("AjaxPlayQuizMedia");
 		
 		
-		if(num == 2) {
+		if(num == 1) {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, pNum);

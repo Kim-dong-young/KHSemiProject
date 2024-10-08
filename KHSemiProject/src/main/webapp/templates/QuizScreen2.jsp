@@ -47,16 +47,141 @@
             </div>
             <div class="answer-container">
                 <input type="text" id="answer-input" placeholder="정답 입력">
-                <button id="submit-btn">제출</button>
+                <button id="submit-btn" onclick="submit_problem()">제출</button>
             </div>
         </div>
     </div>
 
     <button id="home-btn">
-        <img src="<%=contextPath%>/static/img/homebtn.png" alt="홈 버튼">
+        <img src="<%=contextPath%>/static/img/homebtn.png" alt="홈 버튼" onclick="location.href=' <%=contextPath%>/main.me'">
     </button>
 </div>
 <script>
+    var pList = <%= new com.google.gson.Gson().toJson(pList) %>;
+    var pNum = 0;
+    var correctNum = 0;
+
+
+    function renderProblem(){
+        if(pNum < pList.length) {
+            var problem = pList[pNum];
+            document.getElementById("text2").innerText = problem.problem_content;
+
+
+            if(problem.problem_media_kind == 1 || problem.problem_media_kind == 2){
+                document.querySelector(".Media-area").setAttribute('style', "display: true;");
+                $.ajax({
+                    url: "pMedia.pl",
+                    contentType: "application/json",
+                    type: "GET",
+                    data: {
+                        num: problem.problem_media_kind,
+                        pNum: problem.problem_number
+                    },
+                    success: function(res){
+                        if (problem.problem_media_kind == 1) {
+                            document.querySelector(".Media-area").innerHTML = `<img src="<%=contextPath%>/` + res + `" alt="">`;
+                        } else {
+                            document.querySelector(".Media-area").innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/SmTzdSVHvTI?si=0pmxBtOBhp6rPu2B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+                        }
+                    },
+                    error: function(){
+                        console.log("시각콘텐츠 조회용 ajax 통신 실패")
+                    }
+                })
+            } else {
+                document.querySelector(".Media-area").setAttribute('style', "display: none;");
+            }
+            startTimer(problem.Ptime);
+        } else {
+            console.log("응애");
+            postResult();
+        }
+    }
+
+    function postResult() {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "<%=contextPath%>/pqEnd.pl");
+        
+        var correctNumInput = document.createElement("input");
+        correctNumInput.setAttribute("type", "hidden");
+        correctNumInput.setAttribute("name", "correctNum");
+        correctNumInput.setAttribute("value", correctNum);
+        form.appendChild(correctNumInput);
+
+        var quizNumberInput = document.createElement("input");
+        quizNumberInput.setAttribute("type", "hidden");
+        quizNumberInput.setAttribute("name", "quizNumber");
+        quizNumberInput.setAttribute("value", ${param.quizNumber});
+        form.appendChild(quizNumberInput);
+
+        var memberNoInput = document.createElement("input");
+        memberNoInput.setAttribute("type", "hidden");
+        memberNoInput.setAttribute("name", "memberNo");
+        memberNoInput.setAttribute("value", "${loginMember.memberNo}");
+        form.appendChild(memberNoInput);
+
+        var listLenInput = document.createElement("input");
+        memberNoInput.setAttribute("type", "hidden");
+        memberNoInput.setAttribute("name", "listLen");
+        memberNoInput.setAttribute("value", "${pList.size()}");
+        form.appendChild(listLenInput);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+
+  
+
+    function nextProblem(){
+        pNum++;
+        document.querySelector(".answer-container").innerHTML = `<input type="text" id="answer-input" placeholder="정답 입력">
+                <button id="submit-btn" onclick="submit_problem()">제출</button>`
+        renderProblem();
+    }
+
+    
+
+    function submit_problem() {
+        var problem = pList[pNum];
+        let num = problem.problem_number
+        let submitBTN = document.getElementById("submit-btn");
+        submitBTN.setAttribute('disabled', true);
+        let ans = document.getElementById("answer-input").value;
+        $.ajax({
+            url: "qzAnswer.pl",
+            contentType: "application/json",
+            type: "GET",
+            data: {
+                problem_num: num,
+                answer: ans
+            },
+            success: function(res) {
+                console.log(ans)
+                let value = ""
+                if (res.correct) {
+                    value = "정답!";
+                    correctNum++;
+                } else {    
+                    value = "오답! 정답은: " + res.correctAnswer;
+                }
+                console.log(document.getElementById("answer-input").value)
+                document.querySelector("#submit-btn").setAttribute('style', "display: none;");
+                document.querySelector(".answer-container").innerHTML += `<button id="submit-btn" onclick="nextProblem()">다음</button>`
+                document.querySelector("#answer-input").value = value;
+            },
+            error: function() {
+                console.log("정답 조회용 ajax 통신 실패");
+            }
+        });
+    }
+
+
+
+
+
     function startTimer(duration) {
         const progressBar = document.getElementById('progress');
         const timerValue = document.getElementById('timer-value');
@@ -80,12 +205,7 @@
                 console.log('시간이 다됐습니다!');
             }
         }, 1000);
-    }   
-
-
-    startTimer(15);
-
-
+    } 
 </script>
 </body>
 </html>

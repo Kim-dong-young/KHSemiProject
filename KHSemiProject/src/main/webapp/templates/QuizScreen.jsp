@@ -71,7 +71,7 @@
                         </div>
                         
                         `;
-                        mediaInner(problem.problem_media_kind, problem.problem_number);
+                        mediaInner(problem.problem_media_kind,  );
                 } else {
                     // 모든 문제를 다 풀었을 때 결과 창으로 전환
                     addPlayCount(${param.quizNumber}, '${loginMember.memberNo}', correctNum);

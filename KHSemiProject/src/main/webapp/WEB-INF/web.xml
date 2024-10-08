@@ -182,7 +182,7 @@
     <url-pattern>/userset4.me</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>                       
+    <description></description>
     <display-name>delete.bo</display-name>
     <servlet-name>delete.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardDeleteController</servlet-class>
@@ -426,5 +426,15 @@
   <servlet-mapping>
     <servlet-name>AjaxPlayQuizViewCountController</servlet-name>
     <url-pattern>/qzPlCount.pl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PlayQuizEndController</display-name>
+    <servlet-name>PlayQuizEndController</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.PlayQuizEndController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlayQuizEndController</servlet-name>
+    <url-pattern>/pqEnd.pl</url-pattern>
   </servlet-mapping>
 </web-app>
