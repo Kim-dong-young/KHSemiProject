@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.community.model.vo.Category;
 import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -29,7 +30,16 @@ public class BoardEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Category> categoryList = new BoardService().selectUserCategory();
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+		
+		ArrayList<Category> categoryList = new ArrayList<>();
+		
+		// 1번은 관리자
+		if(memberNo == 1) {
+			categoryList = new BoardService().selectCategory();
+		} else {
+			categoryList = new BoardService().selectUserCategory();
+		}
 		
 		request.setAttribute("category", categoryList);
 		
