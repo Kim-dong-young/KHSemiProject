@@ -21,12 +21,13 @@
         <main>
         <fieldset>
             <section id="profile-settings" class="content-section">
-                <h2>프로필 설정</h2>
-                    <img src="${pageContext.request.contextPath}/static/img/bold-icon.png" alt="프로필 이미지" class="profile-image">
-                <form action="${pageContext.request.contextPath}/profile.me" method="post">
+                <h2>프로필 설정</h2>                 
+                <img id="profileImage" src="${pageContext.request.contextPath}/static/img/guest-icon.png" alt="프로필 이미지" class="profile-image" onclick="document.getElementById('imageUpload').click();">
+                <form action="${pageContext.request.contextPath}/profile.me" method="post" enctype="multipart/form-data">
                     <div class="profile-details">
+                        <input type="file" id="imageUpload" name="memberImage" action=".jpg, .png" style="display: none;" onchange="previewImage(event)">
+                        
                         <input type="hidden" name="memberId" value="${loginMember.memberId }">
-
                         <label for="memberNickName">닉네임:</label>
                         <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임">
                         <label for="Introduce">자기소개:</label>
@@ -35,10 +36,17 @@
                     <button type="submit">저장</button>
                 </form>
                 <script>
-                    document.getElementById("edit-update-btn").onclick = function() {
-                        
+                   function previewImage(event) {
+                    const image = document.getElementById('profileImage');
+                    const file = event.target.files[0];  
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                image.src = e.target.result; // 선택된 파일을 이미지로 미리보기
+                            };
+                            reader.readAsDataURL(file); // 파일을 데이터 URL로 변환
+                        }
                     }
-
                 </script>
             </section>
         </fieldset>
