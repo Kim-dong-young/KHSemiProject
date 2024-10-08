@@ -125,6 +125,13 @@ span{
 
 .bulletin-input p{
     font-weight:450;
+    margin : 0;
+    padding : 0;
+}
+
+
+.bulletin-input div{
+    font-weight:450;
 }
 
 .image-input{
