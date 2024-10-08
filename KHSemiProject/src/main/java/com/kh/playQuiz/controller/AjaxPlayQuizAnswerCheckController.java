@@ -31,7 +31,8 @@ public class AjaxPlayQuizAnswerCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pNum = Integer.parseInt(request.getParameter("problem_num"));
-	    String answer = request.getParameter("ans");
+	    String answer = request.getParameter("answer");
+	    System.out.println(answer);
 	    PlayQuizService service = new PlayQuizService();
 	    boolean result = service.AjaxPlayQuizAnswerCheck(pNum, answer);
 	    String correctAnswer = service.getCorrectAnswer(pNum); // 정답을 가져오는 메소드 추가
