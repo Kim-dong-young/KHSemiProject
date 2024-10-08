@@ -30,7 +30,7 @@ public class PersonalPageController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
-		
+		System.out.println(memberNo);
 		request.setAttribute("pageName", "personalPage");
 		request.setAttribute("optional", memberNo);
 		

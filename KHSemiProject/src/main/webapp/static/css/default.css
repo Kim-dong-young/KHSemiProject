@@ -80,6 +80,7 @@ ul, li, ol {
     height: 100%;
     overflow: hidden;
     background: #F3F3F3;
+    z-index: 100;
 }
 
 .side-navi > ul{

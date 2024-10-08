@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectQuizProblem">
+		SELECT PROBLEM_NUMBER,
+			   PROBLEM_CONTENT,
+			   PROBLEM_MEDIA_KIND,
+			   PROBLEM_HINT,
+			   Ptime
+		  FROM PROBLEM
+		 WHERE QUIZ_NUMBER=? 
+	
+	</entry>
+	
+	<entry key="AjaxPlayQuizAnswerCheck">
+		SELECT ANSWER_NUMBER
+		FROM ANSWER
+		WHERE PROBLEM_NUMBER = ?
+		AND ANSWER_CONTENT = ?
+	</entry>
+	
+	<entry key="getCorrectAnswer">
+		SELECT ANSWER_CONTENT
+		FROM ANSWER
+		WHERE PROBLEM_NUMBER = ?
+	</entry>
+</properties>
+
+

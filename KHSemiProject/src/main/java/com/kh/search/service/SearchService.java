@@ -136,17 +136,17 @@ public class SearchService {
 		return list;
 	}
 	
-	public ArrayList<Quiz> selectCreateQuiz(int memberNo, String btnValue) {
+	public ArrayList<Quiz> noSearchMyQuiz(int memberNo, String selectValue, String btnValue) {
 		Connection conn = getConnection();
-		ArrayList<Quiz> list = new QuizDao().selectCreateQuiz(conn, memberNo, btnValue);
+		ArrayList<Quiz> list = new QuizDao().noSearchMyQuiz(conn, memberNo, selectValue, btnValue);
 		
 		JDBCTemplate.close(conn);
 		return list;
 	}
-	
-	public ArrayList<Quiz> selectbookmarkQuiz(int memberNo, String btnValue) {
+		
+	public ArrayList<Quiz> searchMyQuiz(int memberNo, String selectValue, String btnValue, String searchValue, String serSelValue) {
 		Connection conn = getConnection();
-		ArrayList<Quiz> list = new QuizDao().selectbookmarkQuiz(conn, memberNo, btnValue);
+		ArrayList<Quiz> list = new QuizDao().searchMyQuiz(conn, memberNo, selectValue, btnValue, searchValue, serSelValue);
 		
 		JDBCTemplate.close(conn);
 		return list;
