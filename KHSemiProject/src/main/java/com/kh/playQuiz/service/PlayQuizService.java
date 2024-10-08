@@ -1,5 +1,8 @@
 package com.kh.playQuiz.service;
 
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -36,6 +39,18 @@ public class PlayQuizService {
 		
 		
 		return new PlayQuizDao().AjaxPlayQuizMedia(conn, pNum, num);
+	}
+
+	public boolean AjaxPlayQuizViewCount(int qNum, int mNum, int cNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = new PlayQuizDao().AjaxPlayQuizViewCount(conn, qNum, mNum, cNum);
+		
+		if(result) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
 	}
 	
 }

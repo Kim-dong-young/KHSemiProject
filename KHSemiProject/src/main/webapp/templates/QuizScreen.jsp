@@ -68,8 +68,10 @@
                                 <img src="<%=contextPath%>/static/img/homebtn.png" alt="홈 버튼">
                             </button>
                         </div>`;
+                        mediaInner(problem.problem_media_kind, problem.problem_number);
                 } else {
                     // 모든 문제를 다 풀었을 때 결과 창으로 전환
+                    addPlayCount(${param.quizNumber}, '${loginMember.memberNo}', correctNum);
                     document.getElementById("div-main-problem").innerHTML =
                         `<link rel="stylesheet" href="<%=contextPath%>/static/css/Result.css">
                         <div class="container">
@@ -113,7 +115,7 @@
                             </div>
                         </div>`;
                 }
-                mediaInner(problem.problem_media_kind, problem.problem_number);
+                
             }
 
             function mediaInner(num, pNum){
@@ -174,8 +176,23 @@
                 });
             }
 
-            function addPlayCount(pnum){
+            function addPlayCount(qNum, mNum, cNum){
+                $.ajax({
+                    url: "qzPlCount.pl",
+                    contentType: "application/json",
+                    type: "GET",
+                    data: {
+                        qNum: qNum,
+                        mNum: mNum,
+                        cNum: cNum
+                    },
+                    success: function(){
 
+                    },
+                    error: function(){
+                        console.log("조회수 증가용 ajax 통신 실패");
+                    }
+                })
             }
 
             // 첫 번째 문제 렌더링

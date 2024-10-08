@@ -24,6 +24,18 @@
 		FROM ANSWER
 		WHERE PROBLEM_NUMBER = ?
 	</entry>
+	
+	<entry key="AjaxPlayQuizViewCount">
+		INSERT INTO QUIZ_LOG
+		VALUES
+		(
+			SEQ_QLOG.NEXTVAL,
+			?,
+			?,
+			?,
+			SYSDATE
+		)
+	</entry>
 </properties>
 
 

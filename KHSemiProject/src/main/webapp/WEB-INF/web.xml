@@ -425,4 +425,14 @@
     <servlet-name>AjzxPlayQuizMediaController</servlet-name>
     <url-pattern>/pMedia.pl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxPlayQuizViewCountController</display-name>
+    <servlet-name>AjaxPlayQuizViewCountController</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.AjaxPlayQuizViewCountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxPlayQuizViewCountController</servlet-name>
+    <url-pattern>/qzPlCount.pl</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -155,4 +155,27 @@ public class PlayQuizDao {
 		return result;
 	}
 
+	public boolean AjaxPlayQuizViewCount(Connection conn, int qNum, int mNum, int cNum) {
+		boolean result = false;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("AjaxPlayQuizViewCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mNum);
+			pstmt.setInt(2, qNum);
+			pstmt.setInt(3, cNum);
+			
+			
+			result = pstmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
