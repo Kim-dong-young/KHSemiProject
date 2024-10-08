@@ -43,7 +43,7 @@ public class problemsController extends HttpServlet {
 			// 3. 파일 업로드를 위한 DiskFileItemFactory 생성
 			DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
 			JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
-			
+
 			upload.setFileSizeMax(fileMaxSize);
 			upload.setSizeMax(requestMaxSize);
 
@@ -52,8 +52,8 @@ public class problemsController extends HttpServlet {
 
 			Problem p = new Problem();
 			p.setQUIZ_number(((Quiz) request.getAttribute("insertQuiz")).getQuiz_number());
-			
-			//반복문을 통해 파일과 파라미터 정보획득
+
+			// 반복문을 통해 파일과 파라미터 정보획득
 			for (FileItem item : formItems) {
 				if (item.isFormField()) {
 					switch (item.getFieldName()) {
@@ -96,12 +96,14 @@ public class problemsController extends HttpServlet {
 
 			// 응답 처리
 			if (result > 0) {
-				
+				request.setAttribute("alertMsg", "문제 작성 완료");
+				response.sendRedirect(request.getContextPath() + "/problems.co");
 			} else {
 				if (changeName != null) {
 					new File(savePath + changeName).delete();
 				}
-		
+				request.setAttribute("alertMsg", "사진게시글 작성 실패");
+				response.sendRedirect(request.getContextPath() + "/main.me");
 			}
 		}
 	}
