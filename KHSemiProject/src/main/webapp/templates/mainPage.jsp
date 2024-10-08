@@ -29,24 +29,15 @@
             <div>이런 퀴즈는 어떤가요?~</div>
             <div class="recommend-button">
                 <ul>
-                    <li><button class="custom-btn" name="latest" value="latest" onclick="turn(this.name, '<%=contextPath%>')" disabled>최신</button></li>
-                    <li><button class="custom-btn" name="inquiry" value="inquiry" onclick="turn(this.name, '<%=contextPath%>')">조회</button></li>
-                    <li><button class="custom-btn" name="grade" value="grade" onclick="turn(this.name, '<%=contextPath%>')">평점</button></li>
+                    <li><button class="custom-btn" name="latest" value="Latest" disabled>최신</button></li>
+                    <li><button class="custom-btn" name="inquiry" value="Inquiry">조회</button></li>
+                    <li><button class="custom-btn" name="grade" value="Grade">평점</button></li>
                 </ul>
             </div>
             <div class="my-swiper-box">
                 <div class="swiper">
                     <div class="swiper-wrapper">
-                    <%if(list.isEmpty()) {%>
-                        <div class="swiper-slide">조회된 정보가 없습니다.</div>
-                    <%} else {%>
-                    	<%for(Quiz q : list) {%>
-	                    	<div class="swiper-slide" onclick="location.href='<%=contextPath%>/click.sl?quiz_number=<%=q.getQuiz_number() %>&page=1'" style="cursor: pointer">
-	                            <div class="thumbnail"><img src="<%=contextPath%>/<%=q.getThumbnail() %>"></div>
-	                            <div class="title"><%=q.getQuiz_number()%>. <%=q.getQuiz_title() %></div>
-	                        </div>
-                        <%} %>
-                    <%} %>
+                        <!-- ajax로 swiper 채워줌 -->
                     </div>
                     <!-- Add Navigation buttons if needed -->
                     <div class="swiper-button-next"></div>
@@ -63,17 +54,24 @@
                 	    </c:when>
                 		<c:otherwise>
 		                    <div id="user-info">
-		                        <div id=user-info-img><img src="static/img/test.png" alt=""></div>
+		                        <div id=user-info-img><img src="<%=contextPath%>${loginMember.memberImg}" alt=""></div>
 		                        <div class="user-info-exp">
 		                            <div class="user-info-level">
 		                                <div>
 		                                    <span>LV.</span>
-		                                    <span id="level">456</span>
+                                            <c:choose>
+                                                <c:when test="${loginMember.exp lt 1000}">
+		                                            <span id="level">1</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span id="level"></span>
+                                                </c:otherwise>
+                                            </c:choose>
 		                                </div>
 		                                <div>
-		                                    <span>1</span>
+		                                    <span>${loginMember.exp % 1000}</span>
 		                                    <span>/</span>
-		                                    <span>2</span>
+		                                    <span>1000</span>
 		                                </div>
 		                            </div>
 		                            <div id="user-exp-bar">
