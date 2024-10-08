@@ -40,6 +40,7 @@ function initSwiper() {
     }
   })
 }
+
 function selectRate(btnVal, swiper) {
   $.ajax({
     url: "topten.sl",

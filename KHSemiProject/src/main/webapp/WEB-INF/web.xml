@@ -182,15 +182,7 @@
     <url-pattern>/userset4.me</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>quizCreate</servlet-name>
-    <jsp-file>/templates/CreateQuiz.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>quizCreate</servlet-name>
-    <url-pattern>/quiz.cr</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
+    <description></description>                       
     <display-name>delete.bo</display-name>
     <servlet-name>delete.bo</servlet-name>
     <servlet-class>com.kh.community.controller.BoardDeleteController</servlet-class>
