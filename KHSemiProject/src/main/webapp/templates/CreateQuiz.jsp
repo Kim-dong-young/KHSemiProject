@@ -33,7 +33,8 @@ String contextPath = request.getContextPath();
 				</div>
 			</div>
 
-			<form action="<%=contextPath%>/problems.co" class="quiz-content" method="post" enctype="multipart/form-data">
+			<form action="<%=contextPath%>/problems.co" class="quiz-content"
+				method="post" enctype="multipart/form-data">
 				<div id="quiz-content-wrapper">
 					<div class="quiz-slide">
 						<div class="question-type">
@@ -68,10 +69,13 @@ String contextPath = request.getContextPath();
 						</div>
 
 						<div class="buttons">
-								<a class="home-btn" href="<%=contextPath%>/main.me"> 
-								<img src="<%=contextPath%>/static/img/homebtn.png" width="130px" height="45px">
-								</a>
-							<button class="create-btn" onclick="saveQuiz()" type="submit">질문 생성하기</button>
+							<a class="home-btn" href="<%=contextPath%>/main.me"> <img
+								src="<%=contextPath%>/static/img/homebtn.png" width="130px"
+								height="45px">
+							</a>
+							<button class="create-btn" onclick="saveQuiz()" type="submit">질문
+								생성하기</button>
+
 						</div>
 					</div>
 				</div>

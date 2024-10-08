@@ -118,9 +118,10 @@ public class BoardService {
 		
 		int result1 = bDao.deleteComment(conn, boardNo);
 		int result2 = bDao.deleteCommunityLike(conn, boardNo);
-		int result3 = bDao.deleteBoard(conn, boardNo);
+		int result3 = bDao.deleteBoardAttachment(conn, boardNo);
+		int result4 = bDao.deleteBoard(conn, boardNo);
 		
-		if(result1 > -1 && result2 > -1 && result3 > -1) {
+		if(result1 > -1 && result2 > -1 && result3 > -1 && result4 > -1) {
 			commit(conn);
 			isSuccess = true;
 		} else {

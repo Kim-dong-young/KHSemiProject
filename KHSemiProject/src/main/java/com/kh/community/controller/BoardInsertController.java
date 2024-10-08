@@ -13,6 +13,7 @@ import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
 import com.kh.community.service.BoardService;
+import com.kh.member.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -38,6 +39,8 @@ public class BoardInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 		
 		// enctype이 multipart/form-data로 전송됬는지 체크해준다.
 		if(JakartaServletFileUpload.isMultipartContent(request)) {
@@ -73,6 +76,10 @@ public class BoardInsertController extends HttpServlet {
 						break;
 					case "tab":
 						b.setCommunityTab( item.getString( Charset.forName("utf-8")) );
+						if(memberNo != 1 && b.getCommunityTab().equals("1")) {
+							response.sendRedirect("community?cpage=1"); // 관리자가 아닌 유저가 공지글 작성시 취소시킴
+							return;
+						}
 						break;
 					case "title":
 						b.setCommunityTitle( item.getString( Charset.forName("utf-8")) );

@@ -33,7 +33,7 @@ public class PlayQuizMainController extends HttpServlet {
 		ArrayList<Problem> pList = new PlayQuizService().selectQuizProblem(quizNumber);
 		
 		request.setAttribute("pList", pList);
-		request.getRequestDispatcher("templates/QuizScreen.jsp").forward(request, response);
+		request.getRequestDispatcher("templates/QuizScreen2.jsp").forward(request, response);
 	}
 
 	/**

@@ -59,14 +59,7 @@
 		                            <div class="user-info-level">
 		                                <div>
 		                                    <span>LV.</span>
-                                            <c:choose>
-                                                <c:when test="${loginMember.exp lt 1000}">
-		                                            <span id="level">1</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span id="level"></span>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <span id="level"></span>
 		                                </div>
 		                                <div>
 		                                    <span>${loginMember.exp % 1000}</span>
@@ -143,36 +136,7 @@
                 <div class="popular-community">
                     <div>인기글</div>
                     <table>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
+                            
                     </table>
                 </div>
             </div>

@@ -102,6 +102,7 @@ public class CreateQuizMainController extends HttpServlet {
 				request.getSession().setAttribute("alertMsg", "퀴즈 작성 성공");
 				response.sendRedirect(request.getContextPath() + "/quiz.cr");
 			} else { 
+
 				if(cQuiz != null) {
 					 new File(savePath + changeName).delete();
 				 }
