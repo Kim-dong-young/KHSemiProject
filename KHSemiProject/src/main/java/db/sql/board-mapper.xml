@@ -1035,4 +1035,8 @@
 		    ?
 		)
 	</entry>
+	<entry key="deleteBoardAttachment">
+		DELETE FROM COMMUNITY_IMG
+		 WHERE COMMUNITY_NUMBER = ?
+	</entry>
 </properties>

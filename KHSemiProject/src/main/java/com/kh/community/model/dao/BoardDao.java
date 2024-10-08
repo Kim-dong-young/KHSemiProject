@@ -2104,6 +2104,27 @@ public class BoardDao {
 		
 		return result;
 	}
+
+	public int deleteBoardAttachment(Connection conn, int boardNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteBoardAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 }
