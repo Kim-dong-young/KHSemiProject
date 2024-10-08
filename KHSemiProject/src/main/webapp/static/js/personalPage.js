@@ -91,7 +91,7 @@ function listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal) {
                 for(let myQuiz of res.qList) {
                     
                     interestList.innerHTML += "<div class='quizbox' onclick=location.href='" + res.contextPath + "/click.sl?quiz_number=" + myQuiz.quiz_number + "&page=3'>" +
-                                                "<div class='thumbnail'><img src=" + myQuiz.thumbnail + "></div>" + 
+                                                "<div class='thumbnail'><img src=" + res.contextPath + "/" + myQuiz.thumbnail + "></div>" + 
                                                 "<div class='title'>" + myQuiz.quiz_number + ". " + myQuiz.quiz_title + "</div>" + 
                                                 "<div>"
                 }

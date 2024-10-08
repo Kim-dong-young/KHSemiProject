@@ -47,7 +47,7 @@
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
     <div id="header">
-        <div id="logo-img"><a href=""><img src="<%=request.getContextPath()%>/static/img/logo.png" alt="퀴즈팡 로고"></a></div>
+        <div id="logo-img"><a href="<%=request.getContextPath()%>/main.me"><img src="<%=request.getContextPath()%>/static/img/logo.png" alt="퀴즈팡 로고"></a></div>
         <div id="welcome-user">
         	<c:choose>
         		<c:when test="${empty loginMember}">

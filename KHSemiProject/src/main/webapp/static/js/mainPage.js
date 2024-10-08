@@ -1,7 +1,9 @@
-let swiper;
-
 function initSwiper() {
-  swiper = new Swiper('.swiper', {
+  const buttons = document.querySelectorAll('.recommend-button .custom-btn');
+
+  let btnVal;
+
+  let swiper = new Swiper('.swiper', {
       // Optional parameters
       slidesPerView: 6,
       spaceBetween: 10,
@@ -14,34 +16,43 @@ function initSwiper() {
         prevEl: '.swiper-button-prev',
       },
     }); 
-}
 
-function turn(name, path) {
-  let buttons = document.querySelectorAll('.recommend-button .custom-btn');
+    buttons.forEach(button => {
+      if (button.disabled) {
+          btnVal = button.value;
+      }
+    });
+    selectRate(btnVal, swiper);
 
-  for(let i = 0; i < buttons.length; i++) {
-    if (buttons[i].value === name) {
-      buttons[i].disabled = true;  // 클릭된 버튼 비활성화
-    } else {
-        buttons[i].disabled = false; // 나머지 버튼 활성화
+    buttons.forEach(button => {
+      button.onclick = function(ev) {
+        btnVal = ev.target.value;
+        
+        buttons.forEach(btn => {
+          if(btn === ev.target) {
+              btn.disabled = true;
+          } else {
+              btn.disabled = false;
+          }
+      })
+
+      selectRate(btnVal, swiper);
     }
-  }
-
-  selectRate(name, path)
+  })
 }
-
-function selectRate(name, path) {
+function selectRate(btnVal, swiper) {
   $.ajax({
-    url: name + ".sl",
+    url: "topten.sl",
     type: "post",
+    data: {btnValue: btnVal},
     success: function(res) {
-      console.log(res)
+      console.log(res.qList)
 
       swiper.removeAllSlides();
 
-      for(let list of res) {
-        let swiperSlide = "<div class='swiper-slide' onclick=location.href='" + path + "/click.sl?quiz_number=" + list.quiz_number + "&page=1' style='cursor: pointer'>" + 
-        "<div class='thumbnail'><img src=" + path + "/" + list.thumbnail + "></div>" + 
+      for(let list of res.qList) {
+        let swiperSlide = "<div class='swiper-slide' onclick=location.href='" + res.contextPath + "/click.sl?quiz_number=" + list.quiz_number + "&page=1' style='cursor: pointer'>" + 
+        "<div class='thumbnail'><img src=" + res.contextPath + "/" + list.thumbnail + "></div>" + 
         "<div class='title'>" + list.quiz_number + ". " + list.quiz_title + "</div>" + 
         "</div>"
 
