@@ -30,5 +30,12 @@ public class PlayQuizService {
 		
 		return new PlayQuizDao().getCorrectAnswer(conn, pNum);
 	}
+
+	public String AjaxPlayQuizMedia(int num, int pNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		
+		return new PlayQuizDao().AjaxPlayQuizMedia(conn, pNum, num);
+	}
 	
 }

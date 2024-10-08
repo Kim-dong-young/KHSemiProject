@@ -111,4 +111,48 @@ public class PlayQuizDao {
 		return result;
 	}
 
+	public String AjaxPlayQuizMedia(Connection conn, int pNum, int num) {
+		String result = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("AjaxPlayQuizMedia");
+		
+		
+		if(num == 2) {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pNum);
+				
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					result = rset.getString("IMGS_FILE_NAME");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+		} else {
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pNum);
+				
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					result = rset.getString("imgs_link_path");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+		}
+		
+		return result;
+	}
+
 }

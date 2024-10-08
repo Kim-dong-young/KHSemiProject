@@ -425,7 +425,7 @@
     <servlet-name>AjaxPlayQuizAnswerCheckController</servlet-name>
     <url-pattern>/qzAnswer.pl</url-pattern>
   </servlet-mapping>
-<servlet>
+  <servlet>
     <description></description>
     <display-name>report.co</display-name>
     <servlet-name>report.co</servlet-name>
@@ -434,5 +434,15 @@
   <servlet-mapping>
     <servlet-name>report.co</servlet-name>
     <url-pattern>/report.co</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjzxPlayQuizMediaController</display-name>
+    <servlet-name>AjzxPlayQuizMediaController</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.AjzxPlayQuizMediaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjzxPlayQuizMediaController</servlet-name>
+    <url-pattern>/pMedia.pl</url-pattern>
   </servlet-mapping>
 </web-app>
