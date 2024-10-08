@@ -59,14 +59,7 @@
 		                            <div class="user-info-level">
 		                                <div>
 		                                    <span>LV.</span>
-                                            <c:choose>
-                                                <c:when test="${loginMember.exp lt 1000}">
-		                                            <span id="level">1</span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span id="level"></span>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <span id="level"></span>
 		                                </div>
 		                                <div>
 		                                    <span>${loginMember.exp % 1000}</span>

@@ -62,7 +62,7 @@ CREATE TABLE QUIZ(
     QUIZ_explanation varchar2(500),
     MEMBER_number number not null,
     CATEGORY_number number not null,
-    THUMBNAIL VARCHAR2(1500),
+    THUMBNAIL VARCHAR2(1500) DEFAULT 'static/img/THUMBNAIL/default.png',
     PRIMARY KEY(QUIZ_number),
     FOREIGN KEY(MEMBER_number) references MEMBER(MEMBER_number),
     FOREIGN KEY(CATEGORY_number) references CATEGORY(CATEGORY_number)

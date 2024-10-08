@@ -1,10 +1,8 @@
 package com.kh.main.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import com.kh.search.model.vo.Quiz;
-import com.kh.search.service.SearchService;
+import com.kh.member.model.vo.Member;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -31,6 +29,12 @@ public class MainPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("pageName", "mainPage");
 		
+		Member m = ((Member)request.getSession().getAttribute("loginMember"));
+		
+		if(m != null) {
+			request.setAttribute("optional", m.getMemberNo());
+		}
+	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
 	}
 

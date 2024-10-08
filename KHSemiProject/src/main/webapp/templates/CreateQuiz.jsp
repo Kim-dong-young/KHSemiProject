@@ -70,13 +70,12 @@ String contextPath = request.getContextPath();
 						</div>
 
 						<div class="buttons">
-							<button class="home-btn">
-								<a href="<%=contextPath%>/main.me"> <img
-									src="<%=contextPath%>/static/img/homebtn.png" width="130px"
-									height="45px">
-								</a>
-							</button>
-							<button class="create-btn" onclick="saveQuiz()">질문 생성하기</button>
+                     <button class="home-btn">
+                        <a href=<%=contextPath%>"/main.me"> <img src="<%=contextPath%>/static/img/homebtn.png"
+                           width="130px" height="45px">
+                        </a>
+                     </button>
+                     <button class="create-btn" onclick="saveQuiz()">질문 생성하기</button>
 						</div>
 					</div>
 				</div>
