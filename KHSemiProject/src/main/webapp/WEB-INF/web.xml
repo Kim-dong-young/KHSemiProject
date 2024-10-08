@@ -182,14 +182,6 @@
     <url-pattern>/userset4.me</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>quizCreate</servlet-name>
-    <jsp-file>/templates/CreateQuiz.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>quizCreate</servlet-name>
-    <url-pattern>/quiz.cr</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <description></description>
     <display-name>delete.bo</display-name>
     <servlet-name>delete.bo</servlet-name>
@@ -434,5 +426,15 @@
   <servlet-mapping>
     <servlet-name>AjaxPlayQuizViewCountController</servlet-name>
     <url-pattern>/qzPlCount.pl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PlayQuizEndController</display-name>
+    <servlet-name>PlayQuizEndController</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.PlayQuizEndController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PlayQuizEndController</servlet-name>
+    <url-pattern>/pqEnd.pl</url-pattern>
   </servlet-mapping>
 </web-app>

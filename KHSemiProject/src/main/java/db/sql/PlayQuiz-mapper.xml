@@ -36,6 +36,12 @@
 			SYSDATE
 		)
 	</entry>
+	
+	<entry key="AjaxPlayQuizMedia">
+		SELECT IMGS_FILE_NAME, IMGS_LINK_PATH
+		FROM IMGS_FILE
+		WHERE IMGS_FILE_ID = ?
+	</entry>
 </properties>
 
 

@@ -309,6 +309,29 @@
 		SEQ_PNO.CURRVAL
 	)
 	</entry>
+	
+	<entry key="insertQuizNotThumb">
+		INSERT INTO QUIZ
+        (
+            QUIZ_NUMBER,
+            QUIZ_TITLE,
+            QUIZ_DATE,
+            QUIZ_MODIFY_DATE,
+            QUIZ_EXPLANATION,
+            MEMBER_NUMBER,
+            CATEGORY_NUMBER
+        )
+        VALUES
+        (
+            SEQ_QUIZ.NEXTVAL,
+            ?,
+            SYSDATE,
+            SYSDATE,
+            ?,
+            ?,
+            ?
+        )
+	</entry>
 </properties>
 
 

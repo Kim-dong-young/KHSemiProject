@@ -55,6 +55,7 @@
             </div>
         </div>
 
+        <!--
         <div class="section2">
             
         </div>
@@ -70,6 +71,7 @@
         <div class="section5">
 
         </div>
+        -->
 
         <div class="footer">
             <span>

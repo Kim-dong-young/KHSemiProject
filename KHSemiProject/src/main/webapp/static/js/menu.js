@@ -29,5 +29,8 @@ function init(pageName, optional){
         case "searchClickPage":
             init()
             break;
+        case "PlayQuizMain":
+            renderProblem()
+            break;
     }
 }

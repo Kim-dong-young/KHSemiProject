@@ -30,23 +30,26 @@ public class CreateQuizDAO {
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("insertQuiz");
+		String sql;
+		
+		if(quiz.getTHUMBNAIL() == null) {
+			sql = prop.getProperty("insertQuizNotThumb");
+		} else {
+			sql = prop.getProperty("insertQuiz");
+		}
+		
 		System.out.println(sql);
 		try {
-			
-			System.out.println(quiz.getQUIZ_TITLE());
-			System.out.println(quiz.getQUIZ_EXPLANATION());
-			System.out.println(quiz.getMEMBER_NUMBER());
-			System.out.println(quiz.getCATEGORY_NUMBER());
-			System.out.println(quiz.getTHUMBNAIL());
-			
 			pstmt = conn.prepareStatement(sql);
 			
             pstmt.setString(1, quiz.getQUIZ_TITLE());
             pstmt.setString(2, quiz.getQUIZ_EXPLANATION());
             pstmt.setInt(3, quiz.getMEMBER_NUMBER());
             pstmt.setInt(4, quiz.getCATEGORY_NUMBER());
-            pstmt.setString(5, quiz.getTHUMBNAIL());
+            
+            if(quiz.getTHUMBNAIL() != null) {
+            	pstmt.setString(5, quiz.getTHUMBNAIL());
+            }
             
             result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -94,7 +97,7 @@ public class CreateQuizDAO {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, p.getPROBLEM_number());
-			pstmt.setString(2,p.getPROBLEM_conment());
+			pstmt.setString(2,p.getPROBLEM_content());
 			pstmt.setInt(3, p.getPROBLEM_media_kind());
 			pstmt.setString(4, p.getPROBLEM_media());
 			pstmt.setString(5, p.getPROBLEM_hint());

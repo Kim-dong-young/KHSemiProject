@@ -77,9 +77,9 @@ textarea {
 
 .screen{
     background: #d9d9d9;
-    
-    width: 60%;
-    height: 380px;
+    object-fit: scale-down;
+    width: 400px;
+    height: 400px;
     margin: auto;
 }
 
