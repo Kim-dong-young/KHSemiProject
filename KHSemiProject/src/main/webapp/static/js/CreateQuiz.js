@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						<img src="./static/img/homebtn.png" width="130px" height="45px">
 					</a>
 				</button>
-				<button class="create-btn">질문 생성하기</button>
+				<button class="create-btn" onclick="saveQuiz()">질문 생성하기</button>
 			</div>
         `;
         quizLayout.appendChild(newPage);
