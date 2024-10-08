@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%
 String contextPath = request.getContextPath();
-
 %>
 
 <!DOCTYPE html>
@@ -34,7 +33,8 @@ String contextPath = request.getContextPath();
 				</div>
 			</div>
 
-			<form class="quiz-content" method="post" enctype="multipart/form-data">
+			<form class="quiz-content" method="post"
+				enctype="multipart/form-data">
 				<div id="quiz-content-wrapper">
 					<div class="quiz-slide">
 						<div class="question-type">
@@ -57,10 +57,9 @@ String contextPath = request.getContextPath();
 						</div>
 
 						<div class="time-limit">
-							<label>제한시간</label> 
-							<input type="radio" name="time-1" value="15"> 15초
-							<input type="radio" name="time-1" value="30"> 30초 
-							<input type="radio" name="time-1" value="45"> 45초
+							<label>제한시간</label> <input type="radio" name="time-1" value="15">
+							15초 <input type="radio" name="time-1" value="30"> 30초 <input
+								type="radio" name="time-1" value="45"> 45초
 						</div>
 
 						<div class="hint-answer">
@@ -68,18 +67,17 @@ String contextPath = request.getContextPath();
 								placeholder="없을 경우 '.'을 입력해 주세요"> <label for="answer-1">정답:</label>
 							<input type="text" id="answer-1" placeholder="정답을 입력해 주세요">
 						</div>
-
-						<div class="buttons">
-							<button class="home-btn">
-								<a href="<%=contextPath%>/main.me"> <img
-									src="<%=contextPath%>/static/img/homebtn.png" width="130px"
-									height="45px">
-								</a>
-							</button>
-							<button class="create-btn" onclick="saveQuiz()">질문 생성하기</button>
-						</div>
 					</div>
 				</div>
+				<div class="buttons">
+					<button class="home-btn"
+						onclick="location.href='<%=contextPath%>/main.me'">
+						<img src="<%=contextPath%>/static/img/homebtn.png" width="130px"
+							height="45px">
+					</button>
+					<button class="create-btn" onclick="saveQuiz()" onclick="window.location.href='<%=contextPath%>/main.me'">질문 생성하기</button>
+				</div>
+
 			</form>
 		</div>
 	</div>

@@ -99,7 +99,7 @@ public class CreateQuizMainController extends HttpServlet {
 			int result = quizService.createQuiz(cQuiz);
 			
 			if(result > 0) {
-				request.getSession().setAttribute("alertMsg", "사진게시글 작성 성공");
+				request.getSession().setAttribute("alertMsg", "퀴즈 작성 성공");
 				response.sendRedirect(request.getContextPath() + "/quiz.cr");
 			} else { 
 				if(cQuiz != null) {
