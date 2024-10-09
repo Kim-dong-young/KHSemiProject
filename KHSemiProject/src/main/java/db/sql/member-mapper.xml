@@ -132,4 +132,9 @@
 		MEMBER_INTRODUCE = ?
 	WHERE MEMBER_ID = ?
 	</entry>
+	<entry key="playedRecode">
+		SELECT COUNT(*) AS "count"
+  		  FROM QUIZ_LOG
+ 	     WHERE MEMBER_NUMBER = ? AND TO_CHAR(QUIZ_LOG_DATE) = TO_CHAR(SYSDATE)
+	</entry>
 </properties>
