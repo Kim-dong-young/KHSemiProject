@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList, com.kh.playQuiz.model.vo.Problem"%>
 <%
     ArrayList<Problem> pList = (ArrayList<Problem>)request.getAttribute("pList");
+        String contextPath2 = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퀴즈팡</title>
-    
+    <script src="<%=contextPath2%>/static/js/Quiz Screen(Media O).js"></script>
 </head>
 <body>
     
@@ -30,11 +31,11 @@
                     console.log(pList);
                     var problem = pList[pNum];
                     document.getElementById("div-main-problem").innerHTML =
-                        `<link rel="stylesheet" href="<%=contextPath%>/static/css/QuizScreen(Media X).css">
+                        `<link rel="stylesheet" href="<%=contextPath%>/static/css/QuizScreen(Media O).css">
                         <div id="quiz-container">
                             <div id="header">
                                 <div id="title">
-                                    <img src="<%=contextPath%>/static/img/QuizLogo.png" alt="퀴즈 로고">
+                                    <img src="<%=contextPath%>/static/img/logo.png" alt="퀴즈 로고"  onclick="location.href=' <%=contextPath%>/main.me'">
                                 </div>
                                 <div id="right-header">
                                     
@@ -65,10 +66,12 @@
                             </div>
 
                             <button id="home-btn">
-                                <img src="<%=contextPath%>/static/img/homebtn.png" alt="홈 버튼">
+                                <img src="<%=contextPath%>/static/img/homebtn.png" alt="홈 버튼"  onclick="location.href=' <%=contextPath%>/main.me'">
                             </button>
-                        </div>`;
-                        mediaInner(problem.problem_media_kind, problem.problem_number);
+                        </div>
+                        
+                        `;
+                        mediaInner(problem.problem_media_kind,  );
                 } else {
                     // 모든 문제를 다 풀었을 때 결과 창으로 전환
                     addPlayCount(${param.quizNumber}, '${loginMember.memberNo}', correctNum);
@@ -77,7 +80,7 @@
                         <div class="container">
                             <div class="box">
                                 <p>당신은 상위 <span class="highlight">?</span>% 입니다.</p>
-                                <p>당신의 정답률: <span class="highlight">80%</span> <span class="highlight">16/20</span></p>
+                                <p>당신의 정답률: <span class="highlight">` + Math.round((correctNum / pList.length) * 100) + `%</span> <span class="highlight">` + correctNum + `/` + pList.length + `</span></p>
                                 <p>평균 정답률: <span class="highlight">?</span>%</p>
                             </div>
                             
@@ -108,7 +111,6 @@
                             <div class="bottom-buttons">
                                 <button class="report-btn">신고하기</button>
                                 <button class="button" onclick="location.href=' <%=contextPath%>/main.me'">
-                                    <a></a>
                                     홈으로
                                 </button>
                                 <button class="button">다시하기</button>

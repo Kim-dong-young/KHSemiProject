@@ -136,36 +136,7 @@
                 <div class="popular-community">
                     <div>인기글</div>
                     <table>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
-                        <tr>
-                            <td class="tab">잡담</td>
-                            <td class="title">테스트용 제목</td>
-                            <td class="author">Test1</td>
-                            <td class="comment-num">[1]<img src="../static/img/comment-icon.png"></td>
-                        </tr>
+                            
                     </table>
                 </div>
             </div>

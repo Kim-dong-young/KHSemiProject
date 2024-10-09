@@ -102,7 +102,7 @@ public class CreateQuizDAO {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, p.getPROBLEM_number());
-			pstmt.setString(2,p.getPROBLEM_conment());
+			pstmt.setString(2,p.getPROBLEM_content());
 			pstmt.setInt(3, p.getPROBLEM_media_kind());
 			pstmt.setString(4, p.getPROBLEM_media());
 			pstmt.setString(5, p.getPROBLEM_hint());
