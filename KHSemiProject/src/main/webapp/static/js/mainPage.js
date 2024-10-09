@@ -1,7 +1,11 @@
 function initMain(optional) {
   selectPopBoard();
   setInterval(selectPopBoard, 3000)
-  setLevel(optional);
+  
+  if(optional) {
+    setLevel(optional);
+  }
+
   const buttons = document.querySelectorAll('.recommend-button .custom-btn');
   let btnVal;
 
