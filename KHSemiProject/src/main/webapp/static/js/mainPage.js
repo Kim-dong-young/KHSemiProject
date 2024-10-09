@@ -1,6 +1,10 @@
+function initMain(){
+    selectPopBoard();
+    setInterval(selectPopBoard, 3000);
+    selectDailyQuest();
+}
+
 function initSwiper() {
-  selectPopBoard();
-  setInterval(selectPopBoard, 3000);
   
   const buttons = document.querySelectorAll('.recommend-button .custom-btn');
 
@@ -133,4 +137,38 @@ function selectPopBoard(){
           console.log("인기글 조회 실패");
       }
   })
+}
+
+function selectDailyQuest(){
+  $.ajax({
+    url: "dailyQuest.me",
+    type: "post",
+    success: function(res) {
+      const questDiv = document.querySelector(".quest-list-row");
+      let str = "";
+      console.log(res)
+      console.log("응답 길이:", res.length);
+
+      for(let quest of res) {
+        str += (
+          "<div>" +
+              "<div class='quest-content'>"+ quest.questContent+"</div>" +
+               "<div class='quest-achieving-condition'>" +
+                  "<span>" + quest.questSuccess + "</span>" +
+                  "<span> / </span>" +
+                  "<span class='completion-condition'>" + 1 + "</span>" +
+              "</div>" +
+              "<div class='submit-btn'>" +
+                  "<button>달성하기</button>" +
+              "</div>" +
+          "</div>"
+        )
+      }
+
+      questDiv.innerHTML = str;
+    },
+    error : function() {
+      console.log("일일퀘스트 조회 실패");
+    }
+  });
 }

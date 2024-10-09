@@ -21,6 +21,7 @@ function init(pageName, optional){
             initLoad(optional)
             break;
         case "mainPage":
+            initMain()
             initSwiper()
 			break;
         case "searchMainPage":

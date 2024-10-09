@@ -98,6 +98,7 @@
                 <div class="quest-list">
                     <div>일간</div>
                     <div class="quest-list-row">
+                        <!--
                         <div>
                             <div class="quest-content">1. 퀴즈 1개 완료하기</div>
                             <div class="quest-achieving-condition">
@@ -109,28 +110,7 @@
                                 <button>달성하기</button>
                             </div>
                         </div>
-                        <div>
-                            <div class="quest-content">1. 퀴즈 1개 완료하기</div>
-                            <div class="quest-achieving-condition">
-                                <span>0</span>
-                                <span>/</span>
-                                <span class="completion-condition">1</span>
-                            </div>
-                            <div class="submit-btn">
-                                <button>달성하기</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="quest-content">1. 퀴즈 1개 완료하기</div>
-                            <div class="quest-achieving-condition">
-                                <span>0</span>
-                                <span>/</span>
-                                <span class="completion-condition">1</span>
-                            </div>
-                            <div class="submit-btn">
-                                <button>달성하기</button>
-                            </div>
-                        </div>
+                        -->
                     </div>                    
                 </div>
                 <div class="popular-community">

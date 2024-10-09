@@ -8,9 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.Quest;
 
 public class MemberDao {
 	private Properties prop = new Properties();
@@ -407,6 +409,91 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public ArrayList<Quest> selectDailyQuest(Connection conn, Member loginMember) {
+		ArrayList<Quest> questList = new ArrayList<>();
+		
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectDailyQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginMember.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Quest quest = new Quest(
+							rset.getInt("MEMBER_QUEST_NUMBER"),
+							rset.getInt("MEMBER_QUEST_SUCCESS"),
+							rset.getString("MEMBER_QUEST_DATE"),
+							rset.getInt("MEMBER_NUMBER"),
+							rset.getInt("QUEST_NUMBER"),
+							rset.getString("QUEST_CONTENT")
+						);
+				
+				questList.add(quest);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return questList;
+	}
+
+	public int insertDailyQuest(Connection conn, Member loginMember, int questNo) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertDailyQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginMember.getMemberNo());
+			pstmt.setInt(2, questNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectQuestCount(Connection conn) {
+		int result = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectQuestCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
 		return result;
 	}
 }
