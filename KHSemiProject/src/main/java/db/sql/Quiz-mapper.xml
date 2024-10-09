@@ -332,6 +332,18 @@
             ?
         )
 	</entry>
+	<entry key="noSearchLatestSolved">
+		
+	</entry>
+	<entry key="noSearchInquirySolved">
+		SELECT q.QUIZ_NUMBER,
+       		   QUIZ_TITLE,
+       		   THUMBNAIL
+  		  FROM QUIZ_LOG ql
+  		  JOIN QUIZ q on(ql.QUIZ_NUMBER = q.QUIZ_NUMBER)
+ 		 WHERE ql.MEMBER_NUMBER = ?
+         ORDER BY QUIZ_TITLE	
+	</entry>
 </properties>
 
 
