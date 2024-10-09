@@ -332,9 +332,7 @@
             ?
         )
 	</entry>
-	<entry key="noSearchLatestSolved">
-		
-	</entry>
+
 	<entry key="noSearchInquirySolved">
 		SELECT q.QUIZ_NUMBER,
        		   QUIZ_TITLE,
@@ -343,6 +341,16 @@
   		  JOIN QUIZ q on(ql.QUIZ_NUMBER = q.QUIZ_NUMBER)
  		 WHERE ql.MEMBER_NUMBER = ?
          ORDER BY QUIZ_TITLE	
+	</entry>
+	<entry key="insertAnswer">
+		INSERT INTO ANSWER
+		(
+			ANSWER_COMENT
+		)
+		VALUES
+		(
+		?
+		)
 	</entry>
 </properties>
 
