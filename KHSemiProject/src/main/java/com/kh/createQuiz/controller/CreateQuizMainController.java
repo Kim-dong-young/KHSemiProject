@@ -96,13 +96,13 @@ public class CreateQuizMainController extends HttpServlet {
             if (result > 0) {
                 Quiz createdQuiz = new Quiz();
                 createdQuiz.setQuiz_number(cQuiz.getQUIZ_NUMBER());
-                request.setAttribute("insertQuiz", createdQuiz); // 생성한 퀴즈 객체를 속성으로 설정
+                request.setAttribute("insertQuiz", createdQuiz); 
 
                 request.getSession().setAttribute("alertMsg", "퀴즈 작성 완료");
                 response.sendRedirect(request.getContextPath() + "/problems.co");
             } else {
                 if (cQuiz != null) {
-                    new File(savePath + changeName).delete(); // 실패 시 파일 삭제
+                    new File(savePath + changeName).delete(); 
                 }
                 request.setAttribute("alertMsg", "퀴즈 작성 실패");
                 response.sendRedirect(request.getContextPath() + "/main.me");
