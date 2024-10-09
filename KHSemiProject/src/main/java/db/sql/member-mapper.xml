@@ -132,6 +132,7 @@
 		MEMBER_INTRODUCE = ?
 	WHERE MEMBER_ID = ?
 	</entry>
+<<<<<<< HEAD
 	<entry key="selectDailyQuest">
 	 SELECT MEMBER_QUEST_NUMBER ,
 			MEMBER_QUEST_SUCCESS ,
@@ -161,4 +162,9 @@
 		SELECT COUNT(*) AS COUNT
 		FROM QUEST
 	</entry>
+	<entry key="playedRecode">
+		SELECT COUNT(*) AS "count"
+ 		  FROM QUIZ_LOG
+	     WHERE MEMBER_NUMBER = ? AND TO_CHAR(QUIZ_LOG_DATE) = TO_CHAR(SYSDATE)
+ 	</entry>
 </properties>

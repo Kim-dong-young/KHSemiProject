@@ -88,7 +88,7 @@ public class CreateQuizMainController extends HttpServlet {
 						String type = originName.substring(originName.lastIndexOf("."));
 						changeName = tmpName + type; //서버에 저장할 파일명
 						
-						File f = new File(savePath, changeName);
+						File f = new File(savePath, changeName);                                                                 
 						item.write(f.toPath()); //지정한 경로에 파일 업로드
 						
 						cQuiz.setTHUMBNAIL("static/img/THUMBNAIL/" + changeName);
@@ -99,10 +99,9 @@ public class CreateQuizMainController extends HttpServlet {
 			int result = quizService.createQuiz(cQuiz);
 			
 			if(result > 0) {
-				request.getSession().setAttribute("alertMsg", "퀴즈 작성 완료");
-				response.sendRedirect(request.getContextPath() + "/templates/CreateQuiz.jsp");
-			} else { 
-
+//				response.sendRedirect(request.getContextPath() + "/main.me");
+				request.getRequestDispatcher("templates/CreateQuiz.jsp").forward(request, response);
+			} else {
 				if(cQuiz != null) {
 					 new File(savePath + changeName).delete();
 				 }

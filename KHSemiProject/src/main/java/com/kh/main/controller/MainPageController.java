@@ -3,6 +3,7 @@ package com.kh.main.controller;
 import java.io.IOException;
 
 import com.kh.member.model.vo.Member;
+import com.kh.member.service.MemberService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -32,7 +33,10 @@ public class MainPageController extends HttpServlet {
 		Member m = ((Member)request.getSession().getAttribute("loginMember"));
 		
 		if(m != null) {
-			request.setAttribute("optional", m.getMemberNo());
+			int result = new MemberService().playedRecode(m.getMemberNo());
+			
+			request.setAttribute("optional", m.getExp());
+			request.setAttribute("playedRecode", result);
 		}
 	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);

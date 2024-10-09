@@ -33,7 +33,11 @@ String contextPath = request.getContextPath();
 				</div>
 			</div>
 
+<<<<<<< HEAD
+			<form action="problems.co" class="quiz-content" method="post" enctype="multipart/form-data">
+=======
 			<form action="<%=contextPath%>/problems.co" class="quiz-content" method="post" enctype="multipart/form-data">
+>>>>>>> bdc9e70abf7cb98d8dbe7c95bc779e2b21c6249d
 				<div id="quiz-content-wrapper">
 					<div class="quiz-slide">
 						<div class="question-type">

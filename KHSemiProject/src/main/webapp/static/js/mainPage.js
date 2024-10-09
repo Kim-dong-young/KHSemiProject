@@ -1,13 +1,10 @@
-function initMain(){
-    selectPopBoard();
-    setInterval(selectPopBoard, 3000);
-    selectDailyQuest();
-}
+function initMain(optional) {
+  selectPopBoard();
+  setInterval(selectPopBoard, 3000);
+  setLevel(optional);
+  selectDailyQuest()
 
-function initSwiper() {
-  
   const buttons = document.querySelectorAll('.recommend-button .custom-btn');
-
   let btnVal;
 
   let swiper = new Swiper('.swiper', {
@@ -36,7 +33,7 @@ function initSwiper() {
         btnVal = ev.target.value;
         
         buttons.forEach(btn => {
-          if(btn === ev.target) {
+          if(btn === ev.target) { 
               btn.disabled = true;
           } else {
               btn.disabled = false;
@@ -139,6 +136,7 @@ function selectPopBoard(){
   })
 }
 
+
 function selectDailyQuest(){
   $.ajax({
     url: "dailyQuest.me",
@@ -171,4 +169,31 @@ function selectDailyQuest(){
       console.log("일일퀘스트 조회 실패");
     }
   });
+}
+
+function setLevel(optional) {
+    const levelValue = document.getElementById('level')
+    const expValue = document.getElementById('exp-value')
+    const expBarValue = document.getElementById('current-user-exp-bar')
+  
+    let op = Number(optional) //optional을 number타입으로 변경
+  
+    let maxExp = 1000;
+    let level = Math.floor(op / maxExp);
+    let exp = op % maxExp;
+    let expGage = (exp / maxExp) * 100;
+  
+    if(op < maxExp) {
+      levelValue.innerText = 1;
+    } else {
+      levelValue.innerText = level + 1;
+    }
+    
+    if(exp > 0) {
+      expValue.innerText = exp;
+    } else {
+      expValue.innerText = 0;
+    }
+  
+    expBarValue.style.width = expGage + '%'
 }

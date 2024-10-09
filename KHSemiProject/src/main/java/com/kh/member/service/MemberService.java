@@ -55,6 +55,7 @@ public class MemberService {
 			rollback(conn);
 		}
 		
+		close(conn);
 		return updateMember;
 	}
 	
@@ -134,6 +135,7 @@ public class MemberService {
 			}
 		}
 		
+		close(conn);
 		return loginMember;
 	}
 
@@ -150,6 +152,8 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		return updateMember;
 	}
 
@@ -166,9 +170,11 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		return null;
 	}
-
+	
 	public ArrayList<Quest> getDailyQuest(Member loginMember) {
 		Connection conn = getConnection();
 		MemberDao mDao = new MemberDao();
@@ -211,5 +217,14 @@ public class MemberService {
 
 		close(conn);
 		return questList;
+	}
+
+
+	public int playedRecode(int memberNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().playedRecode(conn, memberNo);
+		
+		close(conn);
+		return result;
 	}
 }
