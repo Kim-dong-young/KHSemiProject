@@ -41,6 +41,11 @@ public class CreateQuizDAO {
 		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
+			System.out.println(quiz.getQUIZ_TITLE());
+			System.out.println(quiz.getQUIZ_EXPLANATION());
+			System.out.println(quiz.getMEMBER_NUMBER());
+			System.out.println(quiz.getCATEGORY_NUMBER());
+			System.out.println(quiz.getTHUMBNAIL());
 			
             pstmt.setString(1, quiz.getQUIZ_TITLE());
             pstmt.setString(2, quiz.getQUIZ_EXPLANATION());

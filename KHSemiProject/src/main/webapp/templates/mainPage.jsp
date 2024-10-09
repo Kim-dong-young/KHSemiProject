@@ -61,8 +61,8 @@
 		                                    <span>LV.</span>
                                             <span id="level"></span>
 		                                </div>
-		                                <div>
-		                                    <span>${loginMember.exp % 1000}</span>
+		                                <div> 
+		                                    <span id="exp-value"></span>
 		                                    <span>/</span>
 		                                    <span>1000</span>
 		                                </div>

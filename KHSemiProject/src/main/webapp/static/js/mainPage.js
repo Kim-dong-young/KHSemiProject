@@ -1,6 +1,5 @@
-function initSwiper() {
+function initSwiper(optional) {
   const buttons = document.querySelectorAll('.recommend-button .custom-btn');
-
   let btnVal;
 
   let swiper = new Swiper('.swiper', {

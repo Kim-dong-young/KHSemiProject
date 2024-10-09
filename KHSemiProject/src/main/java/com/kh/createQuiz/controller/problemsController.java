@@ -28,23 +28,23 @@ public class problemsController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int PROBLEM_number = Integer.parseInt(request.getParameter("pno"));
-		String PROBLEM_content = request.getParameter("pcontent") ;
-		int PROBLEM_media_kind = Integer.parseInt(request.getParameter("pmk"));
-		String PROBLEM_media = request.getParameter("pmedia");
-		String PROBLEM_hint = request.getParameter("phint");
-		
-		Problem p = new Problem();
-		p.setPROBLEM_number(PROBLEM_number);
-		p.setPROBLEM_conment(PROBLEM_content);
-		p.setPROBLEM_media_kind(PROBLEM_media_kind);
-		p.setPROBLEM_media(PROBLEM_media);
-		p.setPROBLEM_hint(PROBLEM_hint);
-		
-		int result = new CreateQuizServiceImpl().insertProblems(p);
-		
-		response.getWriter().print(result);
-		System.out.println(result);
+//		int PROBLEM_number = Integer.parseInt(request.getParameter("pno"));
+//		String PROBLEM_content = request.getParameter("pcontent") ;
+//		int PROBLEM_media_kind = Integer.parseInt(request.getParameter("pmk"));
+//		String PROBLEM_media = request.getParameter("pmedia");
+//		String PROBLEM_hint = request.getParameter("phint");
+//		
+//		Problem p = new Problem();
+//		p.setPROBLEM_number(PROBLEM_number);
+//		p.setPROBLEM_conment(PROBLEM_content);
+//		p.setPROBLEM_media_kind(PROBLEM_media_kind);
+//		p.setPROBLEM_media(PROBLEM_media);
+//		p.setPROBLEM_hint(PROBLEM_hint);
+//		
+//		int result = new CreateQuizServiceImpl().insertProblems(p);
+//		
+//		response.getWriter().print(result);
+//		System.out.println(result);
 	}
 
 	/**

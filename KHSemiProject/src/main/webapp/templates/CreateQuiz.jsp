@@ -34,7 +34,7 @@ String contextPath = request.getContextPath();
 				</div>
 			</div>
 
-			<form class="quiz-content" method="post" enctype="multipart/form-data">
+			<form action="problems.co" class="quiz-content" method="post" enctype="multipart/form-data">
 				<div id="quiz-content-wrapper">
 					<div class="quiz-slide">
 						<div class="question-type">
@@ -70,10 +70,9 @@ String contextPath = request.getContextPath();
 						</div>
 
 						<div class="buttons">
-                     <button class="home-btn">
-                        <a href=<%=contextPath%>"/main.me"> <img src="<%=contextPath%>/static/img/homebtn.png"
+                     		<button class="home-btn" href="<%=contextPath%>/main.me">
+                        <img src="<%=contextPath%>/static/img/homebtn.png"
                            width="130px" height="45px">
-                        </a>
                      </button>
                      <button class="create-btn" onclick="saveQuiz()">질문 생성하기</button>
 						</div>
