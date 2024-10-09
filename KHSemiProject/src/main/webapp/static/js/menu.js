@@ -21,7 +21,7 @@ function init(pageName, optional){
             initLoad(optional)
             break;
         case "mainPage":
-            initSwiper(optional)
+            initMain(optional)
 			break;
         case "searchMainPage":
             tagSearchAjax()

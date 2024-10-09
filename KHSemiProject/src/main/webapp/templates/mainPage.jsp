@@ -173,28 +173,10 @@
                     </div>
                     <hr>
                     <div id="solve-a-quiz">
-                        <div>최근 플레이 횟수</div>
-                        <div class="solve-a-quiz-day">
-                            <div class="solve-a-quiz-day-bar">
-                                <div class="solve-a-quiz-bar"><div></div></div>
-                                <div class="solve-a-quiz-bar"><div></div></div>
-                                <div class="solve-a-quiz-bar"><div></div></div>
-                                <div class="solve-a-quiz-bar"><div></div></div>
-                                <div class="solve-a-quiz-bar"><div></div></div>
-                                <div class="solve-a-quiz-bar"><div></div></div>
-                                <div class="solve-a-quiz-bar"><div></div></div>
-                            </div>
-                            <hr>
-                            <div class="solve-a-quiz-day-of-week">
-                                <div>일</div>
-                                <div>월</div>
-                                <div>화</div>
-                                <div>수</div>
-                                <div>목</div>
-                                <div>금</div>
-                                <div>토</div>
-                            </div>
-                        </div>
+                        <div>오늘 플레이 횟수</div>
+                        <%if(loginMember != null) {%>
+                            <div class="solve-a-quiz-day">${playedRecode}회</div>
+                        <%}%>
                     </div>
                 </div>
                 <div class="ranking"></div>
