@@ -332,6 +332,16 @@
             ?
         )
 	</entry>
+	<entry key="insertAnswer">
+		INSERT INTO ANSWER
+		(
+			ANSWER_COMENT
+		)
+		VALUES
+		(
+		?
+		)
+	</entry>
 </properties>
 
 

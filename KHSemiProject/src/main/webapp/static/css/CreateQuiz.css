@@ -5,7 +5,7 @@
 }
 
 html, body {
-    width: 1920px;;
+    width: 1920px;
     height: 1080px;
     margin: auto;
 }
@@ -50,9 +50,9 @@ body {
 
 .quiz-layout {
     display: flex;
-    flex: 1; 
+    flex: 1;
     margin-top: 20px;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .question-item {
@@ -70,7 +70,7 @@ body {
 
 .question-list {
     overflow-y: auto;
-    max-height: calc(100vh - 160px); 
+    max-height: calc(100vh - 160px);
 }
 
 .image-placeholder {
@@ -81,19 +81,7 @@ body {
     border-radius: 5px;
 }
 
-.add-question-btn {
-    padding: 10px;
-    width: 150px;
-    background-color: #f39c12;
-    border: #FF9139;
-    color: black;
-    font-weight: bold;
-    border-radius: 5px;
-    margin-top: 20px;
-    margin-left: 10%;
-    cursor: pointer;
-}
-.delete-question-btn {
+.add-question-btn, .delete-question-btn {
     padding: 10px;
     width: 150px;
     background-color: #f39c12;
@@ -111,7 +99,7 @@ body {
     padding-left: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .question-type {
@@ -138,7 +126,6 @@ body {
     margin-bottom: 20px;
 }
 
-
 .question-input input {
     width: 100%;
     padding: 10px;
@@ -159,11 +146,17 @@ body {
     margin-bottom: 20px;
 }
 
-.media input{
+.media input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+}
+
+.media img {
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
 }
 
 .time-limit {
@@ -192,7 +185,7 @@ body {
 }
 
 .buttons {
-    display: flex ;
+    display: flex;
     justify-content: space-between;
     padding: 20px 0;
 }
@@ -206,5 +199,29 @@ body {
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
-    width : 10%;
+    width: 10%;
+}
+
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.thumbnail-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.thumbnail-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
