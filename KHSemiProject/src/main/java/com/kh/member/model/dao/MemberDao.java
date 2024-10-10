@@ -18,15 +18,12 @@ import com.kh.member.model.vo.Quest;
 
 public class MemberDao {
 	private Properties prop = new Properties();
-	private Properties questProp = new Properties();
 	
 	public MemberDao() {
 		String filePath = MemberDao.class.getResource("/db/sql/member-mapper.xml").getPath();
-		String questFilePath = MemberDao.class.getResource("/db/sql/quest-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
-			questProp.loadFromXML(new FileInputStream(questFilePath));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -596,6 +593,104 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, loginMember.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int successQuest(Connection conn, int memberNo, int questNo) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("successQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int checkDailyQuest(Connection conn, int memberNo, int questNo) {
+		int result = 0;
+
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("checkDailyQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("MEMBER_QUEST_SUCCESS");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateMemberExp(Connection conn, int memberNo, int exp) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMemberExp");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, exp);
+			pstmt.setInt(2, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int doneDailyQuest(Connection conn, int memberNo, int questNo) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("doneDailyQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
