@@ -1,8 +1,6 @@
 package com.kh.playQuiz.service;
 
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.rollback;
-
+import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -16,6 +14,7 @@ public class PlayQuizService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		ArrayList<Problem> pList = new PlayQuizDao().selectQuizProblem(conn, quizNumber);
+		close(conn);
 		// TODO Auto-generated method stub
 		return pList;
 	}
@@ -23,22 +22,25 @@ public class PlayQuizService {
 	public boolean AjaxPlayQuizAnswerCheck(int pNum, String answer) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		
-		return new PlayQuizDao().AjaxPlayQuizAnswerCheck(conn, pNum, answer);
+		boolean result = new PlayQuizDao().AjaxPlayQuizAnswerCheck(conn, pNum, answer); 
+		close(conn);
+		return result;
 	}
 
 	public String getCorrectAnswer(int pNum) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		
-		return new PlayQuizDao().getCorrectAnswer(conn, pNum);
+		String result = new PlayQuizDao().getCorrectAnswer(conn, pNum);
+		close(conn);
+		return result;
 	}
 
 	public String AjaxPlayQuizMedia(int num, int pNum) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		
-		return new PlayQuizDao().AjaxPlayQuizMedia(conn, pNum, num);
+		String result = new PlayQuizDao().AjaxPlayQuizMedia(conn, pNum, num);
+		close(conn);
+		return result;
 	}
 
 	public boolean AjaxPlayQuizViewCount(int qNum, int mNum, int cNum) {
@@ -50,6 +52,49 @@ public class PlayQuizService {
 		} else {
 			rollback(conn);
 		}
+		close(conn);
+		return result;
+	}
+
+	public int AjaxPlayQuizStarsCheck(int qNum, int mNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new PlayQuizDao().AjaxPlayQuizStarsCheck(conn, qNum, mNum);
+		close(conn);
+		return result;
+	}
+
+	public boolean AjaxPlayQuizStarsConfirm(int qNum, int mNum, int rating) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = new PlayQuizDao().AjaxPlayQuizStarsConfirm(conn, qNum, mNum, rating);
+		
+		if(result) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public void MemberAddExp(int mNum, int qNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = new PlayQuizDao().MemberAddExp(conn, mNum, qNum);
+		
+		System.out.println(result);
+		if(result) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+	}
+
+	public int PlayQuizSelectExp(int mNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new PlayQuizDao().PlayQuizSelectExp(conn, mNum);
+		close(conn);
 		return result;
 	}
 	
