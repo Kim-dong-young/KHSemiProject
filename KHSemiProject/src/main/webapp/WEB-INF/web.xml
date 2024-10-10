@@ -456,5 +456,42 @@
   <servlet-mapping>
     <servlet-name>insert.pr</servlet-name>
     <url-pattern>/insert.pr</url-pattern>
+    <display-name>checkQuest</display-name>
+    <servlet-name>checkQuest</servlet-name>
+    <servlet-class>com.kh.member.controller.DailyQuestCheckController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkQuest</servlet-name>
+    <url-pattern>/checkQuest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxPlayQuizStarsCheck</display-name>
+    <servlet-name>AjaxPlayQuizStarsCheck</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.AjaxPlayQuizStarsCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxPlayQuizStarsCheck</servlet-name>
+    <url-pattern>/rankCheck.pl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxPlayQuizStarsConfirm</display-name>
+    <servlet-name>AjaxPlayQuizStarsConfirm</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.AjaxPlayQuizStarsConfirm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxPlayQuizStarsConfirm</servlet-name>
+    <url-pattern>/rankConfirm.pl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxQuizClickReportController</display-name>
+    <servlet-name>AjaxQuizClickReportController</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxQuizClickReportController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxQuizClickReportController</servlet-name>
+    <url-pattern>/report.qz</url-pattern>
   </servlet-mapping>
 </web-app>

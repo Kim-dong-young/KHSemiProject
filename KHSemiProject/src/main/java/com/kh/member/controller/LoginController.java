@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.kh.member.model.vo.Member;
 import com.kh.member.service.MemberService;
+import com.kh.common.DailyQuestTemplate;
+import com.kh.common.DailyQuestTemplate.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -59,7 +61,18 @@ public class LoginController extends HttpServlet {
 			} else {
 				session.setAttribute("loginMember", loginMember);
 			}
-
+			
+			int result = 0;
+			// 첫 접속 유저에게 퀘스트를 부여한다.
+			result = new MemberService().initDailyQuest(loginMember); // 유저가 가진 퀘스트 개수 반환
+			
+			if(result > 0) { // 퀘스트가 있다면, 하루가 지났는지 검사해서 퀘스트를 교체해준다.
+				new MemberService().updateDailyQuest(loginMember);
+			}
+			
+			// 로그인 하면 퀘스트 성공
+			new MemberService().successQuest(loginMember.getMemberNo(), 2); // 2 : 로그인 하기
+			
 			session.setAttribute("totalAt", totalAt);
 			
 			if(checkPath.equals(contextPath)) {

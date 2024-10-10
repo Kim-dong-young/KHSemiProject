@@ -178,4 +178,133 @@ public class PlayQuizDao {
 		return result;
 	}
 
+	public int AjaxPlayQuizStarsCheck(Connection conn, int qNum, int mNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("AjaxPlayQuizStarsCheck");
+		ResultSet rset = null;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mNum);
+			pstmt.setInt(2, qNum);
+			
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				result = rset.getInt("QUIZ_RATE_RATING");
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public boolean AjaxPlayQuizStarsConfirm(Connection conn, int qNum, int mNum, int rating) {
+		boolean result = false;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("AjaxPlayQuizStarsConfirm");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rating);
+			pstmt.setInt(2, mNum);
+			pstmt.setInt(3, qNum);
+			
+			
+			result = pstmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public boolean MemberAddExp(Connection conn, int mNum, int qNum) {
+		
+		boolean preResult = false;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("PreCheckLog");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNum);
+			pstmt.setInt(2, mNum);
+
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				preResult = true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		if(!preResult) {
+			boolean result = false;
+			PreparedStatement pstmt2 = null;
+			String sql2 = prop.getProperty("MemberAddExp");
+			
+			try {
+				pstmt2 = conn.prepareStatement(sql2);
+				pstmt2.setInt(1, mNum);
+				
+				
+				result = pstmt2.executeUpdate() > 0;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(pstmt2);
+			}
+			
+			return result;
+		} else {
+			return false;
+		}
+		
+		
+	}
+
+	public int PlayQuizSelectExp(Connection conn, int mNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("PlayQuizSelectExp");
+		ResultSet rset = null;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mNum);
+			
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				result = rset.getInt("MEMBER_EXP");
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
