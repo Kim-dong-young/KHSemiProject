@@ -60,6 +60,7 @@
     var pList = <%= new com.google.gson.Gson().toJson(pList) %>;
     var pNum = 0;
     var correctNum = 0;
+    let interval;
 
 
     function renderProblem(){
@@ -190,7 +191,7 @@
         progressBar.style.width = '100%'; 
         timerValue.textContent = remainingTime; 
 
-        const interval = setInterval(() => {
+        interval = setInterval(() => {
             if (remainingTime > 0) {
                 remainingTime--; 
                 const percentage = (remainingTime / duration) * 100;
@@ -201,11 +202,12 @@
             }
 
             if (remainingTime <= 0) {
-                clearInterval(interval); 
+                clearInterval(interval);
                 console.log('시간이 다됐습니다!');
             }
         }, 1000);
-    } 
+
+    }
 </script>
 </body>
 </html>

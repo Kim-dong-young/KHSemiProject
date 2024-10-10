@@ -1,10 +1,10 @@
 function initMain(optional) {
   selectPopBoard();
   setInterval(selectPopBoard, 3000);
-  selectDailyQuest()
   
   if(optional) {
     setLevel(optional);
+    selectDailyQuest()
   }
 
   const buttons = document.querySelectorAll('.recommend-button .custom-btn');
