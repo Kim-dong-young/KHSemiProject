@@ -449,6 +449,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>insert.pr</display-name>
+    <servlet-name>insert.pr</servlet-name>
+    <servlet-class>com.kh.createQuiz.controller.InsertProblem</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insert.pr</servlet-name>
+    <url-pattern>/insert.pr</url-pattern>
     <display-name>checkQuest</display-name>
     <servlet-name>checkQuest</servlet-name>
     <servlet-class>com.kh.member.controller.DailyQuestCheckController</servlet-class>

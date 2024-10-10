@@ -131,20 +131,18 @@
 
 	<entry key="insertProblems">
 	INSERT INTO PROBLEM(
-		PROBLEM_number;
-		PROBLEM_content;
-		PROBLEM_media_kind;
-		PROBLEM_media;
-		PROBLEM_hint;
-		QUIZ_number;
+		PROBLEM_number,
+		PROBLEM_content,
+		PROBLEM_media,
+		PROBLEM_hint,
+		QUIZ_number,
 	)
 	VALUES(
 		SEQ_PNO.NEXTVAL,
 		?,
 		?,
 		?,
-		?,
-		SEQ_PNO.CURRVAL
+		?
 	)
 	</entry>
 	
@@ -174,12 +172,17 @@
 	<entry key="insertAnswer">
 		INSERT INTO ANSWER
 		(
-			ANSWER_COMENT
+			ANSWER_CONTENT
 		)
 		VALUES
 		(
 		?
 		)
+	</entry>
+	
+	<entry key="selectQuizNo">
+		SELECT SEQ_QUIZ.CURRVAL
+		FROM DUAL
 	</entry>
 </properties>
 
