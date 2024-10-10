@@ -166,4 +166,22 @@
  		  FROM QUIZ_LOG
 	     WHERE MEMBER_NUMBER = ? AND TO_CHAR(QUIZ_LOG_DATE) = TO_CHAR(SYSDATE)
  	</entry>
+ 	<entry key="countMemberQuest">
+		SELECT COUNT(*) AS COUNT
+		  FROM MEMBER_QUEST
+		 WHERE MEMBER_NUMBER = ?
+ 	</entry>
+ 	<entry key="getQuestDate">
+ 		SELECT MAX(MEMBER_QUEST_DATE) AS MEMBER_QUEST_DATE
+		  FROM MEMBER_QUEST
+		 WHERE MEMBER_NUMBER = ?
+ 	</entry>
+ 	<entry key="deleteMemberQuest">
+ 		DELETE 
+ 		  FROM MEMBER_QUEST
+ 		 WHERE MEMBER_NUMBER = ?
+ 	</entry>
+ 	<entry key="updateDailyQuest">
+ 		
+ 	</entry>
 </properties>

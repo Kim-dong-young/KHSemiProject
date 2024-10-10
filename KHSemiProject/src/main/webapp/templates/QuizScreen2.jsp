@@ -206,7 +206,7 @@
             }
 
             if (remainingTime <= 0) {
-                clearInterval(interval); 
+                clearInterval(interval);
                 console.log('시간이 다됐습니다!');
                 var problem = pList[pNum];
                 let num = problem.problem_number
@@ -233,9 +233,6 @@
                 });
             }
         }, 1000);
-
-
-
     } 
 </script>
 </body>
