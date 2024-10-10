@@ -125,7 +125,7 @@ crossorigin="anonymous"></script>
                                     <span><%=cm.getMemberName()%></span>
                                 </div>
                                 <div class="comment-content">
-                                    <p><%=cm.getCommentContent()%></p>
+                                    <p><c:out value="<%=cm.getCommentContent()%>"/></p>
                                 </div>
                                 <div class="comment-option">
                                     <% if( loginMember != null ) { %>

@@ -21,12 +21,11 @@
         <main>
         <fieldset>
             <section id="profile-settings" class="content-section">
-                <h2>프로필 설정</h2>                 
-                <img id="profileImage" src="${pageContext.request.contextPath}/static/img/guest-icon.png" alt="프로필 이미지" class="profile-image" onclick="document.getElementById('imageUpload').click();">
+                <h2>프로필 설정</h2>    
                 <form action="${pageContext.request.contextPath}/profile.me" method="post" enctype="multipart/form-data">
+                    <img id="profileImage" src="${pageContext.request.contextPath}/static/img/guest-icon.png" alt="프로필 이미지" class="profile-image" onclick="document.getElementById('imageUpload').click();">             
                     <div class="profile-details">
                         <input type="file" id="imageUpload" name="memberImage" action=".jpg, .png" style="display: none;" onchange="previewImage(event)">
-                        
                         <input type="hidden" name="memberId" value="${loginMember.memberId }">
                         <label for="memberNickName">닉네임:</label>
                         <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임">
