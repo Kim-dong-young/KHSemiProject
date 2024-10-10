@@ -7,6 +7,7 @@ public class Problem {
 	private int problem_media_kind;
 	private String problem_hint;
 	private int Ptime;
+	
 	public int getPtime() {
 		return Ptime;
 	}

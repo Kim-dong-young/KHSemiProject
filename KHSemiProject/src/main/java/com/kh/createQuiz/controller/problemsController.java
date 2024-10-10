@@ -2,6 +2,7 @@ package com.kh.createQuiz.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
@@ -64,19 +65,23 @@ public class problemsController extends HttpServlet {
                 if (item.isFormField()) {
                     switch (item.getFieldName()) {
                     case "quiz_number":
-                    	pr.setQUIZ_number(Integer.parseInt(item.getString()));
+                    	pr.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
                     	break;
                     case "pcontent-1":
-                        pr.setPROBLEM_content(item.getString());
+                        pr.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
                         break;
 //                    case "pmk":
 //                        pr.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
 //                        break;
+                    case "ptime-1" :
+                    	pr.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+                    	break;
                     case "phint-1":
-                        pr.setPROBLEM_hint(item.getString());
+                        pr.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
                         break;
                     case "panswer-1":
-                        a.setANSWER_content(item.getString());
+                        a.setANSWER_content(item.getString(Charset.forName("utf-8")));
+                        System.out.println();
                         break;
                     }
                 } else {
@@ -101,7 +106,7 @@ public class problemsController extends HttpServlet {
             }
             System.out.println("정보들어가다잇");
             int problemResult = new CreateQuizServiceImpl().insertProblems(pr, a);
-
+            
             if (problemResult > 0) {
             	System.out.println("성공");
                 request.getSession().setAttribute("alertMsg", "문제 작성 완료");
