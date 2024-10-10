@@ -31,7 +31,7 @@ public class CommentInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService bService = new BoardService();
 		
-		int userNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 		String content = request.getParameter("commentContent");
 		String communityNo = request.getParameter("no");
 		
@@ -39,7 +39,7 @@ public class CommentInsertController extends HttpServlet {
 		String cmtPage = request.getParameter("comment");
 		
 		Comment comment = new Comment();
-		comment.setMemberNo(userNo);
+		comment.setMemberNo(memberNo);
 		comment.setCommentContent(content);
 		comment.setCommunityNo(Integer.parseInt(communityNo));
 		
@@ -49,6 +49,10 @@ public class CommentInsertController extends HttpServlet {
 		}
 		
 		int result = bService.insertComment(comment);
+		if(result > 0) {
+			int questNo = 3;
+			bService.successQuest(memberNo, questNo);
+		}
 		
 		response.sendRedirect("board?cpage="+ cpage +"&no="+ communityNo +"&comment=" + cmtPage);
 	}
