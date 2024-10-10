@@ -19,6 +19,9 @@
 <div style="display: none;" >
     <%@ include file="common/menu.jsp" %>
 </div>
+<script>
+    console.log(${loginMember.memberNo})
+</script>
 <div id="quiz-container">
     <div id="header">
         <div id="title">
@@ -80,10 +83,11 @@
                         pNum: problem.problem_number
                     },
                     success: function(res){
+                        console.log(res);
                         if (problem.problem_media_kind == 1) {
                             document.querySelector(".Media-area").innerHTML = `<img src="<%=contextPath%>/` + res + `" alt="">`;
                         } else {
-                            document.querySelector(".Media-area").innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/SmTzdSVHvTI?si=0pmxBtOBhp6rPu2B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+                            document.querySelector(".Media-area").innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/` + res + `" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
                         }
                     },
                     error: function(){
@@ -128,9 +132,9 @@
         form.appendChild(memberNoInput);
 
         var listLenInput = document.createElement("input");
-        memberNoInput.setAttribute("type", "hidden");
-        memberNoInput.setAttribute("name", "listLen");
-        memberNoInput.setAttribute("value", "${pList.size()}");
+        listLenInput.setAttribute("type", "hidden");
+        listLenInput.setAttribute("name", "listLen");
+        listLenInput.setAttribute("value", "${pList.size()}");
         form.appendChild(listLenInput);
 
         document.body.appendChild(form);

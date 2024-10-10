@@ -57,7 +57,7 @@
 
 
 	<link rel="stylesheet" href="<%=contextPath%>/static/css/searchClickPage.css">
-	<div class="content" id="content"> <!-- 컨텐츠 여기다가 추가 -->
+	<div class="content"> <!-- 컨텐츠 여기다가 추가 -->
         <div id="div-top">
             <div id="image-div">
                 <div class="image-container">
