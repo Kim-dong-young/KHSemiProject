@@ -3,16 +3,12 @@ package com.kh.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 
-import com.kh.community.model.vo.Attachment;
-import com.kh.community.model.vo.Board;
-import com.kh.community.service.BoardService;
 import com.kh.member.model.vo.Member;
 import com.kh.member.service.MemberService;
 
@@ -89,7 +85,7 @@ public class MemberProfileController extends HttpServlet {
 					
 					if(originName.length() > 0) { // 파일을 업로드 했을 경우
 						// 고유한 파일명 생성
-						String tmpNmae = "proFile_" + System.currentTimeMillis();
+						String tmpNmae = "/proFile_" + System.currentTimeMillis();
 						// 파일 형식 ex1) jpg , png 추출
 						String type = originName.substring(originName.lastIndexOf("."));
 						// DB에 저장할 파일명
@@ -103,22 +99,10 @@ public class MemberProfileController extends HttpServlet {
 						p.setMemberImg("static/img/userProfile/" + changeName);
 			}
 		}
+	}
 			
-		Member result = MemberService.updateMember(p);
-		
-//		String memberId = request.getParameter("memberId");
-//		String memberNickName = request.getParameter("memberNickName");
-//		String memberImage = request.getParameter("memberImage");
-//		String Introduce = request.getParameter("Introduce");
-//		
-//		Member p = new Member(memberId,memberNickName,Introduce);
-//		
-//		p.setMemberId(memberId);
-//		p.setMemberNickName(memberNickName);
-//		p.setMemberImg(memberImage);
-//		p.setIntroduce(Introduce);
-//		
-//		Member updateProfile = new MemberService().updateProfile(p);
+			
+		Member updateProfile = new MemberService().updateProfile(p);
 		
 		if(updateProfile == null) {
 			request.setAttribute("errorMsg", "프로필 수정에 실패하였습니다.");
@@ -128,6 +112,7 @@ public class MemberProfileController extends HttpServlet {
 			session.setAttribute("alertMsg", "프로필 수정에 성공하였습니다.");
 		}
 		response.sendRedirect(request.getContextPath() + "/userset.me");
+		}
 	}
 
 	/**
