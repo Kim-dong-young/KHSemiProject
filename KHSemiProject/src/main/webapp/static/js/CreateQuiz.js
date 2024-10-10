@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="question-type">
                 <label>문제 유형</label>
                 <div class="progress">${totalPages}/${totalPages}</div>
+				
                 <div class="type-btns">
                     <button class="type-btn" disabled>객관식</button>
                     <button class="type-btn" disabled>주관식</button>

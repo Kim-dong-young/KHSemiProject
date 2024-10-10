@@ -45,7 +45,7 @@ String contextPath = request.getContextPath();
                                 <button class="type-btn" disabled>O / X</button>
                             </div>
                         </div>
-
+						<input type="hidden" name="quiz_number" value="${quiz_num}">
                         <div class="question-input">
                             <label for="question-1">질문 내용:</label> 
                             <input type="text" id="question-1" name="pcontent-1" placeholder="질문을 입력하세요">

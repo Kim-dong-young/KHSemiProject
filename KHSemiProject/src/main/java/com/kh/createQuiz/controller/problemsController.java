@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class problemsController
  */
-@MultipartConfig
+
 public class problemsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,6 @@ public class problemsController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	request.getRequestDispatcher("/templates/CreateQuiz.jsp").forward(request, response);
         String changeName = null;
         response.setContentType("application/json; charset=UTF-8");
 
@@ -49,34 +48,34 @@ public class problemsController extends HttpServlet {
 
             List<FileItem> formItems = upload.parseRequest(request);
 
-            Problem p = new Problem();
+            Problem pr = new Problem();
             Answer a = new Answer();
-
-            Quiz quiz = (Quiz) request.getAttribute("insertQuiz");
-            if (quiz != null) {
-                p.setQUIZ_number(quiz.getQuiz_number());
-            } else {
-                System.out.println("Quiz attribute is null");
-                response.sendRedirect(request.getContextPath());
-                return;
-            }
+            
+//            Quiz quiz = (Quiz)request.getAttribute("insertQuiz");
+//            if (quiz != null) {
+//                p.setQUIZ_number(quiz.getQuiz_number());
+//            } else {
+//                System.out.println("Quiz attribute is null");
+//                response.sendRedirect(request.getContextPath());
+//                return;
+//            }
 
             for (FileItem item : formItems) {
                 if (item.isFormField()) {
                     switch (item.getFieldName()) {
-                    case "pno":
-                        p.setPROBLEM_number(Integer.parseInt(item.getString()));
-                        break;
-                    case "pcontent":
-                        p.setPROBLEM_content(item.getString());
+                    case "quiz_number":
+                    	pr.setQUIZ_number(Integer.parseInt(item.getString()));
+                    	break;
+                    case "pcontent-1":
+                        pr.setPROBLEM_content(item.getString());
                         break;
 //                    case "pmk":
-//                        p.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
+//                        pr.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
 //                        break;
-                    case "phint":
-                        p.setPROBLEM_hint(item.getString());
+                    case "phint-1":
+                        pr.setPROBLEM_hint(item.getString());
                         break;
-                    case "panswer":
+                    case "panswer-1":
                         a.setANSWER_content(item.getString());
                         break;
                     }
@@ -90,7 +89,7 @@ public class problemsController extends HttpServlet {
                         File f = new File(savePath, changeName);
                         try {
                             item.write(f.toPath());
-                            p.setPROBLEM_media("static/img/problems/" + changeName);
+                            pr.setPROBLEM_media("/static/img/problems/" + changeName);
                         } catch (Exception e) {
                             e.printStackTrace();
                             if (changeName != null) {
@@ -100,13 +99,13 @@ public class problemsController extends HttpServlet {
                     }
                 }
             }
+            System.out.println("정보들어가다잇");
+            int problemResult = new CreateQuizServiceImpl().insertProblems(pr, a);
 
-            int problemResult = new CreateQuizServiceImpl().insertProblems(p);
-            int answerResult = new CreateQuizServiceImpl().insertAnswers(a);
-
-            if (problemResult > 0 && answerResult > 0) {
-                request.setAttribute("alertMsg", "문제 작성 완료");
-                response.sendRedirect(request.getContextPath() + "/problems.co");
+            if (problemResult > 0) {
+            	System.out.println("성공");
+                request.getSession().setAttribute("alertMsg", "문제 작성 완료");
+                response.sendRedirect(request.getContextPath() + "/main.me");
             } else {
                 if (changeName != null) {
                     new File(savePath + changeName).delete();

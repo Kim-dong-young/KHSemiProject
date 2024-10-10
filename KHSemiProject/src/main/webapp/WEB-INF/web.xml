@@ -447,4 +447,14 @@
     <servlet-name>DailyQuestController</servlet-name>
     <url-pattern>/dailyQuest.me</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>insert.pr</display-name>
+    <servlet-name>insert.pr</servlet-name>
+    <servlet-class>com.kh.createQuiz.controller.InsertProblem</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insert.pr</servlet-name>
+    <url-pattern>/insert.pr</url-pattern>
+  </servlet-mapping>
 </web-app>
