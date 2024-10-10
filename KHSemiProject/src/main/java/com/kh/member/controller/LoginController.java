@@ -70,8 +70,16 @@ public class LoginController extends HttpServlet {
 				new MemberService().updateDailyQuest(loginMember);
 			}
 			
-			// 로그인 하면 퀘스트 성공
-			new MemberService().successQuest(loginMember.getMemberNo(), 2); // 2 : 로그인 하기
+			int questNo = 2; // 2 : 로그인 하기
+			int isDone = new MemberService().checkDailyQuest(loginMember.getMemberNo(), questNo);
+			
+			// MEMBER_QUEST_SUCCESS 값 0은 퀘스트완료 X / 보상 획득 X
+			// MEMBER_QUEST_SUCCESS 값 1은 퀘스트완료 O / 보상 획득 X
+			// MEMBER_QUEST_SUCCESS 값 2는 퀘스트완료 O / 보상 획득 O
+			if(isDone == 0) { // 퀘스트 깬적 없을 경우 ( 오늘 첫 로그인 )
+				// 로그인 하면 퀘스트 성공
+				new MemberService().successQuest(loginMember.getMemberNo(), questNo);
+			}
 			
 			session.setAttribute("totalAt", totalAt);
 			

@@ -1039,4 +1039,10 @@
 		DELETE FROM COMMUNITY_IMG
 		 WHERE COMMUNITY_NUMBER = ?
 	</entry>
+	<entry key="successQuest">
+	UPDATE MEMBER_QUEST
+   	   SET MEMBER_QUEST_SUCCESS = 1
+	 WHERE MEMBER_NUMBER = ?
+	   AND QUEST_NUMBER = ?
+	</entry>
 </properties>

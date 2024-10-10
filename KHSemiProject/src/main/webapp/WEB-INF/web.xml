@@ -456,7 +456,9 @@
   <servlet-mapping>
     <servlet-name>insert.pr</servlet-name>
     <url-pattern>/insert.pr</url-pattern>
-  </servlet-mapping>
+   </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>checkQuest</display-name>
     <servlet-name>checkQuest</servlet-name>
     <servlet-class>com.kh.member.controller.DailyQuestCheckController</servlet-class>
