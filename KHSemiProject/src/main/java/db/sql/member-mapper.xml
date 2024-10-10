@@ -132,7 +132,6 @@
 		MEMBER_INTRODUCE = ?
 	WHERE MEMBER_ID = ?
 	</entry>
-<<<<<<< HEAD
 	<entry key="selectDailyQuest">
 	 SELECT MEMBER_QUEST_NUMBER ,
 			MEMBER_QUEST_SUCCESS ,

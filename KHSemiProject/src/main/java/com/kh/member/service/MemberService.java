@@ -172,7 +172,8 @@ public class MemberService {
 		}
 		
 		close(conn);
-		return null;
+		
+		return updateProfile;
 	}
 	
 	public ArrayList<Quest> getDailyQuest(Member loginMember) {
