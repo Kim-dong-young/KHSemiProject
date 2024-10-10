@@ -107,7 +107,8 @@ public class CreateQuizDAO {
 			pstmt.setString(2, p.getPROBLEM_media());
 			pstmt.setString(3, p.getPROBLEM_hint());
 			pstmt.setInt(4, p.getQUIZ_number());
-
+			pstmt.setInt(5, p.getPtime());
+			
 			result = pstmt.executeUpdate();
 
 			// 자동 생성된 problem_number 값 가져오기
@@ -124,8 +125,8 @@ public class CreateQuizDAO {
 		return result;
 	}
 
-	public String insertAnswer(Connection conn, Answer a) {
-		String result = "";
+	public int insertAnswer(Connection conn, Answer a) {
+		int result = 0;
 
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertAnswer");
@@ -133,6 +134,8 @@ public class CreateQuizDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, a.getANSWER_content());
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

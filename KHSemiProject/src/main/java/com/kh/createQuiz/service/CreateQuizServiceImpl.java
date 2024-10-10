@@ -38,22 +38,18 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		Connection conn = getConnection();
 		
 		System.out.println("들어왔다잇" + pr + "," + a);
-		int result = new CreateQuizDAO().insertProblems(conn, pr);
+		int result1 = new CreateQuizDAO().insertProblems(conn, pr);
+		int result2 = new CreateQuizDAO().insertAnswer(conn, a);
 		
-		
-		System.out.println(result);
-		if (result > 0 ) {
-			String result1 = new CreateQuizDAO().insertAnswer(conn, a);
-			System.out.println(result1);
+		if (result1 > 0 && result2 >0) {
 			commit(conn);
 			System.out.println("완료");
 		} else {
 			System.out.println("실패");
-			rollback(conn);
-			
+			rollback(conn);		
 		}
 		close(conn);
-		return result;
+		return result1 * result2;
 	}
 
 }

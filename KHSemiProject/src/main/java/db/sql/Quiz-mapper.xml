@@ -136,9 +136,11 @@
 		PROBLEM_media,
 		PROBLEM_hint,
 		QUIZ_number,
+		Ptime
 	)
 	VALUES(
 		SEQ_PNO.NEXTVAL,
+		?,
 		?,
 		?,
 		?,
@@ -171,12 +173,16 @@
 	
 	<entry key="insertAnswer">
 		INSERT INTO ANSWER
-		(
-			ANSWER_CONTENT
+		(	
+			ANSWER_NUMBER,
+			ANSWER_CONTENT,
+			PROBLEM_NUMBER
 		)
 		VALUES
 		(
-		?
+		SEQ_AN.NEXTVAL,
+		?,
+		SEQ_PNO.CURRVAL
 		)
 	</entry>
 	

@@ -2,7 +2,6 @@ package com.kh.createQuiz.model.vo;
 
 public class Answer {
 	private int ANSWER_number;
-	private int ANSWER_kind;
 	private String ANSWER_content;
 	private int PROBLEM_number;
 
@@ -10,10 +9,9 @@ public class Answer {
 		super();
 	}
 
-	public Answer(int aNSWER_number, int aNSWER_kind, String aNSWER_content, int pROBLEM_number) {
+	public Answer(int aNSWER_number, String aNSWER_content, int pROBLEM_number) {
 		super();
 		ANSWER_number = aNSWER_number;
-		ANSWER_kind = aNSWER_kind;
 		ANSWER_content = aNSWER_content;
 		PROBLEM_number = pROBLEM_number;
 	}
@@ -24,14 +22,6 @@ public class Answer {
 
 	public void setANSWER_number(int aNSWER_number) {
 		ANSWER_number = aNSWER_number;
-	}
-
-	public int getANSWER_kind() {
-		return ANSWER_kind;
-	}
-
-	public void setANSWER_kind(int aNSWER_kind) {
-		ANSWER_kind = aNSWER_kind;
 	}
 
 	public String getANSWER_content() {
@@ -52,8 +42,8 @@ public class Answer {
 
 	@Override
 	public String toString() {
-		return "Answer [ANSWER_number=" + ANSWER_number + ", ANSWER_kind=" + ANSWER_kind + ", ANSWER_content="
-				+ ANSWER_content + ", PROBLEM_number=" + PROBLEM_number + "]";
+		return "Answer [ANSWER_number=" + ANSWER_number + ", ANSWER_content=" + ANSWER_content + ", PROBLEM_number="
+				+ PROBLEM_number + "]";
 	}
 
 }
