@@ -22,10 +22,12 @@ public class QuizDao {
 	
 
 	public QuizDao() {
-		String filePath = QuizDao.class.getResource("/db/sql/Quiz-mapper.xml").getPath();
+		String filePath1 = QuizDao.class.getResource("/db/sql/Quiz-mapper.xml").getPath();
+		String filePath2 = QuizDao.class.getResource("/db/sql/searchQuiz-mapper.xml").getPath();
 		
 		try {
-			prop.loadFromXML(new FileInputStream(filePath));
+			prop.loadFromXML(new FileInputStream(filePath1));
+			prop.loadFromXML(new FileInputStream(filePath2));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

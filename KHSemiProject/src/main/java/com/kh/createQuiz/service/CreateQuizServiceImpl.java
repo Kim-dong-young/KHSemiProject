@@ -8,6 +8,7 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import com.kh.createQuiz.model.dao.CreateQuizDAO;
+import com.kh.createQuiz.model.vo.Answer;
 import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.model.vo.Problem;
 
@@ -45,4 +46,20 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		close(conn);
 		return result;
 	}
+
+
+	public int insertAnswers(Answer a) {
+		Connection conn = getConnection();
+		
+		int result = new CreateQuizDAO().insertAnswer(conn, a);
+		
+		if(result >0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

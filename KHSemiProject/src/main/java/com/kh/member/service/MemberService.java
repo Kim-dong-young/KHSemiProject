@@ -8,7 +8,6 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import com.kh.member.model.dao.MemberDao;
-import com.kh.member.model.vo.Attendance;
 import com.kh.member.model.vo.Member;
 
 
@@ -50,6 +49,7 @@ public class MemberService {
 			rollback(conn);
 		}
 		
+		close(conn);
 		return updateMember;
 	}
 	
@@ -129,6 +129,7 @@ public class MemberService {
 			}
 		}
 		
+		close(conn);
 		return loginMember;
 	}
 
@@ -145,6 +146,8 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		return updateMember;
 	}
 
@@ -161,6 +164,16 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		return null;
+	}
+	
+	public int playedRecode(int memberNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().playedRecode(conn, memberNo);
+		
+		close(conn);
+		return result;
 	}
 }
