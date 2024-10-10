@@ -3,16 +3,12 @@ package com.kh.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 
-import com.kh.community.model.vo.Attachment;
-import com.kh.community.model.vo.Board;
-import com.kh.community.service.BoardService;
 import com.kh.member.model.vo.Member;
 import com.kh.member.service.MemberService;
 
@@ -65,17 +61,23 @@ public class MemberProfileController extends HttpServlet {
 			// 요청(request)으로부터 파일 아이템 파싱
 			List<FileItem> formItems = upload.parseRequest(request);
 			
+			// 추가할 데이터
+			Member p = new Member();
+			
 			for(FileItem item : formItems) {
 				if(item.isFormField()) { // 일반 파라미터일 경우
 					switch(item.getFieldName()) {
 					case "memberId":
-						item.getString(Charset.forName("utf-8"));  // form 태그 내 input 태그의 name 값과 일치하는 데이터 처리
+						p.setMemberId(item.getString(Charset.forName("utf-8")));  // form 태그 내 input 태그의 name 값과 일치하는 데이터 처리
 						break;
 					case "memberNickName":
-						item.getString(Charset.forName("utf-8"));
+						p.setMemberNickName(item.getString(Charset.forName("utf-8")));
+						break;
+					case "memberImage":
+						p.setMemberImg(item.getString(Charset.forName("utf-8")));
 						break;
 					case "Introduce":
-						item.getString(Charset.forName("utf-8"));
+						p.setIntroduce(item.getString(Charset.forName("utf-8")));
 						break;
 					}
 				}else { // 이미지 파일일 경우
@@ -83,7 +85,7 @@ public class MemberProfileController extends HttpServlet {
 					
 					if(originName.length() > 0) { // 파일을 업로드 했을 경우
 						// 고유한 파일명 생성
-						String tmpNmae = "proFile_" + System.currentTimeMillis();
+						String tmpNmae = "/proFile_" + System.currentTimeMillis();
 						// 파일 형식 ex1) jpg , png 추출
 						String type = originName.substring(originName.lastIndexOf("."));
 						// DB에 저장할 파일명
@@ -94,23 +96,12 @@ public class MemberProfileController extends HttpServlet {
 						
 						item.write(f.toPath()); // 지정된 경로에 파일 업로드
 						
-					}
-				}
+						p.setMemberImg("static/img/userProfile/" + changeName);
 			}
 		}
-		
-		String memberId = request.getParameter("memberId");
-		String memberNickName = request.getParameter("memberNickName");
-		String memberImage = request.getParameter("memberImage");
-		String Introduce = request.getParameter("Introduce");
-		
-		Member p = new Member(memberId,memberNickName,Introduce);
-		
-		p.setMemberId(memberId);
-		p.setMemberNickName(memberNickName);
-		p.setMemberImg(memberImage);
-		p.setIntroduce(Introduce);
-		
+	}
+			
+			
 		Member updateProfile = new MemberService().updateProfile(p);
 		
 		if(updateProfile == null) {
@@ -121,6 +112,7 @@ public class MemberProfileController extends HttpServlet {
 			session.setAttribute("alertMsg", "프로필 수정에 성공하였습니다.");
 		}
 		response.sendRedirect(request.getContextPath() + "/userset.me");
+		}
 	}
 
 	/**
