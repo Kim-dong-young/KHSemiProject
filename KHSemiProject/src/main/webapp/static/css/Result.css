@@ -49,9 +49,15 @@ body {
 }
 
 .progress-fill {
-    width: 60%;
     height: 100%;
     background-color: #33ff33;
+    transition: width 0.5s; /* 애니메이션 효과 */
+}   
+
+.progress-text {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 .rating-box {

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.playQuiz.model.vo.Problem"%>
+<%@ page import="java.util.ArrayList, com.kh.playQuiz.model.vo.Problem, java.lang.Math"%>
 <%
-    
+
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -35,12 +36,36 @@
         <script>
             document.getElementById("percent_correct").innerText = Math.round((${param.correctNum} / ${param.listLen}) * 100) + "%";
         </script>
-        <div class="level-box">
-            <p>LV.66</p>
-            <div class="progress-bar">
-                <div class="progress-fill"></div>
+        <% if(loginMember != null){ %>
+            <% 
+                // 총 누적 경험치 값을 가져옵니다.
+                int exp = (Integer) request.getAttribute("exp");
+        
+                // 각 레벨에서 필요한 최대 경험치
+                int maxExpForLevel = 1000;
+        
+                // 현재 레벨 계산 (레벨 번호를 1부터 시작)
+                int currentLevel = exp / maxExpForLevel + 1;
+        
+                // 현재 레벨에서의 경험치
+                int expInCurrentLevel = exp % maxExpForLevel;
+        
+                // 진행률 계산 (레벨업 시 진행 바를 100%로 표시)
+                int progressPercentage = (expInCurrentLevel == 0 && exp != 0) ? 100 : expInCurrentLevel * 100 / maxExpForLevel;
+            %>
+            <div class="level-box">
+                <p id="playerLevel">
+                    LV. <%= currentLevel %>
+                </p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: <%= progressPercentage %>%"></div>
+                </div>
+                <p class="progress-text">
+                    경험치: <%= expInCurrentLevel %> / <%= maxExpForLevel %>
+                </p>
             </div>
-        </div>
+        <% } %>
+        
 
         <div class="rating-box">
             <p>별점</p>
@@ -56,15 +81,21 @@
 
         <div class="buttons">
             <button class="button" id="starconfirm" value="${param.quizNumber}">별점주기</button>
+            <input type="hidden" id="memberNoInfo" value="${loginMember.memberNo}">
         </div>
 
         <div class="bottom-buttons">
             <button class="report-btn">신고하기</button>
-            <button class="button">
-                <a href="<%=contextPath%>/main.me"></a>
+            <button class="button" onclick="location.href='<%=contextPath%>/main.me'">
                 홈으로
             </button>
-            <button class="button">다시하기</button>
+            <form action="<%= contextPath %>/main.pl" method="POST">
+                <input type="hidden" name="memberNumber" value="${loginMember.memberNo}">
+                <input type="hidden" name="quizNumber" value="${param.quizNumber}">
+                <button class="button" type="submit" id="playenter">
+                    다시하기
+                </button>
+            </form>
         </div>
     </div>
 
