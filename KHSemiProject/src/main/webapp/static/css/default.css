@@ -129,9 +129,6 @@ ul, li, ol {
 .content{
     padding: 110px 10px 10px;
     margin-left: 290px;
-    max-width: calc(100vw - 290px); /* 전체 화면에서 사이드바 너비를 뺀 만큼 설정 */
-    min-width: 1380px;
-    overflow-x: auto;
 }
 
 .content > div {

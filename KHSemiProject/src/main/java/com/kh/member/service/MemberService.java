@@ -174,7 +174,8 @@ public class MemberService {
 		}
 		
 		close(conn);
-		return null;
+		
+		return updateProfile;
 	}
 	
 	public int initDailyQuest(Member loginMember) {

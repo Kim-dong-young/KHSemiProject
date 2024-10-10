@@ -13,7 +13,6 @@
     <div class="content"> <!-- 컨텐츠 여기다가 추가 -->
 		<div class="topBox">
 			<div class="search">
-				<div id="gap"></div>
 				<div class="sub-option">
 					<select name="searchOpt">
 						<option value="Title">제목</option>

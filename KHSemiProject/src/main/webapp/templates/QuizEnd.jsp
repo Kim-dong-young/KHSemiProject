@@ -13,6 +13,7 @@
     
 </head>
 <body>
+    
     <script>
         console.log(${param.pList})
         console.log(${param.correctNum})
@@ -23,6 +24,7 @@
     <div style="display: none;">
         <%@ include file="common/menu.jsp" %>
     </div>
+    
     <link rel="stylesheet" href="<%=contextPath%>/static/css/Result.css">
     <div class="container">
         <div class="box">
@@ -53,8 +55,7 @@
         </div>
 
         <div class="buttons">
-            <button class="button">질문하기</button>
-            <button class="button">댓글보기</button>
+            <button class="button" id="starconfirm" value="${param.quizNumber}">별점주기</button>
         </div>
 
         <div class="bottom-buttons">
@@ -66,6 +67,8 @@
             <button class="button">다시하기</button>
         </div>
     </div>
+
+
 
     <script src="<%=contextPath%>/static/js/Result.js"></script>
 </body>
