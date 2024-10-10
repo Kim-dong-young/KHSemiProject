@@ -94,7 +94,7 @@ public class problemsController extends HttpServlet {
                         File f = new File(savePath, changeName);
                         try {
                             item.write(f.toPath());
-                            pr.setPROBLEM_media("/static/img/problems/" + changeName);
+                            pr.setPROBLEM_media("static/img/problems/" + changeName);
                         } catch (Exception e) {
                             e.printStackTrace();
                             if (changeName != null) {
