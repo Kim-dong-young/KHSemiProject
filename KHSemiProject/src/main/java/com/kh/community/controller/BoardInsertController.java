@@ -40,6 +40,8 @@ public class BoardInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		BoardService bService = new BoardService();
+		
 		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 		
 		// enctype이 multipart/form-data로 전송됬는지 체크해준다.
@@ -119,7 +121,12 @@ public class BoardInsertController extends HttpServlet {
 				}
 			}
 
-			int result = new BoardService().insertBoard(b, list);
+			int result = bService.insertBoard(b, list);
+			
+			if(result > 0) {
+				int questNo = 4;
+				bService.successQuest(memberNo, questNo);
+			}
 			
 		}
 		response.sendRedirect("community?cpage=1");

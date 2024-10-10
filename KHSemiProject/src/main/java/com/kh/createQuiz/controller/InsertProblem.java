@@ -1,25 +1,21 @@
-package com.kh.playQuiz.controller;
+package com.kh.createQuiz.controller;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.google.gson.Gson;
-import com.kh.playQuiz.service.PlayQuizService;
-
 /**
- * Servlet implementation class AjzxPlayQuizMediaController
+ * Servlet implementation class InsertProblem
  */
-public class AjzxPlayQuizMediaController extends HttpServlet {
+public class InsertProblem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjzxPlayQuizMediaController() {
+    public InsertProblem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,13 +24,7 @@ public class AjzxPlayQuizMediaController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pNum = Integer.parseInt(request.getParameter("pNum"));
-		int num = Integer.parseInt(request.getParameter("num"));
-		String link = new PlayQuizService().AjaxPlayQuizMedia(num, pNum);
-		System.out.println(link);
-		response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    new Gson().toJson(link, response.getWriter());
+		request.getRequestDispatcher("/templates/CreateQuiz.jsp").forward(request, response);
 	}
 
 	/**

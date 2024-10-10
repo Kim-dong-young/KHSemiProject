@@ -32,6 +32,7 @@ DROP SEQUENCE SEQ_REPORT;
 DROP SEQUENCE SEQ_PNO;
 DROP SEQUENCE SEQ_QLOG;
 DROP SEQUENCE SEQ_QUEST;
+DROP SEQUENCE SEQ_AN;
 
 CREATE TABLE MEMBER(
     MEMBER_number number not null,
@@ -39,7 +40,7 @@ CREATE TABLE MEMBER(
     MEMBER_pwd varchar2(50) not null,
     MEMBER_nickname varchar2(50) not null,
     MEMBER_exp number DEFAULT 0 not null,
-    MEMBER_image varchar2(300) DEFAULT 'static/img/userProfile/guest-icon.png',
+    MEMBER_image varchar2(300) DEFAULT '/static/img/userProfile/guest-icon.png',
     MEMBER_join_date Date default SYSDATE not null,
     MEMBER_check_continueCount NUMBER DEFAULT 0 NOT NULL,
     MEMBER_status VARCHAR2(1) DEFAULT 'Y' NOT NULL,
@@ -74,7 +75,8 @@ CREATE TABLE PROBLEM(
     PROBLEM_number number not null,
     PROBLEM_content varchar2(50),
     PROBLEM_media_kind number,
-    Ptime number not null,
+    Ptime number,
+   -- Pdate date,
     PROBLEM_media varchar2(50),
     PROBLEM_hint varchar2(50),
     QUIZ_number number not null,
@@ -84,7 +86,6 @@ CREATE TABLE PROBLEM(
 
 CREATE TABLE ANSWER (
     ANSWER_number number not null,
-    ANSWER_kind number not null,
     ANSWER_content varchar2(1000) not null,
     PROBLEM_number number not null,
     PRIMARY KEY (ANSWER_number),
@@ -299,3 +300,4 @@ CREATE SEQUENCE SEQ_QLOG
     
 CREATE SEQUENCE SEQ_QUEST;
 
+CREATE SEQUENCE SEQ_AN;

@@ -19,6 +19,9 @@
 <div style="display: none;" >
     <%@ include file="common/menu.jsp" %>
 </div>
+<script>
+    console.log(${loginMember.memberNo})
+</script>
 <div id="quiz-container">
     <div id="header">
         <div id="title">
@@ -60,6 +63,7 @@
     var pList = <%= new com.google.gson.Gson().toJson(pList) %>;
     var pNum = 0;
     var correctNum = 0;
+    let interval;
 
 
     function renderProblem(){
@@ -79,10 +83,11 @@
                         pNum: problem.problem_number
                     },
                     success: function(res){
+                        console.log(res);
                         if (problem.problem_media_kind == 1) {
                             document.querySelector(".Media-area").innerHTML = `<img src="<%=contextPath%>/` + res + `" alt="">`;
                         } else {
-                            document.querySelector(".Media-area").innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/SmTzdSVHvTI?si=0pmxBtOBhp6rPu2B" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+                            document.querySelector(".Media-area").innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/` + res + `" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
                         }
                     },
                     error: function(){
@@ -91,6 +96,10 @@
                 })
             } else {
                 document.querySelector(".Media-area").setAttribute('style', "display: none;");
+            }
+            if(interval !== undefined){
+                clearInterval(interval);
+                console.log(interval);
             }
             startTimer(problem.Ptime);
         } else {
@@ -123,9 +132,9 @@
         form.appendChild(memberNoInput);
 
         var listLenInput = document.createElement("input");
-        memberNoInput.setAttribute("type", "hidden");
-        memberNoInput.setAttribute("name", "listLen");
-        memberNoInput.setAttribute("value", "${pList.size()}");
+        listLenInput.setAttribute("type", "hidden");
+        listLenInput.setAttribute("name", "listLen");
+        listLenInput.setAttribute("value", "${pList.size()}");
         form.appendChild(listLenInput);
 
         document.body.appendChild(form);
@@ -190,7 +199,7 @@
         progressBar.style.width = '100%'; 
         timerValue.textContent = remainingTime; 
 
-        const interval = setInterval(() => {
+        interval = setInterval(() => {
             if (remainingTime > 0) {
                 remainingTime--; 
                 const percentage = (remainingTime / duration) * 100;
@@ -201,8 +210,31 @@
             }
 
             if (remainingTime <= 0) {
-                clearInterval(interval); 
+                clearInterval(interval);
                 console.log('시간이 다됐습니다!');
+                var problem = pList[pNum];
+                let num = problem.problem_number
+                let submitBTN = document.getElementById("submit-btn");
+                submitBTN.setAttribute('disabled', true);
+                let ans = document.getElementById("answer-input").value;
+                $.ajax({
+                    url: "qzAnswer.pl",
+                    contentType: "application/json",
+                    type: "GET",
+                    data: {
+                        problem_num: num,
+                        answer: ans
+                    },
+                    success: function(res) {
+                        console.log(document.getElementById("answer-input").value)
+                        document.querySelector("#submit-btn").setAttribute('style', "display: none;");
+                        document.querySelector(".answer-container").innerHTML += `<button id="submit-btn" onclick="nextProblem()">다음</button>`
+                        document.querySelector("#answer-input").value = "시간초과! 정답은: " + res.correctAnswer;
+                    },
+                    error: function() {
+                        console.log("정답 조회용 ajax 통신 실패");
+                    }
+                });
             }
         }, 1000);
     } 

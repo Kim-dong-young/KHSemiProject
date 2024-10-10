@@ -13,53 +13,43 @@ import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.model.vo.Problem;
 
 public class CreateQuizServiceImpl implements CreateQuizService {
-    private CreateQuizDAO quizDAO = new CreateQuizDAO();
+	private CreateQuizDAO quizDAO = new CreateQuizDAO();
 
-    @Override
-    public int createQuiz(CreateQuiz quiz) {
-        Connection conn = getConnection();
-        
-        int result = quizDAO.insertQuiz(conn, quiz);
-        
-        if(result > 0) {
-        	commit(conn);
-        } else {
-        	rollback(conn);
-        }
-        
-        close(conn);
-        
-        return result;
-    }
-
-
-	public int insertProblems(Problem p) {
+	@Override
+	public int createQuiz(CreateQuiz quiz) {
 		Connection conn = getConnection();
-		
-		int result = new CreateQuizDAO().insertProblems(conn, p);
-		
-		if(result >0) {
+
+		int result = quizDAO.insertQuiz(conn, quiz);
+
+		if (result > 0) {
 			commit(conn);
+			
+			result = quizDAO.selectQuizNo(conn);
 		} else {
 			rollback(conn);
 		}
+
 		close(conn);
+
 		return result;
 	}
 
-
-	public int insertAnswers(Answer a) {
+	public int insertProblems(Problem pr, Answer a) {
 		Connection conn = getConnection();
 		
-		int result = new CreateQuizDAO().insertAnswer(conn, a);
+		System.out.println("들어왔다잇" + pr + "," + a);
+		int result1 = new CreateQuizDAO().insertProblems(conn, pr);
+		int result2 = new CreateQuizDAO().insertAnswer(conn, a);
 		
-		if(result >0) {
+		if (result1 > 0 && result2 >0) {
 			commit(conn);
+			System.out.println("완료");
 		} else {
-			rollback(conn);
+			System.out.println("실패");
+			rollback(conn);		
 		}
 		close(conn);
-		return result;
+		return result1 * result2;
 	}
 
 }
