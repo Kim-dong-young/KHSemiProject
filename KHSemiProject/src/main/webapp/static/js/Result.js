@@ -1,7 +1,9 @@
+let rating = 0;
+const starCbtn = document.getElementById('starconfirm');
+
 document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star');
     const ratingValueDisplay = document.getElementById('rating-value');
-    let rating = 0;
 
     // 별 클릭 이벤트 핸들러
     stars.forEach((star, index) => {
@@ -29,4 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    
 });
+
+
+
+starCbtn.addEventListener('click', function(){
+    // $.ajax({
+    //     url: "rankConfirm.pl",
+    //     contentType: "application/json",
+    //     type: "GET",
+    //     data:{
+    //         rating: rating,
+    //         qNum: event.value
+    //     }
+    // })
+    console.log(starCbtn.value)
+})

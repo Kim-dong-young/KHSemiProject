@@ -60,6 +60,7 @@
     var pList = <%= new com.google.gson.Gson().toJson(pList) %>;
     var pNum = 0;
     var correctNum = 0;
+    let interval;
 
 
     function renderProblem(){
@@ -91,6 +92,10 @@
                 })
             } else {
                 document.querySelector(".Media-area").setAttribute('style', "display: none;");
+            }
+            if(interval !== undefined){
+                clearInterval(interval);
+                console.log(interval);
             }
             startTimer(problem.Ptime);
         } else {
@@ -190,7 +195,7 @@
         progressBar.style.width = '100%'; 
         timerValue.textContent = remainingTime; 
 
-        const interval = setInterval(() => {
+        interval = setInterval(() => {
             if (remainingTime > 0) {
                 remainingTime--; 
                 const percentage = (remainingTime / duration) * 100;
@@ -203,8 +208,34 @@
             if (remainingTime <= 0) {
                 clearInterval(interval); 
                 console.log('시간이 다됐습니다!');
+                var problem = pList[pNum];
+                let num = problem.problem_number
+                let submitBTN = document.getElementById("submit-btn");
+                submitBTN.setAttribute('disabled', true);
+                let ans = document.getElementById("answer-input").value;
+                $.ajax({
+                    url: "qzAnswer.pl",
+                    contentType: "application/json",
+                    type: "GET",
+                    data: {
+                        problem_num: num,
+                        answer: ans
+                    },
+                    success: function(res) {
+                        console.log(document.getElementById("answer-input").value)
+                        document.querySelector("#submit-btn").setAttribute('style', "display: none;");
+                        document.querySelector(".answer-container").innerHTML += `<button id="submit-btn" onclick="nextProblem()">다음</button>`
+                        document.querySelector("#answer-input").value = "시간초과! 정답은: " + res.correctAnswer;
+                    },
+                    error: function() {
+                        console.log("정답 조회용 ajax 통신 실패");
+                    }
+                });
             }
         }, 1000);
+
+
+
     } 
 </script>
 </body>
