@@ -48,7 +48,7 @@ String contextPath = request.getContextPath();
 
                         <div class="question-input">
                             <label for="question-1">질문 내용:</label> 
-                            <input type="text" id="question-1" name="question-1" placeholder="질문을 입력하세요">
+                            <input type="text" id="question-1" name="pcontent-1" placeholder="질문을 입력하세요">
                         </div>
 
                         <div>
@@ -60,16 +60,16 @@ String contextPath = request.getContextPath();
 
                         <div class="time-limit">
                             <label>제한시간</label> 
-                            <input type="radio" name="time-1" value="15">15초 
-                            <input type="radio" name="time-1" value="30">30초 
-                            <input type="radio" name="time-1" value="45">45초
+                            <input type="radio" name="ptime-1" value="15">15초 
+                            <input type="radio" name="ptime-1" value="30">30초 
+                            <input type="radio" name="ptime-1" value="45">45초
                         </div>
 
                         <div class="hint-answer">
                             <label for="hint-1">힌트:</label> 
-                            <input type="text" id="hint-1" name="hint-1" placeholder="없을 경우 '.'을 입력해 주세요"> 
+                            <input type="text" id="hint-1" name="phint-1" placeholder="없을 경우 '.'을 입력해 주세요"> 
                             <label for="answer-1">정답:</label>
-                            <input type="text" id="answer-1" name="answer-1" placeholder="정답을 입력해 주세요">
+                            <input type="text" id="answer-1" name="panswer-1" placeholder="정답을 입력해 주세요">
                         </div>
 
                         <div class="buttons">

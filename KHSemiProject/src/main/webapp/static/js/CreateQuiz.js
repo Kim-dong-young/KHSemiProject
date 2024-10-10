@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="question-input">
                 <label for="question-${totalPages}">질문 내용:</label>
-                <input type="text" id="question-${totalPages}" name="question-${totalPages}" placeholder="질문을 입력하세요">
+                <input type="text" id="question-${totalPages}" name="pcontent-${totalPages}" placeholder="질문을 입력하세요">
             </div>
 
             <div>
@@ -62,25 +62,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="time-limit">
                 <label>제한시간</label>
-                <input type="radio" name="time-${totalPages}" value="15"> 15초
-                <input type="radio" name="time-${totalPages}" value="30"> 30초
-                <input type="radio" name="time-${totalPages}" value="45"> 45초
+                <input type="radio" name="ptime-${totalPages}" value="15"> 15초
+                <input type="radio" name="ptime-${totalPages}" value="30"> 30초
+                <input type="radio" name="ptime-${totalPages}" value="45"> 45초
             </div>
 
             <div class="hint-answer">
                 <label for="hint-${totalPages}">힌트:</label>
-                <input type="text" id="hint-${totalPages}" name="hint-${totalPages}" placeholder="없을 경우 '.'을 입력해 주세요">
+                <input type="text" id="hint-${totalPages}" name="phint-${totalPages}" placeholder="없을 경우 '.'을 입력해 주세요">
                 
                 <label for="answer-${totalPages}">정답:</label>
-                <input type="text" id="answer-${totalPages}" name="answer-${totalPages}" placeholder="정답을 입력해 주세요">
+                <input type="text" id="answer-${totalPages}" name="panswer-${totalPages}" placeholder="정답을 입력해 주세요">
             </div>
             <div class="buttons">
                 <button class="home-btn">
                     <a href="../main.me"> 
-                        <img src="../static/img/homebtn.png" width="130px" height="45px">
+                        <img src="./static/img/homebtn.png" width="130px" height="45px">
                     </a>
                 </button>
-                <button class="create-btn" onclick="saveQuiz()">질문 생성하기</button>
+                <button class="create-btn" type="submit">질문 생성하기</button>
             </div>
         `;
         quizLayout.appendChild(newPage);

@@ -14,6 +14,7 @@ import com.kh.createQuiz.service.CreateQuizServiceImpl;
 import com.kh.search.model.vo.Quiz;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class problemsController
  */
+@MultipartConfig
 public class problemsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -30,6 +32,7 @@ public class problemsController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	request.getRequestDispatcher("/templates/CreateQuiz.jsp").forward(request, response);
         String changeName = null;
         response.setContentType("application/json; charset=UTF-8");
 
@@ -54,7 +57,7 @@ public class problemsController extends HttpServlet {
                 p.setQUIZ_number(quiz.getQuiz_number());
             } else {
                 System.out.println("Quiz attribute is null");
-                response.sendRedirect(request.getContextPath() + "/templates/CreateQuiz.jsp");
+                response.sendRedirect(request.getContextPath());
                 return;
             }
 
@@ -67,9 +70,9 @@ public class problemsController extends HttpServlet {
                     case "pcontent":
                         p.setPROBLEM_content(item.getString());
                         break;
-                    case "pmk":
-                        p.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
-                        break;
+//                    case "pmk":
+//                        p.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
+//                        break;
                     case "phint":
                         p.setPROBLEM_hint(item.getString());
                         break;
