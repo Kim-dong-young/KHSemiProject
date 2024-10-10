@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.kh.createQuiz.model.vo.Answer;
 import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.model.vo.Problem;
 
@@ -112,6 +113,25 @@ public class CreateQuizDAO {
 		} finally {
 			close(pstmt);
 		}
-		return 0;
+		return result;
+	}
+
+	public int insertAnswer(Connection conn, Answer a) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAnswer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,a.getANSWER_content());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+		
+		
 	}
 }
