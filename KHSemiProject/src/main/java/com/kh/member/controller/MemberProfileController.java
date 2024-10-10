@@ -46,7 +46,7 @@ public class MemberProfileController extends HttpServlet {
 			int requestMaxSize = 1024 * 1024 * 20; // 20MB
 			
 			// 2. 전달된 파일을 저장시킬 폴더경로 가져오기
-			String savePath = request.getServletContext().getRealPath("static/img/userProfile");
+			String savePath = request.getServletContext().getRealPath("/static/img/userProfile/");
 			System.out.println("savePAth : "+savePath);
 			
 			// 3.DiskFileItemFactory(파일을 임시로 저장) 객체 생성
@@ -85,7 +85,7 @@ public class MemberProfileController extends HttpServlet {
 					
 					if(originName.length() > 0) { // 파일을 업로드 했을 경우
 						// 고유한 파일명 생성
-						String tmpNmae = "/proFile_" + System.currentTimeMillis();
+						String tmpNmae = "proFile_" + System.currentTimeMillis();
 						// 파일 형식 ex1) jpg , png 추출
 						String type = originName.substring(originName.lastIndexOf("."));
 						// DB에 저장할 파일명
@@ -96,19 +96,19 @@ public class MemberProfileController extends HttpServlet {
 						
 						item.write(f.toPath()); // 지정된 경로에 파일 업로드
 						
-						p.setMemberImg("static/img/userProfile/" + changeName);
+						p.setMemberImg("/static/img/userProfile/" + changeName);
 			}
 		}
 	}
 			
 			
 		Member updateProfile = new MemberService().updateProfile(p);
-		
+		System.out.println(updateProfile);
 		if(updateProfile == null) {
 			request.setAttribute("errorMsg", "프로필 수정에 실패하였습니다.");
 		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", updateProfile);
+			session.setAttribute("loginMember", updateProfile);
 			session.setAttribute("alertMsg", "프로필 수정에 성공하였습니다.");
 		}
 		response.sendRedirect(request.getContextPath() + "/userset.me");
