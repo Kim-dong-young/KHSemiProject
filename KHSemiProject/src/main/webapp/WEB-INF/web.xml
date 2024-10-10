@@ -437,4 +437,14 @@
     <servlet-name>PlayQuizEndController</servlet-name>
     <url-pattern>/pqEnd.pl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DailyQuestController</display-name>
+    <servlet-name>DailyQuestController</servlet-name>
+    <servlet-class>com.kh.member.controller.DailyQuestController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DailyQuestController</servlet-name>
+    <url-pattern>/dailyQuest.me</url-pattern>
+  </servlet-mapping>
 </web-app>

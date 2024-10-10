@@ -132,9 +132,39 @@
 		MEMBER_INTRODUCE = ?
 	WHERE MEMBER_ID = ?
 	</entry>
+<<<<<<< HEAD
+	<entry key="selectDailyQuest">
+	 SELECT MEMBER_QUEST_NUMBER ,
+			MEMBER_QUEST_SUCCESS ,
+			MEMBER_QUEST_DATE ,
+			MEMBER_NUMBER ,
+			QUEST_NUMBER ,
+			QUEST_CONTENT
+			FROM MEMBER_QUEST
+			JOIN QUEST USING (QUEST_NUMBER)
+		WHERE MEMBER_NUMBER = ?
+	</entry>
+	<entry key="insertDailyQuest">
+		INSERT INTO MEMBER_QUEST 
+		    (
+		        MEMBER_QUEST_NUMBER ,
+		    	MEMBER_NUMBER ,
+		        QUEST_NUMBER
+		    )
+		VALUES
+		    (
+		        SEQ_QUEST.NEXTVAL,
+		        ?,
+		        ?
+		    )
+	</entry>
+	<entry key="selectQuestCount">
+		SELECT COUNT(*) AS COUNT
+		FROM QUEST
+	</entry>
 	<entry key="playedRecode">
 		SELECT COUNT(*) AS "count"
-  		  FROM QUIZ_LOG
- 	     WHERE MEMBER_NUMBER = ? AND TO_CHAR(QUIZ_LOG_DATE) = TO_CHAR(SYSDATE)
-	</entry>
+ 		  FROM QUIZ_LOG
+	     WHERE MEMBER_NUMBER = ? AND TO_CHAR(QUIZ_LOG_DATE) = TO_CHAR(SYSDATE)
+ 	</entry>
 </properties>

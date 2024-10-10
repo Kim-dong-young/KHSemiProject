@@ -1,6 +1,7 @@
 function initMain(optional) {
   selectPopBoard();
-  setInterval(selectPopBoard, 3000)
+  setInterval(selectPopBoard, 3000);
+  selectDailyQuest()
   
   if(optional) {
     setLevel(optional);
@@ -138,29 +139,64 @@ function selectPopBoard(){
   })
 }
 
+
+function selectDailyQuest(){
+  $.ajax({
+    url: "dailyQuest.me",
+    type: "post",
+    success: function(res) {
+      const questDiv = document.querySelector(".quest-list-row");
+      let str = "";
+      console.log(res)
+      console.log("응답 길이:", res.length);
+
+      for(let quest of res) {
+        str += (
+          "<div>" +
+              "<div class='quest-content'>"+ quest.questContent+"</div>" +
+               "<div class='quest-achieving-condition'>" +
+                  "<span>" + quest.questSuccess + "</span>" +
+                  "<span> / </span>" +
+                  "<span class='completion-condition'>" + 1 + "</span>" +
+              "</div>" +
+              "<div class='submit-btn'>" +
+                  "<button>달성하기</button>" +
+              "</div>" +
+          "</div>"
+        )
+      }
+
+      questDiv.innerHTML = str;
+    },
+    error : function() {
+      console.log("일일퀘스트 조회 실패");
+    }
+  });
+}
+
 function setLevel(optional) {
-  const levelValue = document.getElementById('level')
-  const expValue = document.getElementById('exp-value')
-  const expBarValue = document.getElementById('current-user-exp-bar')
-
-  let op = Number(optional) //optional을 number타입으로 변경
-
-  let maxExp = 1000;
-  let level = Math.floor(op / maxExp);
-  let exp = op % maxExp;
-  let expGage = (exp / maxExp) * 100;
-
-  if(op < maxExp) {
-    levelValue.innerText = 1;
-  } else {
-    levelValue.innerText = level + 1;
-  }
+    const levelValue = document.getElementById('level')
+    const expValue = document.getElementById('exp-value')
+    const expBarValue = document.getElementById('current-user-exp-bar')
   
-  if(exp > 0) {
-    expValue.innerText = exp;
-  } else {
-    expValue.innerText = 0;
-  }
-
-  expBarValue.style.width = expGage + '%'
+    let op = Number(optional) //optional을 number타입으로 변경
+  
+    let maxExp = 1000;
+    let level = Math.floor(op / maxExp);
+    let exp = op % maxExp;
+    let expGage = (exp / maxExp) * 100;
+  
+    if(op < maxExp) {
+      levelValue.innerText = 1;
+    } else {
+      levelValue.innerText = level + 1;
+    }
+    
+    if(exp > 0) {
+      expValue.innerText = exp;
+    } else {
+      expValue.innerText = 0;
+    }
+  
+    expBarValue.style.width = expGage + '%'
 }

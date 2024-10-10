@@ -6,9 +6,15 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.Quest;
 
 
 public class MemberService {
@@ -169,6 +175,51 @@ public class MemberService {
 		return null;
 	}
 	
+	public ArrayList<Quest> getDailyQuest(Member loginMember) {
+		Connection conn = getConnection();
+		MemberDao mDao = new MemberDao();
+		ArrayList<Quest> questList = mDao.selectDailyQuest(conn, loginMember); // 유저의 일일퀘스트를 조회한다.
+		
+		if(questList.isEmpty()) { // 퀘스트가 없다면 퀘스트를 부여
+			int result = 0; // 트랜잭션 커밋 & 롤백 용 변수
+			int dailyQuestLimit = 3; // 일일퀘스트의 개수
+			
+			// 퀘스트는 랜덤으로 부여된다.
+			// 랜덤값의 범위를 조회하기 위해 퀘스트 목록의 크기를 가져온다.
+			int questCount = mDao.selectQuestCount(conn);
+			
+			// IntStream.rangeClosed( startIndex, endIndex ) => startIndex ~ endIndex 값 까지 IntStream 반환
+			// Boxed 는 원시 타입 스트림을 객체 타입 스트림으로 변환
+			// list는 객체형만 담을수 있어서 변환해줘야 한다.
+			// toList()로 변환시, immutableCollection 반환, 수정이 불가능하다.
+			// collect(Collectors.toList())로 변환해줘야 한다.
+			List<Integer> randNum = IntStream.rangeClosed(1, questCount).boxed().collect(Collectors.toList());
+			
+			// 배열을 랜덤한 순서로 섞음 ( Fisher-Yates shuffle )
+			// 이미 뽑은 배열 요소는 다시 선택하지 않음 => 무작위 추출시 무한루프 걱정 X, O(n)의 시간복잡도
+			Collections.shuffle(randNum);
+			
+			// 1 ~ questCount까지 생성된 배열을 무작위로 섞고 일일퀘스트 개수만큼 추출
+			// => 중복 퀘스트를 선택할 일이 없다
+			List<Integer> selectedQuest = randNum.subList(0, dailyQuestLimit);
+			
+			for(int questNo : selectedQuest) { // 선택된 퀘스트를 퀘스트 테이블에 추가
+				result += mDao.insertDailyQuest(conn, loginMember, questNo);
+			}
+			
+			if(result == dailyQuestLimit) { // dailyQuestLimit 개수만큼 일일퀘스트가 추가 되었다면 커밋
+				commit(conn);
+				questList = mDao.selectDailyQuest(conn, loginMember); // 유저의 일일퀘스트를 조회한다.
+			} else {
+				rollback(conn);
+			}
+		}
+
+		close(conn);
+		return questList;
+	}
+
+
 	public int playedRecode(int memberNo) {
 		Connection conn = getConnection();
 		int result = new MemberDao().playedRecode(conn, memberNo);
