@@ -59,6 +59,15 @@ public class LoginController extends HttpServlet {
 			} else {
 				session.setAttribute("loginMember", loginMember);
 			}
+			
+			int result1 = 0;
+			int result2 = 0;
+			// 첫 접속 유저에게 퀘스트를 부여한다.
+			result1 = new MemberService().initDailyQuest(loginMember); // 유저가 가진 퀘스트 개수 반환
+			
+			if(result1 > 0) { // 퀘스트가 있다면, 하루가 지났는지 검사해서 퀘스트를 교체해준다.
+				result2 = new MemberService().updateDailyQuest(loginMember);
+			}
 
 			session.setAttribute("totalAt", totalAt);
 			

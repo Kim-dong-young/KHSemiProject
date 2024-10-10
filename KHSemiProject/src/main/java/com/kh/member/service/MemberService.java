@@ -5,12 +5,14 @@ import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
 
+import static com.kh.common.DailyQuestTemplate.*;
+
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Random;
 
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -176,45 +178,74 @@ public class MemberService {
 		return updateProfile;
 	}
 	
-	public ArrayList<Quest> getDailyQuest(Member loginMember) {
+	public int initDailyQuest(Member loginMember) {
 		Connection conn = getConnection();
-		MemberDao mDao = new MemberDao();
-		ArrayList<Quest> questList = mDao.selectDailyQuest(conn, loginMember); // 유저의 일일퀘스트를 조회한다.
+		MemberDao mDao = new MemberDao(); 
+		int questCount = mDao.countMemberQuest(conn, loginMember);
 		
-		if(questList.isEmpty()) { // 퀘스트가 없다면 퀘스트를 부여
+		if(questCount < 1) { // 멤버가 가진 퀘스트가 없을 경우
 			int result = 0; // 트랜잭션 커밋 & 롤백 용 변수
-			int dailyQuestLimit = 3; // 일일퀘스트의 개수
 			
 			// 퀘스트는 랜덤으로 부여된다.
 			// 랜덤값의 범위를 조회하기 위해 퀘스트 목록의 크기를 가져온다.
-			int questCount = mDao.selectQuestCount(conn);
+			int questRange = mDao.selectQuestCount(conn);
+			HashSet<Integer> questNum = getRandomQuestNum(questRange);
 			
-			// IntStream.rangeClosed( startIndex, endIndex ) => startIndex ~ endIndex 값 까지 IntStream 반환
-			// Boxed 는 원시 타입 스트림을 객체 타입 스트림으로 변환
-			// list는 객체형만 담을수 있어서 변환해줘야 한다.
-			// toList()로 변환시, immutableCollection 반환, 수정이 불가능하다.
-			// collect(Collectors.toList())로 변환해줘야 한다.
-			List<Integer> randNum = IntStream.rangeClosed(1, questCount).boxed().collect(Collectors.toList());
-			
-			// 배열을 랜덤한 순서로 섞음 ( Fisher-Yates shuffle )
-			// 이미 뽑은 배열 요소는 다시 선택하지 않음 => 무작위 추출시 무한루프 걱정 X, O(n)의 시간복잡도
-			Collections.shuffle(randNum);
-			
-			// 1 ~ questCount까지 생성된 배열을 무작위로 섞고 일일퀘스트 개수만큼 추출
-			// => 중복 퀘스트를 선택할 일이 없다
-			List<Integer> selectedQuest = randNum.subList(0, dailyQuestLimit);
-			
-			for(int questNo : selectedQuest) { // 선택된 퀘스트를 퀘스트 테이블에 추가
-				result += mDao.insertDailyQuest(conn, loginMember, questNo);
-			}
+			result = mDao.insertDailyQuest(conn, loginMember, questNum);
 			
 			if(result == dailyQuestLimit) { // dailyQuestLimit 개수만큼 일일퀘스트가 추가 되었다면 커밋
 				commit(conn);
-				questList = mDao.selectDailyQuest(conn, loginMember); // 유저의 일일퀘스트를 조회한다.
+				questCount = result; // 추가된 개수 == 유저가 가지고 있는 퀘스트 개수
 			} else {
 				rollback(conn);
 			}
 		}
+		
+		close(conn);
+		return questCount;
+	}
+	
+	public int updateDailyQuest(Member loginMember) {
+		Connection conn = getConnection();
+		MemberDao mDao = new MemberDao(); 
+		int result1 = 0;
+		int result2 = 0;
+		
+		// 하루가 지났는지 확인후, 지났다면 다시 퀘스트를 부여한다.
+		Date questDate = mDao.getQuestDate(conn, loginMember);
+		Date currentDate = new Date(System.currentTimeMillis());
+		
+        // 1. Calendar 객체를 사용하여 년, 월, 일을 추출
+        Calendar questCal = Calendar.getInstance();
+        questCal.setTime(questDate);
+
+        Calendar currentCal = Calendar.getInstance();
+        currentCal.setTime(currentDate);
+
+        // 2. 년, 월, 일을 비교
+        if (currentCal.get(Calendar.YEAR) == questCal.get(Calendar.YEAR) && // 하루가 지났다면 퀘스트 삭제 후 부여 ( 일자로 비교 )
+            currentCal.get(Calendar.DAY_OF_YEAR) - questCal.get(Calendar.DAY_OF_YEAR) >= 1) {
+        	
+        	int questRange = mDao.selectQuestCount(conn);
+			HashSet<Integer> questNum = getRandomQuestNum(questRange);
+			
+			result1 = mDao.deleteMemberQuest(conn, loginMember);
+			result2 = mDao.insertDailyQuest(conn, loginMember, questNum);
+			
+			// 삭제가 성공하고, dailyQuestLimit 개수만큼 일일퀘스트가 추가 되었다면 커밋
+			if(result1 > 0 && result2 == dailyQuestLimit) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+        }
+        
+        return result1 * result2;
+	}
+	
+	public ArrayList<Quest> getDailyQuest(Member loginMember) {
+		Connection conn = getConnection();
+		ArrayList<Quest> questList = new MemberDao().selectDailyQuest(conn, loginMember); // 유저의 일일퀘스트를 조회한다.
 
 		close(conn);
 		return questList;
@@ -228,4 +259,5 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
 }

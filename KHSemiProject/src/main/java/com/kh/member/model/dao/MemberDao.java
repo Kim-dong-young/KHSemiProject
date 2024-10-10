@@ -5,10 +5,12 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Properties;
 
 import com.kh.member.model.vo.Member;
@@ -16,12 +18,15 @@ import com.kh.member.model.vo.Quest;
 
 public class MemberDao {
 	private Properties prop = new Properties();
+	private Properties questProp = new Properties();
 	
 	public MemberDao() {
 		String filePath = MemberDao.class.getResource("/db/sql/member-mapper.xml").getPath();
+		String questFilePath = MemberDao.class.getResource("/db/sql/quest-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
+			questProp.loadFromXML(new FileInputStream(questFilePath));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -449,7 +454,7 @@ public class MemberDao {
 		return questList;
 	}
 
-	public int insertDailyQuest(Connection conn, Member loginMember, int questNo) {
+	public int insertDailyQuest(Connection conn, Member loginMember, HashSet<Integer> questNum) {
 		int result = 0;
 
 		PreparedStatement pstmt = null;
@@ -457,12 +462,14 @@ public class MemberDao {
 		String sql = prop.getProperty("insertDailyQuest");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, loginMember.getMemberNo());
-			pstmt.setInt(2, questNo);
-			
-			result = pstmt.executeUpdate();
+			for(int num : questNum) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, loginMember.getMemberNo());
+				pstmt.setInt(2, num);
+				
+				result += pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -525,6 +532,82 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int countMemberQuest(Connection conn, Member loginMember) {
+		int result = 0;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("countMemberQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, loginMember.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Date getQuestDate(Connection conn, Member loginMember) {
+		Date questDate = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("getQuestDate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, loginMember.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				questDate = rset.getDate("MEMBER_QUEST_DATE");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return questDate;
+	}
+
+	public int deleteMemberQuest(Connection conn, Member loginMember) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMemberQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginMember.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 			
 		
 }
