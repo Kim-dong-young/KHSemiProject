@@ -4,6 +4,7 @@ function initMain(optional) {
   
   if(optional) {
     setLevel(optional);
+    setdount();
     selectDailyQuest()
   }
 
@@ -208,4 +209,19 @@ function setLevel(optional) {
       t++ >= expGage && clearInterval(barAnimation) // 임시변수 값이 원하는 값(여기서는 expGage)과 
                                                     // 같아지면 clearInterval 함수를 호출하여 이벤트를 종료
     }, 10)
+}
+
+function setdount() {
+  const donuts = document.querySelectorAll('.chart-donut');
+  
+  donuts.forEach(donut => {
+    let t = 0;
+    let result = donut.dataset.percent;
+
+  const donutAnimation = setInterval(() => {
+    donut.style.background = `conic-gradient(#FF9139 0 ${t}%, #d9d9d9 ${t}% 100%`
+
+    t++ >= result && clearInterval(donutAnimation) 
+    })
+  }, 10)
 }
