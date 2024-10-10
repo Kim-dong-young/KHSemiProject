@@ -165,24 +165,26 @@
     margin: 0 5px;
 }
 
-.donut-chart{
+.chart{
     width: 80px;
     height: 80px;
-    border-radius: 50%;
     position: relative;
-    margin: 10px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
 }
 
-.donut-chart::before {
-    content: '';
+span .center {
+    background: #fff;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 70%;
     height: 70%;
-    background-color: white;
     border-radius: 50%;
-    position: absolute;
+    text-align: center;
+    font: 30px;
+    transform: translate(-50%, -50%);
 }
 
 .donut-text {
