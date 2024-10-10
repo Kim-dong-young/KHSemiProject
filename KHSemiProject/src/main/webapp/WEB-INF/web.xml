@@ -449,6 +449,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>checkQuest</display-name>
+    <servlet-name>checkQuest</servlet-name>
+    <servlet-class>com.kh.member.controller.DailyQuestCheckController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkQuest</servlet-name>
+    <url-pattern>/checkQuest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>AjaxPlayQuizStarsCheck</display-name>
     <servlet-name>AjaxPlayQuizStarsCheck</servlet-name>
     <servlet-class>com.kh.playQuiz.controller.AjaxPlayQuizStarsCheck</servlet-class>
