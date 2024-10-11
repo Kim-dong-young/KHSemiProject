@@ -73,7 +73,7 @@ public class MemberProfileController extends HttpServlet {
 					case "memberNickName":
 						p.setMemberNickName(item.getString(Charset.forName("utf-8")));
 						break;
-					case "memberImage":
+					case "memberImage":					
 						p.setMemberImg(item.getString(Charset.forName("utf-8")));
 						break;
 					case "Introduce":
@@ -101,6 +101,10 @@ public class MemberProfileController extends HttpServlet {
 		}
 	}
 			
+			
+		if(p.getMemberImg() == null) {
+			p.setMemberImg(((Member)request.getSession().getAttribute("loginMember")).getMemberImg());
+		}
 			
 		Member updateProfile = new MemberService().updateProfile(p);
 		System.out.println(updateProfile);
