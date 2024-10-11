@@ -52,7 +52,7 @@
                 <div id="hintText" style="display: none;">힌트 내용</div>
             </div>
             <div class="answer-container">
-                <input type="text" id="answer-input" placeholder="정답 입력">
+                <input type="text" id="answer-input" placeholder="정답 입력" onkeypress="if(window.event.keyCode==13){submit_problem()}">
                 <button id="submit-btn" onclick="submit_problem()">제출</button>
             </div>
         </div>
@@ -153,7 +153,7 @@
 
     function nextProblem(){
         pNum++;
-        document.querySelector(".answer-container").innerHTML = `<input type="text" id="answer-input" placeholder="정답 입력">
+        document.querySelector(".answer-container").innerHTML = `<input type="text" id="answer-input" placeholder="정답 입력" onkeypress="if(window.event.keyCode==13){submit_problem()}">
                 <button id="submit-btn" onclick="submit_problem()">제출</button>`
         renderProblem();
     }
