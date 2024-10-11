@@ -13,7 +13,7 @@ document.getElementById('thumbnail').addEventListener('change', function(event) 
     }
 });
 
-// 카테고리 선택 시 태그 입력 처리
+/*// 카테고리 선택 시 태그 입력 처리
 const categorySelect = document.getElementById('category');
 const tagInput = document.getElementById('tag');
 
@@ -44,4 +44,4 @@ window.addEventListener('load', function() {
     if (selectedValue !== '8') { 
         tagInput.disabled = true;
     }
-});
+});*/
