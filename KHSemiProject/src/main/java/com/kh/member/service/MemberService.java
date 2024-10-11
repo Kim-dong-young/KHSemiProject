@@ -321,11 +321,27 @@ public class MemberService {
 		Connection conn = getConnection();
 		int result = 0;
 		
-		int totalResult = mDao.totalQuiz(conn, memberNo);
+		int totalResult = mDao.totalQuiz1(conn, memberNo);
 		int correctResult = mDao.correctQuiz(conn, memberNo);
 		
 		if(totalResult > 0 && correctResult > 0) {
 			double i = (double)correctResult / totalResult; 
+			result = (int)(i * 100);
+			System.out.println(result);
+		}
+		
+		return result;
+	}
+	
+	public int playedQuiz(int memberNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		int totalResult = mDao.totalQuiz(conn);
+		int playedResult = mDao.playedQuiz(conn, memberNo);
+		
+		if(totalResult > 0 && playedResult > 0) {
+			double i = (double)playedResult / totalResult; 
 			result = (int)(i * 100);
 			System.out.println(result);
 		}

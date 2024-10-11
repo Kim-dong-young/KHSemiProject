@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.kh.member.model.vo.Member;
 import com.kh.playQuiz.service.PlayQuizService;
 
 /**
@@ -48,6 +49,15 @@ public class PlayQuizEndController extends HttpServlet {
 		boolean link = new PlayQuizService().AjaxPlayQuizViewCount(qNum, mNum, cNum);
 		System.out.println(link);
 		
+		int questNo = 1; // 1 : 퀴즈 1개 완료하기
+		int isDone = new PlayQuizService().checkDailyQuest(mNum, questNo);
+		
+		// MEMBER_QUEST_SUCCESS 값 0은 퀘스트완료 X / 보상 획득 X
+		// MEMBER_QUEST_SUCCESS 값 1은 퀘스트완료 O / 보상 획득 X
+		// MEMBER_QUEST_SUCCESS 값 2는 퀘스트완료 O / 보상 획득 O
+		if(isDone == 0) { // 퀘스트 깬적 없을 경우 ( 오늘 첫 로그인 )
+			new PlayQuizService().successQuest(mNum, questNo);
+		}
 		
 		Math.floor(0.4);
 		request.getRequestDispatcher("templates/QuizEnd.jsp").forward(request, response);

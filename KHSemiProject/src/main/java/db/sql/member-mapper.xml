@@ -232,4 +232,13 @@
         GROUP BY QL.MEMBER_NUMBER
         HAVING QL.MEMBER_NUMBER = ?
 	</entry>
+	<entry key="selectTotalQuiz">
+		SELECT COUNT(*) AS total_quiz
+		  FROM QUIZ
+	</entry>
+	<entry key="selectPlayedQuiz">
+		SELECT COUNT(DISTINCT QUIZ_NUMBER) AS played_quiz
+		  FROM QUIZ_LOG
+		 WHERE MEMBER_NUMBER = ?
+	</entry>
 </properties>

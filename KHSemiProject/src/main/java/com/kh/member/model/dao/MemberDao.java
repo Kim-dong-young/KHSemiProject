@@ -752,7 +752,7 @@ public class MemberDao {
 		return result;
 	}	
 	
-	public int totalQuiz(Connection conn, int memberNo) {
+	public int totalQuiz1(Connection conn, int memberNo) {
 int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -778,7 +778,7 @@ int result = 0;
 	}
 	
 	public int correctQuiz(Connection conn, int memberNo) {
-int result = 0;
+		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -792,6 +792,55 @@ int result = 0;
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				result = rset.getInt("correct");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int totalQuiz(Connection conn) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectTotalQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("total_quiz");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int playedQuiz(Connection conn, int memberNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPlayedQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("played_quiz");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

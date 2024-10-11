@@ -38,11 +38,13 @@ public class MainPageController extends HttpServlet {
 			int rResult = mService.playedRecode(m.getMemberNo());
 			int aResult = mService.attendanceRate(m.getMemberNo());
 			int cResult = mService.correctRate(m.getMemberNo());
+			int pResult = mService.playedQuiz(m.getMemberNo());
 			
 			request.setAttribute("optional", m.getExp());
 			request.setAttribute("playedRecode", rResult);
 			request.setAttribute("attendance", aResult);
 			request.setAttribute("correct", cResult);
+			request.setAttribute("played", pResult);
 		}
 	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
