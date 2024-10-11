@@ -13,6 +13,7 @@ import java.util.Properties;
 import com.kh.createQuiz.model.vo.Answer;
 import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.model.vo.Problem;
+import com.kh.createQuiz.model.vo.QuizTag;
 
 public class CreateQuizDAO {
 	private Properties prop = new Properties();
@@ -69,30 +70,28 @@ public class CreateQuizDAO {
 	}
 
 	// 태그 정보를 데이터베이스에 삽입
-	public int insertQuizTag(Connection conn, CreateQuiz quiz) throws SQLException {
-		String query = "INSERT INTO QUIZ_TAG (TAG_name, QUIZ_number) VALUES (?, ?)";
-		try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-			pstmt.setString(1, quiz.getTAG_NAME());
-			pstmt.setInt(2, quiz.getQUIZ_NUMBER());
-			return pstmt.executeUpdate();
+	public int insertQuizTag(Connection conn, QuizTag tag) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertQuizTag");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, tag.getTagName());
+			
+			System.out.println(tag.getTagName());
+			System.out.println(tag.getQuizNumber());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
 		}
+		return result;
 	}
 
-	// 퀴즈와 태그 정보를 함께 삽입
-	public int insertQuizWithTag(Connection conn, CreateQuiz quiz) throws SQLException {
-		try {
-			conn.setAutoCommit(false);
-			insertQuiz(conn, quiz);
-			insertQuizTag(conn, quiz);
-			conn.commit();
-		} catch (SQLException e) {
-			conn.rollback();
-			throw e;
-		} finally {
-			conn.setAutoCommit(true);
-		}
-		return 0;
-	}
 
 	public int insertProblems(Connection conn, Problem p) {
 		int result = 0;
@@ -134,7 +133,7 @@ public class CreateQuizDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, a.getANSWER_content());
-			
+			System.out.println(sql);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -218,6 +217,55 @@ public class CreateQuizDAO {
 			e.printStackTrace();
 		} finally {
 			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateMemberExp(Connection conn, int memberNo, int exp) {
+		System.out.println("updateMemberExp DAO 실행");
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMemberExp");
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, exp);
+			pstmt.setInt(2, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int doneDailyQuest(Connection conn, int memberNo, int questNo) {
+		System.out.println("doneDailyQuest DAO 실행");
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("doneDailyQuest");
+		System.out.println(sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		

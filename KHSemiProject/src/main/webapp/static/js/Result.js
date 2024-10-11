@@ -71,29 +71,29 @@ document.addEventListener('DOMContentLoaded', () => {
         starCbtn.setAttribute('style', "display: none;");
     }
     starCbtn.addEventListener('click', function(){
-    $.ajax({
-        url: "rankConfirm.pl",
-        contentType: "application/json",
-        type: "GET",
-        data:{
-            rating: rating,
-            qNum: starCbtn.value,
-            mNum: memberNoinfo.value
-        },
-        success: function(res){
-            if(res){
-                alert("별점이 정상적으로 등록되었습니다.")
-                stars.forEach((star, index) => {
-                    star.removeEventListener('click', starHandlers[index]);
-                });
-                starCbtn.setAttribute('disabled', true);
+        $.ajax({
+            url: "rankConfirm.pl",
+            contentType: "application/json",
+            type: "GET",
+            data:{
+                rating: rating,
+                qNum: starCbtn.value,
+                mNum: memberNoinfo.value
+            },
+            success: function(res){
+                if(res){
+                    alert("별점이 정상적으로 등록되었습니다.")
+                    stars.forEach((star, index) => {
+                        star.removeEventListener('click', starHandlers[index]);
+                    });
+                    starCbtn.setAttribute('disabled', true);
+                }
+            },
+            error: function(){
+                console.log("별점주기용 ajax 통신 실패")
             }
-        },
-        error: function(){
-            console.log("별점주기용 ajax 통신 실패")
-        }
+        })
     })
-})
     
 });
 

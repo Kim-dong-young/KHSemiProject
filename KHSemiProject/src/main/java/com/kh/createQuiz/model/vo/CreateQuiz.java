@@ -9,14 +9,13 @@ public class CreateQuiz {
 	private int MEMBER_NUMBER;
 	private int CATEGORY_NUMBER;
 	private String THUMBNAIL;
-	private String TAG_NAME;
 	
 	public CreateQuiz() {
 		super();
 	}
 
 	public CreateQuiz(int qUIZ_NUMBER, String qUIZ_TITLE, String qUIZ_DATE, String qUIZ_MODIFY_DATE,
-			String qUIZ_EXPLANATION, int mEMBER_NUMBER, int cATEGORY_NUMBER, String tHUMBNAIL, String tAG_NAME) {
+			String qUIZ_EXPLANATION, int mEMBER_NUMBER, int cATEGORY_NUMBER, String tHUMBNAIL) {
 		super();
 		QUIZ_NUMBER = qUIZ_NUMBER;
 		QUIZ_TITLE = qUIZ_TITLE;
@@ -26,7 +25,6 @@ public class CreateQuiz {
 		MEMBER_NUMBER = mEMBER_NUMBER;
 		CATEGORY_NUMBER = cATEGORY_NUMBER;
 		THUMBNAIL = tHUMBNAIL;
-		TAG_NAME = tAG_NAME;
 	}
 
 	public int getQUIZ_NUMBER() {
@@ -93,21 +91,14 @@ public class CreateQuiz {
 		THUMBNAIL = tHUMBNAIL;
 	}
 
-	public String getTAG_NAME() {
-		return TAG_NAME;
-	}
-
-	public void setTAG_NAME(String tAG_NAME) {
-		TAG_NAME = tAG_NAME;
-	}
-
 	@Override
 	public String toString() {
 		return "CreateQuiz [QUIZ_NUMBER=" + QUIZ_NUMBER + ", QUIZ_TITLE=" + QUIZ_TITLE + ", QUIZ_DATE=" + QUIZ_DATE
 				+ ", QUIZ_MODIFY_DATE=" + QUIZ_MODIFY_DATE + ", QUIZ_EXPLANATION=" + QUIZ_EXPLANATION
 				+ ", MEMBER_NUMBER=" + MEMBER_NUMBER + ", CATEGORY_NUMBER=" + CATEGORY_NUMBER + ", THUMBNAIL="
-				+ THUMBNAIL + ", TAG_NAME=" + TAG_NAME + "]";
+				+ THUMBNAIL + "]";
 	}
 
+	
 	
 }

@@ -67,7 +67,7 @@
             <li><a href="<%=contextPath%>/userset.me">유저설정</a></li>
             <li><a href="<%=contextPath%>/community?cpage=1">커뮤니티</a></li>
             <li><a href="<%=contextPath%>/insert.quiz">문제만들기</a></li>
-            <li><a href="">도움말</a></li>
+            <li id="help" ><a onclick="document.getElementById('help').textContent = '🥕🥕🥕'">도움!</a></li>
         </ul>
     </div>
 </body>
