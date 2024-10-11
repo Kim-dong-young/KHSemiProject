@@ -22,13 +22,13 @@
         <fieldset>
             <section id="profile-settings" class="content-section">
                 <h2>프로필 설정</h2>    
-                <form action="${pageContext.request.contextPath}profile.me" method="post" enctype="multipart/form-data">
-                    <img id="profileImage" src="<%=contextPath%>${loginMember.memberImg}" alt="프로필 이미지" class="profile-image" onclick="document.getElementById('imageUpload').click();">             
+                <form action="${pageContext.request.contextPath}/profile.me" method="post" enctype="multipart/form-data">
+                    <img id="profileImage" src="<%=contextPath%>/${loginMember.memberImg}" alt="프로필 이미지" class="profile-image" onclick="document.getElementById('imageUpload').click();" >             
                     <div class="profile-details">
                         <input type="file" id="imageUpload" name="memberImage" action=".jpg, .png" style="display: none;" onchange="previewImage(event)">
                         <input type="hidden" name="memberId" value="${loginMember.memberId }">
                         <label for="memberNickName">닉네임:</label>
-                        <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임">
+                        <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임" value="${loginMember.memberNickName}">
                         <label for="Introduce">자기소개:</label>
                         <textarea id="Introduce" name="Introduce" rows="4" placeholder="자기소개를 입력하세요..."></textarea>
                     </div>
