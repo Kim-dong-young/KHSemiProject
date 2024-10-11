@@ -118,38 +118,20 @@ public class PlayQuizDao {
 		String sql = prop.getProperty("AjaxPlayQuizMedia");
 		
 		
-		if(num == 1) {
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, pNum);
-				
-				rset = pstmt.executeQuery();
-				if(rset.next()) {
-					result = rset.getString("IMGS_FILE_NAME");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				JDBCTemplate.close(rset);
-				JDBCTemplate.close(pstmt);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pNum);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getString("PROBLEM_MEDIA");
 			}
-		} else {
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, pNum);
-				
-				rset = pstmt.executeQuery();
-				if(rset.next()) {
-					result = rset.getString("imgs_link_path");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				JDBCTemplate.close(rset);
-				JDBCTemplate.close(pstmt);
-			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
