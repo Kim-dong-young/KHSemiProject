@@ -96,8 +96,6 @@ public class CreateQuizMainController extends HttpServlet {
             if (result > 0) {
             	System.out.println(result);
                 request.setAttribute("quiz_num", result); 
-
-//                request.getSession().setAttribute("alertMsg", "퀴즈 작성 완료");
                 request.getRequestDispatcher("templates/CreateQuiz.jsp").forward(request, response);
             } else {
                 if (cQuiz != null) {

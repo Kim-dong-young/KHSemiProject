@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const questionList = document.querySelector('.question-list');
     const addQuestionBtn = document.querySelector('.add-question-btn');
     const deleteQuestionBtn = document.querySelector('.delete-question-btn');
-    const quizLayout = document.querySelector('.quiz-layout');
+    const quizLayout = document.querySelector('.quiz-layout form');
     let currentPage = 1;
     let totalPages = 1;
     const maxQuestions = 5; // 최대 질문 수
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="time-limit">
                 <label>제한시간</label>
-                <input type="radio" name="ptime-${totalPages}" value="15"> 15초
+                <input type="radio" name="ptime-${totalPages}" value="15" checked="checked"> 15초
                 <input type="radio" name="ptime-${totalPages}" value="30"> 30초
                 <input type="radio" name="ptime-${totalPages}" value="45"> 45초
             </div>
@@ -75,14 +75,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 <label for="answer-${totalPages}">정답:</label>
                 <input type="text" id="answer-${totalPages}" name="panswer-${totalPages}" placeholder="정답을 입력해 주세요">
             </div>
+
             <div class="buttons">
-                <button class="home-btn">
-                    <a href="../main.me"> 
-                        <img src="./static/img/homebtn.png" width="130px" height="45px">
-                    </a>
-                </button>
-                <button class="create-btn" type="submit">질문 생성하기</button>
-            </div>
+                                <a class="home-btn" href="<%=contextPath%>/main.me">
+                                    <img src="<%=contextPath%>/static/img/homebtn.png" width="130px" height="45px">
+                                </a>
+                                <button class="create-btn" type="submit">질문 생성하기</button>
+                            </div>
         `;
         quizLayout.appendChild(newPage);
 
@@ -142,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
             currentPage = pageNumber;
             updatePageCount();
         }
-    }
+    } 
 
     // 질문 삭제 기능
     function deleteLastQuestion() {
@@ -152,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
             totalPages--;
             goToPage(totalPages); // 현재 페이지를 마지막 페이지로 변경
         }
+
     }
 
     // 질문 리스트의 항목을 클릭하면 해당 페이지로 이동
