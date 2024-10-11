@@ -456,7 +456,7 @@
   <servlet-mapping>
     <servlet-name>insert.pr</servlet-name>
     <url-pattern>/insert.pr</url-pattern>
-   </servlet-mapping>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>checkQuest</display-name>
@@ -497,4 +497,30 @@
     <servlet-name>AjaxQuizClickReportController</servlet-name>
     <url-pattern>/report.qz</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>EncodingFilter</display-name>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.kh.common.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>LoginFilter</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.kh.common.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/personal.me</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/userset.me</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/insert.quiz</url-pattern>
+  </filter-mapping>
 </web-app>
