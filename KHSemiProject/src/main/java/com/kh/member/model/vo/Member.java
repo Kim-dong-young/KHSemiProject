@@ -9,7 +9,7 @@ public class Member {
 	private String memberNickName;
 	private int exp;
 	private String memberImg;
-	private Date joinDate;
+	private String joinDate;
 	private int checkContinueCnt;
 	private String status;
 	private String introduce;
@@ -22,7 +22,7 @@ public class Member {
 	}
 
 	public Member(int memberNo, String memberId, String memberPwd, String memberNickName, int exp, String memberImg,
-			Date joinDate, int checkContinueCnt, String status, String introduce, String memberemail , String address, String phone) {
+			String joinDate, int checkContinueCnt, String status, String introduce, String memberemail , String address, String phone) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -103,11 +103,11 @@ public class Member {
 		this.memberImg = memberImg;
 	}
 
-	public Date getJoinDate() {
+	public String getJoinDate() {
 		return joinDate;
 	}
 
-	public void setJoinDate(Date joinDate) {
+	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
 

@@ -36,7 +36,7 @@ public class MainPageController extends HttpServlet {
 		
 		if(m != null) {
 			int rResult = mService.playedRecode(m.getMemberNo());
-			int aResult = mService.attendanceRate(m.getMemberNo());
+			int aResult = mService.attendanceRate(m);
 			int cResult = mService.correctRate(m.getMemberNo());
 			int pResult = mService.playedQuiz(m.getMemberNo());
 			
