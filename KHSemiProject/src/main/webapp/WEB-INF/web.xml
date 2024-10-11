@@ -523,4 +523,14 @@
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/insert.quiz</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>share.sl</display-name>
+    <servlet-name>share.sl</servlet-name>
+    <servlet-class>com.kh.search.controller.AjaxQuizShareController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>share.sl</servlet-name>
+    <url-pattern>/share.sl</url-pattern>
+  </servlet-mapping>
 </web-app>

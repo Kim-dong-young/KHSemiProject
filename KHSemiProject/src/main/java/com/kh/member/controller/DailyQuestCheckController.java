@@ -29,6 +29,7 @@ public class DailyQuestCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String contextPath = request.getContextPath(); // contextPath
+		
 		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 		int questNo = Integer.parseInt(request.getParameter("qno"));
 		
@@ -43,6 +44,12 @@ public class DailyQuestCheckController extends HttpServlet {
 			int exp = 100;
 			mService.updateMemberExp(memberNo, questNo, exp);
 		}
+		
+		// 현재 로그인 중인 유저의 번호로 갱신된 정보(경험치)를 새로 받아온다.
+		Member m = new MemberService().selectMember(memberNo);
+		
+		request.getSession().setAttribute("loginMember", m);
+		request.setAttribute("optional", m.getExp());
 		
 		response.sendRedirect(contextPath + "/main.me");
 	}

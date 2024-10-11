@@ -73,7 +73,7 @@ CREATE TABLE QUIZ(
 
 CREATE TABLE PROBLEM( 
     PROBLEM_number number not null,
-    PROBLEM_content varchar2(50),
+    PROBLEM_content varchar2(1500),
     PROBLEM_media_kind number,
     Ptime number,
    -- Pdate date,
