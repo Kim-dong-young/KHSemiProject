@@ -533,4 +533,14 @@
     <servlet-name>share.sl</servlet-name>
     <url-pattern>/share.sl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>checkQuest.pl</display-name>
+    <servlet-name>checkQuest.pl</servlet-name>
+    <servlet-class>com.kh.playQuiz.controller.AjaxQuizQuestController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkQuest.pl</servlet-name>
+    <url-pattern>/checkQuest.pl</url-pattern>
+  </servlet-mapping>
 </web-app>

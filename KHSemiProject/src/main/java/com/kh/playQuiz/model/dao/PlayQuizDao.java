@@ -1,5 +1,7 @@
 package com.kh.playQuiz.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -284,6 +286,58 @@ public class PlayQuizDao {
 		}finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int successQuest(Connection conn, int memberNo, int questNo) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("successQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int checkDailyQuest(Connection conn, int memberNo, int questNo) {
+		int result = 0;
+
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("checkDailyQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("MEMBER_QUEST_SUCCESS");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return result;
