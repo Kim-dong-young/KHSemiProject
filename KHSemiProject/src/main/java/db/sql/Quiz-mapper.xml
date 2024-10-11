@@ -224,13 +224,14 @@
 		FROM DUAL
 	</entry>
 	
+	<!-- 문제 맞춘 갯수 -->
 	<entry key="selectQuizCorrectNumber">
 		SELECT SUM(QUIZ_LOG_COUNT)
 		FROM QUIZ_LOG
 		GROUP BY MEMBER_NUMBER
         HAVING MEMBER_NUMBER = ?
 	</entry>
-	
+	<!-- 전체 문제 갯수 -->
 	<entry key="selectQuizTotalNumber">
 		SELECT COUNT(*) AS COUNT
 		FROM PROBLEM P
@@ -239,6 +240,7 @@
         GROUP BY QL.MEMBER_NUMBER
         HAVING QL.MEMBER_NUMBER = ?
 	</entry>
+	
 </properties>
 
 
