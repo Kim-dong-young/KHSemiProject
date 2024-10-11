@@ -12,7 +12,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퀴즈팡</title>
-    <script src="<%=contextPath2%>/static/js/Quiz Screen(Media O).js"></script>
     <link rel="stylesheet" href="<%=contextPath2%>/static/css/QuizScreen(Media O).css">
 </head>
 <body>
@@ -164,6 +163,7 @@
     function submit_problem() {
         var problem = pList[pNum];
         let num = problem.problem_number
+        clearInterval(interval);
         let submitBTN = document.getElementById("submit-btn");
         submitBTN.setAttribute('disabled', true);
         let ans = document.getElementById("answer-input").value;
