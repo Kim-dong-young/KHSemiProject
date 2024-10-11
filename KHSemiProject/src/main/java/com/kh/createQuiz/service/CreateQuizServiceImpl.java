@@ -17,16 +17,14 @@ import com.kh.member.model.dao.MemberDao;
 
 public class CreateQuizServiceImpl implements CreateQuizService {
 	private CreateQuizDAO quizDAO = new CreateQuizDAO();
-	
 	@Override
-	public int createQuiz(CreateQuiz quiz) {
+	public int createQuiz(CreateQuiz quiz , QuizTag tag) {
 		Connection conn = getConnection();
 
 		int result = quizDAO.insertQuiz(conn, quiz);
-
-		if (result > 0) {
+		int result2 = quizDAO.insertQuizTag(conn, tag);
+		if (result > 0 && result2 > 0) {
 			commit(conn);
-
 			result = quizDAO.selectQuizNo(conn);
 		} else {
 			rollback(conn);
@@ -36,21 +34,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 		return result;
 	}
-	public int QuizTag(QuizTag tag) {
-		Connection conn = getConnection();
-		
-		int result = quizDAO.insertQuizTag(conn, tag);
-		
-		if(result >0) {
-			commit(conn);
-			
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		return result;
-	}
+	
 
 	public int insertProblems(Problem pr, Problem pr2, Problem pr3, Problem pr4, Problem pr5, Answer a, Answer a2,
 			Answer a3, Answer a4, Answer a5) {
@@ -145,6 +129,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		return result;
 	}
 
+
 	public int updateMemberExp(int memberNo, int questNo, int exp) {
 		CreateQuizDAO cQuizDao = new CreateQuizDAO();
 		Connection conn = getConnection();
@@ -176,5 +161,6 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		close(conn);
 		return result1;
 	}
+
 
 }

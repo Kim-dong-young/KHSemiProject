@@ -93,7 +93,7 @@ public class CreateQuizMainController extends HttpServlet {
             }
 
             // 퀴즈 저장
-            int result = quizService.createQuiz(cQuiz);
+            int result = quizService.createQuiz(cQuiz, tag);
             if (result > 0) {
             	System.out.println(result);
                 request.setAttribute("quiz_num", result); 
