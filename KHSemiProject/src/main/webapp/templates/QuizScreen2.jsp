@@ -185,6 +185,12 @@
                 if (res.correct) {
                     value = "정답!";
                     correctNum++;
+                    $.ajax({
+                        url : 'checkQuest.pl',
+                        error : function(){
+                            console.log("퀘스트 AJAX 실패")
+                        }
+                    })
                 } else {    
                     value = "오답! 정답은: " + res.correctAnswer;
                 }

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
+import com.kh.member.model.dao.MemberDao;
 import com.kh.playQuiz.model.dao.PlayQuizDao;
 import com.kh.playQuiz.model.vo.Problem;
 
@@ -94,6 +95,29 @@ public class PlayQuizService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new PlayQuizDao().PlayQuizSelectExp(conn, mNum);
+		close(conn);
+		return result;
+	}
+	
+	public int successQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new PlayQuizDao().successQuest(conn, memberNo, questNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int checkDailyQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new PlayQuizDao().checkDailyQuest(conn, memberNo, questNo);
+		
 		close(conn);
 		return result;
 	}
