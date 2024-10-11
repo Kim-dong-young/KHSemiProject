@@ -543,4 +543,14 @@
     <servlet-name>checkQuest.pl</servlet-name>
     <url-pattern>/checkQuest.pl</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AjaxCheckId</display-name>
+    <servlet-name>AjaxCheckId</servlet-name>
+    <servlet-class>com.kh.member.controller.AjaxCheckId</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxCheckId</servlet-name>
+    <url-pattern>/idCheck.me</url-pattern>
+  </servlet-mapping>
 </web-app>
