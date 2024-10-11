@@ -1207,70 +1207,27 @@ INSERT INTO CATEGORY
 VALUES (8, '기타');
 
 INSERT INTO QUIZ
-VALUES (1, '인물이름맞추기', SYSDATE, SYSDATE, '야호', 1, 2, 'static/img/THUMBNAIL/quiz_1.webp');
+VALUES (1, '게임 캐릭터 이름 맞추기', SYSDATE, SYSDATE, '이터널 리턴에 나오는 게임 캐릭터 이름 맞추기', 1, 1, 'static/img/THUMBNAIL/quiz_1.webp');
+
+INSERT INTO PROBLEM (PROBLEM_NUMBER, PROBLEM_CONTENT, PROBLEM_MEDIA_KIND, PTIME, PROBLEM_HINT, QUIZ_NUMBER)
+VALUES (1, '이 캐릭터의 이름은?', 1, 30, '누구일까?', 1);
+
+INSERT INTO ANSWER
+VALUES (1, '로지', 1);
+
+INSERT INTO IMGS_FILE (IMGS_FILE_ID, IMGS_FILE_NAME, IMGS_FILE_UPLOAD_DATE)
+VALUES (1, 'static/img/THUMBNAIL/quiz_1.webp', SYSDATE);
+
+INSERT INTO PROBLEM (PROBLEM_NUMBER, PROBLEM_CONTENT, PROBLEM_MEDIA_KIND, PTIME, QUIZ_NUMBER)
+VALUES (2, '이 캐릭터의 이름은?', 3, 30, 1);
+
+
 
 INSERT INTO QUIZ
-VALUES (2, '사람들이 사는 방법', SYSDATE, SYSDATE, '나는 나의 오호', 1, 1, 'static/img/THUMBNAIL/quiz_2.webp');
+VALUES (2, '나라 이름 맞추기', SYSDATE, SYSDATE, '나라별 국기를 보고 나라 이름을 맞춰보세요', 1, 3, 'static/img/THUMBNAIL/quiz_2.webp');
 
 INSERT INTO QUIZ
 VALUES (3, '태정태세문단세', SYSDATE, SYSDATE, '이게대체 무슨 소리야', 1, 3, 'static/img/THUMBNAIL/quiz_3.webp');
-
-INSERT INTO QUIZ
-VALUES (4, '끼얏호우 하핳하', SYSDATE, SYSDATE, '모두 다 죽어라!', 1, 2, 'static/img/THUMBNAIL/quiz_4.webp');
-
-INSERT INTO QUIZ
-VALUES (5, '나는 나다', SYSDATE, SYSDATE, '나는 나이기 때문이다.', 1, 4, 'static/img/THUMBNAIL/quiz_5.webp');
-
-INSERT INTO QUIZ
-VALUES (6, '너는 누구인가?', SYSDATE, SYSDATE, '나는 너가 아니기 때문에 모른다.', 1, 5, 'static/img/THUMBNAIL/quiz_6.webp');
-
-INSERT INTO QUIZ
-VALUES (7, '허ㅓ허ㅓㅓㅓ', SYSDATE, SYSDATE, 'ㅗㅕㅜㅏㅏㅓㅑㅏ,ㅜㅏㅝㅑㅜㅘ', 1, 6, 'static/img/THUMBNAIL/quiz_7.webp');
-
-INSERT INTO QUIZ
-VALUES (8, '세세ㅔㅔ셋ㄱ스', SYSDATE, SYSDATE, 'ㅅㄱ', 1, 7, 'static/img/THUMBNAIL/quiz_8.webp');
-
-INSERT INTO QUIZ
-VALUES (9, '수고바위', SYSDATE, SYSDATE, '머지했어요', 1, 8, 'static/img/THUMBNAIL/quiz_9.webp');
-
-INSERT INTO QUIZ
-VALUES (10, '아ㅏㅏㅏ앙ㅇ아ㅏ앙ㅇㅇ아ㅏ', SYSDATE, SYSDATE, '응기잇', 1, 3, 'static/img/THUMBNAIL/quiz_10.webp');
-
-INSERT INTO QUIZ
-VALUES (11, '하야다ㅜ야ㅏㅜ댜아ㅓㅎ', SYSDATE, SYSDATE, 'ㅁㅇㅍㄷㅎㄹ', 1, 2, 'static/img/THUMBNAIL/quiz_11.webp');
-
-INSERT INTO QUIZ
-VALUES (12, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_12.webp');
-
-INSERT INTO QUIZ
-VALUES (13, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_13.webp');
-
-INSERT INTO QUIZ
-VALUES (14, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_14.webp');
-
-INSERT INTO QUIZ
-VALUES (15, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_15.webp');
-
-INSERT INTO QUIZ
-VALUES (16, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_16.webp');
-
-INSERT INTO QUIZ
-VALUES (17, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_17.webp');
-
-INSERT INTO QUIZ
-VALUES (18, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_18.webp');
-
-INSERT INTO QUIZ
-VALUES (19, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_19.webp');
-
-INSERT INTO QUIZ
-VALUES (20, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_20.webp');
-
-INSERT INTO QUIZ
-VALUES (21, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_21.webp');
-
-INSERT INTO QUIZ
-VALUES (22, '라야추ㅏ얖', SYSDATE, SYSDATE, '무야호~~~', 1, 1, 'static/img/THUMBNAIL/quiz_22.webp');
 
 INSERT INTO QUIZ_TAG
 VALUES ('유머', 3);
