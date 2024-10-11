@@ -75,32 +75,28 @@
             var problem = pList[pNum];
             document.getElementById("text2").innerText = problem.problem_content;
 
-
-            if(problem.problem_media_kind == 1 || problem.problem_media_kind == 2){
-                document.querySelector(".Media-area").setAttribute('style', "display: true;");
-                $.ajax({
-                    url: "pMedia.pl",
-                    contentType: "application/json",
-                    type: "GET",
-                    data: {
-                        num: problem.problem_media_kind,
-                        pNum: problem.problem_number
-                    },
-                    success: function(res){
-                        console.log(res);
-                        if (problem.problem_media_kind == 1) {
-                            document.querySelector(".Media-area").innerHTML = `<img src="<%=contextPath%>/` + res + `" alt="">`;
-                        } else {
-                            document.querySelector(".Media-area").innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/` + res + `" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
-                        }
-                    },
-                    error: function(){
-                        console.log("시각콘텐츠 조회용 ajax 통신 실패")
+            
+            $.ajax({
+                url: "pMedia.pl",
+                contentType: "application/json",
+                type: "GET",
+                data: {
+                    num: problem.problem_media_kind,
+                    pNum: problem.problem_number
+                },
+                success: function(res){
+                    console.log(res);
+                    if (res != null) {
+                        document.querySelector(".Media-area").setAttribute('style', "display: true;");
+                        document.querySelector(".Media-area").innerHTML = `<img src="<%=contextPath%>/` + res + `" alt="">`;
+                    } else {
+                        document.querySelector(".Media-area").setAttribute('style', "display: none;");
                     }
-                })
-            } else {
-                document.querySelector(".Media-area").setAttribute('style', "display: none;");
-            }
+                },
+                error: function(){
+                    console.log("시각콘텐츠 조회용 ajax 통신 실패")
+                }
+            })
             if(interval !== undefined){
                 clearInterval(interval);
                 console.log(interval);
