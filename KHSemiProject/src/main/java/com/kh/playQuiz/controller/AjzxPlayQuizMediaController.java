@@ -29,8 +29,7 @@ public class AjzxPlayQuizMediaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
-		int num = Integer.parseInt(request.getParameter("num"));
-		String link = new PlayQuizService().AjaxPlayQuizMedia(num, pNum);
+		String link = new PlayQuizService().AjaxPlayQuizMedia(pNum);
 		System.out.println(link);
 		response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");

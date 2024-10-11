@@ -48,7 +48,7 @@
 
                 <div class="form-group">
                     <label for="tag">태그 설정:</label> 
-                    <input type="text" id="tag" name="tag" placeholder="카테고리 기타를 선택한 경우에만 작성">
+                    <input type="text" id="tag" name="tag" placeholder="태그를 추가해 보세요">
                 </div>
             </div>
             <div class="buttons">

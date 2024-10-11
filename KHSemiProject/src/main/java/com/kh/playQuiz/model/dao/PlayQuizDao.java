@@ -113,7 +113,7 @@ public class PlayQuizDao {
 		return result;
 	}
 
-	public String AjaxPlayQuizMedia(Connection conn, int pNum, int num) {
+	public String AjaxPlayQuizMedia(Connection conn, int pNum) {
 		String result = "";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
