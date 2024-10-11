@@ -15,9 +15,6 @@ body {
     background-color: #f8f8f8;
 }
 
-form{
-    
-}
 .container {
     display: flex;
     flex-direction: column;
@@ -28,7 +25,9 @@ form{
     border: 2px solid #e67e22;
     border-radius: 10px;
 }
-
+form{
+    width: 90%;
+}
 .header {
     display: flex;
     justify-content: space-between;
@@ -191,7 +190,9 @@ form{
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
+  
 }
+
 
 .create-btn, .home-btn {
     padding: 0;
@@ -203,9 +204,12 @@ form{
     border-radius: 5px;
     cursor: pointer;
     width: 10%;
+    height: 45px;
 }
 
-
+.a> img{
+    border-radius: 5px;
+}
 .custom-file-upload {
     display: inline-block;
     padding: 10px 20px;
