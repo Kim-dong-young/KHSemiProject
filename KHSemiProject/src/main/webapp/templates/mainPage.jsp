@@ -74,7 +74,7 @@
 		                    </div>
 		                    <div class="achievement-donut-rate">
 		                        <div>
-		                            <div class="chart-donut" data-percent="70"></div>
+		                            <div class="chart-donut" data-percent="${att}"></div>
 		                            <div class="content-rate">출석률</div>
 		                        </div>
 		                        <div>

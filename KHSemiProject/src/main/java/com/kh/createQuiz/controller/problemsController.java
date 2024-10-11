@@ -25,104 +25,175 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 
 public class problemsController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public problemsController() {
-        super();
-    }
+	public problemsController() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String changeName = null;
-        response.setContentType("application/json; charset=UTF-8");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String changeName = null;
+		response.setContentType("application/json; charset=UTF-8");
 
-        if (JakartaServletFileUpload.isMultipartContent(request)) {
-            int fileMaxSize = 1024 * 1024 * 10; // 10MB
-            int requestMaxSize = 1024 * 1024 * 20; // 20MB
+		if (JakartaServletFileUpload.isMultipartContent(request)) {
+			int fileMaxSize = 1024 * 1024 * 10; // 10MB
+			int requestMaxSize = 1024 * 1024 * 20; // 20MB
 
-            String savePath = request.getServletContext().getRealPath("/static/img/problems/");
+			String savePath = request.getServletContext().getRealPath("/static/img/problems/");
 
-            DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
-            JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
-            upload.setFileSizeMax(fileMaxSize);
-            upload.setSizeMax(requestMaxSize);
+			DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
+			JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
+			upload.setFileSizeMax(fileMaxSize);
+			upload.setSizeMax(requestMaxSize);
 
-            List<FileItem> formItems = upload.parseRequest(request);
+			List<FileItem> formItems = upload.parseRequest(request);
 
-            Problem pr = new Problem();
-            Answer a = new Answer();
-            
-//            Quiz quiz = (Quiz)request.getAttribute("insertQuiz");
-//            if (quiz != null) {
-//                p.setQUIZ_number(quiz.getQuiz_number());
-//            } else {
-//                System.out.println("Quiz attribute is null");
-//                response.sendRedirect(request.getContextPath());
-//                return;
-//            }
+			Problem pr = new Problem();
+			Answer a = new Answer();
 
-            for (FileItem item : formItems) {
-                if (item.isFormField()) {
-                    switch (item.getFieldName()) {
-                    case "quiz_number":
-                    	pr.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
-                    	break;
-                    case "pcontent-1":
-                        pr.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
-                        break;
-//                    case "pmk":
-//                        pr.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
-//                        break;
-                    case "ptime-1" :
-                    	pr.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
-                    	break;
-                    case "phint-1":
-                        pr.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
-                        break;
-                    case "panswer-1":
-                        a.setANSWER_content(item.getString(Charset.forName("utf-8")));
-                        System.out.println();
-                        break;
-                    }
-                } else {
-                    String originName = item.getName();
-                    if (originName.length() > 0) {
-                        String tmpName = "problem_" + System.currentTimeMillis();
-                        String type = originName.substring(originName.lastIndexOf("."));
-                        changeName = tmpName + type;
+			Problem pr2 = new Problem();
+			Answer a2 = new Answer();
 
-                        File f = new File(savePath, changeName);
-                        try {
-                            item.write(f.toPath());
-                            pr.setPROBLEM_media("static/img/problems/" + changeName);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            if (changeName != null) {
-                                new File(savePath + changeName).delete();
-                            }
-                        }
-                    }
-                }
-            }
-            System.out.println("정보들어가다잇");
-            int problemResult = new CreateQuizServiceImpl().insertProblems(pr, a);
-            
-            if (problemResult > 0) {
-            	System.out.println("성공");
-                request.getSession().setAttribute("alertMsg", "문제 작성 완료");
-                response.sendRedirect(request.getContextPath() + "/main.me");
-            } else {
-                if (changeName != null) {
-                    new File(savePath + changeName).delete();
-                }
-                request.setAttribute("alertMsg", "문제 작성 실패");
-                response.sendRedirect(request.getContextPath() + "/main.me");
-            }
-        }
-    }
+			Problem pr3 = new Problem();
+			Answer a3 = new Answer();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
-    }
+			Problem pr4 = new Problem();
+			Answer a4 = new Answer();
+
+			Problem pr5 = new Problem();
+			Answer a5 = new Answer();
+
+			for (FileItem item : formItems) {
+				if (item.isFormField()) {
+					switch (item.getFieldName()) {
+					case "quiz_number":
+						pr.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						pr2.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						pr3.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						pr4.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						pr5.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						break;
+					case "pcontent-1":
+						pr.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "ptime-1":
+						pr.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						break;
+					case "phint-1":
+						pr.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
+						break;
+					case "panswer-1":
+						a.setANSWER_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "pcontent-2":
+						pr2.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "ptime-2":
+						pr2.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						break;
+					case "phint-2":
+						pr2.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
+						break;
+					case "panswer-2":
+						a2.setANSWER_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "pcontent-3":
+						pr3.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "ptime-3":
+						pr3.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						break;
+					case "phint-3":
+						pr3.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
+						break;
+					case "panswer-3":
+						a3.setANSWER_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "pcontent-4":
+						pr4.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "ptime-4":
+						pr4.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						break;
+					case "phint-4":
+						pr4.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
+						break;
+					case "panswer-4":
+						a4.setANSWER_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "pcontent-5":
+						pr5.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
+						break;
+					case "ptime-5":
+						pr5.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+						break;
+					case "phint-5":
+						pr5.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
+						break;
+					case "panswer-5":
+						a5.setANSWER_content(item.getString(Charset.forName("utf-8")));
+						break;
+
+					}
+				} else {
+					String originName = item.getName();
+					if (originName.length() > 0) {
+						String tmpName = "problem_" + System.currentTimeMillis();
+						String type = originName.substring(originName.lastIndexOf("."));
+						changeName = tmpName + type;
+
+						File f = new File(savePath, changeName);
+						try {
+							item.write(f.toPath());
+							switch (item.getFieldName()) {
+							case "file-1":
+								pr.setPROBLEM_media("static/img/problems/" + changeName);
+								break;
+							case "file-2":
+								pr2.setPROBLEM_media("static/img/problems/" + changeName);
+								break;
+							case "file-3":
+								pr3.setPROBLEM_media("static/img/problems/" + changeName);
+								break;
+							case "file-4":
+								pr4.setPROBLEM_media("static/img/problems/" + changeName);
+								break;
+							case "file-5":
+								pr5.setPROBLEM_media("static/img/problems/" + changeName);
+								break;
+							}
+
+						} catch (Exception e) {
+							e.printStackTrace();
+							if (changeName != null) {
+								new File(savePath + changeName).delete();
+							}
+						}
+					}
+				}
+
+			}
+
+			int problemResult = new CreateQuizServiceImpl().insertProblems(pr, pr2, pr3, pr4, pr5,
+					a, a2, a3, a4, a5);
+
+			if (problemResult > 0) {
+				System.out.println("성공");
+				request.getSession().setAttribute("alertMsg", "문제 작성 완료");
+				response.sendRedirect(request.getContextPath() + "/main.me");
+			} else {
+				if (changeName != null) {
+					new File(savePath + changeName).delete();
+				}
+				request.setAttribute("alertMsg", "문제 작성 실패");
+				response.sendRedirect(request.getContextPath() + "/main.me");
+			}
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
 }

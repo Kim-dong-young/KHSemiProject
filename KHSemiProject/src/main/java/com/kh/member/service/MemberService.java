@@ -19,6 +19,8 @@ import com.kh.member.model.vo.Quest;
 
 
 public class MemberService {
+	private MemberDao mDao = new MemberDao();
+	
 	public Member loginMember(String memberId, String memberPwd) {
 		Connection conn = getConnection();
 		Member m = new MemberDao().loginMember(conn, memberId, memberPwd);
@@ -285,7 +287,6 @@ public class MemberService {
 
 
 	public int updateMemberExp(int memberNo, int questNo, int exp) {
-		MemberDao mDao = new MemberDao();
 		Connection conn = getConnection();
 		int result1 = mDao.updateMemberExp(conn, memberNo, exp);
 		int result2 = mDao.doneDailyQuest(conn, memberNo, questNo);
@@ -300,4 +301,19 @@ public class MemberService {
 		return result1 * result2;
 	}
 	
+	public int attendanceRate(int memberNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		int totalResult = mDao.totalDate(conn, memberNo);
+		int attendanceResult = mDao.attendanceDate(conn, memberNo);
+		
+		if(totalResult > 0 && attendanceResult > 0) {
+			double i = (double)attendanceResult / totalResult; 
+			result = (int)(i * 100);
+			System.out.println(result);
+		}
+		
+		return result;
+	}
 }
