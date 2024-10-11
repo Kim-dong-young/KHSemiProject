@@ -181,6 +181,39 @@
 		?
 		)
 	</entry>
+	
+	<entry key="selectQuizMaker">
+		SELECT MEMBER_NUMBER
+		FROM QUIZ
+		WHERE QUIZ_NUMBER = ?
+	</entry>
+	
+	<entry key="selectReportQuiz">
+		SELECT COUNT(*) AS COUNT
+		  FROM RP
+		 WHERE MEMBER_NUMBER = ?
+		   AND REPORTED_MEMBER_NUMBER = ?
+		   AND QUIZ_NUMBER = ?
+	</entry>
+	
+	<entry key="insertReportQuiz">
+		INSERT INTO RP(
+		    RP_NUMBER,
+		    RP_ENCOUNTER_NUMBER,
+		    RP_REASON,
+		    MEMBER_NUMBER,
+		    REPORTED_MEMBER_NUMBER,
+		    QUIZ_NUMBER
+		)
+		VALUES(
+		    SEQ_REPORT.NEXTVAL,
+		    ?,
+		    ?,
+		    ?,
+		    ?,
+		    ?
+		)
+	</entry>
 </properties>
 
 

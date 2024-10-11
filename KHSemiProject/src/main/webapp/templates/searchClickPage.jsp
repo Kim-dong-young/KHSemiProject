@@ -120,10 +120,11 @@
                         </c:when>
                         <c:otherwise>
                             <button onclick="clickMark(<%=q.getQuiz_number()%>, ${loginMember.memberNo})" id="Mark"><img src="<%=contextPath%>/static/img/searchClickPage/mark.png" alt=""> 북마크</button>
+                            <button data-bs-toggle="modal" data-bs-target="#report-board-modal"> <img src="<%=contextPath%>/static/img/searchClickPage/singo.png" alt=""> 신고</button>
                         </c:otherwise>
                     </c:choose>
                     <button id="share-button" onclick="share('<%=contextPath%>', <%=q.getQuiz_number()%>)"><img src="<%=contextPath%>/static/img/searchClickPage/share.png" alt=""> 공유</button>
-                    <button> <img src="<%=contextPath%>/static/img/searchClickPage/singo.png" alt=""> 신고</button>
+                    
                 </div>
             </div>
         </div>
@@ -201,5 +202,114 @@
             }
         </script>
     </div>
+
+
+
+
+    <!-- 신고 Modal -->
+    <div class="modal fade" id="report-board-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <img src="<%=contextPath%>/static/img/flag-icon.png">
+              <h4 class="modal-title">신고하기</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <!-- Modal body -->
+            <form id="reportForm">
+                <div class="modal-body">
+                    <div class="report-choose-area">
+                        <label>
+                            <input type="radio" name="reportNumber" value="1" checked>
+                            <span class="custom-check"></span>
+                            홍보/도배 글입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="2">
+                            <span class="custom-check"></span>
+                            음란물을 포함하고 있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="3">
+                            <span class="custom-check"></span>
+                            불법적인 내용입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="4">
+                            <span class="custom-check"></span>
+                            욕설이 포함되어있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="5">
+                            <span class="custom-check"></span>
+                            혐오발언이 포함되어있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="6">
+                            <span class="custom-check"></span>
+                            사칭 글입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="7">
+                            <span class="custom-check"></span>
+                            괴롭힘 및 따돌림이 포함되었습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="8">
+                            <span class="custom-check"></span>
+                            기타
+                        </label><br>
+                    </div>
+
+                    <textarea name="reportReason" wrap="hard" placeholder="자세한 사유를 설명해주세요."></textarea>
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" id="report-submit-button" onclick="reportBoard(<%=q.getQuiz_number()%>, ${loginMember.memberNo});" class="btn btn-danger">제출하기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form> 
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function reportBoard(bno, mno){ // 피신고자 커뮤니티 번호, 멤버번호 
+            const checkedButton = document.querySelector('#reportForm input[type="radio"][name="reportNumber"]:checked');
+            const reportReason = document.querySelector("#reportForm textarea[name=reportReason]");
+
+            $.ajax({
+                url : "report.qz",
+                type: "post",
+                data : {    
+                    quizNo : bno,                   //신고당한 퀴즈 번호
+                    reportedMemberNo : mno,         //신고한 사람 맴버번호
+                    reportNumber : checkedButton.value, //신고유형
+                    reportReason : reportReason.value   //신고내용
+                },
+                success : function(res) {
+                    if(res > 0) {
+                        alert("성공적으로 신고되었습니다.");
+                    } else {
+                        alert("이미 신고한 글입니다.");
+                    }
+                },
+                error : function() {
+                    console.log("신고 AJAX 실패");
+                }
+            })
+        }
+      </script>
 </body>
 </html>

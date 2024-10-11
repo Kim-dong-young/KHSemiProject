@@ -85,7 +85,9 @@
         </div>
 
         <div class="bottom-buttons">
-            <button class="report-btn">신고하기</button>
+            <% if(loginMember != null){ %>
+            <button class="report-btn" data-bs-toggle="modal" data-bs-target="#report-board-modal">신고하기</button>
+            <% } %>
             <button class="button" onclick="location.href='<%=contextPath%>/main.me'">
                 홈으로
             </button>
@@ -99,6 +101,84 @@
         </div>
     </div>
 
+
+    <!-- 신고 Modal -->
+    <div class="modal fade" id="report-board-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <img src="<%=contextPath%>/static/img/flag-icon.png">
+              <h4 class="modal-title">신고하기</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+      
+            <!-- Modal body -->
+            <form id="reportForm">
+                <div class="modal-body">
+                    <div class="report-choose-area">
+                        <label>
+                            <input type="radio" name="reportNumber" value="1" checked>
+                            <span class="custom-check"></span>
+                            홍보/도배 글입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="2">
+                            <span class="custom-check"></span>
+                            음란물을 포함하고 있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="3">
+                            <span class="custom-check"></span>
+                            불법적인 내용입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="4">
+                            <span class="custom-check"></span>
+                            욕설이 포함되어있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="5">
+                            <span class="custom-check"></span>
+                            혐오발언이 포함되어있습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="6">
+                            <span class="custom-check"></span>
+                            사칭 글입니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="7">
+                            <span class="custom-check"></span>
+                            괴롭힘 및 따돌림이 포함되었습니다.
+                        </label><br>
+                    
+                        <label>
+                            <input type="radio" name="reportNumber" value="8">
+                            <span class="custom-check"></span>
+                            기타
+                        </label><br>
+                    </div>
+
+                    <textarea name="reportReason" wrap="hard" placeholder="자세한 사유를 설명해주세요."></textarea>
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" id="report-submit-button" onclick="reportBoard(${param.quizNumber}, ${loginMember.memberNo});" class="btn btn-danger">제출하기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form> 
+          </div>
+        </div>
+      </div>
 
 
     <script src="<%=contextPath%>/static/js/Result.js"></script>

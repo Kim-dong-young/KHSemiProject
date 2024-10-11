@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         star.removeEventListener('click', starHandlers[index]);
                     });
                     starCbtn.innerText = "이미 별점을 등록하셨습니다."
+                    document.getElementById("rating-value").textContent = "";
                     starCbtn.setAttribute('disabled', true);
                 }
             },
@@ -98,3 +99,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+function reportBoard(bno, mno){ // 피신고자 커뮤니티 번호, 멤버번호 
+    const checkedButton = document.querySelector('#reportForm input[type="radio"][name="reportNumber"]:checked');
+    const reportReason = document.querySelector("#reportForm textarea[name=reportReason]");
+
+    $.ajax({
+        url : "report.qz",
+        type: "post",
+        data : {    
+            quizNo : bno,                   //신고당한 퀴즈 번호
+            reportedMemberNo : mno,         //신고한 사람 맴버번호
+            reportNumber : checkedButton.value, //신고유형
+            reportReason : reportReason.value   //신고내용
+        },
+        success : function(res) {
+            if(res > 0) {
+                alert("성공적으로 신고되었습니다.");
+            } else {
+                alert("이미 신고한 글입니다.");
+            }
+        },
+        error : function() {
+            console.log("신고 AJAX 실패");
+        }
+    })
+}
