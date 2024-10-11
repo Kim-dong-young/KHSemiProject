@@ -128,7 +128,18 @@
             ?
         )
 	</entry>
-
+	
+	<entry key="insertQuizTag">
+		INSERT INTO QUIZ_TAG(
+			tagName,
+			quizNumber
+		)VALUES
+		(
+		?,
+		SEQ_QUIZ.CURRVAL
+		)
+	</entry>
+	
 	<entry key="insertProblems">
 	INSERT INTO PROBLEM(
 		PROBLEM_number,
