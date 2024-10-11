@@ -1,5 +1,6 @@
 package com.kh.search.service;
 
+import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.PageInfo;
+import com.kh.common.ReportInfo;
 import com.kh.search.model.dao.QuizDao;
 import com.kh.search.model.vo.Quiz;
 import com.kh.search.model.vo.Tag;
@@ -134,5 +136,47 @@ public class SearchService {
 		
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public int selectQuizMaker(int qNum) {
+		Connection conn = getConnection();
+		int result = new QuizDao().selectQuizMaker(conn, qNum);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int insertReportQuiz(ReportInfo reportInfo) {
+		Connection conn = getConnection();
+		int result = 0;
+		int selectResult = new QuizDao().selectReportQuiz(conn, reportInfo);
+		
+		if(selectResult < 1) { // 조회 결과가 없을 경우에만 신고 테이블에 삽입 ( 중복신고 방지 )
+			result = new QuizDao().insertReportQuiz(conn, reportInfo);
+		}
+		
+		close(conn);
+		return result;
+	}
+	public int successQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new QuizDao().successQuest(conn, memberNo, questNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int checkDailyQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new QuizDao().checkDailyQuest(conn, memberNo, questNo);
+		
+		close(conn);
+		return result;
 	}
 }
