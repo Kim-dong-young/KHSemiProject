@@ -35,10 +35,10 @@ public class PlayQuizService {
 		return result;
 	}
 
-	public String AjaxPlayQuizMedia(int num, int pNum) {
+	public String AjaxPlayQuizMedia(int pNum) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		String result = new PlayQuizDao().AjaxPlayQuizMedia(conn, pNum, num);
+		String result = new PlayQuizDao().AjaxPlayQuizMedia(conn, pNum);
 		close(conn);
 		return result;
 	}
