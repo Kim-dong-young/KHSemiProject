@@ -91,9 +91,16 @@ public class CreateQuizMainController extends HttpServlet {
                     }
                 }
             }
+            
+            int result = 0;
+            // 퀴즈 태그 분리 ( , 쉼표로 구분 )
+            tag.setTagList(tag.getTagName().split(","));
+            
+            if(tag.getTagList().length <= 5) { // 태그는 최대 5개
+                // 퀴즈 저장
+                result = quizService.createQuiz(cQuiz, tag);
+            }
 
-            // 퀴즈 저장
-            int result = quizService.createQuiz(cQuiz, tag);
             if (result > 0) {
             	System.out.println(result);
                 request.setAttribute("quiz_num", result); 

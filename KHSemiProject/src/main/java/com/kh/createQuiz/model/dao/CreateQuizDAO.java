@@ -71,19 +71,19 @@ public class CreateQuizDAO {
 
 	// 태그 정보를 데이터베이스에 삽입
 	public int insertQuizTag(Connection conn, QuizTag tag) {
-		int result = 0;
+		int result = 1; // 태그는 Null일 수도 있다. 따라서 기본값 항상 성공
 		
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertQuizTag");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, tag.getTagName());
-			
-			System.out.println(tag.getTagName());
-			System.out.println(tag.getQuizNumber());
-			result = pstmt.executeUpdate();
+			for(String tagName : tag.getTagList()) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, tagName);
+				
+				result *= pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
