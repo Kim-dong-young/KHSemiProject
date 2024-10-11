@@ -3,6 +3,8 @@ function init(pageName, optional){
     if(path){
         path.value = location.href;
     }
+
+    idInput()
     
     switch(pageName){
         case "communityMainPage":

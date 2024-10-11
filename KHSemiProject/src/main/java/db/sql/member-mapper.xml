@@ -245,4 +245,9 @@
 		SELECT TO_CHAR(SYSDATE) AS sys 
 		  FROM DUAL
 	</entry>
+	<entry key="checkId">
+		SELECT COUNT(*) AS count
+		  FROM MEMBER
+		 WHERE MEMBER_ID = ?
+	</entry>
 </properties>
