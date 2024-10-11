@@ -223,6 +223,22 @@
 		SELECT SEQ_QUIZ.CURRVAL
 		FROM DUAL
 	</entry>
+	
+	<entry key="selectQuizCorrectNumber">
+		SELECT SUM(QUIZ_LOG_COUNT)
+		FROM QUIZ_LOG
+		GROUP BY MEMBER_NUMBER
+        HAVING MEMBER_NUMBER = ?
+	</entry>
+	
+	<entry key="selectQuizTotalNumber">
+		SELECT COUNT(*) AS COUNT
+		FROM PROBLEM P
+		LEFT JOIN QUIZ Q ON (P.QUIZ_NUMBER = Q.QUIZ_NUMBER)
+		RIGHT JOIN QUIZ_LOG QL ON (P.QUIZ_NUMBER = QL.QUIZ_NUMBER)
+        GROUP BY QL.MEMBER_NUMBER
+        HAVING QL.MEMBER_NUMBER = ?
+	</entry>
 </properties>
 
 
