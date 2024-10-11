@@ -39,14 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
         newPage.style.display = 'none'; // 기본적으로 숨김
         newPage.innerHTML = `
             <div class="question-type">
-                <label>문제 유형</label>
                 <div class="progress">${totalPages}/${totalPages}</div>
 				
-                <div class="type-btns">
-                    <button class="type-btn" disabled>객관식</button>
-                    <button class="type-btn" disabled>주관식</button>
-                    <button class="type-btn" disabled>O / X</button>
-                </div>
             </div>
 
             <div class="question-input">
@@ -77,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
 
             <div class="buttons">
-                                <a class="home-btn" href="<%=contextPath%>/main.me">
-                                    <img src="<%=contextPath%>/static/img/homebtn.png" width="130px" height="45px">
+                                <a class="home-btn" href="./main.me">
+                                    <img src="./static/img/homebtn.png" width="130px" height="45px">
                                 </a>
                                 <button class="create-btn" type="submit">질문 생성하기</button>
                             </div>

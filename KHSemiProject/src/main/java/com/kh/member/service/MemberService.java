@@ -325,7 +325,7 @@ public class MemberService {
 			double i = (double)attendanceResult / 1;
 			result = (int)(i * 100);
 		}
-		
+		close(conn);
 		return result;
 	}
 	
@@ -341,7 +341,7 @@ public class MemberService {
 			result = (int)(i * 100);
 			System.out.println(result);
 		}
-		
+		close(conn);
 		return result;
 	}
 	
@@ -358,6 +358,23 @@ public class MemberService {
 			System.out.println(result);
 		}
 		
+		close(conn);
 		return result;
+	}
+	
+	public String idCheck(String checkId) {
+		Connection conn = getConnection();
+		int result = mDao.checkId(conn, checkId);
+		
+		String yesOrNo;
+		
+		if(result > 0) {
+			yesOrNo = "NNNNN";
+		} else {
+			yesOrNo = "NNNNY";
+		}
+		
+		close(conn);
+		return yesOrNo;
 	}
 }

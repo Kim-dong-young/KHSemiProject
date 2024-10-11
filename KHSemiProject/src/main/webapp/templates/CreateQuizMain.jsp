@@ -48,7 +48,7 @@
 
                 <div class="form-group">
                     <label for="tag">태그 설정:</label> 
-                    <input type="text" id="tag" name="tag" placeholder="태그를 추가해 보세요">
+                    <input type="text" id="tag" name="tag" placeholder="태그를 추가해 보세요( 최대 5개, 쉼표(,)로 구분 )">
                 </div>
             </div>
             <div class="buttons">

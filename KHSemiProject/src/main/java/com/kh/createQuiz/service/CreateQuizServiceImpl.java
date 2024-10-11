@@ -23,6 +23,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 		int result = quizDAO.insertQuiz(conn, quiz);
 		int result2 = quizDAO.insertQuizTag(conn, tag);
+		
 		if (result > 0 && result2 > 0) {
 			commit(conn);
 			result = quizDAO.selectQuizNo(conn);

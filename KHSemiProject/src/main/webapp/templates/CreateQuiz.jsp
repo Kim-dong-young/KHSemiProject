@@ -37,13 +37,9 @@ String contextPath = request.getContextPath();
                     <div id="quiz-content-wrapper" class="quiz-content">
                         <div class="quiz-slide">
                             <div class="question-type">
-                                <label>문제 유형</label>
+                                
                                 <div class="progress">${totalPages}/${totalPages}</div>
-                                <div class="type-btns">
-                                    <button class="type-btn" disabled>객관식</button>
-                                    <button class="type-btn" disabled>주관식</button>
-                                    <button class="type-btn" disabled>O / X</button>
-                                </div>
+                                
                             </div>
                             <input type="hidden" name="quiz_number" value="${quiz_num}">
                             <div class="question-input">
@@ -74,7 +70,7 @@ String contextPath = request.getContextPath();
 
                             <div class="buttons">
                                 <a class="home-btn" href="<%=contextPath%>/main.me">
-                                    <img src="<%=contextPath%>/static/img/homebtn.png" width="130px" height="45px">
+                                    <img src="<%=contextPath%>/static/img/homebtn.png"  width="135px" height="45px">
                                 </a>
                                 <button class="create-btn" type="submit">질문 생성하기</button>
                             </div>

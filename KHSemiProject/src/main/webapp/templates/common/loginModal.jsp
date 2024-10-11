@@ -25,6 +25,8 @@
             color: black;
         }
     </style>
+
+	<script src="static/js/loginmodal.js"></script>
 </head>
 <body>
 	<!-- contextPath 로그인 modal -->
@@ -68,25 +70,26 @@
 				</div>
 				
 				<!-- Modal body -->
-				<div class="modal-body" align="center">
+				<div class="modal-body enrollForm" align="center">
 					<form action="<%=contextPath %>/signin.me" method="POST" id="enroll-form">
 						<input type="hidden" name="origin" value="<%=request.getRequestURI()%>">
 						<table>
 							<tr>
 								<td>*아이디</td>
 								<td><input type="text" name="memberId" maxlength="20" required></td>
+								<td id="checkResult"></td>
 							</tr>
 							<tr>
 								<td>*비밀번호</td>
-								<td><input type="password" name="memberPwd" maxlength="20" required></td>
+								<td colspan="2"><input type="password" name="memberPwd" maxlength="20" required></td>
 							</tr>
 							<tr>
 								<td>*비밀번호 확인</td>
-								<td><input type="password" name="memberPwdCheck" maxlength="20" required></td>
+								<td colspan="2"><input type="password" name="memberPwdCheck" maxlength="20" required></td>
 							</tr>
 							<tr>
 								<td>*닉네임</td>
-								<td><input type="text" name="nickname" maxlength="20" required></td>
+								<td colspan="2"><input type="text" name="nickname" maxlength="20" required></td>
 							</tr>
 						</table>
 						<button type="submit" class="btn custom-lsin-btn" onclick="return checkPwd()">회원가입</button>
@@ -96,17 +99,5 @@
 			</div>
 		</div>
 	</div>	
-	
-	<script>
-        function checkPwd(){
-            const pwd = document.querySelector("#enroll-form input[name=memberPwd]").value
-            const pwdCheck = document.querySelector("#enroll-form input[name=memberPwdCheck]").value
-
-            if(pwd !== pwdCheck) {
-                alert("비밀번호가 일치하지 않습니다.");
-                return false;
-            }
-        }
-    </script>
 </body>
 </html>
