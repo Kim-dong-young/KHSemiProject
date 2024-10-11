@@ -98,7 +98,14 @@ body {
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
-    font-size: large;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.box p{
+    margin-top: 10px;
 }
 
 .highlight {

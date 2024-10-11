@@ -29,9 +29,7 @@
     <link rel="stylesheet" href="<%=contextPath%>/static/css/Result.css">
     <div class="container">
         <div class="box">
-            <p>당신은 상위 <span class="highlight">?</span>% 입니다.</p>
-            <p>당신의 정답률: <span class="highlight" id="percent_correct">80%</span> <span class="highlight">${param.correctNum}/${param.listLen}</span></p>
-            <p>평균 정답률: <span class="highlight">?</span>%</p>
+            <p>정답률: <span class="highlight" id="percent_correct">80%</span> <span class="highlight">${param.correctNum}/${param.listLen}</span></p>
         </div>
         <script>
             document.getElementById("percent_correct").innerText = Math.round((${param.correctNum} / ${param.listLen}) * 100) + "%";
