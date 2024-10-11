@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.kh.member.model.vo.Member;
+import com.kh.member.service.MemberService;
 import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
@@ -33,6 +34,17 @@ public class AjaxQuizMarkController extends HttpServlet {
 		int memberNum = Integer.parseInt(request.getParameter("member"));
 		
 		int mark = new SearchService().markInsert(quizNum, memberNum);
+		
+		int questNo = 8; // 8 : 북마크하기
+		int isDone = new SearchService().checkDailyQuest(memberNum, questNo);
+		
+		// MEMBER_QUEST_SUCCESS 값 0은 퀘스트완료 X / 보상 획득 X
+		// MEMBER_QUEST_SUCCESS 값 1은 퀘스트완료 O / 보상 획득 X
+		// MEMBER_QUEST_SUCCESS 값 2는 퀘스트완료 O / 보상 획득 O
+		if(isDone == 0) { // 퀘스트 깬적 없을 경우 ( 오늘 첫 로그인 )
+			// 로그인 하면 퀘스트 성공
+			new SearchService().successQuest(memberNum, questNo);
+		}
 		
 		System.out.println("데이터들어옴");
 		

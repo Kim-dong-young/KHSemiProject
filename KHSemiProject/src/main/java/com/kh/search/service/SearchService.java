@@ -1,5 +1,6 @@
 package com.kh.search.service;
 
+import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.PageInfo;
+import com.kh.member.model.dao.MemberDao;
 import com.kh.search.model.dao.QuizDao;
 import com.kh.search.model.vo.Quiz;
 import com.kh.search.model.vo.Tag;
@@ -134,5 +136,28 @@ public class SearchService {
 		
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public int successQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new QuizDao().successQuest(conn, memberNo, questNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int checkDailyQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new QuizDao().checkDailyQuest(conn, memberNo, questNo);
+		
+		close(conn);
+		return result;
 	}
 }
