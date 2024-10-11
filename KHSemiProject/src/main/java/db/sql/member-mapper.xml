@@ -204,4 +204,16 @@
 	 WHERE MEMBER_NUMBER = ?
 	   AND QUEST_NUMBER = ?
 	</entry>
+	<!-- 총 날짜(회원 가입일로부터 현재까지) -->
+	<entry key="selectTotalDay">
+		SELECT TRUNC(SYSDATE) - MEMBER_JOIN_DATE as totalDate
+   		  FROM MEMBER
+  		 WHERE MEMBER_NUMBER = ?
+	</entry>
+	<!-- 총 출석일 -->
+	<entry key="selectTotalAttendance">
+		SELECT COUNT(*) AS atTotal
+    	  FROM DAILY_CHECK
+   		 WHERE MEMBER_NUMBER = ?
+	</entry>
 </properties>

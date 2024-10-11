@@ -23,7 +23,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 		if (result > 0) {
 			commit(conn);
-			
+
 			result = quizDAO.selectQuizNo(conn);
 		} else {
 			rollback(conn);
@@ -34,19 +34,70 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		return result;
 	}
 
-	public int insertProblems(Problem pr, Answer a) {
+	public int insertProblems(Problem pr, Problem pr2, Problem pr3, Problem pr4, Problem pr5, Answer a, Answer a2,
+			Answer a3, Answer a4, Answer a5) {
 		Connection conn = getConnection();
-		
-		System.out.println("들어왔다잇" + pr + "," + a);
-		int result1 = new CreateQuizDAO().insertProblems(conn, pr);
-		int result2 = new CreateQuizDAO().insertAnswer(conn, a);
-		
-		if (result1 > 0 && result2 >0) {
+		Boolean isSuccess = false;
+		int result1 = 0;
+		int result2 = 0;
+		if (pr.getPROBLEM_content() != null && a.getANSWER_content() != null) {
+			System.out.println("들어왔다잇" + pr + "," + a);
+			result1 = new CreateQuizDAO().insertProblems(conn, pr);
+			result2 = new CreateQuizDAO().insertAnswer(conn, a);
+
+			if (result1 * result2 > 0)
+				isSuccess = true;
+			else
+				isSuccess = false;
+
+		}
+		if (pr2.getPROBLEM_content() != null && a2.getANSWER_content() != null) {
+			System.out.println("들어왔다잇" + pr2 + "," + a2);
+			result1 = new CreateQuizDAO().insertProblems(conn, pr2);
+			result2 = new CreateQuizDAO().insertAnswer(conn, a2);
+			
+			if (result1 * result2 > 0)
+				isSuccess = true;
+			else
+				isSuccess = false;
+		}
+		if (pr3.getPROBLEM_content() != null && a3.getANSWER_content() != null) {
+			System.out.println("들어왔다잇" + pr3 + "," + a3);
+			result1 = new CreateQuizDAO().insertProblems(conn, pr3);
+			result2 = new CreateQuizDAO().insertAnswer(conn, a3);
+			
+			if (result1 * result2 > 0)
+				isSuccess = true;
+			else
+				isSuccess = false;
+		}
+		if (pr4.getPROBLEM_content() != null && a4.getANSWER_content() != null) {
+			System.out.println("들어왔다잇" + pr4 + "," + a4);
+			result1 = new CreateQuizDAO().insertProblems(conn, pr4);
+			result2 = new CreateQuizDAO().insertAnswer(conn, a4);
+			
+			if (result1 * result2 > 0)
+				isSuccess = true;
+			else
+				isSuccess = false;
+		}
+		if (pr5.getPROBLEM_content() != null && a5.getANSWER_content() != null) {
+			System.out.println("들어왔다잇" + pr5 + "," + a5);
+			result1 = new CreateQuizDAO().insertProblems(conn, pr5);
+			result2 = new CreateQuizDAO().insertAnswer(conn, a5);
+			
+			if (result1 * result2 > 0)
+				isSuccess = true;
+			else
+				isSuccess = false;
+		}
+
+		if (isSuccess) {
 			commit(conn);
 			System.out.println("완료");
 		} else {
 			System.out.println("실패");
-			rollback(conn);		
+			rollback(conn);
 		}
 		close(conn);
 		return result1 * result2;
