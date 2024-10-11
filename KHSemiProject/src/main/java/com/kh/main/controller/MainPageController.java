@@ -33,10 +33,12 @@ public class MainPageController extends HttpServlet {
 		Member m = ((Member)request.getSession().getAttribute("loginMember"));
 		
 		if(m != null) {
-			int result = new MemberService().playedRecode(m.getMemberNo());
+			int rResult = new MemberService().playedRecode(m.getMemberNo());
+			int aResult = new MemberService().attendanceRate(m.getMemberNo());
 			
 			request.setAttribute("optional", m.getExp());
-			request.setAttribute("playedRecode", result);
+			request.setAttribute("playedRecode", rResult);
+			request.setAttribute("att", aResult);
 		}
 	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);
