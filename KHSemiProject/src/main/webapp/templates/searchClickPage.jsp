@@ -136,6 +136,14 @@
                     .catch(err => {
                         console.error('텍스트 복사에 실패했습니다: ', err);
                     });
+                
+                $.ajax({
+                    url : "share.sl",
+                    method : "post",
+                    error : function(){
+                        console.log("공유 AJAX 실패")
+                    }
+                })
             }
             function clickMark(aaa, bbb){
                 $.ajax({
