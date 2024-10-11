@@ -670,10 +670,8 @@ public class QuizDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("selectReportQuiz");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setInt(1, reportInfo.getMemberNo());
 			pstmt.setInt(2, reportInfo.getReportedMemberNo());
 			pstmt.setInt(3, reportInfo.getQuizNo());
@@ -692,6 +690,29 @@ public class QuizDao {
 		
 		return result;
 	}
+	
+	public int successQuest(Connection conn, int memberNo, int questNo) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("successQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+			
+			
 
 	public int insertReportQuiz(Connection conn, ReportInfo reportInfo) {
 		int result = 0; // insert = 처리된 행 수 반환
@@ -709,10 +730,40 @@ public class QuizDao {
 			pstmt.setInt(4, reportInfo.getReportedMemberNo());
 			pstmt.setInt(5, reportInfo.getQuizNo());
 			
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int checkDailyQuest(Connection conn, int memberNo, int questNo) {
+		int result = 0;
+
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("checkDailyQuest");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, questNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("MEMBER_QUEST_SUCCESS");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		

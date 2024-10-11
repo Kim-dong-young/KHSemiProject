@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * CreateQuizMainController
  */
-@MultipartConfig
+
 public class CreateQuizMainController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private CreateQuizService quizService = new CreateQuizServiceImpl();
@@ -94,12 +94,11 @@ public class CreateQuizMainController extends HttpServlet {
             // 퀴즈 저장
             int result = quizService.createQuiz(cQuiz);
             if (result > 0) {
-                Quiz createdQuiz = new Quiz();
-                createdQuiz.setQuiz_number(cQuiz.getQUIZ_NUMBER());
-                request.setAttribute("insertQuiz", createdQuiz); 
+            	System.out.println(result);
+                request.setAttribute("quiz_num", result); 
 
-                request.getSession().setAttribute("alertMsg", "퀴즈 작성 완료");
-                response.sendRedirect(request.getContextPath() + "/problems.co");
+//                request.getSession().setAttribute("alertMsg", "퀴즈 작성 완료");
+                request.getRequestDispatcher("templates/CreateQuiz.jsp").forward(request, response);
             } else {
                 if (cQuiz != null) {
                     new File(savePath + changeName).delete(); 

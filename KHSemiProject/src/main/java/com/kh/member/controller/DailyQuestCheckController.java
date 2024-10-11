@@ -1,11 +1,9 @@
-package com.kh.search.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 
-import com.google.gson.Gson;
 import com.kh.member.model.vo.Member;
 import com.kh.member.service.MemberService;
-import com.kh.search.service.SearchService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,15 +11,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AjaxQuizMarkController
+ * Servlet implementation class DailyQuestCheckController
  */
-public class AjaxQuizMarkController extends HttpServlet {
+public class DailyQuestCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxQuizMarkController() {
+    public DailyQuestCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,28 +28,31 @@ public class AjaxQuizMarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int quizNum = Integer.parseInt(request.getParameter("quizNum"));
-		int memberNum = Integer.parseInt(request.getParameter("member"));
+		String contextPath = request.getContextPath(); // contextPath
 		
-		int mark = new SearchService().markInsert(quizNum, memberNum);
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+		int questNo = Integer.parseInt(request.getParameter("qno"));
 		
-		int questNo = 8; // 8 : 북마크하기
-		int isDone = new SearchService().checkDailyQuest(memberNum, questNo);
+		MemberService mService = new MemberService();
+		
+		int isDone = mService.checkDailyQuest(memberNo, questNo);
 		
 		// MEMBER_QUEST_SUCCESS 값 0은 퀘스트완료 X / 보상 획득 X
 		// MEMBER_QUEST_SUCCESS 값 1은 퀘스트완료 O / 보상 획득 X
 		// MEMBER_QUEST_SUCCESS 값 2는 퀘스트완료 O / 보상 획득 O
-		if(isDone == 0) { // 퀘스트 깬적 없을 경우 ( 오늘 첫 로그인 )
-			// 로그인 하면 퀘스트 성공
-			new SearchService().successQuest(memberNum, questNo);
+		if(isDone == 1) {
+			int exp = 100;
+			mService.updateMemberExp(memberNo, questNo, exp);
 		}
 		
-		System.out.println("데이터들어옴");
+		// 현재 로그인 중인 유저의 번호로 갱신된 정보(경험치)를 새로 받아온다.
+		Member m = new MemberService().selectMember(memberNo);
 		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(mark, response.getWriter());
+		request.getSession().setAttribute("loginMember", m);
+		request.setAttribute("optional", m.getExp());
+		
+		response.sendRedirect(contextPath + "/main.me");
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

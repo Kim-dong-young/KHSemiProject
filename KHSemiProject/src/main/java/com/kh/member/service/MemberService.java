@@ -1,18 +1,17 @@
 package com.kh.member.service;
 
+import static com.kh.common.DailyQuestTemplate.dailyQuestLimit;
+import static com.kh.common.DailyQuestTemplate.getRandomQuestNum;
 import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
-
-import static com.kh.common.DailyQuestTemplate.*;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.Random;
 
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -258,6 +257,47 @@ public class MemberService {
 		
 		close(conn);
 		return result;
+	}
+
+
+	public int successQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().successQuest(conn, memberNo, questNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int checkDailyQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().checkDailyQuest(conn, memberNo, questNo);
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int updateMemberExp(int memberNo, int questNo, int exp) {
+		MemberDao mDao = new MemberDao();
+		Connection conn = getConnection();
+		int result1 = mDao.updateMemberExp(conn, memberNo, exp);
+		int result2 = mDao.doneDailyQuest(conn, memberNo, questNo);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1 * result2;
 	}
 	
 }

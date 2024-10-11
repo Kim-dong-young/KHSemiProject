@@ -157,4 +157,26 @@ public class SearchService {
 		close(conn);
 		return result;
 	}
+	public int successQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new QuizDao().successQuest(conn, memberNo, questNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int checkDailyQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new QuizDao().checkDailyQuest(conn, memberNo, questNo);
+		
+		close(conn);
+		return result;
+	}
 }

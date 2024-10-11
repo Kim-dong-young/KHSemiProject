@@ -4,6 +4,7 @@ function initMain(optional) {
   
   if(optional) {
     setLevel(optional);
+    setdount();
     selectDailyQuest()
   }
 
@@ -155,12 +156,12 @@ function selectDailyQuest(){
           "<div>" +
               "<div class='quest-content'>"+ quest.questContent+"</div>" +
                "<div class='quest-achieving-condition'>" +
-                  "<span>" + quest.questSuccess + "</span>" +
+                  "<span>" + (quest.questSuccess > 0 ? "1" : "0") + "</span>" +
                   "<span> / </span>" +
                   "<span class='completion-condition'>" + 1 + "</span>" +
               "</div>" +
               "<div class='submit-btn'>" +
-                  "<button>달성하기</button>" +
+                  "<button "+ (quest.questSuccess === 2 ? "disabled" : "") +" onclick=\"location.href='checkQuest?qno=" + quest.questNo + "'\">"+ (quest.questSuccess === 2 ? "완료함" : "달성하기") +"</button>" +
               "</div>" +
           "</div>"
         )
@@ -197,6 +198,30 @@ function setLevel(optional) {
     } else {
       expValue.innerText = 0;
     }
+    
+    let t = 0;  // setInterval 함수 내에 그래프의 width 변화값을 담당하는 증가변수
+
+    expBarValue.style.width = 0;
+    
+    const barAnimation = setInterval(() => {
+      expBarValue.style.width = t + '%';
+
+      t++ >= expGage && clearInterval(barAnimation) // 임시변수 값이 원하는 값(여기서는 expGage)과 
+                                                    // 같아지면 clearInterval 함수를 호출하여 이벤트를 종료
+    }, 10)
+}
+
+function setdount() {
+  const donuts = document.querySelectorAll('.chart-donut');
   
-    expBarValue.style.width = expGage + '%'
+  donuts.forEach(donut => {
+    let t = 0;
+    let result = donut.dataset.percent;
+
+  const donutAnimation = setInterval(() => {
+    donut.style.background = `conic-gradient(#FF9139 0 ${t}%, #d9d9d9 ${t}% 100%`
+
+    t++ >= result && clearInterval(donutAnimation) 
+    })
+  }, 10)
 }

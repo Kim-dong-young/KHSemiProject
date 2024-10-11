@@ -35,32 +35,4 @@ public class DailyQuestTemplate {
 		
 		return result;
 	}
-	
-	public static boolean checkQuest(int questNo) {
-		
-		switch(questNo) {
-		case 1: // 퀴즈 1개 완료하기
-			break;
-		case 2: // 로그인 하기
-			break;
-		case 3: // 댓글 1개 달기
-			break;
-		case 4: // 커뮤니티 글 작성
-			break;
-		case 5: // 경험치 100 획득
-			break;
-		case 6: // 문제 1개 맞추기
-			break;
-		case 7: // 문제 만들어보기
-			break;
-		case 8: // 북마크하기
-			break;
-		case 9: // 공유하기
-			break;
-		case 10: // 출석버튼 누르기
-			break;
-		}
-		
-		return false;
-	}
 }

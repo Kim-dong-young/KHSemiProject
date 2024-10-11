@@ -2,6 +2,7 @@ package com.kh.createQuiz.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
@@ -14,6 +15,7 @@ import com.kh.createQuiz.service.CreateQuizServiceImpl;
 import com.kh.search.model.vo.Quiz;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class problemsController
  */
+
 public class problemsController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -46,35 +49,39 @@ public class problemsController extends HttpServlet {
 
             List<FileItem> formItems = upload.parseRequest(request);
 
-            Problem p = new Problem();
+            Problem pr = new Problem();
             Answer a = new Answer();
-
-            Quiz quiz = (Quiz) request.getAttribute("insertQuiz");
-            if (quiz != null) {
-                p.setQUIZ_number(quiz.getQuiz_number());
-            } else {
-                System.out.println("Quiz attribute is null");
-                response.sendRedirect(request.getContextPath() + "/templates/CreateQuiz.jsp");
-                return;
-            }
+            
+//            Quiz quiz = (Quiz)request.getAttribute("insertQuiz");
+//            if (quiz != null) {
+//                p.setQUIZ_number(quiz.getQuiz_number());
+//            } else {
+//                System.out.println("Quiz attribute is null");
+//                response.sendRedirect(request.getContextPath());
+//                return;
+//            }
 
             for (FileItem item : formItems) {
                 if (item.isFormField()) {
                     switch (item.getFieldName()) {
-                    case "pno":
-                        p.setPROBLEM_number(Integer.parseInt(item.getString()));
+                    case "quiz_number":
+                    	pr.setQUIZ_number(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+                    	break;
+                    case "pcontent-1":
+                        pr.setPROBLEM_content(item.getString(Charset.forName("utf-8")));
                         break;
-                    case "pcontent":
-                        p.setPROBLEM_content(item.getString());
+//                    case "pmk":
+//                        pr.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
+//                        break;
+                    case "ptime-1" :
+                    	pr.setPtime(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
+                    	break;
+                    case "phint-1":
+                        pr.setPROBLEM_hint(item.getString(Charset.forName("utf-8")));
                         break;
-                    case "pmk":
-                        p.setPROBLEM_media_kind(Integer.parseInt(item.getString()));
-                        break;
-                    case "phint":
-                        p.setPROBLEM_hint(item.getString());
-                        break;
-                    case "panswer":
-                        a.setANSWER_content(item.getString());
+                    case "panswer-1":
+                        a.setANSWER_content(item.getString(Charset.forName("utf-8")));
+                        System.out.println();
                         break;
                     }
                 } else {
@@ -87,7 +94,7 @@ public class problemsController extends HttpServlet {
                         File f = new File(savePath, changeName);
                         try {
                             item.write(f.toPath());
-                            p.setPROBLEM_media("static/img/problems/" + changeName);
+                            pr.setPROBLEM_media("static/img/problems/" + changeName);
                         } catch (Exception e) {
                             e.printStackTrace();
                             if (changeName != null) {
@@ -97,13 +104,13 @@ public class problemsController extends HttpServlet {
                     }
                 }
             }
-
-            int problemResult = new CreateQuizServiceImpl().insertProblems(p);
-            int answerResult = new CreateQuizServiceImpl().insertAnswers(a);
-
-            if (problemResult > 0 && answerResult > 0) {
-                request.setAttribute("alertMsg", "문제 작성 완료");
-                response.sendRedirect(request.getContextPath() + "/problems.co");
+            System.out.println("정보들어가다잇");
+            int problemResult = new CreateQuizServiceImpl().insertProblems(pr, a);
+            
+            if (problemResult > 0) {
+            	System.out.println("성공");
+                request.getSession().setAttribute("alertMsg", "문제 작성 완료");
+                response.sendRedirect(request.getContextPath() + "/main.me");
             } else {
                 if (changeName != null) {
                     new File(savePath + changeName).delete();
