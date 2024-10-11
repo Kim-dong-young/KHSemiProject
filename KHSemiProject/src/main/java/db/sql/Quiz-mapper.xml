@@ -2,11 +2,13 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectTagList">
-		SELECT TAG_NAME, COUNT(*) AS COUNT
-		FROM QUIZ_TAG
-		WHERE TAG_NAME LIKE ?
-        GROUP BY TAG_NAME
-        ORDER BY COUNT DESC
+		SELECT * FROM (
+		    SELECT TAG_NAME, COUNT(*) AS COUNT
+		    FROM QUIZ_TAG
+		    WHERE TAG_NAME LIKE ?
+		    GROUP BY TAG_NAME
+		    ORDER BY COUNT DESC
+		) WHERE ROWNUM &lt;= 18
 	</entry>
 
 	<entry key="detailQuiz">
