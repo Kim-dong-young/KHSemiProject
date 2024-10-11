@@ -12,10 +12,10 @@ import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 import com.kh.createQuiz.model.vo.Answer;
 import com.kh.createQuiz.model.vo.Problem;
 import com.kh.createQuiz.service.CreateQuizServiceImpl;
-import com.kh.search.model.vo.Quiz;
+import com.kh.member.model.vo.Member;
+import com.kh.member.service.MemberService;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,6 +35,8 @@ public class problemsController extends HttpServlet {
 			throws ServletException, IOException {
 		String changeName = null;
 		response.setContentType("application/json; charset=UTF-8");
+		
+		int memberNo = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
 
 		if (JakartaServletFileUpload.isMultipartContent(request)) {
 			int fileMaxSize = 1024 * 1024 * 10; // 10MB
@@ -182,6 +184,18 @@ public class problemsController extends HttpServlet {
 				System.out.println("성공");
 				request.getSession().setAttribute("alertMsg", "문제 작성 완료");
 				response.sendRedirect(request.getContextPath() + "/main.me");
+				
+				int questNo = 7; // 7 : 문제 만들어보기
+				int isDone = new CreateQuizServiceImpl().checkDailyQuest(memberNo, questNo);
+				
+				// MEMBER_QUEST_SUCCESS 값 0은 퀘스트완료 X / 보상 획득 X
+				// MEMBER_QUEST_SUCCESS 값 1은 퀘스트완료 O / 보상 획득 X
+				// MEMBER_QUEST_SUCCESS 값 2는 퀘스트완료 O / 보상 획득 O
+				if(isDone == 0) { // 퀘스트 깬적 없을 경우 ( 오늘 첫 로그인 )
+					// 로그인 하면 퀘스트 성공
+					new CreateQuizServiceImpl().successQuest(memberNo, questNo);
+				}
+				
 			} else {
 				if (changeName != null) {
 					new File(savePath + changeName).delete();

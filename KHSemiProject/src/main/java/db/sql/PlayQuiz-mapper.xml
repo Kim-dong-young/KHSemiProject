@@ -78,6 +78,20 @@
 		FROM MEMBER
 		WHERE MEMBER_NUMBER = ?
 	</entry>
+	
+ 	<entry key="successQuest">
+	UPDATE MEMBER_QUEST
+   	   SET MEMBER_QUEST_SUCCESS = 1
+	 WHERE MEMBER_NUMBER = ?
+	   AND QUEST_NUMBER = ?
+	</entry>
+	
+	<entry key="checkDailyQuest">
+   SELECT MEMBER_QUEST_SUCCESS
+     FROM MEMBER_QUEST
+   	WHERE MEMBER_NUMBER = ?
+	  AND QUEST_NUMBER = ?
+	</entry>
 </properties>
 
 

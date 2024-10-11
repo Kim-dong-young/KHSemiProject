@@ -29,16 +29,22 @@ public class MainPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("pageName", "mainPage");
+		MemberService mService = new MemberService();
+		
 		
 		Member m = ((Member)request.getSession().getAttribute("loginMember"));
 		
 		if(m != null) {
-			int rResult = new MemberService().playedRecode(m.getMemberNo());
-			int aResult = new MemberService().attendanceRate(m.getMemberNo());
+			int rResult = mService.playedRecode(m.getMemberNo());
+			int aResult = mService.attendanceRate(m.getMemberNo());
+			int cResult = mService.correctRate(m.getMemberNo());
+			int pResult = mService.playedQuiz(m.getMemberNo());
 			
 			request.setAttribute("optional", m.getExp());
 			request.setAttribute("playedRecode", rResult);
-			request.setAttribute("att", aResult);
+			request.setAttribute("attendance", aResult);
+			request.setAttribute("correct", cResult);
+			request.setAttribute("played", pResult);
 		}
 	
 		request.getRequestDispatcher("templates/mainPage.jsp").forward(request, response);

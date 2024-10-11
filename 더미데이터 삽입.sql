@@ -1207,6 +1207,120 @@ INSERT INTO CATEGORY
 VALUES (8, '기타');
 
 
+INSERT INTO QUIZ
+VALUES
+(1, '이터널 리턴 캐릭터 이름 맞추기', SYSDATE, SYSDATE, '이터널 리턴 캐릭터 이미지를 보고 이름을 맞춰보자.', 1, 1, 'static/img/THUMBNAIL/quiz_22.webp');
+
+INSERT INTO PROBLEM
+VALUES
+(1, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_22.webp', NULL, 1);
+
+INSERT INTO ANSWER
+VALUES
+(1, '재키', 1);
+
+INSERT INTO PROBLEM
+VALUES
+(2, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_1.webp', NULL, 1);
+
+INSERT INTO ANSWER
+VALUES
+(2, '로지', 2);
+
+INSERT INTO PROBLEM
+VALUES
+(3, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_2.webp', NULL, 1);
+
+INSERT INTO ANSWER
+VALUES
+(3, '레녹스', 3);
+
+INSERT INTO PROBLEM
+VALUES
+(4, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_3.webp', NULL, 1);
+
+INSERT INTO ANSWER
+VALUES
+(4, '루크', 4);
+
+INSERT INTO PROBLEM
+VALUES
+(5, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_4.webp', NULL, 1);
+
+INSERT INTO ANSWER
+VALUES
+(5, '엠마', 5);
+
+
+
+
+INSERT INTO QUIZ
+VALUES
+(2, '이터널 리턴 캐릭터 무기 이름 맞추기', SYSDATE, SYSDATE, '이터널 리턴 캐릭터 이미지를 보고 사용하는 무기 종류의 이름을 맞춰보자. 사용하는 무기가 많으면 일러스트에서 들고있는 무기 기준.', 1, 1, 'static/img/THUMBNAIL/quiz_22.webp');
+
+INSERT INTO PROBLEM
+VALUES
+(6, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_22.webp', NULL, 2);
+
+INSERT INTO ANSWER
+VALUES
+(6, '도끼', 6);
+
+INSERT INTO PROBLEM
+VALUES
+(7, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_1.webp', NULL, 2);
+
+INSERT INTO ANSWER
+VALUES
+(7, '권총', 7);
+
+INSERT INTO PROBLEM
+VALUES
+(8, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_2.webp', NULL, 2);
+
+INSERT INTO ANSWER
+VALUES
+(8, '채찍', 8);
+
+INSERT INTO PROBLEM
+VALUES
+(9, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_3.webp', NULL, 2);
+
+INSERT INTO ANSWER
+VALUES
+(9, '방망이', 9);
+
+INSERT INTO PROBLEM
+VALUES
+(10, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_4.webp', NULL, 2);
+
+INSERT INTO ANSWER
+VALUES
+(10, '암기', 10);
+
+
+INSERT INTO QUIZ
+VALUES
+(3, '포캣몬 이름 맞추기', SYSDATE, SYSDATE, '이미지를 보고 무슨 포켓몬인지 맞춰보자.', 1, 1, 'static/img/THUMBNAIL/thumbnail_1728612771490.png');
+
+INSERT INTO PROBLEM
+VALUES
+(11, '이 포켓몬의 이름은?', 0, 30, 'static/img/THUMBNAIL/thumbnail_1728611472259.jfif', NULL, 3);
+
+INSERT INTO ANSWER
+VALUES
+(11, '메타그로스', 11);
+
+INSERT INTO PROBLEM
+VALUES
+(12, '이 포켓몬의 이름은?', 0, 30, 'static/img/THUMBNAIL/thumbnail_1728612771490.png', NULL, 3);
+
+INSERT INTO ANSWER
+VALUES
+(12, '피카츄', 12);
+
+
+
 INSERT INTO MEMBER
 VALUES (-1, 'GUEST', 'GUEST', 'GUEST', 0, '/static/img/userProfile/guest-icon.png', to_date('09/21/2024', 'MM/DD/RRRR'), 0, 'N', '안녕하세요. 잘부탁드립니다.', NULL, NULL, NULL);
 
@@ -1223,7 +1337,7 @@ INSERT INTO QUEST (QUEST_NUMBER, QUEST_CONTENT)
 VALUES (4, '커뮤니티 글 작성하기');
 
 INSERT INTO QUEST (QUEST_NUMBER, QUEST_CONTENT) 
-VALUES (5, '경험치 100 획득하기');
+VALUES (5, '퀴즈 별점 남기기');
 
 INSERT INTO QUEST (QUEST_NUMBER, QUEST_CONTENT) 
 VALUES (6, '문제 1개 맞추기');

@@ -12,7 +12,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퀴즈팡</title>
-    <script src="<%=contextPath2%>/static/js/Quiz Screen(Media O).js"></script>
     <link rel="stylesheet" href="<%=contextPath2%>/static/css/QuizScreen(Media O).css">
 </head>
 <body>
@@ -53,7 +52,7 @@
                 <div id="hintText" style="display: none;">힌트 내용</div>
             </div>
             <div class="answer-container">
-                <input type="text" id="answer-input" placeholder="정답 입력">
+                <input type="text" id="answer-input" placeholder="정답 입력" onkeypress="if(window.event.keyCode==13){submit_problem()}">
                 <button id="submit-btn" onclick="submit_problem()">제출</button>
             </div>
         </div>
@@ -75,32 +74,28 @@
             var problem = pList[pNum];
             document.getElementById("text2").innerText = problem.problem_content;
 
-
-            if(problem.problem_media_kind == 1 || problem.problem_media_kind == 2){
-                document.querySelector(".Media-area").setAttribute('style', "display: true;");
-                $.ajax({
-                    url: "pMedia.pl",
-                    contentType: "application/json",
-                    type: "GET",
-                    data: {
-                        num: problem.problem_media_kind,
-                        pNum: problem.problem_number
-                    },
-                    success: function(res){
-                        console.log(res);
-                        if (problem.problem_media_kind == 1) {
-                            document.querySelector(".Media-area").innerHTML = `<img src="<%=contextPath%>/` + res + `" alt="">`;
-                        } else {
-                            document.querySelector(".Media-area").innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/` + res + `" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
-                        }
-                    },
-                    error: function(){
-                        console.log("시각콘텐츠 조회용 ajax 통신 실패")
+            
+            $.ajax({
+                url: "pMedia.pl",
+                contentType: "application/json",
+                type: "GET",
+                data: {
+                    num: problem.problem_media_kind,
+                    pNum: problem.problem_number
+                },
+                success: function(res){
+                    console.log(res);
+                    if (res != null) {
+                        document.querySelector(".Media-area").setAttribute('style', "display: true;");
+                        document.querySelector(".Media-area").innerHTML = `<img src="<%=contextPath%>/` + res + `" alt="">`;
+                    } else {
+                        document.querySelector(".Media-area").setAttribute('style', "display: none;");
                     }
-                })
-            } else {
-                document.querySelector(".Media-area").setAttribute('style', "display: none;");
-            }
+                },
+                error: function(){
+                    console.log("시각콘텐츠 조회용 ajax 통신 실패")
+                }
+            })
             if(interval !== undefined){
                 clearInterval(interval);
                 console.log(interval);
@@ -158,7 +153,7 @@
 
     function nextProblem(){
         pNum++;
-        document.querySelector(".answer-container").innerHTML = `<input type="text" id="answer-input" placeholder="정답 입력">
+        document.querySelector(".answer-container").innerHTML = `<input type="text" id="answer-input" placeholder="정답 입력" onkeypress="if(window.event.keyCode==13){submit_problem()}">
                 <button id="submit-btn" onclick="submit_problem()">제출</button>`
         renderProblem();
     }
@@ -168,6 +163,7 @@
     function submit_problem() {
         var problem = pList[pNum];
         let num = problem.problem_number
+        clearInterval(interval);
         let submitBTN = document.getElementById("submit-btn");
         submitBTN.setAttribute('disabled', true);
         let ans = document.getElementById("answer-input").value;
@@ -185,6 +181,12 @@
                 if (res.correct) {
                     value = "정답!";
                     correctNum++;
+                    $.ajax({
+                        url : 'checkQuest.pl',
+                        error : function(){
+                            console.log("퀘스트 AJAX 실패")
+                        }
+                    })
                 } else {    
                     value = "오답! 정답은: " + res.correctAnswer;
                 }
