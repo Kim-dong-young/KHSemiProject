@@ -301,17 +301,29 @@ public class MemberService {
 		return result1 * result2;
 	}
 	
-	public int attendanceRate(int memberNo) {
+	public int attendanceRate(Member m) {
 		Connection conn = getConnection();
 		int result = 0;
 		
-		int totalResult = mDao.totalDate(conn, memberNo);
-		int attendanceResult = mDao.attendanceDate(conn, memberNo);
+		String sysdate = mDao.selectSysdate(conn);
 		
+		int totalResult;
+		
+		if(sysdate.equals(m.getJoinDate())) {
+			totalResult = 1;
+		} else {
+			totalResult = mDao.totalDate(conn, m.getMemberNo());
+		}
+		
+		int attendanceResult = mDao.attendanceDate(conn, m.getMemberNo());
+		
+		System.out.println(totalResult + "&" + attendanceResult);
 		if(totalResult > 0 && attendanceResult > 0) {
 			double i = (double)attendanceResult / totalResult; 
 			result = (int)(i * 100);
-			System.out.println(result);
+		} else {
+			double i = (double)attendanceResult / 1;
+			result = (int)(i * 100);
 		}
 		
 		return result;
