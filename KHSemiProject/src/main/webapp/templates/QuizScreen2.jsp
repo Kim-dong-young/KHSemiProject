@@ -48,6 +48,10 @@
             <div class="question">
                 <div id="text2">질문 내용</div>
             </div>
+            <div class="hint">
+                <button id="hintButton" onclick="showHint()" style="display: true;">힌트</button>
+                <div id="hintText" style="display: none;">힌트 내용</div>
+            </div>
             <div class="answer-container">
                 <input type="text" id="answer-input" placeholder="정답 입력">
                 <button id="submit-btn" onclick="submit_problem()">제출</button>
@@ -102,6 +106,14 @@
                 console.log(interval);
             }
             startTimer(problem.Ptime);
+            if(problem.problem_hint != null){
+                document.querySelector(".hint").setAttribute('style', "display: true;");
+                document.querySelector("#hintButton").setAttribute('style', "display: true;");
+                document.querySelector("#hintText").setAttribute('style', "display: none;");
+                document.querySelector("#hintText").innerText = problem.problem_hint;
+            } else {
+                document.querySelector(".hint").setAttribute('style', "display: none;");
+            }
         } else {
             console.log("응애");
             postResult();
@@ -185,6 +197,11 @@
                 console.log("정답 조회용 ajax 통신 실패");
             }
         });
+    }
+
+    function showHint(){
+        document.querySelector("#hintButton").setAttribute('style', "display: none;");
+        document.querySelector("#hintText").setAttribute('style', "display: true;");
     }
 
 
