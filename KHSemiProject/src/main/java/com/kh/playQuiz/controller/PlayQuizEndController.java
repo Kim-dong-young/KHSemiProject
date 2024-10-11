@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.kh.member.model.vo.Member;
+import com.kh.member.service.MemberService;
 import com.kh.playQuiz.service.PlayQuizService;
 
 /**
@@ -43,6 +44,8 @@ public class PlayQuizEndController extends HttpServlet {
 		System.out.println(mNum);
 		if(mNum != -1) {
 			new PlayQuizService().MemberAddExp(mNum, qNum);
+			Member updateMem = new MemberService().selectMember(mNum);
+			request.getSession().setAttribute("loginMember", updateMem);
 			int exp = new PlayQuizService().PlayQuizSelectExp(mNum);
 			request.setAttribute("exp", exp);
 		}
@@ -59,7 +62,6 @@ public class PlayQuizEndController extends HttpServlet {
 			new PlayQuizService().successQuest(mNum, questNo);
 		}
 		
-		Math.floor(0.4);
 		request.getRequestDispatcher("templates/QuizEnd.jsp").forward(request, response);
 	}
 
