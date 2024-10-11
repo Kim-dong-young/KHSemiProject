@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
 
             <div class="buttons">
-                                <a class="home-btn" href="<%=contextPath%>/main.me">
-                                    <img src="<%=contextPath%>/static/img/homebtn.png" width="130px" height="45px">
+                                <a class="home-btn" href="./main.me">
+                                    <img src="./static/img/homebtn.png" width="130px" height="45px">
                                 </a>
                                 <button class="create-btn" type="submit">질문 생성하기</button>
                             </div>
