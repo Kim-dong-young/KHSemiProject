@@ -246,6 +246,17 @@
    	WHERE MEMBER_NUMBER = ?
 	  AND QUEST_NUMBER = ?
 	</entry>
+	<entry key="updateMemberExp">
+	UPDATE MEMBER
+	   SET MEMBER_EXP = MEMBER_EXP + ?
+	 WHERE MEMBER_NUMBER = ?
+	</entry>
+ 	<entry key="doneDailyQuest">
+	UPDATE MEMBER_QUEST
+   	   SET MEMBER_QUEST_SUCCESS = 2
+	 WHERE MEMBER_NUMBER = ?
+	   AND QUEST_NUMBER = ?
+	</entry>
 </properties>
 
 
