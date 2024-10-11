@@ -14,6 +14,7 @@ import java.util.StringJoiner;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.PageInfo;
+import com.kh.common.ReportInfo;
 import com.kh.search.model.vo.Quiz;
 import com.kh.search.model.vo.Tag;
 
@@ -637,6 +638,58 @@ public class QuizDao {
 		
 		return list;
 	}
+
+	public int selectQuizMaker(Connection conn, int qNum) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectQuizMaker");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNum);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getInt("MEMBER_NUMBER");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int selectReportQuiz(Connection conn, ReportInfo reportInfo) {
+		int result = 1; // insert = 처리된 행 수 반환
+		
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectReportQuiz");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reportInfo.getMemberNo());
+			pstmt.setInt(2, reportInfo.getReportedMemberNo());
+			pstmt.setInt(3, reportInfo.getQuizNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	public int successQuest(Connection conn, int memberNo, int questNo) {
 		int result = 0;
@@ -647,9 +700,36 @@ public class QuizDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setInt(1, memberNo);
 			pstmt.setInt(2, questNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+			
+			
+
+	public int insertReportQuiz(Connection conn, ReportInfo reportInfo) {
+		int result = 0; // insert = 처리된 행 수 반환
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertReportQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, reportInfo.getReportEncNo());
+			pstmt.setString(2, reportInfo.getReportReason());
+			pstmt.setInt(3, reportInfo.getMemberNo());
+			pstmt.setInt(4, reportInfo.getReportedMemberNo());
+			pstmt.setInt(5, reportInfo.getQuizNo());
+			
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
