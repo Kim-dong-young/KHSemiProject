@@ -74,21 +74,15 @@
 		                    </div>
 		                    <div class="achievement-donut-rate">
 		                        <div>
-		                            <div class="donut-chart" data-persent="70">
-		                                <span class="donut-text"></span>
-		                            </div>
+		                            <div class="chart-donut" data-percent="70"></div>
 		                            <div class="content-rate">업적 달성률</div>
 		                        </div>
 		                        <div>
-		                            <div class="donut-chart" data-persent="50">
-		                                <span class="donut-text"></span>
-		                            </div>
+		                            <div class="chart-donut"  data-percent="85"></div>
 		                            <div class="content-rate">플레이한 퀴즈</div>
 		                        </div>
 		                        <div>
-		                            <div class="donut-chart" data-persent="80">
-		                                <span class="donut-text"></span>
-		                            </div>
+		                            <div class="chart-donut"  data-percent="50"></div>
 		                            <div class="content-rate">정답률</div>
 		                        </div>
 		                    </div>

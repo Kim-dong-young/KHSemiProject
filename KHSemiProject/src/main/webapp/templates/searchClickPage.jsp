@@ -30,27 +30,25 @@
                 </c:when>
                 <c:otherwise>
                     $.ajax({
-                    url: "mkQuizInit.sl",
-                    contentType: "application/json",
-                    data: {
-                        quizNum:  <%=q.getQuiz_number()%>, 
-                        member: ${loginMember.memberNo}
-                    },
-                    success: function(res){
-                        const mk = document.getElementById("Mark");
-                        console.log(res)
-                        if(res == 1){
-                            mk.classList.add('marked');
-                        } else {
-                            mk.classList.remove('marked');
+                        url: "mkQuizInit.sl",
+                        contentType: "application/json",
+                        data: {
+                            quizNum:  <%=q.getQuiz_number()%>, 
+                            member: ${loginMember.memberNo}
+                        },
+                        success: function(res){
+                            const mk = document.getElementById("Mark");
+                            console.log(res)
+                            if(res == 1){
+                                mk.classList.add('marked');
+                            } else {
+                                mk.classList.remove('marked');
+                            }
+                        },
+                        error: function(){
+                            console.log("태그 조회용 ajax통신 실패")
                         }
-                        
-                        
-                    },
-                    error: function(){
-                        console.log("태그 조회용 ajax통신 실패")
                     }
-                })
                 </c:otherwise>
             </c:choose>
         }

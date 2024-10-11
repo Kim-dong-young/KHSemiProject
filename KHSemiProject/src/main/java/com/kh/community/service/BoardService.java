@@ -12,6 +12,7 @@ import com.kh.community.model.vo.Attachment;
 import com.kh.community.model.vo.Board;
 import com.kh.community.model.vo.Category;
 import com.kh.community.model.vo.Comment;
+import com.kh.member.model.dao.MemberDao;
 
 public class BoardService {
 
@@ -508,6 +509,20 @@ public class BoardService {
 		
 		if(selectResult < 1) { // 조회 결과가 없을 경우에만 신고 테이블에 삽입 ( 중복신고 방지 )
 			result = new BoardDao().insertReportComment(conn, reportInfo);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public int successQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new BoardDao().successQuest(conn, memberNo, questNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
 		}
 		
 		close(conn);

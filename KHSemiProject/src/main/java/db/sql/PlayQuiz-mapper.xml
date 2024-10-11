@@ -42,6 +42,42 @@
 		FROM IMGS_FILE
 		WHERE IMGS_FILE_ID = ?
 	</entry>
+	
+	<entry key="AjaxPlayQuizStarsCheck">
+		SELECT QUIZ_RATE_RATING
+		FROM QUIZ_RATE
+		WHERE MEMBER_NUMBER = ?
+		  AND QUIZ_NUMBER = ?
+	</entry>
+	
+	<entry key="AjaxPlayQuizStarsConfirm">
+		INSERT INTO QUIZ_RATE
+		VALUES
+		(
+			?,
+			?,
+			?
+		)
+	</entry>
+	<entry key="MemberAddExp">
+		UPDATE MEMBER
+		SET
+		MEMBER_EXP = MEMBER_EXP + 100
+		WHERE MEMBER_NUMBER = ?
+	</entry>
+	
+	<entry key="PreCheckLog">
+		SELECT QUIZ_LOG_NUMBER
+		FROM QUIZ_LOG
+		WHERE QUIZ_NUMBER = ?
+		AND MEMBER_NUMBER = ?
+	</entry>
+	
+	<entry key="PlayQuizSelectExp">
+		SELECT MEMBER_EXP
+		FROM MEMBER
+		WHERE MEMBER_NUMBER = ?
+	</entry>
 </properties>
 
 
