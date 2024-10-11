@@ -12,7 +12,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퀴즈팡</title>
-    <script src="<%=contextPath2%>/static/js/Quiz Screen(Media O).js"></script>
     <link rel="stylesheet" href="<%=contextPath2%>/static/css/QuizScreen(Media O).css">
 </head>
 <body>
@@ -53,7 +52,7 @@
                 <div id="hintText" style="display: none;">힌트 내용</div>
             </div>
             <div class="answer-container">
-                <input type="text" id="answer-input" placeholder="정답 입력">
+                <input type="text" id="answer-input" placeholder="정답 입력" onkeypress="if(window.event.keyCode==13){submit_problem()}">
                 <button id="submit-btn" onclick="submit_problem()">제출</button>
             </div>
         </div>
@@ -154,7 +153,7 @@
 
     function nextProblem(){
         pNum++;
-        document.querySelector(".answer-container").innerHTML = `<input type="text" id="answer-input" placeholder="정답 입력">
+        document.querySelector(".answer-container").innerHTML = `<input type="text" id="answer-input" placeholder="정답 입력" onkeypress="if(window.event.keyCode==13){submit_problem()}">
                 <button id="submit-btn" onclick="submit_problem()">제출</button>`
         renderProblem();
     }
@@ -164,6 +163,7 @@
     function submit_problem() {
         var problem = pList[pNum];
         let num = problem.problem_number
+        clearInterval(interval);
         let submitBTN = document.getElementById("submit-btn");
         submitBTN.setAttribute('disabled', true);
         let ans = document.getElementById("answer-input").value;
