@@ -11,11 +11,13 @@ import com.kh.createQuiz.model.dao.CreateQuizDAO;
 import com.kh.createQuiz.model.vo.Answer;
 import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.model.vo.Problem;
+import com.kh.createQuiz.model.vo.QuizTag;
 import com.kh.member.model.dao.MemberDao;
+
 
 public class CreateQuizServiceImpl implements CreateQuizService {
 	private CreateQuizDAO quizDAO = new CreateQuizDAO();
-
+	
 	@Override
 	public int createQuiz(CreateQuiz quiz) {
 		Connection conn = getConnection();
@@ -32,6 +34,21 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 		close(conn);
 
+		return result;
+	}
+	public int QuizTag(QuizTag tag) {
+		Connection conn = getConnection();
+		
+		int result = quizDAO.insertQuizTag(conn, tag);
+		
+		if(result >0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
 		return result;
 	}
 
@@ -53,7 +70,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 		}
 		if (pr2.getPROBLEM_content() != null && a2.getANSWER_content() != null) {
-			System.out.println("들어왔다잇" + pr2 + "," + a2);
+			//System.out.println("들어왔다잇" + pr2 + "," + a2);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr2);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a2);
 			
@@ -63,7 +80,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 				isSuccess = false;
 		}
 		if (pr3.getPROBLEM_content() != null && a3.getANSWER_content() != null) {
-			System.out.println("들어왔다잇" + pr3 + "," + a3);
+			//System.out.println("들어왔다잇" + pr3 + "," + a3);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr3);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a3);
 			
@@ -73,7 +90,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 				isSuccess = false;
 		}
 		if (pr4.getPROBLEM_content() != null && a4.getANSWER_content() != null) {
-			System.out.println("들어왔다잇" + pr4 + "," + a4);
+			//System.out.println("들어왔다잇" + pr4 + "," + a4);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr4);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a4);
 			
@@ -83,7 +100,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 				isSuccess = false;
 		}
 		if (pr5.getPROBLEM_content() != null && a5.getANSWER_content() != null) {
-			System.out.println("들어왔다잇" + pr5 + "," + a5);
+			//System.out.println("들어왔다잇" + pr5 + "," + a5);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr5);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a5);
 			
@@ -104,6 +121,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		return result1 * result2;
 	}
 	
+
 	public int successQuest(int memberNo, int questNo) {
 		Connection conn = getConnection();
 		int result = new MemberDao().successQuest(conn, memberNo, questNo);

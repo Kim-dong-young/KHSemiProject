@@ -10,13 +10,12 @@ import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 
 import com.kh.createQuiz.model.vo.CreateQuiz;
+import com.kh.createQuiz.model.vo.QuizTag;
 import com.kh.createQuiz.service.CreateQuizService;
 import com.kh.createQuiz.service.CreateQuizServiceImpl;
 import com.kh.member.model.vo.Member;
-import com.kh.search.model.vo.Quiz;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,6 +57,8 @@ public class CreateQuizMainController extends HttpServlet {
 
             // 추가할 데이터
             CreateQuiz cQuiz = new CreateQuiz();
+            QuizTag tag = new QuizTag();
+            
             cQuiz.setMEMBER_NUMBER(((Member) request.getSession().getAttribute("loginMember")).getMemberNo());
 
             // 반복문을 통해 파일과 파라미터 정보를 획득
@@ -74,7 +75,7 @@ public class CreateQuizMainController extends HttpServlet {
                         cQuiz.setCATEGORY_NUMBER(Integer.parseInt(item.getString(Charset.forName("utf-8"))));
                         break;
                     case "tag":
-                        cQuiz.setTAG_NAME(item.getString(Charset.forName("utf-8")));
+                        tag.setTagName(item.getString(Charset.forName("utf-8")));
                     }
                 } else { // 파일 업로드
                     String originName = item.getName();
