@@ -78,8 +78,12 @@ public class CreateQuizDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, tag.getTagName());
-			pstmt.setInt(2, tag.getQuizNumber());
+			
+			System.out.println(tag.getTagName());
+			System.out.println(tag.getQuizNumber());
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -129,7 +133,7 @@ public class CreateQuizDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, a.getANSWER_content());
-			
+			System.out.println(sql);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

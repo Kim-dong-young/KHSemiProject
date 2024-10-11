@@ -131,8 +131,8 @@
 	
 	<entry key="insertQuizTag">
 		INSERT INTO QUIZ_TAG(
-			tagName,
-			quizNumber
+			TAG_NAME,
+			QUIZ_NUMBER
 		)VALUES
 		(
 		?,
