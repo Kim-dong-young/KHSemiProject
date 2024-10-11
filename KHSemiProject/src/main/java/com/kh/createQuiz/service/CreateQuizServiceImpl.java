@@ -11,6 +11,7 @@ import com.kh.createQuiz.model.dao.CreateQuizDAO;
 import com.kh.createQuiz.model.vo.Answer;
 import com.kh.createQuiz.model.vo.CreateQuiz;
 import com.kh.createQuiz.model.vo.Problem;
+import com.kh.member.model.dao.MemberDao;
 
 public class CreateQuizServiceImpl implements CreateQuizService {
 	private CreateQuizDAO quizDAO = new CreateQuizDAO();
@@ -101,6 +102,29 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		}
 		close(conn);
 		return result1 * result2;
+	}
+	
+	public int successQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().successQuest(conn, memberNo, questNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int checkDailyQuest(int memberNo, int questNo) {
+		Connection conn = getConnection();
+		int result = new MemberDao().checkDailyQuest(conn, memberNo, questNo);
+		
+		close(conn);
+		return result;
 	}
 
 }

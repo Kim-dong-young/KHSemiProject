@@ -54,14 +54,14 @@ CREATE SEQUENCE SEQ_COMMUNITY_COMMENT
 
 CREATE SEQUENCE SEQ_QUIZ
     INCREMENT BY 1
-    START WITH 23;
+    START WITH 4;
 
 CREATE SEQUENCE SEQ_BNO;
 
 
 CREATE SEQUENCE SEQ_PNO
     INCREMENT BY 1
-    START WITH 1;
+    START WITH 13;
 
 CREATE SEQUENCE SEQ_REPORT;
 
@@ -71,11 +71,13 @@ CREATE SEQUENCE SEQ_QLOG
     
 CREATE SEQUENCE SEQ_QUEST;
 
-CREATE SEQUENCE SEQ_AN;
+CREATE SEQUENCE SEQ_AN
+    INCREMENT BY 1
+    START WITH 13;
 
 CREATE TABLE MEMBER(
     MEMBER_number number not null,
-    MEMBER_id varchar2(50) not null,
+    MEMBER_id varchar2(50) not null unique,
     MEMBER_pwd varchar2(50) not null,
     MEMBER_nickname varchar2(50) not null,
     MEMBER_exp number DEFAULT 0 not null,
@@ -207,7 +209,7 @@ CREATE TABLE COMMUNITY_TAB(
 CREATE TABLE COMMUNITY( 
     COMMUNITY_number number not null,
     COMMUNITY_title varchar2(50) not null,
-    COMMUNITY_content varchar2(1000) not null,
+    COMMUNITY_content varchar2(3000) not null,
     COMMUNITY_viewcount number not null,
     COMMUNITY_date date default SYSDATE not null,
     MEMBER_number number not null,

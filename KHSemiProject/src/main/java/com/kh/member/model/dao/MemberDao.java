@@ -50,7 +50,7 @@ public class MemberDao {
 						rset.getString("member_nickname"),
 						rset.getInt("member_exp"),
 						rset.getString("member_image"),
-						rset.getDate("member_join_date"),
+						rset.getString("member_join_date"),
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
 						rset.getString("member_introduce"),
@@ -141,7 +141,7 @@ public class MemberDao {
 						rset.getString("member_nickname"),
 						rset.getInt("member_exp"),
 						rset.getString("member_image"),
-						rset.getDate("member_join_date"),
+						rset.getString("member_join_date"),
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
 						rset.getString("member_introduce"),
@@ -181,7 +181,7 @@ public class MemberDao {
 						rset.getString("member_nickname"),
 						rset.getInt("member_exp"),
 						rset.getString("member_image"),
-						rset.getDate("member_join_date"),
+						rset.getString("member_join_date"),
 						rset.getInt("member_check_continuecount"),
 						rset.getString("member_status"),
 						rset.getString("member_introduce"),
@@ -724,7 +724,6 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("t" + result);
 		return result;
 	}
 			
@@ -750,9 +749,132 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("a" + result);
 		return result;
 	}	
+	
+	public int totalQuiz1(Connection conn, int memberNo) {
+int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQuizTotalNumber");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int correctQuiz(Connection conn, int memberNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQuizCorrectNumber");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("correct");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int totalQuiz(Connection conn) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectTotalQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("total_quiz");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int playedQuiz(Connection conn, int memberNo) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPlayedQuiz");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("played_quiz");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public String selectSysdate(Connection conn) {
+		String result = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectSysdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getString("sys");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result; 
+	}
 }
 
 

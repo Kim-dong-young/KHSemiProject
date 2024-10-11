@@ -301,15 +301,59 @@ public class MemberService {
 		return result1 * result2;
 	}
 	
-	public int attendanceRate(int memberNo) {
+	public int attendanceRate(Member m) {
 		Connection conn = getConnection();
 		int result = 0;
 		
-		int totalResult = mDao.totalDate(conn, memberNo);
-		int attendanceResult = mDao.attendanceDate(conn, memberNo);
+		String sysdate = mDao.selectSysdate(conn);
 		
+		int totalResult;
+		
+		if(sysdate.equals(m.getJoinDate())) {
+			totalResult = 1;
+		} else {
+			totalResult = mDao.totalDate(conn, m.getMemberNo());
+		}
+		
+		int attendanceResult = mDao.attendanceDate(conn, m.getMemberNo());
+		
+		System.out.println(totalResult + "&" + attendanceResult);
 		if(totalResult > 0 && attendanceResult > 0) {
 			double i = (double)attendanceResult / totalResult; 
+			result = (int)(i * 100);
+		} else {
+			double i = (double)attendanceResult / 1;
+			result = (int)(i * 100);
+		}
+		
+		return result;
+	}
+	
+	public int correctRate(int memberNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		int totalResult = mDao.totalQuiz1(conn, memberNo);
+		int correctResult = mDao.correctQuiz(conn, memberNo);
+		
+		if(totalResult > 0 && correctResult > 0) {
+			double i = (double)correctResult / totalResult; 
+			result = (int)(i * 100);
+			System.out.println(result);
+		}
+		
+		return result;
+	}
+	
+	public int playedQuiz(int memberNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		int totalResult = mDao.totalQuiz(conn);
+		int playedResult = mDao.playedQuiz(conn, memberNo);
+		
+		if(totalResult > 0 && playedResult > 0) {
+			double i = (double)playedResult / totalResult; 
 			result = (int)(i * 100);
 			System.out.println(result);
 		}

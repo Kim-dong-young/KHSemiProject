@@ -8,7 +8,7 @@
 			   MEMBER_NICKNAME,
 			   MEMBER_EXP,
 			   MEMBER_IMAGE,
-			   MEMBER_JOIN_DATE,
+			   TO_CHAR(MEMBER_JOIN_DATE) AS MEMBER_JOIN_DATE,
 			   MEMBER_CHECK_CONTINUECOUNT,
 			   MEMBER_STATUS,
 			   MEMBER_INTRODUCE,
@@ -43,7 +43,7 @@
 			   MEMBER_NICKNAME,
 			   MEMBER_EXP,
 			   MEMBER_IMAGE,
-			   MEMBER_JOIN_DATE,
+			   TO_CHAR(MEMBER_JOIN_DATE) AS MEMBER_JOIN_DATE,
 			   MEMBER_CHECK_CONTINUECOUNT,
 			   MEMBER_STATUS,
 			   MEMBER_INTRODUCE,
@@ -62,7 +62,7 @@
 			   MEMBER_NICKNAME,
 			   MEMBER_EXP,
 			   MEMBER_IMAGE,
-			   MEMBER_JOIN_DATE,
+			   TO_CHAR(MEMBER_JOIN_DATE) AS MEMBER_JOIN_DATE,
 			   MEMBER_CHECK_CONTINUECOUNT,
 			   MEMBER_STATUS,
 			   MEMBER_INTRODUCE,
@@ -215,5 +215,34 @@
 		SELECT COUNT(*) AS atTotal
     	  FROM DAILY_CHECK
    		 WHERE MEMBER_NUMBER = ?
+	</entry>
+		<!-- 문제 맞춘 갯수 -->
+	<entry key="selectQuizCorrectNumber">
+		SELECT SUM(QUIZ_LOG_COUNT) AS correct
+		FROM QUIZ_LOG
+		GROUP BY MEMBER_NUMBER
+        HAVING MEMBER_NUMBER = ?
+	</entry>
+	<!-- 전체 문제 갯수 -->
+	<entry key="selectQuizTotalNumber">
+		SELECT COUNT(*) AS COUNT
+		FROM PROBLEM P
+		LEFT JOIN QUIZ Q ON (P.QUIZ_NUMBER = Q.QUIZ_NUMBER)
+		RIGHT JOIN QUIZ_LOG QL ON (P.QUIZ_NUMBER = QL.QUIZ_NUMBER)
+        GROUP BY QL.MEMBER_NUMBER
+        HAVING QL.MEMBER_NUMBER = ?
+	</entry>
+	<entry key="selectTotalQuiz">
+		SELECT COUNT(*) AS total_quiz
+		  FROM QUIZ
+	</entry>
+	<entry key="selectPlayedQuiz">
+		SELECT COUNT(DISTINCT QUIZ_NUMBER) AS played_quiz
+		  FROM QUIZ_LOG
+		 WHERE MEMBER_NUMBER = ?
+	</entry>
+	<entry key="selectSysdate">
+		SELECT TO_CHAR(SYSDATE) AS sys 
+		  FROM DUAL
 	</entry>
 </properties>
