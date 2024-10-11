@@ -196,6 +196,10 @@ public class problemsController extends HttpServlet {
 					new CreateQuizServiceImpl().successQuest(memberNo, questNo);
 				}
 				
+				int exp = 300; // 퀴즈 제작시 경험치 부여
+				new CreateQuizServiceImpl().updateMemberExp(memberNo, exp);
+				
+				request.getSession().setAttribute("loginMember", new MemberService().selectMember(memberNo));
 			} else {
 				if (changeName != null) {
 					new File(savePath + changeName).delete();

@@ -123,12 +123,44 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 	public int checkDailyQuest(int memberNo, int questNo) {
 		Connection conn = getConnection();
-		int result = new MemberDao().checkDailyQuest(conn, memberNo, questNo);
+		int result = new CreateQuizDAO().checkDailyQuest(conn, memberNo, questNo);
 		
 		close(conn);
 		return result;
 	}
 
+
+	public int updateMemberExp(int memberNo, int questNo, int exp) {
+		CreateQuizDAO cQuizDao = new CreateQuizDAO();
+		Connection conn = getConnection();
+		int result1 = cQuizDao.updateMemberExp(conn, memberNo, exp);
+		int result2 = cQuizDao.doneDailyQuest(conn, memberNo, questNo);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1 * result2;
+	}
+
+	public int updateMemberExp(int memberNo, int exp) {
+		System.out.println("updateMemberExp 실행됨");
+		CreateQuizDAO cQuizDao = new CreateQuizDAO();
+		Connection conn = getConnection();
+		int result1 = cQuizDao.updateMemberExp(conn, memberNo, exp);
+		
+		if(result1 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1;
+	}
 
 
 }

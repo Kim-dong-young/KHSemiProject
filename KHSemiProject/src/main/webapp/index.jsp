@@ -49,7 +49,7 @@
                             <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/playbutton.png">시작하기</button>
                         </c:otherwise>
                     </c:choose>
-                    <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/google-icon.png">소셜 아이디로 로그인하기</button>
+                    <!-- <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/google-icon.png">소셜 아이디로 로그인하기</button> -->
                     <button onclick="location.href='<%=contextPath%>/main.me'"><img src="static/img/guest-icon.png">게스트 계정으로 플레이하기</button>
                 </div>
             </div>

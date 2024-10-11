@@ -100,10 +100,10 @@ CREATE TABLE CATEGORY (
 
 CREATE TABLE QUIZ(
     QUIZ_number number not null,
-    QUIZ_title varchar2(50) not null,
+    QUIZ_title varchar2(1500) not null,
     QUIZ_date date default SYSDATE not null,
     QUIZ_modify_date date default SYSDATE,
-    QUIZ_explanation varchar2(500),
+    QUIZ_explanation varchar2(1500),
     MEMBER_number number not null,
     CATEGORY_number number not null,
     THUMBNAIL VARCHAR2(1500) DEFAULT 'static/img/THUMBNAIL/default.png',
@@ -118,8 +118,8 @@ CREATE TABLE PROBLEM(
     PROBLEM_media_kind number,
     Ptime number,
    -- Pdate date,
-    PROBLEM_media varchar2(50),
-    PROBLEM_hint varchar2(50),
+    PROBLEM_media varchar2(1500),
+    PROBLEM_hint varchar2(1500),
     QUIZ_number number not null,
     PRIMARY KEY(PROBLEM_number),
     FOREIGN KEY (QUIZ_number) REFERENCES QUIZ(QUIZ_number)

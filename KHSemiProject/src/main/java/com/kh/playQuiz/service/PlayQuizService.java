@@ -67,15 +67,21 @@ public class PlayQuizService {
 
 	public boolean AjaxPlayQuizStarsConfirm(int qNum, int mNum, int rating) {
 		Connection conn = JDBCTemplate.getConnection();
-		boolean result = new PlayQuizDao().AjaxPlayQuizStarsConfirm(conn, qNum, mNum, rating);
-		
-		if(result) {
-			commit(conn);
+		int result2 = new PlayQuizDao().AjaxPlayQuizStarsCheck(conn, qNum, mNum);
+		if(result2 >= 1) {
+			close(conn);
+			return false;
 		} else {
-			rollback(conn);
+			boolean result = new PlayQuizDao().AjaxPlayQuizStarsConfirm(conn, qNum, mNum, rating);
+			
+			if(result) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			close(conn);
+			return result;
 		}
-		close(conn);
-		return result;
 	}
 
 	public void MemberAddExp(int mNum, int qNum) {
