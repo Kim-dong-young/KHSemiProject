@@ -74,7 +74,7 @@
 		                    </div>
 		                    <div class="achievement-donut-rate">
 		                        <div>
-		                            <div class="chart-donut" data-percent="${att}"></div>
+		                            <div class="chart-donut" data-percent="${attendance}"></div>
 		                            <div class="content-rate">출석률</div>
 		                        </div>
 		                        <div>
@@ -82,7 +82,7 @@
 		                            <div class="content-rate">플레이한 퀴즈</div>
 		                        </div>
 		                        <div>
-		                            <div class="chart-donut"  data-percent="50"></div>
+		                            <div class="chart-donut"  data-percent="${correct}"></div>
 		                            <div class="content-rate">정답률</div>
 		                        </div>
 		                    </div>

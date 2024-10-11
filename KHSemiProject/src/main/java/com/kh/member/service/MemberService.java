@@ -316,4 +316,20 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public int correctRate(int memberNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		int totalResult = mDao.totalQuiz(conn, memberNo);
+		int correctResult = mDao.correctQuiz(conn, memberNo);
+		
+		if(totalResult > 0 && correctResult > 0) {
+			double i = (double)correctResult / totalResult; 
+			result = (int)(i * 100);
+			System.out.println(result);
+		}
+		
+		return result;
+	}
 }

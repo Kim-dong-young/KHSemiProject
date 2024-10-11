@@ -724,7 +724,6 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("t" + result);
 		return result;
 	}
 			
@@ -750,9 +749,58 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("a" + result);
 		return result;
 	}	
+	
+	public int totalQuiz(Connection conn, int memberNo) {
+int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQuizTotalNumber");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int correctQuiz(Connection conn, int memberNo) {
+int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectQuizCorrectNumber");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("correct");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
 }
 
 
