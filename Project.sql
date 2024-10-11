@@ -77,7 +77,7 @@ CREATE SEQUENCE SEQ_AN
 
 CREATE TABLE MEMBER(
     MEMBER_number number not null,
-    MEMBER_id varchar2(50) not null,
+    MEMBER_id varchar2(50) not null unique,
     MEMBER_pwd varchar2(50) not null,
     MEMBER_nickname varchar2(50) not null,
     MEMBER_exp number DEFAULT 0 not null,
@@ -209,7 +209,7 @@ CREATE TABLE COMMUNITY_TAB(
 CREATE TABLE COMMUNITY( 
     COMMUNITY_number number not null,
     COMMUNITY_title varchar2(50) not null,
-    COMMUNITY_content varchar2(1000) not null,
+    COMMUNITY_content varchar2(3000) not null,
     COMMUNITY_viewcount number not null,
     COMMUNITY_date date default SYSDATE not null,
     MEMBER_number number not null,
