@@ -45,7 +45,13 @@ public class CreateQuizMainController extends HttpServlet {
 
             // 2. 파일을 저장할 경로 설정
             String savePath = request.getServletContext().getRealPath("/static/img/THUMBNAIL/");
-
+            
+            //폴더 없으면 생성
+			File saveDir = new File(savePath);
+			if(!saveDir.exists()) {
+				saveDir.mkdirs(); // 경로에 폴더 생성
+			}
+			
             // 3. DiskFileItemFactory 객체 생성
             DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
             JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
