@@ -276,12 +276,12 @@ CREATE TABLE RP(
     COMMUNITY_number number,
     COMMUNITY_COMMENT_number number,
     PRIMARY KEY (RP_number),
-    FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number),
-    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number), 
-    FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number),
-    FOREIGN KEY (QUIZ_COMMENT_number) references QUIZ_COMMENT(QUIZ_COMMENT_number),
-    FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number),
-    FOREIGN KEY (COMMUNITY_COMMENT_number) references COMMUNITY_COMMENT(COMMUNITY_COMMENT_number)
+    FOREIGN KEY (MEMBER_number) references MEMBER(MEMBER_number) on delete set null,
+    FOREIGN KEY (REPORTED_MEMBER_number) references MEMBER(MEMBER_number) on delete set null, 
+    FOREIGN KEY (QUIZ_number) references QUIZ(QUIZ_number) on delete set null,
+    FOREIGN KEY (QUIZ_COMMENT_number) references QUIZ_COMMENT(QUIZ_COMMENT_number) on delete set null,
+    FOREIGN KEY (COMMUNITY_number) references COMMUNITY(COMMUNITY_number) on delete set null,
+    FOREIGN KEY (COMMUNITY_COMMENT_number) references COMMUNITY_COMMENT(COMMUNITY_COMMENT_number) on delete set null
 );
 
 CREATE TABLE IMGS_file (

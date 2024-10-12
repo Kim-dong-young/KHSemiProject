@@ -136,6 +136,25 @@ document.addEventListener('DOMContentLoaded', function () {
             updatePageCount();
         }
     } 
+	
+	//선택된 페이지 강조
+	questionList.addEventListener('click', function (event) {
+	    const clickedItem = event.target.closest('.question-item');
+	    if (clickedItem) {
+	        // 모든 항목에서 active 클래스 제거
+	        const allItems = questionList.querySelectorAll('.question-item');
+	        allItems.forEach(item => item.classList.remove('active'));
+
+	        // 클릭한 항목에 active 클래스 추가
+	        clickedItem.classList.add('active');
+
+	        const clickedPageNumber = Array.from(questionList.children).indexOf(clickedItem) + 1;
+	        goToPage(clickedPageNumber); // 페이지 이동 함수 호출
+	    }
+	});
+
+
+
 
     // 질문 삭제 기능
     function deleteLastQuestion() {

@@ -43,7 +43,13 @@ public class problemsController extends HttpServlet {
 			int requestMaxSize = 1024 * 1024 * 20; // 20MB
 
 			String savePath = request.getServletContext().getRealPath("/static/img/problems/");
-
+			
+			//폴더 없으면 생성
+			File saveDir = new File(savePath);
+			if(!saveDir.exists()) {
+				saveDir.mkdirs(); // 경로에 폴더 생성
+			}
+			
 			DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
 			JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
 			upload.setFileSizeMax(fileMaxSize);
