@@ -212,7 +212,7 @@
                                         }
                                     }
                                     if(check == 0){
-                                        tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + tag.count + "</button>";
+                                        tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + " / " + tag.count + "</button>";
                                     }
                                 }
                             } else { 
@@ -225,9 +225,9 @@
                                         }
                                     }
                                     if(check == 1) {
-                                        clickedtags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "' class='tag-clicked'>" + tag.quizTag + tag.count + "</button>";
+                                        clickedtags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "' class='tag-clicked'>" + tag.quizTag + " / " + tag.count + "</button>";
                                     } else {
-                                        tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + tag.count + "</button>";
+                                        tags.innerHTML += "<button onclick='lol(this)' value='" + tag.quizTag + "'>" + tag.quizTag + " / " + tag.count + "</button>";
                                     }
                                 }
                                 tttList = "null"
