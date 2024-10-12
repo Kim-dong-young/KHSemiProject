@@ -31,9 +31,9 @@ public class MemberInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String memberId = request.getParameter("memberId");
-		String memberPwd = request.getParameter("memberPwd");
-		String nickname = request.getParameter("nickname");
+		String memberId = request.getParameter("sMemberId");
+		String memberPwd = request.getParameter("sMemberPwd");
+		String nickname = request.getParameter("sMemberNickname");
 		String path = request.getParameter("origin");
 		
 		Member m = new Member(memberId, memberPwd, nickname);

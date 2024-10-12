@@ -11,11 +11,11 @@ function initMain(optional) {
   const buttons = document.querySelectorAll('.recommend-button .custom-btn');
   let btnVal;
 
-  let swiper = new Swiper('.swiper', {
+  const swiper = new Swiper('.swiper', {
       // Optional parameters
       slidesPerView: 6,
       spaceBetween: 10,
-      loop: false,
+      loop: true,
       allowTouchMove: false,
       initialSlide: 0,
       // Navigation arrows
@@ -56,8 +56,15 @@ function selectRate(btnVal, swiper) {
     data: {btnValue: btnVal},
     success: function(res) {
       console.log(res.qList)
-
       swiper.removeAllSlides();
+      
+      if(res.qList.length < 6) {
+        swiper.loopDestroy();
+        swiper.params.loop = false;
+      } else {
+        swiper.params.loop = true;
+        swiper.loopCreate();
+      }
 
       for(let list of res.qList) {
         let swiperSlide = "<div class='swiper-slide' onclick=location.href='" + res.contextPath + "/click.sl?quiz_number=" + list.quiz_number + "&page=1' style='cursor: pointer'>" + 
@@ -69,10 +76,7 @@ function selectRate(btnVal, swiper) {
       }
       swiper.update();
 
-      // swiper.loopDestroy();
-      // swiper.loopCreate();
-      
-      swiper.slideToLoop(0); 
+      swiper.slideToLoop(0, 0, false); 
     },
   });
 }

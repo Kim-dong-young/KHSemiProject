@@ -4,7 +4,7 @@ function init(pageName, optional){
         path.value = location.href;
     }
 
-    idInput()
+    signinit()
     
     switch(pageName){
         case "communityMainPage":

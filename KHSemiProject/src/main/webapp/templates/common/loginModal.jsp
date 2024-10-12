@@ -9,26 +9,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+	
+	<!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .modal-body .form-label{
-            display: flex;
-            justify-content: flex-start;
-        }
 
-        .btn.custom-lsin-btn{
-            font-family: "Noto Sans KR", sans-serif;
-            font-weight: bold;
-            background: #FF9139;
-            color: black;
-        }
-    </style>
+	<!-- jQuery -->
+	<script 
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous">
+	</script>
+    <script
+        src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"
+        integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
+        crossorigin="anonymous">
+	</script>
 
-	<script src="static/js/loginmodal.js"></script>
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/loginMadal.css">
+	<script src="<%=request.getContextPath()%>/static/js/loginmodal.js"></script>
+
 </head>
-<body>
+<body onload="signinit()">
 	<!-- contextPath 로그인 modal -->
 	<div class="modal" id="login-modal">
 		<div class="modal-dialog modal-dialog-centered">
@@ -51,7 +58,7 @@
 							<label for="pwd" class="form-label">비밀번호:</label>
 							<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="memberPwd">
 						</div>
-						<button type="submit" class="btn custom-lsin-btn">로그인</button>
+						<button type="submit" class="btn custom-lsin-btn login">로그인</button>
 						<button type="button" class="btn custom-lsin-btn" data-bs-toggle="modal" data-bs-target="#signin-modal">회원가입</button>
 					</form>
 				</div>
@@ -73,26 +80,25 @@
 				<div class="modal-body enrollForm" align="center">
 					<form action="<%=contextPath %>/signin.me" method="POST" id="enroll-form">
 						<input type="hidden" name="origin" value="<%=request.getRequestURI()%>">
-						<table>
-							<tr>
-								<td>*아이디</td>
-								<td><input type="text" name="memberId" maxlength="20" required></td>
-								<td id="checkResult"></td>
-							</tr>
-							<tr>
-								<td>*비밀번호</td>
-								<td colspan="2"><input type="password" name="memberPwd" maxlength="20" required></td>
-							</tr>
-							<tr>
-								<td>*비밀번호 확인</td>
-								<td colspan="2"><input type="password" name="memberPwdCheck" maxlength="20" required></td>
-							</tr>
-							<tr>
-								<td>*닉네임</td>
-								<td colspan="2"><input type="text" name="nickname" maxlength="20" required></td>
-							</tr>
-						</table>
-						<button type="submit" class="btn custom-lsin-btn" onclick="return checkPwd()">회원가입</button>
+						<div class="mb-3 mt-3">
+							<label for="id" class="form-label">*아이디:</label>
+							<input type="text" class="form-control" id="sId" name="sMemberId" autocomplete="off" maxlength="20" required>
+							<div id="checkId" style="display: none;"></div>
+						</div>
+						<div class="mb-3">
+							<label for="pwd" class="form-label">*비밀번호:</label>
+							<input type="password" class="form-control" id="sPwd" name="sMemberPwd" maxlength="20" required>
+							<div id="checkPwd" style="display: none;"></div>
+						</div>
+						<div class="mb-3">
+							<label for="pwd" class="form-label">*비밀번호 확인:</label>
+							<input type="password" class="form-control" id="sCheckPwd" name="sCheckMemberPwd" maxlength="20" required>
+						</div>
+						<div class="mb-3">
+							<label for="pwd" class="form-label">*닉네임:</label> 
+							<input type="text" class="form-control" id="sNickname" name="sMemberNickname" autocomplete="off" maxlength="20" required>
+						</div>
+						<button type="submit" class="btn custom-lsin-btn signin" onclick="return checkPwd()">회원가입</button>
 						<button type="reset" class="btn custom-lsin-btn">초기화</button>
 					</form>
 				</div>

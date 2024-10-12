@@ -1,0 +1,16 @@
+.modal-body .form-label{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn.custom-lsin-btn{
+    width: 85px;
+    height: 38px;
+    background: #FF9139;
+    color: black;
+}
+
+.btn.custom-lsin-btn.signin:disabled{
+    background: #d9d9d9;
+    border: none;
+}

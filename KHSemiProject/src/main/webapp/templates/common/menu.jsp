@@ -17,20 +17,6 @@
     
     <!-- JavaScript -->
     <script src="<%=request.getContextPath()%>/static/js/menu.js"></script>
-    <!-- jQuery -->
-    <script 
-        src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-        crossorigin="anonymous"></script>
-    <script
-        src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"
-        integrity="sha256-Fb0zP4jE3JHqu+IBB9YktLcSjI1Zc6J2b6gTjB0LpoM="
-        crossorigin="anonymous"></script>
-    
-    <!-- Google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/default.css">
 </head>
