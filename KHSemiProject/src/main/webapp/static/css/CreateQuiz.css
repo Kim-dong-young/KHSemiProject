@@ -58,9 +58,11 @@ form{
 }
 
 .question-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    cursor: pointer; /* 마우스 포인터 변경 */
+    padding: 10px;
+    border: none;
+    margin-bottom: 5px;
+    transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
 }
 
 .question-number {
@@ -68,6 +70,12 @@ form{
     font-weight: bold;
     margin-right: 12.5px;
     margin-top: -24%;
+}
+
+.question-item.active {
+    background-color: rgb(255, 128, 0); /* 클릭된 항목의 배경색 */
+    color: white; /* 클릭된 항목의 글자색 */
+    box-shadow: 0 0 5px rgb(255, 128, 0); /* 클릭된 항목의 그림자 효과 */
 }
 
 .question-list {
@@ -207,9 +215,12 @@ form{
     height: 45px;
 }
 
-.a> img{
-    border-radius: 5px;
+.home-btn img{
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
 }
+
 .custom-file-upload {
     display: inline-block;
     padding: 10px 20px;
