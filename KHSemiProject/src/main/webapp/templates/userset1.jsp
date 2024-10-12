@@ -28,7 +28,7 @@
                         <input type="file" id="imageUpload" name="memberImage" action=".jpg, .png" style="display: none;" onchange="previewImage(event)">
                         <input type="hidden" name="memberId" value="${loginMember.memberId }">
                         <label for="memberNickName">닉네임:</label>
-                        <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임">
+                        <input type="text" id="memberNickName" name="memberNickName" placeholder="닉네임" value="${loginMember.memberNickName}">
                         <label for="Introduce">자기소개:</label>
                         <textarea id="Introduce" name="Introduce" rows="4" placeholder="자기소개를 입력하세요..."></textarea>
                     </div>

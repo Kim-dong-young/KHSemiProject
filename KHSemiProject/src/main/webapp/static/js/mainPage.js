@@ -15,7 +15,7 @@ function initMain(optional) {
       // Optional parameters
       slidesPerView: 6,
       spaceBetween: 10,
-      loop: true,
+      loop: false,
       allowTouchMove: false,
       initialSlide: 0,
       // Navigation arrows

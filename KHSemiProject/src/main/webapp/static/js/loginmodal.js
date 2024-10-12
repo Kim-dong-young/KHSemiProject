@@ -33,7 +33,7 @@ function idInput() {
                             } else {
                                 checkResult.style.color = "green";
                                 checkResult.innerText = "사용가능한 아이디입니다.";
-
+ m
                                 document.querySelector("#enrollForm button[type='submit']").disabled = false;
                             }
                         }, error : function(){
