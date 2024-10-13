@@ -71,11 +71,14 @@ public class CreateQuizDAO {
 		
 		try {
 			for(String tagName : tag.getTagList()) {
-				pstmt = conn.prepareStatement(sql);
+				if(tagName != null && !tagName.equals("")) {
+					pstmt = conn.prepareStatement(sql);
 				
-				pstmt.setString(1, tagName);
+					pstmt.setString(1, tagName);
+					
+					result *= pstmt.executeUpdate();
+				}
 				
-				result *= pstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
