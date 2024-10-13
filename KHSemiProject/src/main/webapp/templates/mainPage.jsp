@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>퀴즈팡 - 메인</title>
+<title>Insert title here</title>
 
 <!-- 스와이프 라이브러리-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
