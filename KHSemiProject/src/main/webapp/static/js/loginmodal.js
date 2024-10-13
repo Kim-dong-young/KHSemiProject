@@ -1,4 +1,10 @@
 function signinit() {
+    const path = document.querySelector('#enroll-form input[name="sPath"]');
+
+    if(path){
+        path.value = location.href;
+    }
+
     idInput()
     pwdInput()
 }
@@ -22,7 +28,6 @@ function pwdInput() {
         clearTimeout(eventFlag);
 
         const str = ev.target.value;
-        console.log(str)
         if(pwd.value !== null && str !== null) {
             document.querySelector("#checkPwd").style.display = "block";
 

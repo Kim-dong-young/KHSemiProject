@@ -34,11 +34,15 @@ public class MemberInsertController extends HttpServlet {
 		String memberId = request.getParameter("sMemberId");
 		String memberPwd = request.getParameter("sMemberPwd");
 		String nickname = request.getParameter("sMemberNickname");
-		String path = request.getParameter("origin");
+		
+		String contextPath = request.getContextPath(); // contextPath
+		String path = request.getParameter("sPath");    // js에서 받아온 pathname
+		String checkPath = contextPath + path;          // contextPath + pathname
 		
 		Member m = new Member(memberId, memberPwd, nickname);
 		
 		System.out.println(memberId + " "+ memberPwd + " " + nickname);
+		System.out.println(contextPath + " "+ path + " " + checkPath);
 		
 		int result = new MemberService().insertMember(m);
 		
@@ -50,10 +54,10 @@ public class MemberInsertController extends HttpServlet {
 			session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
 		}
 		
-		if(path.equals("/KHSemiProject/templates/mainPage.jsp") ) {
-			response.sendRedirect(request.getContextPath() + "/main.me");
+		if(checkPath.equals(contextPath)) {
+			response.sendRedirect(contextPath);
 		} else {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(path);
 		}
 	}
 

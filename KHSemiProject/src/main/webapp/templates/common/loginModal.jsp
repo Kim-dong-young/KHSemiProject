@@ -86,7 +86,7 @@
 				<!-- Modal body -->
 				<div class="modal-body enrollForm" align="center">
 					<form action="<%=contextPath %>/signin.me" method="POST" id="enroll-form">
-						<input type="hidden" name="origin" value="<%=request.getRequestURI()%>">
+						<input type="hidden" name="sPath" value="">
 						<div class="mb-3 mt-3">
 							<label for="id" class="form-label">*아이디:</label>
 							<input type="text" class="form-control" id="sId" name="sMemberId" autocomplete="off" maxlength="20" required>
