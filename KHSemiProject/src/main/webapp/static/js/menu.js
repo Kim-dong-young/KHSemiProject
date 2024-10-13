@@ -28,7 +28,7 @@ function init(pageName, optional){
             tagSearchAjax()
             break;
         case "searchClickPage":
-            init()
+            initsss()
             break;
         case "PlayQuizMain":
             renderProblem()
