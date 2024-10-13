@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>유저설정</title>
+<title>퀴즈팡 - 유저설정</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/userset.css">
 </head>
 <body>
