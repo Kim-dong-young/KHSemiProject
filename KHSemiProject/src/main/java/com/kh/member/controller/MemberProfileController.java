@@ -104,8 +104,9 @@ public class MemberProfileController extends HttpServlet {
 			
 		if(p.getMemberImg() == null) {
 			p.setMemberImg(((Member)request.getSession().getAttribute("loginMember")).getMemberImg());
+			System.out.println(p.getMemberImg());
 		}
-			
+		
 		Member updateProfile = new MemberService().updateProfile(p);
 		System.out.println(updateProfile);
 		if(updateProfile == null) {
