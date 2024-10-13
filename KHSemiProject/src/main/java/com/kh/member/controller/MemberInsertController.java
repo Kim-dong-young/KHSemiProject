@@ -41,9 +41,6 @@ public class MemberInsertController extends HttpServlet {
 		
 		Member m = new Member(memberId, memberPwd, nickname);
 		
-		System.out.println(memberId + " "+ memberPwd + " " + nickname);
-		System.out.println(contextPath + " "+ path + " " + checkPath);
-		
 		int result = new MemberService().insertMember(m);
 		
 		HttpSession session = request.getSession();

@@ -38,16 +38,13 @@ public class MemberProfileController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println("서블릿 실행됨");
 		if(JakartaServletFileUpload.isMultipartContent(request)) {
-			System.out.println("멀티파트true 실행됨");
 			// 1.파일 용량 제한(byte)
 			int fileMaxSize = 1024 * 1024 * 10; // 10MB
 			int requestMaxSize = 1024 * 1024 * 20; // 20MB
 			
 			// 2. 전달된 파일을 저장시킬 폴더경로 가져오기
 			String savePath = request.getServletContext().getRealPath("/static/img/userProfile/");
-			System.out.println("savePAth : "+savePath);
 			
 			// 3.DiskFileItemFactory(파일을 임시로 저장) 객체 생성
 			DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
@@ -92,7 +89,6 @@ public class MemberProfileController extends HttpServlet {
 						String changeName = tmpNmae + type;
 						
 						File f = new File(savePath , changeName);
-						System.out.println(savePath + changeName); // 콘솔창에서 경로 찍히는거 보고 이상하면 알아서 수정
 						
 						item.write(f.toPath()); // 지정된 경로에 파일 업로드
 						
@@ -104,11 +100,9 @@ public class MemberProfileController extends HttpServlet {
 			
 		if(p.getMemberImg() == null) {
 			p.setMemberImg(((Member)request.getSession().getAttribute("loginMember")).getMemberImg());
-			System.out.println(p.getMemberImg());
 		}
 		
 		Member updateProfile = new MemberService().updateProfile(p);
-		System.out.println(updateProfile);
 		if(updateProfile == null) {
 			request.setAttribute("errorMsg", "프로필 수정에 실패하였습니다.");
 		}else {

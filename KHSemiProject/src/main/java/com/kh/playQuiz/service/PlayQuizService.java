@@ -88,7 +88,6 @@ public class PlayQuizService {
 		Connection conn = JDBCTemplate.getConnection();
 		boolean result = new PlayQuizDao().MemberAddExp(conn, mNum, qNum);
 		
-		System.out.println(result);
 		if(result) {
 			commit(conn);
 		} else {

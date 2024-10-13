@@ -61,17 +61,12 @@ public class SearchMainController extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
 		ArrayList<String> tagList = new ArrayList<String>();
-		
-		
-		System.out.println("응애" + tag_list);
-		
-		
+				
 		String str = "";
 		if (tag_list != null && !tag_list.trim().isEmpty() && !tag_list.equals("")) {
 			for(int i = 0; i < tag_list.length();i++) {
 				if(tag_list.charAt(i) != '!') {
 					str += tag_list.charAt(i);
-					System.out.println(tag_list.charAt(i));
 				} else {
 					tagList.add(str);
 					str = "";
@@ -83,7 +78,6 @@ public class SearchMainController extends HttpServlet {
 		
 		quizCount = new SearchService().selectQuizCount(category, search_type, search_text, orderby, tagList);
 		
-		System.out.println("응애응애" + str);
 		/**
 		 * maxPage : 제일 마지막 페이지 수
 		 * 
@@ -125,7 +119,6 @@ public class SearchMainController extends HttpServlet {
 		
 		
 		
-		System.out.println(search_text);
 		
 		PageInfo pi = new PageInfo(quizCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		ArrayList<Quiz> list = new SearchService().selectQuiz(pi, category, search_type, search_text, orderby, tagList);
@@ -133,8 +126,6 @@ public class SearchMainController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("tagList", tagList);
-		System.out.println(pi);
-		System.out.println(list);
 		
 		//ArrayList<Tag> tagLi = request.getpara
 		

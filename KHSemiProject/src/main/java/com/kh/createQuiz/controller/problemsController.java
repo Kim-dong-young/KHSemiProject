@@ -187,7 +187,6 @@ public class problemsController extends HttpServlet {
 					a, a2, a3, a4, a5);
 
 			if (problemResult > 0) {
-				System.out.println("성공");
 				request.getSession().setAttribute("alertMsg", "문제 작성 완료");
 				response.sendRedirect(request.getContextPath() + "/main.me");
 				

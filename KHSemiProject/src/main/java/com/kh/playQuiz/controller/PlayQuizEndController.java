@@ -33,15 +33,12 @@ public class PlayQuizEndController extends HttpServlet {
 		int cNum = Integer.parseInt(request.getParameter("correctNum"));
 		int qNum = Integer.parseInt(request.getParameter("quizNumber"));
 		int mNum = 0;
-		System.out.println(request.getParameter("memberNo"));
+
 		if(request.getParameter("memberNo") == null || request.getParameter("memberNo").equals("")) {
 			mNum = -1;
 		} else {
 			mNum = Integer.parseInt(request.getParameter("memberNo"));
 		}
-		System.out.println(cNum);
-		System.out.println(qNum);
-		System.out.println(mNum);
 		if(mNum != -1) {
 			new PlayQuizService().MemberAddExp(mNum, qNum);
 			Member updateMem = new MemberService().selectMember(mNum);
@@ -50,7 +47,6 @@ public class PlayQuizEndController extends HttpServlet {
 			request.setAttribute("exp", exp);
 		}
 		boolean link = new PlayQuizService().AjaxPlayQuizViewCount(qNum, mNum, cNum);
-		System.out.println(link);
 		
 		int questNo = 1; // 1 : 퀴즈 1개 완료하기
 		int isDone = new PlayQuizService().checkDailyQuest(mNum, questNo);

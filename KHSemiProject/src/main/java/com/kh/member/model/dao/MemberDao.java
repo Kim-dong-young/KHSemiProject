@@ -58,8 +58,6 @@ public class MemberDao {
 						rset.getString("address"),
 						rset.getString("phone")
 						);
-			} else {
-				System.out.println("일치하는 정보가 없습니다.");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -109,7 +107,7 @@ public class MemberDao {
 			pstmt.setString(3, memberPwd);
 			
 			result = pstmt.executeUpdate();
-			System.out.println(result);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

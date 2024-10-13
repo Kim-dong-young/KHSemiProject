@@ -41,15 +41,8 @@ public class CreateQuizDAO {
 			sql = prop.getProperty("insertQuiz");
 		}
 
-		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(quiz.getQUIZ_TITLE());
-			System.out.println(quiz.getQUIZ_EXPLANATION());
-			System.out.println(quiz.getMEMBER_NUMBER());
-			System.out.println(quiz.getCATEGORY_NUMBER());
-			System.out.println(quiz.getTHUMBNAIL());
-
 			pstmt.setString(1, quiz.getQUIZ_TITLE());
 			pstmt.setString(2, quiz.getQUIZ_EXPLANATION());
 			pstmt.setInt(3, quiz.getMEMBER_NUMBER());
@@ -133,7 +126,6 @@ public class CreateQuizDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, a.getANSWER_content());
-			System.out.println(sql);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,7 +151,6 @@ public class CreateQuizDAO {
 
 			if (rset.next()) {
 				result = rset.getInt("CURRVAL");
-				System.out.println("dao : " + result);
 			}
 
 		} catch (SQLException e) {
@@ -224,13 +215,11 @@ public class CreateQuizDAO {
 	}
 
 	public int updateMemberExp(Connection conn, int memberNo, int exp) {
-		System.out.println("updateMemberExp DAO 실행");
 		int result = 0;
 
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("updateMemberExp");
-		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -248,13 +237,11 @@ public class CreateQuizDAO {
 	}
 
 	public int doneDailyQuest(Connection conn, int memberNo, int questNo) {
-		System.out.println("doneDailyQuest DAO 실행");
 		int result = 0;
 
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("doneDailyQuest");
-		System.out.println(sql);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

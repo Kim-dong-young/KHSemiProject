@@ -571,12 +571,10 @@ public class QuizDao {
 
 	public ArrayList<Quiz> noSearchMyQuiz(Connection conn, int memberNo, String selectValue, String btnValue) {
 		ArrayList<Quiz> list = new ArrayList<>();
-		System.out.println(memberNo);
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("noSearch" + btnValue + selectValue);
-		System.out.println("noSearch" + btnValue + selectValue);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memberNo);
@@ -603,12 +601,10 @@ public class QuizDao {
 	
 	public ArrayList<Quiz> searchMyQuiz(Connection conn,  int memberNo, String selectValue, String btnValue, String searchValue, String serSelValue) {
 		ArrayList<Quiz> list = new ArrayList<>();
-		System.out.println(memberNo);
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("search" + btnValue + selectValue + serSelValue);
-		System.out.println("search" + btnValue + selectValue + serSelValue);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -46,8 +46,6 @@ public class AjaxQuizMarkController extends HttpServlet {
 			new SearchService().successQuest(memberNum, questNo);
 		}
 		
-		System.out.println("데이터들어옴");
-		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(mark, response.getWriter());
 	}

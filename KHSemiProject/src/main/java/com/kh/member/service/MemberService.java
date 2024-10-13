@@ -241,6 +241,7 @@ public class MemberService {
 			}
         }
         
+        close(conn);
         return result1 * result2;
 	}
 	
@@ -317,7 +318,6 @@ public class MemberService {
 		
 		int attendanceResult = mDao.attendanceDate(conn, m.getMemberNo());
 		
-		System.out.println(totalResult + "&" + attendanceResult);
 		if(totalResult > 0 && attendanceResult > 0) {
 			double i = (double)attendanceResult / totalResult; 
 			result = (int)(i * 100);
@@ -339,7 +339,7 @@ public class MemberService {
 		if(totalResult > 0 && correctResult > 0) {
 			double i = (double)correctResult / totalResult; 
 			result = (int)(i * 100);
-			System.out.println(result);
+
 		}
 		close(conn);
 		return result;
@@ -355,7 +355,7 @@ public class MemberService {
 		if(totalResult > 0 && playedResult > 0) {
 			double i = (double)playedResult / totalResult; 
 			result = (int)(i * 100);
-			System.out.println(result);
+
 		}
 		
 		close(conn);
