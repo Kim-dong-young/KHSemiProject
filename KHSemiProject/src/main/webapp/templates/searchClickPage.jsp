@@ -62,7 +62,7 @@
             <div id="image-div">
                 <div class="image-container">
                     <%if(q.getThumbnail() == null){ %>
-                        <img id="image-playing" src="<%=contextPath%>/static/img/default.png" alt="">
+                        <img id="image-playing" src="<%=contextPath%>/static/img/THUMBNAIL/default.png" alt="">
                     <% } else { %>
                         <img id="image-playing" src="<%=contextPath%>/<%=q.getThumbnail()%>" alt="">
                     <% } %>
@@ -182,7 +182,7 @@
                             <div class="video-priview" onclick="clickQuiz(<%=qq.getQuiz_number()%>)">
                                 <div class="thumbnail-row">
                                     <%if(q.getThumbnail() == null){ %>
-                                        <img class="thumbnail" src="<%=contextPath%>/static/img/searchMainPage/alwaysjone_teacher_photo 1.png" alt="">
+                                        <img class="thumbnail" src="<%=contextPath%>/static/img/THUMBNAIL/default.png" alt="">
                                     <% } else { %>
                                         <img class="thumbnail" src="<%=contextPath%>/<%=qq.getThumbnail()%>" alt="">
                                     <% } %>
