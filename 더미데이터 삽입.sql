@@ -1209,115 +1209,314 @@ VALUES (8, '기타');
 
 INSERT INTO QUIZ
 VALUES
-(1, '이터널 리턴 캐릭터 이름 맞추기', SYSDATE, SYSDATE, '이터널 리턴 캐릭터 이미지를 보고 이름을 맞춰보자.', 1, 1, 'static/img/THUMBNAIL/quiz_22.webp');
+(1, '이터널 리턴 캐릭터 이름 맞추기', SYSDATE, SYSDATE, '이터널 리턴 캐릭터 이미지를 보고 이름을 맞춰보자.', 1, 1, 'static/img/THUMBNAIL/thumbnail_dummy_1.webp');
+
+INSERT INTO QUIZ_TAG
+VALUES
+('게임', 1);
+
+INSERT INTO QUIZ_TAG
+VALUES
+('이름', 1);
 
 INSERT INTO PROBLEM
 VALUES
-(1, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_22.webp', NULL, 1);
-
+(1, '이 캐릭터의 이름은?', 0, 30, 'static/img/problems/problem_dummy_1.webp', NULL, 1);
 INSERT INTO ANSWER
 VALUES
 (1, '재키', 1);
 
 INSERT INTO PROBLEM
 VALUES
-(2, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_1.webp', NULL, 1);
-
+(2, '이 캐릭터의 이름은?', 0, 30, 'static/img/problems/problem_dummy_2.webp', NULL, 1);
 INSERT INTO ANSWER
 VALUES
 (2, '로지', 2);
 
 INSERT INTO PROBLEM
 VALUES
-(3, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_2.webp', NULL, 1);
-
+(3, '이 캐릭터의 이름은?', 0, 30, 'static/img/problems/problem_dummy_3.webp', NULL, 1);
 INSERT INTO ANSWER
 VALUES
 (3, '레녹스', 3);
 
 INSERT INTO PROBLEM
 VALUES
-(4, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_3.webp', NULL, 1);
-
+(4, '이 캐릭터의 이름은?', 0, 30, 'static/img/problems/problem_dummy_4.webp', NULL, 1);
 INSERT INTO ANSWER
 VALUES
 (4, '루크', 4);
 
 INSERT INTO PROBLEM
 VALUES
-(5, '이 캐릭터의 이름은?', 0, 30, 'static/img/THUMBNAIL/quiz_4.webp', NULL, 1);
-
+(5, '이 캐릭터의 이름은?', 0, 30, 'static/img/problems/problem_dummy_5.webp', NULL, 1);
 INSERT INTO ANSWER
 VALUES
 (5, '엠마', 5);
 
-
-
-
 INSERT INTO QUIZ
 VALUES
-(2, '이터널 리턴 캐릭터 무기 이름 맞추기', SYSDATE, SYSDATE, '이터널 리턴 캐릭터 이미지를 보고 사용하는 무기 종류의 이름을 맞춰보자. 사용하는 무기가 많으면 일러스트에서 들고있는 무기 기준.', 1, 1, 'static/img/THUMBNAIL/quiz_22.webp');
+(2, '이터널 리턴 캐릭터 무기 종류 맞추기', SYSDATE, SYSDATE, '이터널 리턴 캐릭터 이미지를 보고 사용하는 무기 종류를 맞춰보자. 사용하는 무기가 많으면 일러스트에서 들고있는 무기 기준.', 1, 1, 'static/img/THUMBNAIL/thumbnail_dummy_2.webp');
+
+INSERT INTO QUIZ_TAG
+VALUES
+('게임', 2);
 
 INSERT INTO PROBLEM
 VALUES
-(6, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_22.webp', NULL, 2);
-
+(6, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/problems/problem_dummy_6.webp', NULL, 2);
 INSERT INTO ANSWER
 VALUES
 (6, '도끼', 6);
 
 INSERT INTO PROBLEM
 VALUES
-(7, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_1.webp', NULL, 2);
-
+(7, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/problems/problem_dummy_7.webp', NULL, 2);
 INSERT INTO ANSWER
 VALUES
-(7, '권총', 7);
+(7, '단검', 7);
 
 INSERT INTO PROBLEM
 VALUES
-(8, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_2.webp', NULL, 2);
-
+(8, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/problems/problem_dummy_8.webp', NULL, 2);
 INSERT INTO ANSWER
 VALUES
-(8, '채찍', 8);
+(8, '글러브', 8);
 
 INSERT INTO PROBLEM
 VALUES
-(9, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_3.webp', NULL, 2);
-
+(9, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/problems/problem_dummy_9.webp', NULL, 2);
 INSERT INTO ANSWER
 VALUES
 (9, '방망이', 9);
 
 INSERT INTO PROBLEM
 VALUES
-(10, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/THUMBNAIL/quiz_4.webp', NULL, 2);
-
+(10, '이 캐릭터가 사용하는 무기의 종류는?', 0, 30, 'static/img/problems/problem_dummy_10.webp', NULL, 2);
 INSERT INTO ANSWER
 VALUES
-(10, '암기', 10);
+(10, '기관총', 10);
+
+INSERT INTO QUIZ
+VALUES
+(3, '배우 이름 맞추기', SYSDATE, SYSDATE, '초성을 보고 배우 이름을 맞춰보자', 1, 1, 'static/img/THUMBNAIL/default.png');
+
+INSERT INTO PROBLEM
+VALUES
+(11, 'ㄱㅇ 이 배우의 이름은?', 0, 15, NULL, '부산행', 3);
+INSERT INTO ANSWER
+VALUES
+(11, '공유', 11);
+
+INSERT INTO PROBLEM
+VALUES
+(12, 'ㅇㄷㅇ 이 배우의 이름은?', 0, 15, NULL, '도깨비', 3);
+INSERT INTO ANSWER
+VALUES
+(12, '이동욱', 12);
+
+INSERT INTO PROBLEM
+VALUES
+(13, 'ㄱㄱㅇ 이 배우의 이름은?', 0, 15, NULL, '파묘', 3);
+INSERT INTO ANSWER
+VALUES
+(13, '김고은', 13);
+
+
+INSERT INTO PROBLEM
+VALUES
+(14, 'ㅁㄷㅅ 이 배우의 이름은?', 0, 15, NULL, '범죄도시', 3);
+INSERT INTO ANSWER
+VALUES
+(14, '마동석', 14);
+
+
+INSERT INTO PROBLEM
+VALUES
+(15, 'ㅈㅈㅎ 이 배우의 이름은?', 0, 15, NULL, '별에서 온 그대', 3);
+INSERT INTO ANSWER
+VALUES
+(15, '전지현', 15);
 
 
 INSERT INTO QUIZ
 VALUES
-(3, '포캣몬 이름 맞추기', SYSDATE, SYSDATE, '이미지를 보고 무슨 포켓몬인지 맞춰보자.', 1, 1, 'static/img/THUMBNAIL/thumbnail_1728612771490.png');
+(4, '간단한 자바 문제 풀어보기', SYSDATE, SYSDATE, '그동안 배운 지식을 총 동원해봐요', 1, 5, 'static/img/THUMBNAIL/thumbnail_dummy_4.png');
+
+INSERT INTO QUIZ_TAG
+VALUES
+('JAVA', 4);
 
 INSERT INTO PROBLEM
 VALUES
-(11, '이 포켓몬의 이름은?', 0, 30, 'static/img/THUMBNAIL/thumbnail_1728611472259.jfif', NULL, 3);
-
+(16, '다음 코드를 실행하면 나오는 결과는?', 0, 45, 'static/img/problems/problem_dummy_16.png', '삼항연산자군요', 4);
 INSERT INTO ANSWER
 VALUES
-(11, '메타그로스', 11);
+(16, 'false', 16);
 
 INSERT INTO PROBLEM
 VALUES
-(12, '이 포켓몬의 이름은?', 0, 30, 'static/img/THUMBNAIL/thumbnail_1728612771490.png', NULL, 3);
-
+(17, '다음 코드를 실행하면 나오는 결과는?', 0, 45, 'static/img/problems/problem_dummy_17.png', '조건문에 i % 2 == 0이군요 뭘 의미하는걸까요?', 4);
 INSERT INTO ANSWER
 VALUES
-(12, '피카츄', 12);
+(17, '20', 17);
+
+INSERT INTO PROBLEM
+VALUES
+(18, '다음 코드를 실행하면 나오는 결과는?', 0, 45, 'static/img/problems/problem_dummy_18.png', 'text 내용을 split했습니다.', 4);
+INSERT INTO ANSWER
+VALUES
+(18, '사과배복숭아포도수박', 18);
+
+INSERT INTO PROBLEM
+VALUES
+(19, '다음 코드를 실행하면 나오는 결과는?', 0, 45, 'static/img/problems/problem_dummy_19.png', 'switch문이군요 차근차근 읽어보세요', 4);
+INSERT INTO ANSWER
+VALUES
+(19, '-7', 19);
+
+INSERT INTO PROBLEM
+VALUES
+(20, '다음 코드를 실행하면 나오는 결과는?', 0, 45, 'static/img/problems/problem_dummy_20.png', 'numbers라는 list에 정수를 add해줬어요', 4);
+INSERT INTO ANSWER
+VALUES
+(20, '합계: 60', 20);
+
+INSERT INTO QUIZ
+VALUES
+(5, '장면보고 마블 영화 제목 맞추기', SYSDATE, SYSDATE, '마블 영화 명장면~', 1, 2, 'static/img/THUMBNAIL/thumbnail_dummy_5.webp');
+
+INSERT INTO QUIZ_TAG
+VALUES
+('영화', 5);
+
+INSERT INTO PROBLEM
+VALUES
+(21, '다음 장면이 등장한 영화의 풀네임은?(띄어쓰기X)', 0, 30, 'static/img/problems/problem_dummy_21.jfif', NULL, 5);
+INSERT INTO ANSWER
+VALUES
+(21, '가디언즈오브갤럭시', 21);
+
+INSERT INTO PROBLEM
+VALUES
+(22, '다음 장면이 등장한 영화의 풀네임은?(띄어쓰기X)', 0, 30, 'static/img/problems/problem_dummy_22.jpg', NULL, 5);
+INSERT INTO ANSWER
+VALUES
+(22, '아이언맨', 22);
+
+INSERT INTO PROBLEM
+VALUES
+(23, '다음 장면이 등장한 영화의 풀네임은?(띄어쓰기X)', 0, 30, 'static/img/problems/problem_dummy_23.jfif', NULL, 5);
+INSERT INTO ANSWER
+VALUES
+(23, '어벤져스', 23);
+
+INSERT INTO PROBLEM
+VALUES
+(24, '다음 장면이 등장한 영화의 풀네임은?(띄어쓰기X)', 0, 30, 'static/img/problems/problem_dummy_24.jpg', NULL, 5);
+INSERT INTO ANSWER
+VALUES
+(24, '토르:라그나로크', 24);
+
+INSERT INTO PROBLEM
+VALUES
+(25, '다음 장면이 등장한 영화의 풀네임은?(띄어쓰기X)', 0, 30, 'static/img/problems/problem_dummy_25.webp', NULL, 5);
+INSERT INTO ANSWER
+VALUES
+(25, '캡틴아메리카:시빌워', 25);
+
+INSERT INTO QUIZ
+VALUES
+(6, '포켓몬 이름 맞추기', SYSDATE, SYSDATE, '사진을 보고 포켓몬 이름을 맞춰보자', 1, 8, 'static/img/THUMBNAIL/thumbnail_dummy_6.jfif');
+
+INSERT INTO QUIZ_TAG
+VALUES
+('포켓몬', 6);
+
+INSERT INTO PROBLEM
+VALUES
+(26, '이 포켓몬의 이름은?', 0, 30, 'static/img/problems/problem_dummy_26.png', '초성: ㄴㅇ', 6);
+INSERT INTO ANSWER
+VALUES
+(26, '누오', 26);
+
+INSERT INTO PROBLEM
+VALUES
+(27, '이 포켓몬의 이름은?', 0, 30, 'static/img/problems/problem_dummy_27.png', '초성:ㄹㅈㅁ', 6);
+INSERT INTO ANSWER
+VALUES
+(27, '리자몽', 27);
+
+INSERT INTO PROBLEM
+VALUES
+(28, '이 포켓몬의 이름은?', 0, 30, 'static/img/problems/problem_dummy_28.png', '초성:ㅁㄴㄴ', 6);
+INSERT INTO ANSWER
+VALUES
+(28, '망나뇽', 28);
+
+INSERT INTO PROBLEM
+VALUES
+(29, '이 포켓몬의 이름은?', 0, 30, 'static/img/problems/problem_dummy_29.png', '초성:ㄷㅉㅇ', 6);
+INSERT INTO ANSWER
+VALUES
+(29, '대짱이', 29);
+
+INSERT INTO PROBLEM
+VALUES
+(30, '이 포켓몬의 이름은?', 0, 30, 'static/img/problems/problem_dummy_30.png', '초성:ㅁㅈㅈ', 6);
+INSERT INTO ANSWER
+VALUES
+(30, '무장조', 30);
+
+
+INSERT INTO QUIZ_LOG
+VALUES
+(1, 1, 6, 2, SYSDATE);
+
+INSERT INTO QUIZ_RATE
+VALUES
+(5, 1, 6);
+
+INSERT INTO QUIZ_LOG
+VALUES
+(2, 1, 5, 2, SYSDATE);
+
+INSERT INTO QUIZ_RATE
+VALUES
+(4, 1, 5);
+
+INSERT INTO QUIZ_LOG
+VALUES
+(3, 1, 4, 4, SYSDATE);
+
+INSERT INTO QUIZ_RATE
+VALUES
+(3, 1, 4);
+
+INSERT INTO QUIZ_LOG
+VALUES
+(4, 1, 3, 3, SYSDATE);
+
+INSERT INTO QUIZ_RATE
+VALUES
+(3, 1, 3);
+
+INSERT INTO QUIZ_LOG
+VALUES
+(5, 1, 2, 4, SYSDATE);
+
+INSERT INTO QUIZ_RATE
+VALUES
+(4, 1, 2);
+
+INSERT INTO QUIZ_LOG
+VALUES
+(6, 1, 1, 3, SYSDATE);
+
+INSERT INTO QUIZ_RATE
+VALUES
+(4, 1, 1);
+
 
 
 
