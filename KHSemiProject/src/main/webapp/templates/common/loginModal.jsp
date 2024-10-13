@@ -65,8 +65,10 @@
 							<label for="pwd" class="form-label">비밀번호:</label>
 							<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="memberPwd">
 						</div>
-						<button type="submit" class="btn custom-lsin-btn login">로그인</button>
-						<button type="button" class="btn custom-lsin-btn" data-bs-toggle="modal" data-bs-target="#signin-modal">회원가입</button>
+						<div class="btn-div">
+							<button type="submit" class="btn custom-lsin-btn login">로그인</button>
+							<button type="button" class="btn custom-lsin-btn" data-bs-toggle="modal" data-bs-target="#signin-modal">회원가입</button>
+						</div>						
 					</form>
 				</div>
 			</div>
@@ -105,8 +107,10 @@
 							<label for="pwd" class="form-label">*닉네임:</label> 
 							<input type="text" class="form-control" id="sNickname" name="sMemberNickname" autocomplete="off" maxlength="20" required>
 						</div>
-						<button type="submit" class="btn custom-lsin-btn signin" onclick="return checkPwd()">회원가입</button>
-						<button type="reset" class="btn custom-lsin-btn">초기화</button>
+						<div class="btn-div">
+							<button type="submit" class="btn custom-lsin-btn signin" onclick="return checkPwd()">회원가입</button>
+							<button type="reset" class="btn custom-lsin-btn">초기화</button>
+						</div>
 					</form>
 				</div>
 			</div>

@@ -50,7 +50,7 @@
                 <div class="user-status">
                 	<c:choose>
                 	    <c:when test="${empty loginMember}">
-                		    <div>로그인 후 이용 가능한 서비스입니다.</div>
+                		    <div class="not-login-info">로그인 후 이용 가능한 서비스입니다.</div>
                 	    </c:when>
                 		<c:otherwise>
 		                    <div id="user-info">
@@ -93,7 +93,6 @@
                     <div>일간</div>
                     <div class="quest-list-row">
                         <!--
-                        <div>
                             <div class="quest-content">1. 퀴즈 1개 완료하기</div>
                             <div class="quest-achieving-condition">
                                 <span>0</span>
@@ -103,7 +102,6 @@
                             <div class="submit-btn">
                                 <button>달성하기</button>
                             </div>
-                        </div>
                         -->
                     </div>                    
                 </div>
@@ -118,12 +116,13 @@
                 <div class="attendance-recode">
                     <div id="attendance">
                     	<%if(loginMember == null) {%>
-                       		<div id="attendance-btn"><button disable>출석</button></div>
+                            <div>출석부</div>
+                       		<div id="attendance-btn"><button class="btn custom-btn" disabled>출석하기</button></div>
                         <%} else {%>
-                    	<form action="<%=contextPath%>/attend.me" method="post">
+                    	<form action="<%=contextPath%>/attend.me" method="post" id="attendance-notdisabled">
                     		<input type="hidden" name="MemberNo" value="<%=loginMember.getMemberNo()%>">
                     		<div>출석부</div>
-	                        <div id="attendance-btn"><button type="submit" style="background: green">출석하기</button></div>	                        
+	                        <div id="attendance-btn"><button class="btn custom-btn" type="submit">출석하기</button></div>	                        
                     	</form>
                     	<%}%>                
                     </div>
@@ -150,7 +149,9 @@
                         <div>오늘 플레이 횟수</div>
                         <%if(loginMember != null) {%>
                             <div class="solve-a-quiz-day">${playedRecode}회</div>
-                        <%}%>
+                        <%} else { %>
+                            <div class="solve-a-quiz-day">0회</div>
+                        <%} %>
                     </div>
                 </div>
                 <div class="ranking"></div>
