@@ -154,17 +154,19 @@ function selectDailyQuest(){
 
       for(let quest of res) {
         str += (
-          "<div>" +
-              "<div class='quest-content'>"+ quest.questContent+"</div>" +
-               "<div class='quest-achieving-condition'>" +
-                  "<span>" + (quest.questSuccess > 0 ? "1" : "0") + "</span>" +
-                  "<span> / </span>" +
-                  "<span class='completion-condition'>" + 1 + "</span>" +
-              "</div>" +
-              "<div class='submit-btn'>" +
-                  "<button "+ (quest.questSuccess === 2 ? "disabled" : "") +" onclick=\"location.href='checkQuest?qno=" + quest.questNo + "'\">"+ (quest.questSuccess === 2 ? "완료함" : "달성하기") +"</button>" +
-              "</div>" +
-          "</div>"
+              "<table>" + 
+                "<tr>" + 
+                  "<td class='quest-content'>"+ quest.questContent+"</td>" +
+                  "<td class='quest-achieving-condition'>" +
+                    "<span>" + (quest.questSuccess > 0 ? "1" : "0") + "</span>" +
+                    "<span> / </span>" +
+                    "<span class='completion-condition'>" + 1 + "</span>" +
+                  "</td>" +
+                  "<td class='submit-btn'>" +
+                    "<button "+ (quest.questSuccess === 2 ? "disabled" : "") +" onclick=\"location.href='checkQuest?qno=" + quest.questNo + "'\">"+ (quest.questSuccess === 2 ? "완료함" : "달성하기") +"</button>" +
+                  "</td>" + 
+                "<tr>" + 
+              "</table>"
         )
       }
 

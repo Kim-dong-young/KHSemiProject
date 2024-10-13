@@ -117,6 +117,11 @@
     border: 1px solid #d9d9d9;
 }
 
+.not-login-info {
+    font-size: 20px;
+    margin: auto;
+}
+
 #user-info{
     display: flex;
     align-items: center;
@@ -215,29 +220,30 @@
 
 .quest-list-row{
     border: 1px solid #FF9139;
-    border-radius: 10px
-}
-
-.quest-list-row>div{
+    border-radius: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     font-size: 25px;
-    margin-top: 10px;
+    padding: 0 75px;
 }
 
-.quest-content{
-    margin-right: 100px;
+.quest-list-row td{
+    /* border: 1px solid black; */
+    padding: 10px 0;
 }
 
-.quest-achieving-condition{
-    margin-right: 25px;
+.quest-list-row .quest-content{
+    width: 60%;
+    text-align: center;
 }
 
-.submit-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.quest-list-row .quest-achieving-condition{
+    width: 20%;
+    text-align: center;
+}
+
+.quest-list-row .completion-condition{
+    width: 20%;
 }
 
 .popular-community{
@@ -288,6 +294,7 @@
 }
 
 #attendance,
+#attendance form,
 #serial-attendance,
 #total-attendance{
     display: flex;
@@ -296,10 +303,19 @@
     margin: 10px 0; /* 각 섹션 사이에 간격 추가 */
 }
 
-#attendance-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#attendance form{
+    display: contents;
+}
+
+#attendance .btn.custom-btn{
+    background: #FF9139;
+    font-size: 20px;
+    width: 100px;
+    height: 42px;
+}
+
+#attendance .btn.custom-btn:disabled{
+    background: #d9d9d9;
 }
 
 .solve-a-quiz-day {

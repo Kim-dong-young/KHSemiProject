@@ -42,15 +42,30 @@ function initLoad(optional) {
         }
     });
 
+
     searchBtn.onclick = function() {
         searchVal = searchBar.value;
 
         listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal);
     }
 
+    searchBar.onkeypress = function(ev) {
+        if(ev.key === 'Enter' || ev.keyCode === 13) {
+            searchVal = searchBar.value;
+
+            listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal);
+        }
+    }
+
     searchSelectOpt.onchange = function(ev) {
         searchSelectVal = ev.target.value
     }
+}
+
+function performSearch() {
+    searchVal = searchBar.value;
+
+    listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal);
 }
 
 function listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal) {
