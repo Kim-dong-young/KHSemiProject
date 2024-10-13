@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/default.css">
 </head>
 <% if(pageName != null ) { %>
-<body onload="init('${pageName}', '${optional}')">
+<body onload="init('${pageName}', '${optional}'); signinit();">
 <% } else { %>
 <body>
 <% } %>

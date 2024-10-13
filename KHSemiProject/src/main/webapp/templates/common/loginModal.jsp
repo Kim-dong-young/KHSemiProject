@@ -35,7 +35,14 @@
 	<script src="<%=request.getContextPath()%>/static/js/loginmodal.js"></script>
 
 </head>
-<body onload="signinit()">
+<c:choose>
+	<c:when test="${empty pageName}">
+		<body onload="signinit()">
+	</c:when>
+	<c:otherwise>
+		<body>
+	</c:otherwise>
+</c:choose>
 	<!-- contextPath 로그인 modal -->
 	<div class="modal" id="login-modal">
 		<div class="modal-dialog modal-dialog-centered">

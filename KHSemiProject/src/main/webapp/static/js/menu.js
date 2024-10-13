@@ -4,8 +4,7 @@ function init(pageName, optional){
         path.value = location.href;
     }
 
-    signinit()
-    
+
     switch(pageName){
         case "communityMainPage":
             initBoard(optional) // tabNo 전달
