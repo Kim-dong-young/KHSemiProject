@@ -40,8 +40,8 @@
                         <!-- ajax로 swiper 채워줌 -->
                     </div>
                     <!-- Add Navigation buttons if needed -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next custom-swiper-btn"></div>
+                    <div class="swiper-button-prev custom-swiper-btn"></div>
                 </div>
             </div>
         </div>
