@@ -1,5 +1,5 @@
 function init(pageName, optional){
-    let path = document.querySelector('#loginForm input[name=path]');
+    const path = document.querySelector('#loginForm input[name="path"]');
     if(path){
         path.value = location.href;
     }

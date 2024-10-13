@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 		if(loginMember == null) {
 			session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
 			
-			if(checkPath.equals(contextPath)) {
+			if(checkPath.equals(contextPath)) {		// 로그인 실패한 경로로 리다이렉트
 				response.sendRedirect(contextPath);
 			} else {
 				response.sendRedirect(path);
@@ -83,8 +83,8 @@ public class LoginController extends HttpServlet {
 			
 			session.setAttribute("totalAt", totalAt);
 			
-			if(checkPath.equals(contextPath)) {
-				response.sendRedirect(contextPath + "/main.me");
+			if(checkPath.equals(contextPath)) {	
+				response.sendRedirect(contextPath + "/main.me"); // contextPath에서 로그인 시 main으로 이동
 			} else {
 				response.sendRedirect(path);
 			}
