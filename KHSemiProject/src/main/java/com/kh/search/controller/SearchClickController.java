@@ -29,7 +29,7 @@ public class SearchClickController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		int num = Integer.parseInt(request.getParameter("quiz_number"));
 		
 		ArrayList<Tag> tagArr = new SearchService().TagArray(num);
