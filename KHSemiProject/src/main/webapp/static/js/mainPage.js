@@ -60,9 +60,13 @@ function selectRate(btnVal, swiper) {
       if(res.qList.length < 6) {
         swiper.loopDestroy();
         swiper.params.loop = false;
+        document.querySelector('.swiper-button-next').classList.add('hidden');
+        document.querySelector('.swiper-button-prev').classList.add('hidden');
       } else {
         swiper.params.loop = true;
         swiper.loopCreate();
+        document.querySelector('.swiper-button-next').classList.remove('hidden');
+        document.querySelector('.swiper-button-prev').classList.remove('hidden');
       }
 
       for(let list of res.qList) {
