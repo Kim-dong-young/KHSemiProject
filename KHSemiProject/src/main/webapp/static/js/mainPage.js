@@ -55,7 +55,6 @@ function selectRate(btnVal, swiper) {
     type: "post",
     data: {btnValue: btnVal},
     success: function(res) {
-      console.log(res.qList)
       swiper.removeAllSlides();
       
       if(res.qList.length < 6) {
@@ -152,8 +151,6 @@ function selectDailyQuest(){
     success: function(res) {
       const questDiv = document.querySelector(".quest-list-row");
       let str = "";
-      console.log(res)
-      console.log("응답 길이:", res.length);
 
       for(let quest of res) {
         str += (

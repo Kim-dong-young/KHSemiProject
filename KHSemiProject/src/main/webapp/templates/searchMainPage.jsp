@@ -34,11 +34,9 @@
         <% if (tagList != null && !tagList.isEmpty()){ %>
             <% for(int i = 0; i < tagList.size(); i++){ %>
                 tttList[<%=i%>] = "<%=tagList.get(i)%>"
-            console.log(tttList)
             <% } %>
         <% } else {%>
             tttList = "null"
-            console.log(tttList)
         <% } %>
     </script>
 
@@ -203,7 +201,6 @@
                             let check = 0;
 
                             if(tttList == "null") { 
-                                console.log("비어있다!");
                                 for(let tag of res){
                                     check = 0;
                                     for (let tagli of tagLiist){
@@ -216,7 +213,6 @@
                                     }
                                 }
                             } else { 
-                                console.log("안비었음!");
                                 for(let tag of res){
                                     check = 0;
                                     for(let tt of tttList) {
@@ -231,7 +227,6 @@
                                     }
                                 }
                                 tttList = "null"
-                                console.log("어라!");
                             }
 
                             
@@ -255,7 +250,6 @@
                 function updateTagSelect(){
                     const divvv = document.getElementById("tag-selected-div");
                     let tagList = document.querySelectorAll('.tag-clicked');
-                    console.log(tagList)
                     let String = "";
                     for (let tag of tagList){
                         String += "<button onclick='lol(this)' value='" + tag.value + "' class='tag-clicked'>" + tag.innerText + "</button>";
@@ -265,7 +259,6 @@
                 }
                 function tag_clear(){
                     let tagLiist = document.querySelectorAll('.tag-clicked');
-                    console.log(tagLiist)
                     for(let sst of tagLiist){
                         if(sst.classList.contains('tag-clicked')){
                             sst.classList.remove('tag-clicked');

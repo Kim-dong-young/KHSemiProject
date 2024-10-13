@@ -14,14 +14,6 @@
     
 </head>
 <body>
-    
-    <script>
-        console.log(${param.pList})
-        console.log(${param.correctNum})
-        console.log(${param.quizNumber})
-        console.log(${loginMember.memberNo})
-        console.log(${param.listLen})
-    </script>
     <div style="display: none;">
         <%@ include file="common/menu.jsp" %>
     </div>
