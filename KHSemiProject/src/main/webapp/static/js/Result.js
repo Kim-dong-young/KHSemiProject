@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.star');
     const ratingValueDisplay = document.getElementById('rating-value');
 
-    
-    console.log(memberNoinfo.value)
     if(memberNoinfo.value){
         // 별 클릭 이벤트 핸들러
         stars.forEach((star, index) => {

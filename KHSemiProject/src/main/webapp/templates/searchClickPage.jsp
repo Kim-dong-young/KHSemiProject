@@ -38,7 +38,6 @@
                         },
                         success: function(res){
                             const mk = document.getElementById("Mark");
-                            console.log(res)
                             if(res == 1){
                                 mk.classList.add('marked');
                             } else {
@@ -156,7 +155,6 @@
                     },
                     success: function(res){
                         const mk = document.getElementById("Mark");
-                        console.log(res)
                         if(res == 1){
                             mk.classList.add('marked');
                         } else {

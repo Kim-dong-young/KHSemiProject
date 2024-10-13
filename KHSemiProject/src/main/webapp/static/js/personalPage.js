@@ -17,12 +17,10 @@ function initLoad(optional) {
         }
     });
 
-    console.log(optional)
     listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal);
 
     showSelectOpt.onchange = function(ev) {
         showSelectVal = ev.target.value;
-        console.log(showSelectVal, btnVal);
 
         listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal);
         
@@ -31,7 +29,6 @@ function initLoad(optional) {
     recomBtns.forEach(button => {
         button.onclick = function(ev) {
             btnVal = ev.target.value; // 클릭된 버튼의 값을 btnVal에 저장
-            console.log(showSelectVal, btnVal); // 콘솔에 출력
 
             recomBtns.forEach(btn => {
                 if(btn === ev.target) {
@@ -47,7 +44,6 @@ function initLoad(optional) {
 
     searchBtn.onclick = function() {
         searchVal = searchBar.value;
-        console.log(optional, showSelectVal, btnVal, searchVal, searchSelectVal)
 
         listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal);
     }
@@ -81,7 +77,6 @@ function listLoad(optional, showSelectVal, btnVal, searchVal, searchSelectVal) {
         type: "post",
         data: searchData,
         success: function(res) {
-            console.log(res.qList);
             // 퀴즈 데이터를 담을 HTML을 동적으로 생성
             const interestList = document.querySelector('.interestList');
             

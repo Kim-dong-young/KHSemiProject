@@ -57,7 +57,7 @@ function idInput() {
         clearTimeout(eventFlag); // 아직 실행되지 않은 ajax요청을 취소
         
         const str = ev.target.value;
-        console.log(str)
+
         if(str.trim().length >= 5){ 
             eventFlag = setTimeout(function(){ // 1초뒤에 값을 확인해서 ajax요청
                 // ajax요청
