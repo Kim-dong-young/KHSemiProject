@@ -1468,6 +1468,66 @@ INSERT INTO ANSWER
 VALUES
 (30, '무장조', 30);
 
+INSERT INTO QUIZ
+VALUES
+(7, '프로그래밍 언어 맞추기', SYSDATE, SYSDATE, 'Hello world 출력문을 보고 프로그래밍 언어를 맞춰보세요', 1, 6, 'static/img/THUMBNAIL/thumbnail_dummy_7.png');
+
+INSERT INTO QUIZ_TAG
+VALUES
+('컴퓨터', 7);
+
+INSERT INTO QUIZ_TAG
+VALUES
+('프로그래밍', 7);
+
+INSERT INTO QUIZ_TAG
+VALUES
+('컴퓨터공학', 7);
+
+INSERT INTO QUIZ_TAG
+VALUES
+('소프트웨어', 7);
+
+INSERT INTO QUIZ_TAG
+VALUES
+('코딩', 7);
+
+INSERT INTO PROBLEM
+VALUES
+(31, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_31.png', '썬 마이크로시스템즈에서 1995년 개발한 대표적인 객체 지향 프로그래밍 언어', 7);
+INSERT INTO ANSWER
+VALUES
+(31, 'Java', 31);
+
+INSERT INTO PROBLEM
+VALUES
+(32, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_32.png', '동적인 웹 페이지를 표현하는데 쓰이는 언어', 7);
+INSERT INTO ANSWER
+VALUES
+(32, 'JavaScript', 32);
+
+INSERT INTO PROBLEM
+VALUES
+(33, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_33.png', '귀도 반 로섬이 1991년 만든 인터프리터 언어', 7);
+INSERT INTO ANSWER
+VALUES
+(33, 'Python', 33);
+
+INSERT INTO PROBLEM
+VALUES
+(34, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_34.png', '1972년 벨 연구소의 데니스 리치가 만든 프로그래밍 언어', 7);
+INSERT INTO ANSWER
+VALUES
+(34, 'C', 34);
+
+INSERT INTO PROBLEM
+VALUES
+(35, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_35.png', '마이크로소프트에서 2000년 발표한 객체 지향 프로그래밍 언어', 7);
+INSERT INTO ANSWER
+VALUES
+(35, 'C#', 35);
+
+
 
 INSERT INTO QUIZ_LOG
 VALUES
@@ -1517,7 +1577,13 @@ INSERT INTO QUIZ_RATE
 VALUES
 (4, 1, 1);
 
+INSERT INTO QUIZ_LOG
+VALUES
+(7, 1, 7, 5, SYSDATE);
 
+INSERT INTO QUIZ_RATE
+VALUES
+(5, 1, 7);
 
 
 INSERT INTO MEMBER
