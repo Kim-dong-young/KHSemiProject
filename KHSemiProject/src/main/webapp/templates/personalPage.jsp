@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>퀴즈팡 - 개인 화면</title>
 <link rel="stylesheet" href="static/css/personalPage.css">
 <script src="static/js/personalPage.js"></script>
 </head>

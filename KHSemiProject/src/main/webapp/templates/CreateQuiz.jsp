@@ -9,7 +9,7 @@ String contextPath = request.getContextPath();
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>퀴즈팡-퀴즈 생성</title>
+<title>퀴즈팡 - 퀴즈 생성</title>
 <link rel="stylesheet" href="<%=contextPath%>/static/css/CreateQuiz.css">
 
 <script defer src="<%=contextPath%>/static/js/CreateQuiz.js"></script>
