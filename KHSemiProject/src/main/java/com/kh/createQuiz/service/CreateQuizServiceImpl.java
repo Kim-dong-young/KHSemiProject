@@ -44,7 +44,6 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 		int result1 = 0;
 		int result2 = 0;
 		if (pr.getPROBLEM_content() != null && a.getANSWER_content() != null) {
-			System.out.println("들어왔다잇" + pr + "," + a);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a);
 
@@ -55,7 +54,6 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 		}
 		if (pr2.getPROBLEM_content() != null && a2.getANSWER_content() != null) {
-			//System.out.println("들어왔다잇" + pr2 + "," + a2);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr2);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a2);
 			
@@ -65,7 +63,6 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 				isSuccess = false;
 		}
 		if (pr3.getPROBLEM_content() != null && a3.getANSWER_content() != null) {
-			//System.out.println("들어왔다잇" + pr3 + "," + a3);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr3);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a3);
 			
@@ -75,7 +72,6 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 				isSuccess = false;
 		}
 		if (pr4.getPROBLEM_content() != null && a4.getANSWER_content() != null) {
-			//System.out.println("들어왔다잇" + pr4 + "," + a4);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr4);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a4);
 			
@@ -85,7 +81,6 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 				isSuccess = false;
 		}
 		if (pr5.getPROBLEM_content() != null && a5.getANSWER_content() != null) {
-			//System.out.println("들어왔다잇" + pr5 + "," + a5);
 			result1 = new CreateQuizDAO().insertProblems(conn, pr5);
 			result2 = new CreateQuizDAO().insertAnswer(conn, a5);
 			
@@ -97,9 +92,7 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 
 		if (isSuccess) {
 			commit(conn);
-			System.out.println("완료");
 		} else {
-			System.out.println("실패");
 			rollback(conn);
 		}
 		close(conn);
@@ -148,7 +141,6 @@ public class CreateQuizServiceImpl implements CreateQuizService {
 	}
 
 	public int updateMemberExp(int memberNo, int exp) {
-		System.out.println("updateMemberExp 실행됨");
 		CreateQuizDAO cQuizDao = new CreateQuizDAO();
 		Connection conn = getConnection();
 		int result1 = cQuizDao.updateMemberExp(conn, memberNo, exp);

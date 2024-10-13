@@ -40,7 +40,6 @@ public class LoginController extends HttpServlet {
 		String path = request.getParameter("path");    // js에서 받아온 pathname
 		String checkPath = contextPath + path;          // contextPath + pathname
 		
-		System.out.println(checkPath);
 		Member loginMember = new MemberService().loginMember(memberId, memberPwd);
 		
 		HttpSession session = request.getSession();		

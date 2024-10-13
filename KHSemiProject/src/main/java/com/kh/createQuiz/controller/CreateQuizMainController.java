@@ -38,7 +38,6 @@ public class CreateQuizMainController extends HttpServlet {
 
         // enctype이 multipart/form-data로 전송되었는지 체크
         if (JakartaServletFileUpload.isMultipartContent(request)) {
-            System.out.println("파일 업로드 성공");
             // 1. 파일 용량 제한 (byte)
             int fileMaxSize = 1024 * 1024 * 10; // 10MB
             int requestMaxSize = 1024 * 1024 * 20; // 20MB
@@ -108,7 +107,6 @@ public class CreateQuizMainController extends HttpServlet {
             }
 
             if (result > 0) {
-            	System.out.println(result);
                 request.setAttribute("quiz_num", result); 
                 request.getRequestDispatcher("templates/CreateQuiz.jsp").forward(request, response);
             } else {
