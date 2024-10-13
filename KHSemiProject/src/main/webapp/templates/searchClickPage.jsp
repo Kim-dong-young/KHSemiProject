@@ -24,7 +24,7 @@
     <%@ include file="common/menu.jsp" %>
     
     <script>
-        function init(){
+        function initsss(){
             <c:choose>
                 <c:when test="${empty loginMember}">
                 </c:when>
@@ -48,7 +48,7 @@
                         error: function(){
                             console.log("태그 조회용 ajax통신 실패")
                         }
-                    }
+                    })
                 </c:otherwise>
             </c:choose>
         }
