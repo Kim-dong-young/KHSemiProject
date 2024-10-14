@@ -13,7 +13,7 @@ public class Member {
 	private int checkContinueCnt;
 	private String status;
 	private String introduce;
-	private String memberemail;
+	private String memberEmail;
 	private String address;
 	private String phone;
 	
@@ -22,7 +22,7 @@ public class Member {
 	}
 
 	public Member(int memberNo, String memberId, String memberPwd, String memberNickName, int exp, String memberImg,
-			String joinDate, int checkContinueCnt, String status, String introduce, String memberemail , String address, String phone) {
+			String joinDate, int checkContinueCnt, String status, String introduce, String memberEmail , String address, String phone) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -34,7 +34,7 @@ public class Member {
 		this.checkContinueCnt = checkContinueCnt;
 		this.status = status;
 		this.introduce = introduce;
-		this.memberemail = memberemail;
+		this.memberEmail = memberEmail;
 		this.address = address;
 		this.phone = phone;
 	}
@@ -46,11 +46,11 @@ public class Member {
 		this.memberNickName = memberNickName;
 	}
 	
-	public Member(String memberId, String memberNickName, String memberemail, String address, String phone) {
+	public Member(String memberId, String memberNickName, String memberEmail, String address, String phone) {
 		super();
 		this.memberId = memberId;
 		this.memberNickName = memberNickName;
-		this.memberemail = memberemail;
+		this.memberEmail = memberEmail;
 		this.address = address;
 		this.phone = phone;
 	}
@@ -135,12 +135,12 @@ public class Member {
 		this.introduce = introduce;
 	}
 
-	public String getEmail() {
-		return memberemail;
+	public String getMemberEmail() {
+		return memberEmail;
 	}
 
-	public void setEmail(String memberemail) {
-		this.memberemail = memberemail;
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
 
 	public String getAddress() {
@@ -164,10 +164,8 @@ public class Member {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
 				+ ", memberNickName=" + memberNickName + ", exp=" + exp + ", memberImg=" + memberImg + ", joinDate="
 				+ joinDate + ", checkContinueCnt=" + checkContinueCnt + ", status=" + status + ", introduce="
-				+ introduce + ", memberemail=" + memberemail + ", address=" + address + ", phone=" + phone + "]";
+				+ introduce + ", memberEmail=" + memberEmail + ", address=" + address + ", phone=" + phone + "]";
 	}
 
-	
-	
 	
 }

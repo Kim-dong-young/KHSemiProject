@@ -45,7 +45,7 @@ public class MemberUpdateController extends HttpServlet {
 			request.setAttribute("errorMsg", "회원정보 수정에 실패하였습니다.");
 		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("loginMember", updateMem);
 			session.setAttribute("alertMsg", "성공적으로 수정하였습니다.");
 		}
 		response.sendRedirect(request.getContextPath() + "/userset3.me");
