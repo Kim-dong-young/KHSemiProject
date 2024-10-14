@@ -44,7 +44,7 @@ String contextPath = request.getContextPath();
                             <input type="hidden" name="quiz_number" value="${quiz_num}">
                             <div class="question-input">
                                 <label for="question-1">질문 내용:</label> 
-                                <input type="text" id="question-1" name="pcontent-1" placeholder="질문을 입력하세요">
+                                <input type="text" id="question-1" name="pcontent-1" placeholder="질문을 입력하세요" required>
                             </div>
 
                             <div>
@@ -65,7 +65,7 @@ String contextPath = request.getContextPath();
                                 <label for="hint-1">힌트:</label> 
                                 <input type="text" id="hint-1" name="phint-1" placeholder="없을 경우 '.'을 입력해 주세요"> 
                                 <label for="answer-1">정답:</label>
-                                <input type="text" id="answer-1" name="panswer-1" placeholder="정답을 입력해 주세요">
+                                <input type="text" id="answer-1" name="panswer-1" placeholder="정답을 입력해 주세요" required>
                             </div>
 
                             <div class="buttons">
