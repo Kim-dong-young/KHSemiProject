@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.kh.member.model.vo.Member;
+import com.kh.member.service.MemberService;
+
 /**
  * Servlet implementation class userset
  */
@@ -25,7 +28,6 @@ public class userset1Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher("templates/userset1.jsp").forward(request, response);
 	}
 

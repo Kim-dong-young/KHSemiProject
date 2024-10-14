@@ -1494,35 +1494,35 @@ VALUES
 
 INSERT INTO PROBLEM
 VALUES
-(31, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_31.png', '썬 마이크로시스템즈에서 1995년 개발한 대표적인 객체 지향 프로그래밍 언어', 7);
+(31, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_31.PNG', '썬 마이크로시스템즈에서 1995년 개발한 대표적인 객체 지향 프로그래밍 언어', 7);
 INSERT INTO ANSWER
 VALUES
 (31, 'Java', 31);
 
 INSERT INTO PROBLEM
 VALUES
-(32, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_32.png', '동적인 웹 페이지를 표현하는데 쓰이는 언어', 7);
+(32, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_32.PNG', '동적인 웹 페이지를 표현하는데 쓰이는 언어', 7);
 INSERT INTO ANSWER
 VALUES
 (32, 'JavaScript', 32);
 
 INSERT INTO PROBLEM
 VALUES
-(33, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_33.png', '귀도 반 로섬이 1991년 만든 인터프리터 언어', 7);
+(33, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_33.PNG', '귀도 반 로섬이 1991년 만든 인터프리터 언어', 7);
 INSERT INTO ANSWER
 VALUES
 (33, 'Python', 33);
 
 INSERT INTO PROBLEM
 VALUES
-(34, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_34.png', '1972년 벨 연구소의 데니스 리치가 만든 프로그래밍 언어', 7);
+(34, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_34.PNG', '1972년 벨 연구소의 데니스 리치가 만든 프로그래밍 언어', 7);
 INSERT INTO ANSWER
 VALUES
 (34, 'C', 34);
 
 INSERT INTO PROBLEM
 VALUES
-(35, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_35.png', '마이크로소프트에서 2000년 발표한 객체 지향 프로그래밍 언어', 7);
+(35, '다음 언어는 무엇일까요?', 0, 30, 'static/img/problems/problem_dummy_35.PNG', '마이크로소프트에서 2000년 발표한 객체 지향 프로그래밍 언어', 7);
 INSERT INTO ANSWER
 VALUES
 (35, 'C#', 35);
