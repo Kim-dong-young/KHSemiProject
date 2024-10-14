@@ -29,11 +29,11 @@
                             <input type="hidden" name="memberId" value="${loginMember.memberId }">
                             <input type="hidden" name="memberNickName" value="${loginMember.memberNickName}">
                             <label for="memberemail">이메일:</label>
-                            <input type="text" id="memberemail" name="memberemail">
+                            <input type="text" id="memberemail" name="memberEmail" value="${loginMember.memberEmail}">
                             <label for="phone">전화번호:</label>
-                            <input type="text" id="phone" name="phone">
+                            <input type="text" id="phone" name="phone" value="${loginMember.phone}">
                             <label for="address">주소:</label>
-                            <input type="text" id="address" name="address">
+                            <input type="text" id="address" name="address" value="${loginMember.address}">
                         </div>
                     <button id="edit-update-btn" type="submit">변경</button>
                 </form>

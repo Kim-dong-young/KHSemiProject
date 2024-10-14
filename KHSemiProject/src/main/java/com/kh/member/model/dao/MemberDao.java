@@ -147,6 +147,7 @@ public class MemberDao {
 						rset.getString("address"),
 						rset.getString("phone")
 						);
+				System.out.println(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -374,9 +375,9 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, m.getMemberNickName());
-			pstmt.setString(2, m.getEmail());
-			pstmt.setString(3, m.getPhone());
-			pstmt.setString(4, m.getAddress());
+			pstmt.setString(2, m.getMemberEmail());
+			pstmt.setString(3, m.getAddress());
+			pstmt.setString(4, m.getPhone());
 			pstmt.setString(5, m.getMemberId());
 			
 			result = pstmt.executeUpdate();
